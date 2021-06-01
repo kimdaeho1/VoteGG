@@ -25,7 +25,7 @@ const CreateRoomModal = ({ onClose, onCreateRoom }) => {
 
 
       // 서버로 POST 요청 보내기
-      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/room/roomCreate`, {
+      const response = await axios.post(window.location.origin + "/api/room/roomCreate", {
         roomname: roomTitle,
         createdby: username, // 임의 사용자 ID, 필요에 따라 수정
         invitees: filteredInvitees, // 초대할 사람 정보 추가 (초대기능)
@@ -41,6 +41,7 @@ const CreateRoomModal = ({ onClose, onCreateRoom }) => {
       }
     } catch (error) {
       console.error("방 생성 실패:", error.message);
+      console.log(roomNumber);
       alert("방 생성에 실패했습니다. 다시 시도해주세요.");
     }
   };

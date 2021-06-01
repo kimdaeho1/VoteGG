@@ -1,19 +1,24 @@
 const express = require("express");
 const Room = require("../schemas/room");
+const { v4 } = require('uuid'); // 방 uuid 생성
 
 const router = express.Router();
+const max_Room_Count = 2 << 4 // 최대 방 갯수
 
-const getNextRoomNumber = async (maxRooms = 2 << 4) => {
-  const rooms = await Room.find({}, { roomNumber: 1 }).sort({ roomNumber: 1 }).exec();
-  const usedNumbers = new Set(rooms.map((room) => room.roomNumber));
+const getNextRoomNumber = async (maxRooms = max_Room_Count) => {
+  const rooms = await Room.countDocuments({}); // 방 갯수 가져옴
 
-  for (let i = 1; i <= maxRooms; i++) {
-    if (!usedNumbers.has(i)) {
-      return i;
-    }
+  const uuid = () => {
+    const tokens = v4().split('-')
+    return tokens[2] + tokens[1] + tokens[0] + tokens[3] + tokens[4];
+  };
+ 
+  if (rooms < maxRooms){
+    return uuid(); // 새 방 uuid 반환
   }
-
-  throw new Error("No available room numbers.");
+  else{
+    throw new Error("No available room numbers."); // 만들 수 있는 방 여유 없음
+  }  
 };
 
 
@@ -23,7 +28,7 @@ router.post("/roomCreate", async (req, res) => {
     const { roomname, createdby } = req.body;
 
     // 다음 방 번호 가져오기
-    const roomNumber = await getNextRoomNumber(16);
+    const roomNumber = await getNextRoomNumber(max_Room_Count);
 
     const newRoom = new Room({
       roomNumber,
@@ -31,19 +36,15 @@ router.post("/roomCreate", async (req, res) => {
       createdby,
     });
 
-    const savedRoom = await newRoom.save();
-    
-    // 기존 코드
-    // res.status(201).json(savedRoom);
+    const savedRoom = await newRoom.save(); // 방 정보 저장
 
-    // 초대 코드
+    //초대 코드
     res.status(201).json({
       roomNumber: savedRoom.roomNumber,
       roomname: savedRoom.roomname,
       createdby: savedRoom.createdby,
       inviteLink: `/room/${savedRoom.roomNumber}`, // 초대 링크
     });
-
 
   } catch (error) {
     console.error(error);

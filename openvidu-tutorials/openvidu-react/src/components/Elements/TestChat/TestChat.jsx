@@ -30,9 +30,10 @@ const TestChat = () => {
     }
 
     // 소켓 연결 생성
-    const newSocket = io(`${process.env.REACT_APP_API_BASE_URL}/chat`, {
-      path: '/chat/socket.io/',
+    const newSocket = io(window.location.origin + "/chat", {
+      path: '/chat/socket.io',
       transports: ['websocket'],
+      query: { debug: true }
     });
     setSocket(newSocket);
 
@@ -121,8 +122,6 @@ const TestChat = () => {
 };
 
 export default TestChat;
-
-
 
 // Utility Function for Token Decoding
 const getUsernameFromToken = (token) => {
