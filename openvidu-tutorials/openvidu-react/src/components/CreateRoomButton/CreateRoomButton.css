@@ -1,0 +1,25 @@
+.create-room-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  width:  80px;
+}
+.create-room-button {
+  border: none;
+  border-radius: 40%; /* 원형 버튼 */
+  background-color: white; /* 버튼 배경색 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  padding: 5px;
+}
+.create-room-button:hover {
+  background-color: #e3e3e3; /* 호버 시 색상 변경 */
+}
+.create-room-icon {
+  width: 45px;
+  height: 45px; /* 아이콘 크기 */
+  opacity: 80%;
+}

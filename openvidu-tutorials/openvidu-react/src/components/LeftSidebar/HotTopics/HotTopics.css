@@ -1,0 +1,32 @@
+.hot-topics {
+  padding: 10px;
+  background-color: #ffffff;
+  overflow-y: scroll;
+  height: 50vh;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hot-topics::-webkit-scrollbar {
+  display: none; 
+}
+
+.hot-topics h3 {
+  margin-top: 50px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.topic-item {
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+  margin-left: -20px;
+}
+
+.topic-rank {
+  font-weight: bold;
+  color: #000000;
+  margin-right: 8px;
+}

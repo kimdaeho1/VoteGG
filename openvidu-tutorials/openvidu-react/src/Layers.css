@@ -1,0 +1,16 @@
+.layers {
+  display: flex;
+  flex-direction: column; /* 위에서 아래로 배치 */
+  height: 100vh; /* 전체 화면을 차지 */
+  overflow: hidden;
+}
+
+.main-layout {
+  display: flex;
+  flex: 1;
+  margin-top: 60px;
+}
+
+.content {
+  flex-grow: 1; 
+}

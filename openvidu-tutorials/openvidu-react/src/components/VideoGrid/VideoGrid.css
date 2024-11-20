@@ -1,0 +1,26 @@
+.video-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 두 열 */
+  grid-template-rows: 1fr 1fr; /* 두 행 */
+  gap: 10px; 
+  width: 100%;
+  height: 60vh;
+  margin: 0; /* 화면 가운데 정렬 */
+  background-color: #000000; /* 선택 사항: 배경색 */
+}
+
+.video-container {
+  position: relative;
+  width: 100%; /* 부모 크기 채우기 */
+  height: 100%; /* 부모 크기 채우기 */
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* 부모 영역 너비 */
+  height: 100%; /* 부모 영역 높이 */
+
+}

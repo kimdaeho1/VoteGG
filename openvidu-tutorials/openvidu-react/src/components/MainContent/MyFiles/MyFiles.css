@@ -1,0 +1,26 @@
+.my-files {
+  width: 640px;
+  height: 360px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+}
+
+.my-files h4 {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.my-files ul {
+  list-style: none;
+  padding: 0;
+}
+
+.my-files li {
+  font-size: 12px;
+  color: #555;
+  padding: 5px 0;
+}

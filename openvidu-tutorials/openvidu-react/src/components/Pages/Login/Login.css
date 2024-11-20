@@ -1,0 +1,90 @@
+/* 중앙 정렬을 위한 컨테이너 */
+.login-container {
+  width: 400px;
+  height: 400px;
+  margin: 100px auto;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+/* 제목 스타일 */
+.login-container h2 {
+  font-size: 24px;
+  color: #4a4a4a;
+  margin-bottom: 10px;
+}
+
+/* 안내 텍스트 스타일 */
+.login-container p {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+/* 폼 레이블 숨김 */
+.login-form label {
+  display: none;
+}
+
+/* 아이콘과 함께 사용할 입력 필드 래퍼 */
+.input-wrapper {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+/* 입력 필드 스타일 */
+.login-form input {
+  width: 80%;
+  padding: 12px 40px; /* 아이콘 위치를 고려해 패딩 추가 */
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+ 
+}
+
+/* 입력 필드 아이콘 */
+.input-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #888;
+}
+
+/* 로그인 버튼 스타일 */
+.login-login-button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background-color: #000000;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  opacity: 0.6;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.login-login-button:hover {
+  background-color: #ff0000;
+  opacity: 0.5;
+}
+
+/* 하단 링크 스타일 */
+.login-container .signup-link {
+  display: block;
+  margin-top: 20px;
+  color: #000000a1;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.login-container .signup-link:hover {
+  text-decoration: underline;
+}

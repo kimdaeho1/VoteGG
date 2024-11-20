@@ -1,0 +1,17 @@
+.left-sidebar {
+  width: 210px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* border-right: 1px solid black;  */
+  margin-bottom: 80px;
+  height: 80vh;
+  max-height: 1200px;
+  min-width: 210px;
+}
+
+
+.user-info {
+  margin-top: auto;
+}

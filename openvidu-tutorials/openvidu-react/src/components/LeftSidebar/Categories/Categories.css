@@ -1,0 +1,24 @@
+.categories {
+  display: flex;
+  flex-direction: column; 
+  gap: 15px; 
+  padding: 20px; 
+  background-color: #ffffff; 
+  border-top: 1px solid black;
+  margin-bottom: -60px;
+}
+
+.category-item {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333; /* 글씨 색상 */
+  cursor: pointer; /* 클릭 가능한 커서 */
+  padding: 10px;
+  border-radius: 5px; /* 항목 모서리를 둥글게 */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.category-item:hover {
+  background-color: #dadada; /* Hover 시 배경색 */
+  color: rgb(0, 0, 0); /* Hover 시 글자색 */
+}
