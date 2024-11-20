@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+# Project-Agora
+![Agora (1)](https://github.com/user-attachments/assets/a7b468f0-1386-4654-8e88-a26ddba7d9f3)
+=======
 # openvidu-basic-node
 
 This is a minimal OpenVidu server application sample built for Node with Express. Visit [Application server](https://docs.openvidu.io/en/stable/application-server/) documentation for further context.
@@ -28,3 +32,4 @@ Run the application
 ```
 node index.js
 ```
+>>>>>>> 76df910 (Added openvidu-basic-node folder)
