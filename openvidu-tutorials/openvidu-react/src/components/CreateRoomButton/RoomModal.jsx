@@ -24,7 +24,7 @@ const RoomModal = ({ onClose, onCreateRoom }) => {
 
 
       // 서버로 POST 요청 보내기
-      const response = await axios.post("https://whirae3433.shop:8443/api/room/roomCreate", {
+      const response = await axios.post("https://recordstudio.site:8443/api/room/roomCreate", {
         roomname: roomTitle,
         createdby: username, // 임의 사용자 ID, 필요에 따라 수정
         invitees: filteredInvitees, // 초대할 사람 정보 추가 (초대기능)

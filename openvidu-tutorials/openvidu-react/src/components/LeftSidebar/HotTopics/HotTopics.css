@@ -1,32 +1,95 @@
+/* 컨테이너 스타일 */
 .hot-topics {
-  padding: 10px;
-  background-color: #ffffff;
-  overflow-y: scroll;
-  height: 50vh;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  height: 60vh;
+  scrollbar-width: thin;
+  scrollbar-color: #cccccc #f9f9f9;
+  font-family: 'Arial', sans-serif;
+
+  /* 중앙 정렬 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* 스크롤바 스타일 */
 .hot-topics::-webkit-scrollbar {
-  display: none; 
+  width: 8px;
 }
 
+.hot-topics::-webkit-scrollbar-track {
+  background: #f9f9f9;
+}
+
+.hot-topics::-webkit-scrollbar-thumb {
+  background-color: #cccccc;
+  border-radius: 4px;
+}
+
+/* 제목 */
 .hot-topics h3 {
-  margin-top: 50px;
-  margin-bottom: 10px;
-  font-size: 16px;
+  margin-bottom: 20px;
+  font-size: 20px;
   font-weight: bold;
+  color: #333333;
+  text-align: center; /* 제목도 중앙 정렬 */
+  border-bottom: 2px solid #eaeaea;
+  padding-bottom: 10px;
 }
 
+/* 각 아이템 스타일 */
 .topic-item {
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  border: 1px solid #eeeeee;
+  transition: all 0.3s ease;
+  width: 80%; /* 중앙 배치를 위해 너비를 설정 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.topic-item:hover {
+  background-color: #f4f4f4;
+  transform: translateY(-2px);
+}
+
+/* 제목과 순위가 한 줄에 표시되도록 설정 */
+.topic-header {
   display: flex;
   align-items: center;
-  padding: 5px 0;
-  margin-left: -20px;
+  gap: 10px;
 }
 
+/* 순위 */
 .topic-rank {
   font-weight: bold;
-  color: #000000;
-  margin-right: 8px;
+  font-size: 18px;
+  color: #555555;
+  line-height: 1.5;
+}
+
+/* 제목 */
+.topic-title {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: #222222;
+  line-height: 1.5;
+}
+
+.topic-title:hover {
+  text-decoration: underline;
+  color: #0073e6;
+}
+
+/* 리스트 점 제거 */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }

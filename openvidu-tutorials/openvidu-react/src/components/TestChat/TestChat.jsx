@@ -30,7 +30,7 @@ const TestChat = () => {
     }
 
     // 소켓 연결 생성
-    const newSocket = io('https://whirae3433.shop:8443/chat', {
+    const newSocket = io('https://recordstudio.site:8443/chat', {
       path: '/chat/socket.io/',
       transports: ['websocket'],
     });

@@ -11,7 +11,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('https://whirae3433.shop:8443/api/user/login', {
+      const response = await axios.post('https://recordstudio.site:8443/api/user/login', {
         username,
         password,
       });
