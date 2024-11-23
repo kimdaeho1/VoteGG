@@ -68,26 +68,6 @@
   border-bottom: 1px solid black;
 }
 
-
-.login-button:hover {
-  background-color: #c0c0c0;
-  color: white;
-  padding: 10px;
-  border:none;
-}
-
-.logo-link {
-  text-decoration: none;
-}
-
-.logo-image {
-  width: 190px; /* 원하는 크기로 조정 */
-  height: auto;
-  display: block; /* 이미지를 블록 요소로 처리 */
-  transform: translateX(30px);
-  margin-top: 10px;
-}
-
 .right {
   display: flex; /* 가로 배치 */
   align-items: center; /* 세로 가운데 정렬 */

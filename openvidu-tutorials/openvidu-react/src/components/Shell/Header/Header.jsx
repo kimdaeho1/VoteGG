@@ -1,13 +1,13 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import CreateRoomButton from '../../Elements/Buttons/CreateRoomButton/CreateRoomButton';
 import AlarmButton from '../../Elements/Buttons/AlarmButton/AlarmButton';
 import LoginButton from '../../Elements/Buttons/LoginoutButton/LoginoutButton';
+import LogoButton from '../../Elements/Buttons/LogoButton/LogoButton';
 import './Header.css';
 
 const Header = () => {
   const location = useLocation();
-
   const pathParts = location.pathname.split('/');
   const roomId = (pathParts[1] === 'room' || pathParts[1] === 'observer')
     ? decodeURIComponent(pathParts[2]) : null;
@@ -15,14 +15,7 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header-top">
-        {/* Link 내부에 이미지 추가 */}
-        <Link to="/" className="logo-link">
-          <img
-            src="/mainlogo2.png" // 로고 이미지 경로
-            alt="Agora Logo"
-            className="logo-image"
-          />
-        </Link>
+        <LogoButton />
         {roomId ? (
           <div className="room-id-display">Room: {roomId}</div>
         ) : (

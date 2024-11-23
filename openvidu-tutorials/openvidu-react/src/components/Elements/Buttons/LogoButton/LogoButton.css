@@ -1,0 +1,13 @@
+.logo-link {
+  text-decoration: none;
+}
+
+.logo-image {
+  width: 190px;
+  /* 원하는 크기로 조정 */
+  height: auto;
+  display: block;
+  /* 이미지를 블록 요소로 처리 */
+  transform: translateX(30px);
+  margin-top: 10px;
+}
