@@ -49,7 +49,8 @@ const io = new Server(server, {
     methods: ['GET', 'POST'],
     credentials: true,
   },
-  path: '/chat/socket.io/',
+  path: '/chat/socket.io',
+  transports: ['websocket'],
 });
 
 // 소켓 핸들러 추가

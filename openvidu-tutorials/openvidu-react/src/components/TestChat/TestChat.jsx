@@ -30,9 +30,10 @@ const TestChat = () => {
     }
 
     // 소켓 연결 생성
-    const newSocket = io('https://whirae3433.shop:8443/chat', {
-      path: '/chat/socket.io/',
+    const newSocket = io(window.location.origin + "/chat", {
+      path: '/chat/socket.io',
       transports: ['websocket'],
+      query: { debug: true }
     });
     setSocket(newSocket);
 
@@ -121,8 +122,6 @@ const TestChat = () => {
 };
 
 export default TestChat;
-
-
 
 // Utility Function for Token Decoding
 const getUsernameFromToken = (token) => {

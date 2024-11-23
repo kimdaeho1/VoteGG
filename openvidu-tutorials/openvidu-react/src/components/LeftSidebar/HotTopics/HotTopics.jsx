@@ -9,7 +9,7 @@ const HotTopics = () => {
   useEffect(() => {
     const fetchTopics = async () => {
       try {
-        const response = await fetch('https://whirae3433.shop:8443/api/news/policy-news');
+        const response = await fetch(window.location.origin + '/api/news/policy-news');
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

@@ -53,7 +53,7 @@ const RoomList = () => {
 useEffect(() => {
   const fetchRooms = async () => {
     try {
-      const response = await axios.get("https://whirae3433.shop:8443/api/room/roomList");
+      const response = await axios.get(window.location.origin + "/api/room/roomList");
       setRooms(response.data); // 서버에서 받은 데이터로 상태 업데이트
 
     } catch (error) {
