@@ -1,10 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import './Room.css';
+import './Observer.css';
 import TestChat from '../../Elements/TestChat/TestChat.jsx';
-import RoomControl from '../../Elements/RoomControl/RoomControl.jsx';
+import OpenviduFinal from '../../Elements/openvidu/OpenviduFinal.js';
 
-const Room = ({ role }) => {
+const Observer = () => {
   const { roomNumber } = useParams(); // URL에서 :id 추출
   const roomId = roomNumber;
 
@@ -13,7 +13,9 @@ const Room = ({ role }) => {
   return (
     <div className="room">
       <div className="left-side">
-        <RoomControl />
+        <OpenviduFinal />
+        {/* <h1>관전자 페이지입니다</h1> */}
+        {/* 관전자 페이지 컨트롤 */}
       </div>
       <div className='right-side'>
         <TestChat roomId={roomId} />
@@ -22,4 +24,4 @@ const Room = ({ role }) => {
   );
 };
 
-export default Room;
+export default Observer;

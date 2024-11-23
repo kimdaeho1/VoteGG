@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Pages/Home/Home.jsx';
 import Room from './components/Pages/Room/Room.jsx';
 import Login from './components/Pages/Login/Login.jsx';
-import Observer from './components/Observer/Observer.jsx';
+import Observer from './components/Pages/Observer/Observer.jsx';
 import Signup from './components/Pages/Signup/Signup.jsx';
-import Header from './components/Header/Header.jsx';
-import LeftSidebar from './components/LeftSidebar/LeftSidebar.jsx';
+import Header from './components/Shell/Header/Header.jsx';
+import LeftSidebar from './components/Shell/LeftSidebar/LeftSidebar.jsx';
 import './Layers.css';
 
 const Layers = () => {

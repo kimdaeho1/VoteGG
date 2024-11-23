@@ -1,8 +1,8 @@
 // src/components/Home/Home.jsx
 
 import React, { useState } from 'react';
-import RoomList from '../../RoomList/RoomList.jsx';
-import Live from '../../Live/Live.jsx';
+import RoomList from '../../Elements/RoomList/RoomList.jsx';
+import Live from '../../Elements/Live/Live.jsx';
 import './Home.css';
 
 const Home = () => {

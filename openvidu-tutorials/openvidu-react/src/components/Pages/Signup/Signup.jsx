@@ -13,7 +13,7 @@ const Signup = () => {
   const handleSignup = async () => {
     try {
       // API 요청: 회원가입
-      const response = await axios.post('https://recordstudio.site:8443/api/user/users', {
+      const response = await axios.post(`${env.REACT_APP_API_BASE_URL}/user/users`, {
         username, // nickname을 username으로 변경
         password,
         confirmPassword,
