@@ -1,38 +1,35 @@
-import React, { Component } from 'react';
-import { OpenVidu } from 'openvidu-browser';
-import axios from 'axios';
-import './OpenviduFinal.css';
-import UserVideoComponent from './UserVideoComponent';
+import React, { Component } from "react";
+import { OpenVidu } from "openvidu-browser";
+import axios from "axios";
+import UserVideoComponent from "./UserVideoComponent";
 
-const APPLICATION_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'https://demos.openvidu.io/';
+const APPLICATION_SERVER_URL = process.env.NODE_ENV === "production" ? "" : "https://demos.openvidu.io/";
 
 class OpenviduFinal extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
 
         this.state = {
             session: undefined,
             publisher: undefined,
-            subscribers: [],
             mainStreamManager: undefined,
+            subscribers: [],
+            isSharingScreen: false,
         };
 
         this.joinSession = this.joinSession.bind(this);
         this.leaveSession = this.leaveSession.bind(this);
-        this.onbeforeunload = this.onbeforeunload.bind(this);
+        this.startScreenShare = this.startScreenShare.bind(this);
+        this.stopScreenShare = this.stopScreenShare.bind(this);
     }
 
     componentDidMount() {
-        window.addEventListener('beforeunload', this.onbeforeunload);
+        window.addEventListener("beforeunload", this.leaveSession);
         this.joinSession();
     }
 
     componentWillUnmount() {
-        window.removeEventListener('beforeunload', this.onbeforeunload);
-        this.leaveSession();
-    }
-
-    onbeforeunload(event) {
+        window.removeEventListener("beforeunload", this.leaveSession);
         this.leaveSession();
     }
 
@@ -40,14 +37,16 @@ class OpenviduFinal extends Component {
         const OV = new OpenVidu();
         const session = OV.initSession();
 
-        session.on('streamCreated', (event) => {
+        // 다른 사용자의 스트림 구독
+        session.on("streamCreated", (event) => {
             const subscriber = session.subscribe(event.stream, undefined);
             this.setState((prevState) => ({
                 subscribers: [...prevState.subscribers, subscriber],
             }));
         });
 
-        session.on('streamDestroyed', (event) => {
+        // 다른 사용자의 스트림 제거
+        session.on("streamDestroyed", (event) => {
             this.setState((prevState) => ({
                 subscribers: prevState.subscribers.filter(
                     (sub) => sub !== event.stream.streamManager
@@ -55,14 +54,16 @@ class OpenviduFinal extends Component {
             }));
         });
 
-        session.on('exception', (exception) => {
+        session.on("exception", (exception) => {
             console.warn(exception);
         });
 
         try {
-            const token = await this.getToken(this.props.sessionId);
-            await session.connect(token, { clientData: this.props.userName });
+            const sessionId = this.props.sessionId; // 세션 ID
+            const userName = this.props.userName; // 사용자 이름
 
+            const token = await this.getToken(sessionId);
+            await session.connect(token, { clientData: userName });
 
             if (!this.props.isObserver) {
                 // 관전자가 아니면 발행자 생성
@@ -91,9 +92,8 @@ class OpenviduFinal extends Component {
 
             this.setState({ session: session });
 
-
         } catch (error) {
-            console.error('Error joining session:', error);
+            console.error("Error joining session:", error);
         }
     }
 
@@ -105,9 +105,84 @@ class OpenviduFinal extends Component {
         this.setState({
             session: undefined,
             publisher: undefined,
-            subscribers: [],
             mainStreamManager: undefined,
+            subscribers: [],
         });
+    }
+
+    async startScreenShare() {
+        const { session, publisher } = this.state;
+
+        if (!session) {
+            console.error("Session not initialized");
+            return;
+        }
+
+        try {
+            // 기존 퍼블리셔 unpublish
+            session.unpublish(publisher);
+
+            const OV = new OpenVidu();
+            const screenPublisher = OV.initPublisher(undefined, {
+                videoSource: "screen", // 화면 공유
+                audioSource: undefined, // 화면 공유 시 음소거
+                publishAudio: false,
+                publishVideo: true,
+            });
+
+            screenPublisher.once("accessAllowed", () => {
+                session.publish(screenPublisher);
+                this.setState({
+                    publisher: screenPublisher,
+                    mainStreamManager: screenPublisher, // 화면 공유 퍼블리셔로 전환
+                    isSharingScreen: true,
+                });
+                console.log("Screen sharing started");
+            });
+
+            screenPublisher.once("accessDenied", () => {
+                console.error("Screen sharing was denied");
+                session.publish(publisher); // 기존 카메라 퍼블리셔 복원
+            });
+        } catch (error) {
+            console.error("Error starting screen share:", error);
+        }
+    }
+
+    stopScreenShare() {
+        const { session, publisher } = this.state;
+
+        if (!session) {
+            console.error("Session not initialized");
+            return;
+        }
+
+        try {
+            const screenPublisher = this.state.publisher;
+            session.unpublish(screenPublisher); // 화면 공유 퍼블리셔 중단
+            screenPublisher.stream.getMediaStream().getTracks().forEach((track) => track.stop());
+
+            const OV = new OpenVidu();
+            OV.initPublisherAsync(undefined, {
+                audioSource: undefined,
+                videoSource: undefined,
+                publishAudio: true,
+                publishVideo: true,
+                resolution: "640x480",
+                frameRate: 30,
+                mirror: false,
+            }).then((cameraPublisher) => {
+                session.publish(cameraPublisher);
+                this.setState({
+                    publisher: cameraPublisher,
+                    mainStreamManager: cameraPublisher, // 카메라 퍼블리셔로 복원
+                    isSharingScreen: false,
+                });
+                console.log("Screen sharing stopped, camera restored");
+            });
+        } catch (error) {
+            console.error("Error stopping screen share:", error);
+        }
     }
 
     async getToken(sessionId) {
@@ -119,7 +194,7 @@ class OpenviduFinal extends Component {
         const response = await axios.post(
             `${APPLICATION_SERVER_URL}api/sessions`,
             { customSessionId: sessionId },
-            { headers: { 'Content-Type': 'application/json' } }
+            { headers: { "Content-Type": "application/json" } }
         );
         return response.data;
     }
@@ -128,22 +203,28 @@ class OpenviduFinal extends Component {
         const response = await axios.post(
             `${APPLICATION_SERVER_URL}api/sessions/${sessionId}/connections`,
             {},
-            { headers: { 'Content-Type': 'application/json' } }
+            { headers: { "Content-Type": "application/json" } }
         );
         return response.data;
     }
 
     render() {
+        const { mainStreamManager, subscribers, isSharingScreen } = this.state;
+
         return (
             <div className="openvidu-final">
-                {this.state.mainStreamManager && (
-                    <div className="main-video">
-                        <UserVideoComponent streamManager={this.state.mainStreamManager} />
-                    </div>
-                )}
-                <div className="video-container">
-                    {this.state.subscribers.map((sub, index) => (
-                        <div key={index} className="subscriber">
+                {/* 본인 화면 */}
+                <div className="main-video">
+                    {mainStreamManager && <UserVideoComponent streamManager={mainStreamManager} />}
+                </div>
+                <button onClick={isSharingScreen ? this.stopScreenShare : this.startScreenShare}>
+                    {isSharingScreen ? "Stop Screen Sharing" : "Start Screen Sharing"}
+                </button>
+
+                {/* 다른 사용자 화면 */}
+                <div className="subscribers">
+                    {subscribers.map((sub, index) => (
+                        <div key={index}>
                             <UserVideoComponent streamManager={sub} />
                         </div>
                     ))}
