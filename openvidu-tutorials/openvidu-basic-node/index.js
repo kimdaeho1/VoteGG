@@ -1,4 +1,4 @@
-require("dotenv").config(!!process.env.CONFIG ? {path: process.env.CONFIG} : {});
+require("dotenv").config(!!process.env.CONFIG ? { path: process.env.CONFIG } : {});
 var express = require("express");
 var bodyParser = require("body-parser");
 var http = require("http");
@@ -28,7 +28,7 @@ app.use(express.json());
 // HTTP 라우터 추가
 // app.use('/chat', chatRouter);
 app.use('/api/user', userRouter);
-app.use('/api/news', newsRouter); 
+app.use('/api/news', newsRouter);
 app.use('/api/room', roomRouter); // 정책 뉴스 라우터
 ///
 

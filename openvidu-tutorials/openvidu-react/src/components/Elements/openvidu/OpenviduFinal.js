@@ -217,10 +217,14 @@ class OpenviduFinal extends Component {
                 <div className="main-video">
                     {mainStreamManager && <UserVideoComponent streamManager={mainStreamManager} />}
                 </div>
-                <button onClick={isSharingScreen ? this.stopScreenShare : this.startScreenShare}>
-                    {isSharingScreen ? "Stop Screen Sharing" : "Start Screen Sharing"}
-                </button>
-
+        
+                {/* 화면 공유 버튼 - Observer가 아닌 경우에만 표시 */}
+                {!this.props.isObserver && (
+                    <button onClick={isSharingScreen ? this.stopScreenShare : this.startScreenShare}>
+                        {isSharingScreen ? "Stop Screen Sharing" : "Start Screen Sharing"}
+                    </button>
+                )}
+        
                 {/* 다른 사용자 화면 */}
                 <div className="subscribers">
                     {subscribers.map((sub, index) => (
