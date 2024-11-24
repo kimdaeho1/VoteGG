@@ -1,0 +1,19 @@
+/* OpenviduFinal.css */
+.openvidu-final {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.main-video {
+    width: 640px;
+    height: 480px;
+    margin-bottom: 20px;
+}
+.video-container {
+    display: flex;
+    gap: 10px;
+}
+.subscriber {
+    width: 320px;
+    height: 240px;
+}

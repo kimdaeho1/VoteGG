@@ -1,15 +1,35 @@
-import React, { useEffect, useRef } from 'react';
+import React, { Component } from 'react';
+import OpenViduVideoComponent from './OvVideo';
+import './UserVideo.css';
 
-const UserVideoComponent = ({ streamManager }) => {
-    const videoRef = useRef();
-
-    useEffect(() => {
-        if (streamManager && videoRef.current) {
-            streamManager.addVideoElement(videoRef.current);
+export default class UserVideoComponent extends Component {
+    getConnectionInfo() {
+        const { streamManager } = this.props;
+        if (streamManager) {
+            const connectionData = streamManager.stream.connection;
+            return {
+                connectionId: connectionData.connectionId, // 연결 ID
+                clientData: JSON.parse(connectionData.data)?.clientData || 'Unknown', // 사용자 정의 데이터
+            };
         }
-    }, [streamManager]);
+        return {};
+    }
 
-    return <video autoPlay={true} ref={videoRef} />;
-};
+    render() {
+        const { connectionId, clientData } = this.getConnectionInfo();
 
-export default UserVideoComponent;
+        return (
+            <div>
+                {this.props.streamManager ? (
+                    <div className="streamcomponent">
+                        <OpenViduVideoComponent streamManager={this.props.streamManager} />
+                        <div className="connection-info">
+                            <p>Connection ID: {connectionId || 'N/A'}</p>
+                            <p>User Data: {clientData || 'No Data'}</p>
+                        </div>
+                    </div>
+                ) : null}
+            </div>
+        );
+    }
+}
