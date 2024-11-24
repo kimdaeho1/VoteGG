@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import { useParams } from 'react-router-dom'; // React Router 사용
 import './TestChat.css';
 import { useDispatch } from "react-redux";
-import { updateMemberCount } from "../../../roomSlice";
+// import { updateMemberCount } from "../../../roomSlice";
 
 const TestChat = () => {
   const { roomNumber } = useParams(); // URL의 :id 부분 추출
@@ -12,7 +12,6 @@ const TestChat = () => {
   const [message, setMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
   const messagesEndRef = useRef(null);
-
 
 
   // 토큰에서 사용자 이름 추출
@@ -31,7 +30,7 @@ const TestChat = () => {
 
     // 소켓 연결 생성
     const newSocket = io(window.location.origin + "/chat", {
-      path: '/chat/socket.io',
+      path: '/socket.io/',
       transports: ['websocket'],
       query: { debug: true }
     });
@@ -42,8 +41,6 @@ const TestChat = () => {
       console.log('Socket connected:', newSocket.id);
       newSocket.emit('join_room', roomId);
     });
-
-
 
     newSocket.on('receive_message', (data) => {
       setMessageList((list) => [...list, data]);

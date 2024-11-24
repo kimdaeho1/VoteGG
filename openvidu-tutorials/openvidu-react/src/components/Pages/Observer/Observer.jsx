@@ -6,7 +6,11 @@ import OpenviduFinal from '../../Elements/openvidu/OpenviduFinal.js';
 
 const Observer = () => {
   const { roomNumber } = useParams();
-  const userId = `user_${Math.floor(Math.random() * 1000)}`;
+
+  // 토큰에서 사용자 이름 추출
+  const token = localStorage.getItem("token");
+  console.log(token);
+  const userId = token ? getUsernameFromToken(token) : "Unknown User";
 
   return (
     <div className="room">
@@ -21,3 +25,15 @@ const Observer = () => {
 };
 
 export default Observer;
+
+
+// Utility Function for Token Decoding
+const getUsernameFromToken = (token) => {
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1])); // JWT payload parsing
+    return payload.username; // Extract username
+  } catch (error) {
+    console.error('Failed to parse token:', error);
+    return 'Unknown User';
+  }
+};

@@ -8,7 +8,6 @@ const Room = ({ role }) => {
   const { roomNumber } = useParams(); // URL에서 :id 추출
   const roomId = roomNumber;
 
-  const userId = "example_user_id"; // 실제 로그인된 사용자 ID를 여기에 설정
 
   return (
     <div className="room">
