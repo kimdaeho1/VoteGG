@@ -65,23 +65,33 @@ class OpenviduFinal extends Component {
             const token = await this.getToken(sessionId);
             await session.connect(token, { clientData: userName });
 
-            const publisher = await OV.initPublisherAsync(undefined, {
-                audioSource: undefined,
-                videoSource: undefined,
-                publishAudio: true,
-                publishVideo: true,
-                resolution: "640x480",
-                frameRate: 30,
-                mirror: false,
-            });
+            if (!this.props.isObserver) {
+                // 관전자가 아니면 발행자 생성
+                const publisher = await OV.initPublisherAsync(undefined, {
+                    audioSource: undefined,
+                    videoSource: undefined,
+                    publishAudio: true,
+                    publishVideo: true,
+                    resolution: '640x480',
+                    frameRate: 30,
+                    mirror: false,
+                    audioProcessing: {
+                        echoCancellation: true, // 에코 제거 활성화
+                        noiseSuppression: true, // 잡음 제거 활성화
+                        autoGainControl: true,  // 자동 게인 컨트롤 활성화
+                    }
+                });
 
-            session.publish(publisher);
+                session.publish(publisher);
 
-            this.setState({
-                session: session,
-                publisher: publisher,
-                mainStreamManager: publisher, // 초기 상태는 카메라 퍼블리셔
-            });
+                this.setState({
+                    publisher: publisher,
+                    mainStreamManager: publisher,
+                });
+            }
+
+            this.setState({ session: session });
+
         } catch (error) {
             console.error("Error joining session:", error);
         }

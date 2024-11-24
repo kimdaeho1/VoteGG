@@ -24,8 +24,8 @@ export default class UserVideoComponent extends Component {
                     <div className="streamcomponent">
                         <OpenViduVideoComponent streamManager={this.props.streamManager} />
                         <div className="connection-info">
-                            <p>Connection ID: {connectionId || 'N/A'}</p>
-                            <p>User Data: {clientData || 'No Data'}</p>
+                            {/* <p>Connection ID: {connectionId || 'N/A'}</p> */}
+                            <p>User: {clientData || 'No Data'}</p>
                         </div>
                     </div>
                 ) : null}
