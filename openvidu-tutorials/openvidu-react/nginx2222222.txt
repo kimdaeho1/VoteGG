@@ -1,0 +1,42 @@
+server {
+    listen 8443 ssl;
+    server_name whirae3433.shop; # 실제 IP 주소를 사용하거나 도메인 이름으로 변경
+
+    ssl_certificate /home/ubuntu/Project-Agora/openvidu-tutorials/openvidu-basic-node/cert.crt;
+    ssl_certificate_key /home/ubuntu/Project-Agora/openvidu-tutorials/openvidu-basic-node/cert.key;
+
+    add_header Access-Control-Allow-Origin *;  # 모든 도메인에서 접근 허용
+        add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';  # 허용되는 HTTP 메소드
+        add_header Access-Control-Allow-Headers 'Authorization, Content-Type';  # 허용되는 헤더
+
+    # API 프록시 설정
+    location /api {
+        proxy_pass http://127.0.0.1:5000/api;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location /socket.io/ {
+       
+        proxy_pass http://127.0.0.1:5000/socket.io/;   # <-요게 바겼습니다.
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+
+    # React 애플리케이션 프록시 설정
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}

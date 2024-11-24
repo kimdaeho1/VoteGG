@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './HotTopics.css';
 
+
 const HotTopics = () => {
   const [topics, setTopics] = useState([]); // 상태 관리
   const isFetched = useRef(false); // API 요청 여부를 추적
@@ -9,7 +10,7 @@ const HotTopics = () => {
     // API에서 데이터를 가져오는 함수
     const fetchTopics = async () => {
       try {
-        const response = await fetch(`${env.REACT_APP_API_BASE_URL}/api/news/policy-news`);
+        const response = await fetch(window.location.origin + '/api/news/policy-news');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

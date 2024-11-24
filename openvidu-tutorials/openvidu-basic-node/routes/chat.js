@@ -47,18 +47,17 @@ function chatSocketHandler(io) {
     
       try {
         for (const roomId of rooms) {
-          const intRoomId = parseInt(roomId, 10);
           // HTTP 요청 또는 데이터베이스 업데이트 처리
           const updatedRoom = await Room.findOneAndUpdate(
-            { roomNumber: intRoomId, memberCount: { $gt: 0 } },
+            { roomNumber: roomId, memberCount: { $gt: 0 } },
             { $inc: { memberCount: -1 } },
             { new: true }
           );
-          console.log(`인구 다운 ${intRoomId}`);
+          console.log(`인구 다운 ${roomId}`);
     
           if (updatedRoom && updatedRoom.memberCount === 0) {
-            await Room.deleteOne({ roomNumber: intRoomId });
-            console.log(`방 ${intRoomId}가 삭제되었습니다.`);
+            await Room.deleteOne({ roomNumber: roomId });
+            console.log(`방 ${roomId}가 삭제되었습니다.`);
           }
         }
     

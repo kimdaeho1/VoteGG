@@ -19,14 +19,14 @@ var OPENVIDU_URL = process.env.OPENVIDU_URL || 'http://localhost:4443';
 // Environment variable: secret shared with our OpenVidu server
 var OPENVIDU_SECRET = process.env.OPENVIDU_SECRET || 'MY_SECRET';
 
-const { router: chatRouter, chatSocketHandler } = require('./routes/chat');
+const { chatSocketHandler } = require('./routes/chat');
 const userRouter = require('./routes/user');
 const newsRouter = require('./routes/newsRouter'); // 정책 뉴스 라우터
 const roomRouter = require('./routes/room'); // 룸생성 라우터
 app.use(express.json());
 
 // HTTP 라우터 추가
-app.use('/chat', chatRouter);
+// app.use('/chat', chatRouter);
 app.use('/api/user', userRouter);
 app.use('/api/news', newsRouter); 
 app.use('/api/room', roomRouter); // 정책 뉴스 라우터
@@ -49,7 +49,7 @@ const io = new Server(server, {
     methods: ['GET', 'POST'],
     credentials: true,
   },
-  path: '/chat/socket.io',
+  path: '/socket.io/',
   transports: ['websocket'],
 });
 
