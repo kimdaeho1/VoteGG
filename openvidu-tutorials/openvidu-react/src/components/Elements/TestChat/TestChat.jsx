@@ -2,8 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import io from 'socket.io-client';
 import { useParams } from 'react-router-dom'; // React Router 사용
 import './TestChat.css';
-import { useDispatch } from "react-redux";
-// import { updateMemberCount } from "../../../roomSlice";
 
 const TestChat = () => {
   const { roomNumber } = useParams(); // URL의 :id 부분 추출
@@ -19,7 +17,7 @@ const TestChat = () => {
   console.log(token);
   const username = token ? getUsernameFromToken(token) : "Unknown User";
 
-  const dispatch = useDispatch();
+
 
 
   useEffect(() => {
@@ -50,7 +48,7 @@ const TestChat = () => {
     return () => {
       newSocket.disconnect();
     };
-  }, [roomId, dispatch]);
+  }, [roomId]);
 
   useEffect(() => {
     // 메시지 목록이 업데이트될 때마다 자동 스크롤
