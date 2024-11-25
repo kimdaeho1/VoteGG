@@ -4,9 +4,7 @@ import useSocket from "../../useSocket"; // 커스텀 훅 가져오기
 import "./TestChat.css";
 import VoteModal from "../../Modals/VoteModal/VoteModal"; // 모달 컴포넌트
 
-const TestChat = () => {
-  const { roomNumber } = useParams(); // URL의 :id 부분 추출
-  const roomId = roomNumber;
+const TestChat = ({ roomId, isObserver }) => {  // isObserver props 추가
   const socket = useSocket("/chat", roomId); // 소켓 연결 가져오기
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
@@ -98,10 +96,12 @@ const TestChat = () => {
           <button className="room-send-button" onClick={sendMessage}>
             <img src="/send.png" alt="Send" className="send-icon" />
           </button>
-          {/* 모달 열기 버튼 추가 */}
-          <button className="modal-button" onClick={toggleModal}>
-            <img src="/ticket.jpg" alt="Modal" className="modal-icon" />
-          </button>
+          {/* 옵저버일 경우만 모달 열기 버튼 표시 */}
+          {isObserver && (
+            <button className="modal-button" onClick={toggleModal}>
+              <img src="/ticket.jpg" alt="Modal" className="modal-icon" />
+            </button>
+          )}
         </div>
       </div>
 

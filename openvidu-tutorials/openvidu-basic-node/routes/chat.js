@@ -36,7 +36,10 @@ function chatSocketHandler(io) {
         // 투표권 증가를 위한 setInterval
         setInterval(() => {
           if (userVotes[roomId]) {
-            userVotes[roomId][socket.id] += 1;  // 유저의 투표권 증가
+            // 투표권 증가, 최대 10개로 제한
+            if (userVotes[roomId][socket.id] < 10) {
+              userVotes[roomId][socket.id] += 1;  // 유저의 투표권 증가
+            }
             socket.emit("update_vote_count", {
               userId: socket.id,
               voteCount: userVotes[roomId][socket.id],

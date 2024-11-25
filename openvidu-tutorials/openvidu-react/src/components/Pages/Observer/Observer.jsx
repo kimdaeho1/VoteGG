@@ -17,7 +17,7 @@ const Observer = () => {
         />
       </div>
       <div className="right-side">
-        <TestChat roomId={roomNumber} />
+        <TestChat roomId={roomNumber} isObserver={true} /> {/* 옵저버 페이지는 isObserver=true */}
       </div>
     </div>
   );
