@@ -8,9 +8,12 @@ const EndButton = () => {
   const socket = useSocket("/invite", roomId); // useSocket 훅을 통해 소켓 연결
   const [message, setMessage] = useState("");
 
+  const token = localStorage.getItem("token");
+  const username = token ? getUsernameFromToken(token) : "Unknown User";
+
   const handleButtonClick = () => {
     if (socket) {
-      socket.emit("button_click", { roomId, message: "Hello from Client!" });
+      socket.emit("button_click", { username, message: "Hello from Client!" });
       console.log("Message sent to server!");
     }
   };
@@ -42,3 +45,15 @@ const EndButton = () => {
 };
 
 export default EndButton;
+
+
+// Utility Function for Token Decoding
+const getUsernameFromToken = (token) => {
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1])); // JWT payload parsing
+    return payload.username; // Extract username
+  } catch (error) {
+    console.error("Failed to parse token:", error);
+    return "Unknown User";
+  }
+};
