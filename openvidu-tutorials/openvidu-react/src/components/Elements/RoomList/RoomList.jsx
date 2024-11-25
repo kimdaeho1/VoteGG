@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
-import { updateMemberCount } from "../../../roomSlice";
-import OpenviduFinal from '../openvidu/OpenviduFinal';
 import "./RoomList.css";
 
 // const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
+
+
 const RoomList = () => {
   const navigate = useNavigate();
   const [rooms, setRooms] = useState([]);
-  const [thumbnails, setThumbnails] = useState({}); // 방 번호별 썸네일 저장
+
+
 
   // 데이터베이스에서 방 정보 가져오기
   useEffect(() => {
@@ -19,7 +19,6 @@ const RoomList = () => {
       try {
         const response = await axios.get(window.location.origin + '/api/room/roomList');
         setRooms(response.data); // 서버에서 받은 데이터로 상태 업데이트
-
       } catch (error) {
         console.error("방 목록 가져오기 실패:", error.message);
       }
@@ -27,9 +26,6 @@ const RoomList = () => {
 
     fetchRooms();
   }, []);
-
-
-
 
   return (
     <div className="room-list-container">
@@ -41,7 +37,6 @@ const RoomList = () => {
           <div key={room.roomNumber} className="room-card">
             <div className="room-image">
               <img
-                // src={room.image || "/default-image.png"}
                 src='./sample.jpeg'
                 alt={`${room.roomname} 이미지`}
                 onClick={() => navigate(`/observer/${room.roomNumber}`)}
