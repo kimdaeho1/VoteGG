@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import './Observer.css';
 import TestChat from '../../Elements/TestChat/TestChat.jsx';
 import OpenviduFinal from '../../Elements/openvidu/OpenviduFinal.js'; // OpenviduFinal 가져오기
+import Timer from '../../Elements/openvidu/Timer/Timer';
 
 const Observer = () => {
   const { roomNumber } = useParams();
@@ -20,6 +21,10 @@ const Observer = () => {
       <div className="right-side">
         <TestChat roomId={roomNumber} isObserver={true} /> {/* 옵저버 페이지는 isObserver=true */}
       </div>
+      <div>
+        <Timer roomId={roomNumber} />
+      </div>
+      
     </div>
   );
 };

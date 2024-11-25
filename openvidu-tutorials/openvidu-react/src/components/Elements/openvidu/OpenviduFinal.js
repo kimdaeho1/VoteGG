@@ -12,8 +12,11 @@ class OpenviduFinal extends Component {
         this.state = {
             session: undefined,
             publisher: undefined,
-            leftStreamManager: undefined,
-            rightStreamManager: undefined,
+            mainStreamManager: undefined,
+            // leftStreamManager: undefined,
+            // rightStreamManager: undefined,
+            // leftSubscribers: [], // 왼쪽 사용자 그룹
+            // rightSubscribers: [], // 오른쪽 사용자 그룹
             subscribers: [],
             isSharingScreen: false,
         };
