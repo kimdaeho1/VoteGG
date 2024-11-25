@@ -12,7 +12,8 @@ class OpenviduFinal extends Component {
         this.state = {
             session: undefined,
             publisher: undefined,
-            mainStreamManager: undefined,
+            leftStreamManager: undefined,
+            rightStreamManager: undefined,
             subscribers: [],
             isSharingScreen: false,
         };
@@ -38,18 +39,44 @@ class OpenviduFinal extends Component {
         const session = OV.initSession();
 
         // 다른 사용자의 스트림 구독
-        session.on("streamCreated", (event) => {
+        session.on('streamCreated', (event) => {
             const subscriber = session.subscribe(event.stream, undefined);
-            this.setState((prevState) => ({
-                subscribers: [...prevState.subscribers, subscriber],
-            }));
+
+            // 연결 데이터에서 clientData 추출
+            let data = event.stream.connection.data;
+            let userName = 'Unknown';
+
+            try {
+                const parsedData = JSON.parse(data);
+                userName = parsedData.clientData || 'Unknown';
+            } catch (e) {
+                console.error('연결 데이터 파싱 오류:', e);
+            }
+
+            const newSubscriber = {
+                subscriber: subscriber,
+                userName: userName,
+                left: false,
+            };
+
+            this.setState(
+                (prevState) => ({
+                    subscribers: [...prevState.subscribers, newSubscriber],
+                }),
+                () => {
+                    // 상태가 업데이트된 후 로그 출력
+                    console.log("---------구독과좋아요-----------", this.state.subscribers);
+                    console.log("---------유저네임-----------", this.props.userName);
+                }
+            );
         });
 
-        // 다른 사용자의 스트림 제거
-        session.on("streamDestroyed", (event) => {
+        session.on('streamDestroyed', (event) => {
+            const subscriberToRemove = event.stream.streamManager;
+
             this.setState((prevState) => ({
                 subscribers: prevState.subscribers.filter(
-                    (sub) => sub !== event.stream.streamManager
+                    (subItem) => subItem.subscriber !== subscriberToRemove
                 ),
             }));
         });
@@ -217,19 +244,19 @@ class OpenviduFinal extends Component {
                 <div className="main-video">
                     {mainStreamManager && <UserVideoComponent streamManager={mainStreamManager} />}
                 </div>
-        
+
                 {/* 화면 공유 버튼 - Observer가 아닌 경우에만 표시 */}
                 {!this.props.isObserver && (
                     <button onClick={isSharingScreen ? this.stopScreenShare : this.startScreenShare}>
                         {isSharingScreen ? "Stop Screen Sharing" : "Start Screen Sharing"}
                     </button>
                 )}
-        
+
                 {/* 다른 사용자 화면 */}
                 <div className="subscribers">
-                    {subscribers.map((sub, index) => (
+                    {subscribers.map((subItem, index) => (
                         <div key={index}>
-                            <UserVideoComponent streamManager={sub} />
+                            <UserVideoComponent streamManager={subItem.subscriber} userName={subItem.userName} />
                         </div>
                     ))}
                 </div>

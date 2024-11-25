@@ -14,6 +14,7 @@ const Observer = () => {
           sessionId={roomNumber}
           userName="Observer"
           isObserver={true} // 관전자 모드 활성화
+          subs={false}
         />
       </div>
       <div className="right-side">
