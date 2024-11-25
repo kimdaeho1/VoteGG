@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { updateMemberCount } from "../../../roomSlice";
+import OpenviduFinal from '../openvidu/OpenviduFinal';
 import "./RoomList.css";
 
 // const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
@@ -10,15 +11,7 @@ import "./RoomList.css";
 const RoomList = () => {
   const navigate = useNavigate();
   const [rooms, setRooms] = useState([]);
-  // const rooms = [
-  //   {
-  //     roomNumber: 1,
-  //     roomname: "React 토론방",
-  //     createdby: "홍길동",
-  //     memberCount: 5,
-  //     image: "./sample.jpeg",
-  //   },
-  // ];
+  const [thumbnails, setThumbnails] = useState({}); // 방 번호별 썸네일 저장
 
   // 데이터베이스에서 방 정보 가져오기
   useEffect(() => {
@@ -34,6 +27,8 @@ const RoomList = () => {
 
     fetchRooms();
   }, []);
+
+
 
 
   return (

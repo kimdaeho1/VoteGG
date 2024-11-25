@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import useSocket from "../../useSocket"; // 커스텀 훅 가져오기
 import "./TestChat.css";
+import VoteModal from "../../Modals/VoteModal/VoteModal"; // 모달 컴포넌트
 
 const TestChat = () => {
   const { roomNumber } = useParams(); // URL의 :id 부분 추출
@@ -9,6 +10,7 @@ const TestChat = () => {
   const socket = useSocket("/chat", roomId); // 소켓 연결 가져오기
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 추가
   const messagesEndRef = useRef(null);
 
   // 토큰에서 사용자 이름 추출
@@ -48,6 +50,9 @@ const TestChat = () => {
     }
   };
 
+  // 모달 열기/닫기 함수
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
+
   return (
     <div className="chat-window">
       <div className="chat-header">
@@ -57,8 +62,7 @@ const TestChat = () => {
         {messageList.map((msgContent, index) => (
           <div
             key={index}
-            className={`message ${msgContent.author === username ? "you" : "other"
-              }`}
+            className={`message ${msgContent.author === username ? "you" : "other"}`}
           >
             <div className="message-avatar"></div>
             <div>
@@ -85,8 +89,15 @@ const TestChat = () => {
           <button className="room-send-button" onClick={sendMessage}>
             <img src="/send.png" alt="Send" className="send-icon" />
           </button>
+          {/* 모달 열기 버튼 추가 */}
+          <button className="modal-button" onClick={toggleModal}>
+            <img src="/ticket.jpg" alt="Modal" className="modal-icon" />
+          </button>
         </div>
       </div>
+
+      {/* 모달 컴포넌트 */}
+      {isModalOpen && <VoteModal toggleModal={toggleModal} />}
     </div>
   );
 };

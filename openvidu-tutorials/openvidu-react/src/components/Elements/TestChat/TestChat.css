@@ -1,3 +1,6 @@
+/* TestChat.css */
+
+/* 채팅창 전체 스타일 */
 .chat-window {
   width: 100%;
   height: 100%;
@@ -9,6 +12,7 @@
   margin-left: 20px;
 }
 
+/* 헤더 스타일 */
 .chat-header {
   background-color: white;
   padding: 3px;
@@ -18,6 +22,7 @@
   color: #333;
 }
 
+/* 채팅 메시지 영역 스타일 */
 .chat-body {
   flex: 1;
   overflow-y: auto;
@@ -25,6 +30,7 @@
   background-color: #ffffff;
 }
 
+/* 각 메시지 스타일 */
 .message {
   display: flex;
   align-items: flex-start;
@@ -51,15 +57,16 @@
 .message.you .message-content {
   background-color: #ffffff;
   align-self: flex-end;
-  /* border-radius: 2px solid black; */
 }
 
+/* 메시지 메타데이터 스타일 (시간, 작성자 등) */
 .message-meta {
   font-size: 0.8rem;
   color: #777;
   margin-top: 5px;
 }
 
+/* 채팅 입력창 하단 스타일 */
 .chat-footer {
   display: flex;
   padding: 5px;
@@ -67,6 +74,7 @@
   border-top: 1px solid #ddd;
 }
 
+/* 입력창 스타일 */
 .chat-footer input {
   flex: 1;
   padding: 10px;
@@ -88,31 +96,28 @@
   background-color: #ebebeb;
 }
 
-
+/* 버튼 및 입력창 주변 스타일 */
 .input-wrapper {
   margin-top: 5px;
-  position: center;
-  width: 90%;
+  display: flex; /* 수평으로 버튼들을 배치 */
+  justify-content: flex-start; /* 왼쪽 정렬 */
+  align-items: center; /* 수직 정렬 */
+  width: 100%;
 }
 
 .input-wrapper input {
-  width: 100%;
+  width: 80%;
   height: 30px;
   padding: 10px;
   padding-right: 20px;
   padding-left: 20px;
-  /* 버튼 영역 확보 */
   border: 1px solid #ddd;
   border-radius: 2px;
   outline: none;
 }
 
 .room-send-button {
-  position: absolute;
-  right: -20px;
-  /* input 내부 오른쪽 끝에서 10px */
-  top: 50%;
-  transform: translateY(-50%);
+  margin-left: 10px;
   background: white;
   border: none;
   padding: 0;
@@ -121,7 +126,52 @@
 
 .room-send-button .send-icon {
   width: 24px;
-  /* 아이콘 크기 */
   height: 24px;
   opacity: 60%;
+}
+
+/* 모달 버튼 스타일 */
+.modal-button {
+  margin-left: 10px;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-button .modal-icon {
+  width: 24px;
+  height: 24px;
+  opacity: 60%;
+}
+
+/* 모달 스타일 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  text-align: center;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
 }
