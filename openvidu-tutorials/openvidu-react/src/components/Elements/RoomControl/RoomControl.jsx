@@ -7,7 +7,6 @@ import { useParams } from 'react-router-dom';
 
 const RoomControl = () => {
   const { roomNumber } = useParams(); // URL의 :id 부분 추출
-  const roomId = roomNumber;
 
   return (
     <div className="roomcontrol">
@@ -15,7 +14,7 @@ const RoomControl = () => {
         <EndButton />
       </div>
       <div className='bb'>
-        <Timer roomId={roomId} />
+        <Timer roomId={roomNumber} />
       </div>
     </div>
   );

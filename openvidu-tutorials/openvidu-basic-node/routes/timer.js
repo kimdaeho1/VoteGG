@@ -19,10 +19,10 @@ function timerSocketHandler(io) {
       if (!rooms[roomId]) {
         // 타이머 초기 설정
         rooms[roomId] = {
-          duration: 10, // 총 시간 (초)
+          duration: 180, // 총 시간 (초)
           startTime: Date.now(),
           interval: null,
-          timeLeft: 10,
+          timeLeft: 180,
         };
 
         // 1초마다 타이머 업데이트
