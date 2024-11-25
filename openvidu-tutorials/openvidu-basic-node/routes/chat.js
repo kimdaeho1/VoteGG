@@ -8,7 +8,7 @@ function chatSocketHandler(io) {
   const chatNamespace = io.of('/chat');
 
   chatNamespace.on('connection', (socket) => {
-    console.log(`Chat 사용자 연결됨: ${socket.id}`);
+    console.log(`사용자 연결됨: ${socket.id}`);
 
     // 방 참가
     socket.on('join_room', async (roomId) => {
@@ -38,7 +38,7 @@ function chatSocketHandler(io) {
       console.log(`방 ${data.roomId}에 메시지 전송: ${data.message}`);
       socket.to(data.roomId).emit('receive_message', data);
     });
-
+    
     socket.on('disconnect', async () => {
       console.log(`사용자 연결 해제됨: ${socket.id}`);
     

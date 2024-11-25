@@ -54,7 +54,7 @@ const RoomList = () => {
               <div className="room-info">
                 <p className="room-creator">{room.createdby} 님</p>
               </div>
-              {/* <div className="room-buttons">
+              <div className="room-buttons">
                 <button
                   className="room-spectate-button"
                   onClick={() => navigate(`/observer/${room.roomNumber}`)}
@@ -67,7 +67,7 @@ const RoomList = () => {
                 >
                   토론하기
                 </button>
-              </div> */}
+              </div>
             </div>
           </div>
         ))}
