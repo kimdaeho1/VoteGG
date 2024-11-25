@@ -128,3 +128,6 @@ dist
 .yarn/install-state.gz
 .pnp.**.swp
 .ssh/.authorized_keys.swp
+.npm/
+.ssh/
+.vscode-server/
