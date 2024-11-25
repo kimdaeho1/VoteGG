@@ -11,6 +11,7 @@ const TestChat = () => {
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 추가
+  const [voteCount, setVoteCount] = useState(0); // 투표권 상태
   const messagesEndRef = useRef(null);
 
   // 토큰에서 사용자 이름 추출
@@ -25,9 +26,17 @@ const TestChat = () => {
       setMessageList((list) => [...list, data]);
     });
 
+    // 소켓에서 투표권 업데이트 이벤트 받기
+    socket.on("update_vote_count", ({ userId, voteCount }) => {
+      if (userId === socket.id) {
+        setVoteCount(voteCount); // 본인의 투표권 업데이트
+      }
+    });
+
     // 정리 함수
     return () => {
       socket.off("receive_message");
+      socket.off("update_vote_count");
     };
   }, [socket]);
 
@@ -97,7 +106,7 @@ const TestChat = () => {
       </div>
 
       {/* 모달 컴포넌트 */}
-      {isModalOpen && <VoteModal toggleModal={toggleModal} />}
+      {isModalOpen && <VoteModal toggleModal={toggleModal} voteCount={voteCount} />}
     </div>
   );
 };
