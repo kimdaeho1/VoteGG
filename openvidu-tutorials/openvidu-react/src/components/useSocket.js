@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
-const useSocket = (roomId) => {
+const useSocket = (namespace, roomId) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
@@ -11,7 +11,7 @@ const useSocket = (roomId) => {
     }
 
     // 소켓 연결 생성
-    const newSocket = io(window.location.origin + "/chat", {
+    const newSocket = io(window.location.origin + namespace, {
       path: "/socket.io/",
       transports: ["websocket"],
       query: { debug: true },

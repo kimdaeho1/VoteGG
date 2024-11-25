@@ -21,6 +21,9 @@ const Layers = () => {
               {/* 메인 페이지 라우트 */}
               <Route path="/" element={<Home />} />
 
+              {/* 테스트 */}
+            
+
               {/* 참여자와 관전자 라우트 */}
               <Route
                 path="/room/:roomNumber"

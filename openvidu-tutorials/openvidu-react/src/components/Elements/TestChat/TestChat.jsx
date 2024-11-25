@@ -6,7 +6,7 @@ import "./TestChat.css";
 const TestChat = () => {
   const { roomNumber } = useParams(); // URL의 :id 부분 추출
   const roomId = roomNumber;
-  const socket = useSocket(roomId); // 소켓 연결 가져오기
+  const socket = useSocket("/chat", roomId); // 소켓 연결 가져오기
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const messagesEndRef = useRef(null);

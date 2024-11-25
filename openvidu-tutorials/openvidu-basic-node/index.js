@@ -20,6 +20,7 @@ var OPENVIDU_URL = process.env.OPENVIDU_URL || 'http://localhost:4443';
 var OPENVIDU_SECRET = process.env.OPENVIDU_SECRET || 'MY_SECRET';
 
 const { chatSocketHandler } = require('./routes/chat');
+const { inviteSocketHandler } = require('./routes/invite');
 const userRouter = require('./routes/user');
 const newsRouter = require('./routes/newsRouter'); // 정책 뉴스 라우터
 const roomRouter = require('./routes/room'); // 룸생성 라우터
@@ -55,6 +56,7 @@ const io = new Server(server, {
 
 // 소켓 핸들러 추가
 chatSocketHandler(io);
+inviteSocketHandler(io);
 
 ///////////////////////////
 
