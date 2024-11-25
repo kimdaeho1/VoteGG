@@ -95,7 +95,7 @@ const TestChat = () => {
           </button>
         </div>
       </div>
-
+      
       {/* 모달 컴포넌트 */}
       {isModalOpen && <VoteModal toggleModal={toggleModal} />}
     </div>
