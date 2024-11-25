@@ -10,9 +10,7 @@ const Room = () => {
 
   // 토큰에서 사용자 이름 추출
   const token = localStorage.getItem("token");
-  console.log(token);
   const userId = token ? getUsernameFromToken(token) : "Unknown User";
-
 
   return (
     <div className="room">
@@ -20,8 +18,8 @@ const Room = () => {
         <OpenviduFinal sessionId={roomNumber} userName={userId} />
         <RoomControl />
       </div>
-      <div className='right-side'>
-        <TestChat roomId={roomNumber} />
+      <div className="right-side">
+        <TestChat roomId={roomNumber} isObserver={false} /> {/* 참가자 페이지는 isObserver=false */}
       </div>
     </div>
   );
