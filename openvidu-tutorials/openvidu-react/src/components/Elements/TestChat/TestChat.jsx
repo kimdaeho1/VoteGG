@@ -1,34 +1,38 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import useSocket from "../../useSocket"; // 커스텀 훅 가져오기
 import "./TestChat.css";
-import VoteModal from "../../Modals/VoteModal/VoteModal";
+import VoteModal from "../../Modals/VoteModal/VoteModal"; // 모달 컴포넌트
 
 const TestChat = () => {
-  const { roomNumber } = useParams();
+  const { roomNumber } = useParams(); // URL의 :id 부분 추출
   const roomId = roomNumber;
   const socket = useSocket(roomId); // 소켓 연결 가져오기
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 추가
   const messagesEndRef = useRef(null);
 
-  // 이미지 파일을 변경하고 싶은 경우, 원하는 이미지 URL로 변경하세요
-  const buttonImageUrl = "/your-image-path.jpg"; // 원하는 이미지 파일 경로를 지정
+  // 토큰에서 사용자 이름 추출
+  const token = localStorage.getItem("token");
+  const username = token ? getUsernameFromToken(token) : "Unknown User";
 
   useEffect(() => {
     if (!socket) return;
 
+    // 소켓 메시지 수신 이벤트 등록
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
     });
 
+    // 정리 함수
     return () => {
       socket.off("receive_message");
     };
   }, [socket]);
 
   useEffect(() => {
+    // 메시지 목록이 업데이트될 때마다 자동 스크롤
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messageList]);
 
@@ -36,7 +40,7 @@ const TestChat = () => {
     if (message.trim() && socket) {
       const messageData = {
         roomId: roomId,
-        author: "User", // 사용자 이름을 넣을 수 있음
+        author: username,
         message: message,
         time: new Date().toLocaleTimeString(),
       };
@@ -58,7 +62,7 @@ const TestChat = () => {
         {messageList.map((msgContent, index) => (
           <div
             key={index}
-            className={`message ${msgContent.author === "User" ? "you" : "other"}`}
+            className={`message ${msgContent.author === username ? "you" : "other"}`}
           >
             <div className="message-avatar"></div>
             <div>
@@ -69,7 +73,7 @@ const TestChat = () => {
             </div>
           </div>
         ))}
-        <div ref={messagesEndRef} />
+        <div ref={messagesEndRef} /> {/* 스크롤 끝 참조 요소 */}
       </div>
       <div className="chat-footer">
         <div className="input-wrapper">
@@ -99,3 +103,14 @@ const TestChat = () => {
 };
 
 export default TestChat;
+
+// Utility Function for Token Decoding
+const getUsernameFromToken = (token) => {
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1])); // JWT payload parsing
+    return payload.username; // Extract username
+  } catch (error) {
+    console.error("Failed to parse token:", error);
+    return "Unknown User";
+  }
+};
