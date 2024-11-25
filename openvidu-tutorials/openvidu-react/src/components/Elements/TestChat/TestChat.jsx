@@ -4,17 +4,22 @@ import useSocket from "../../useSocket"; // 커스텀 훅 가져오기
 import "./TestChat.css";
 import VoteModal from "../../Modals/VoteModal/VoteModal"; // 모달 컴포넌트
 
-const TestChat = ({ roomId, isObserver }) => {  // isObserver props 추가
-  const socket = useSocket("/chat", roomId); // 소켓 연결 가져오기
+const TestChat = () => {
+  const { roomNumber } = useParams(); // URL에서 roomId 받기
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 추가
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
   const [voteCount, setVoteCount] = useState(0); // 투표권 상태
   const messagesEndRef = useRef(null);
 
   // 토큰에서 사용자 이름 추출
   const token = localStorage.getItem("token");
   const username = token ? getUsernameFromToken(token) : "Unknown User";
+
+  // 옵저버인지 룸인지 구분
+  const isObserver = window.location.pathname.includes('/observer');  // 옵저버인지 판단
+
+  const socket = useSocket("/chat", roomNumber); // 소켓 연결
 
   useEffect(() => {
     if (!socket) return;
@@ -46,7 +51,7 @@ const TestChat = ({ roomId, isObserver }) => {  // isObserver props 추가
   const sendMessage = () => {
     if (message.trim() && socket) {
       const messageData = {
-        roomId: roomId,
+        roomId: roomNumber,
         author: username,
         message: message,
         time: new Date().toLocaleTimeString(),
