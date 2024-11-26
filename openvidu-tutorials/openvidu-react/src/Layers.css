@@ -8,9 +8,18 @@
 .main-layout {
   display: flex;
   flex: 1;
-  margin-top: 60px;
+  padding-top: 70px;
+  height: calc(100vh - 70px); /* header 높이를 제외한 높이 */
+  box-sizing: border-box;
 }
 
 .content {
   flex-grow: 1; 
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 70px); /* 헤더를 제외한 높이 */
+  width: 100%; /* 전체 폭 사용 */
+  box-sizing: border-box; /* 패딩 포함 크기 계산 */
+  padding: 0; /* 추가 여백 제거 */
+
 }
