@@ -33,3 +33,17 @@
   font-size: 20px;
   cursor: pointer;
 }
+
+
+.participant-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.participant-card.selected {
+  border-color: blue;
+  background-color: #f0f8ff;
+}

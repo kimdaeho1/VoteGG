@@ -149,4 +149,38 @@ router.get("/:roomId/debugParticipants", async (req, res) => {
   }
 });
 
+
+
+// 투표 POST 요청 처리
+router.post("/vote", async (req, res) => {
+  const { roomNumber, participant, votes } = req.body;
+
+  try {
+    const room = await Room.findOne({ roomNumber });
+
+    if (!room) {
+      return res.status(404).json({ error: "방을 찾을 수 없습니다." });
+    }
+
+    if (!room.participant.has(participant)) {
+      return res.status(404).json({ error: "참가자를 찾을 수 없습니다." });
+    }
+
+    // 투표 수 증가
+    const currentVotes = room.participant.get(participant) || 0;
+    room.participant.set(participant, currentVotes + votes);
+
+    await room.save();
+    console.log(`투표 완료: ${participant}에게 ${votes} 투표 추가.`);
+    res.status(200).json({
+      message: "투표 완료",
+      participant: Array.from(room.participant.entries()),
+    });
+  } catch (error) {
+    console.error("투표 처리 실패:", error.message);
+    res.status(500).json({ error: "투표 처리 중 오류가 발생했습니다." });
+  }
+});
+
+
 module.exports = router;
