@@ -9,7 +9,11 @@ const TestChat = () => {
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
-  const [voteCount, setVoteCount] = useState(0); // 투표권 상태
+  const [voteCount, setVoteCount] = useState(() => {
+    // 초기 로드 시 로컬스토리지에서 투표권 값 가져오기
+    const storedVotes = JSON.parse(localStorage.getItem("votes")) || {};
+    return storedVotes[roomNumber] || 0;
+  });
   const messagesEndRef = useRef(null);
 
   // 토큰에서 사용자 이름 추출
@@ -17,7 +21,7 @@ const TestChat = () => {
   const username = token ? getUsernameFromToken(token) : "Unknown User";
 
   // 옵저버인지 룸인지 구분
-  const isObserver = window.location.pathname.includes('/observer');  // 옵저버인지 판단
+  const isObserver = window.location.pathname.includes("/observer"); // 옵저버인지 판단
 
   const socket = useSocket("/chat", roomNumber); // 소켓 연결
 
@@ -33,6 +37,12 @@ const TestChat = () => {
     socket.on("update_vote_count", ({ userId, voteCount }) => {
       if (userId === socket.id) {
         setVoteCount(voteCount); // 본인의 투표권 업데이트
+
+        // 로컬스토리지에 투표권 저장
+        const storedVotes = JSON.parse(localStorage.getItem("votes")) || {};
+        storedVotes[roomNumber] = voteCount;
+        localStorage.setItem("votes", JSON.stringify(storedVotes)); // 업데이트된 투표권 저장
+        console.log(`투표권 업데이트: 방 ID=${roomNumber}, 투표권=${voteCount}`);
       }
     });
 
@@ -41,7 +51,7 @@ const TestChat = () => {
       socket.off("receive_message");
       socket.off("update_vote_count");
     };
-  }, [socket]);
+  }, [socket, roomNumber]);
 
   useEffect(() => {
     // 메시지 목록이 업데이트될 때마다 자동 스크롤
