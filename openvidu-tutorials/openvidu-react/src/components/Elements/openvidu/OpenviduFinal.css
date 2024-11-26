@@ -44,6 +44,20 @@
     background-color: #000;
 }
 
+/* 본인 화면의 유저 정보와 버튼 */
+.info-and-buttons {
+    display: flex;
+    align-items: center; /* 세로 정렬 */
+    justify-content: center; /* 가운데 정렬 */
+    gap: 10px; /* 유저 정보와 버튼 간 간격 */
+    width: 100%;
+}
+
+.user-info {
+    font-size: 16px;
+    font-weight: bold;
+}
+
 /* 버튼 컨테이너 */
 .button-container {
     display: flex;
@@ -75,4 +89,12 @@
     display: flex; /* 비디오를 중앙 정렬 */
     justify-content: center;
     align-items: center;
+}
+
+/* 상대방 유저 정보 스타일 */
+.subscriber-info {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5px;
 }
