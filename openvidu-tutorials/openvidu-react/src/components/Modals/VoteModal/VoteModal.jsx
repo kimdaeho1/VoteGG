@@ -21,6 +21,7 @@ const VoteModal = ({ toggleModal, voteCount, roomNumber }) => {
       }
     };
 
+    
     if (roomNumber) {
       fetchParticipants();
     }
