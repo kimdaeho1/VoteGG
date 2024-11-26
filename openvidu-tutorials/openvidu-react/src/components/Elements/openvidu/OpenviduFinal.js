@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { OpenVidu } from "openvidu-browser";
 import axios from "axios";
 import UserVideoComponent from "./UserVideoComponent";
+import './OpenviduFinal.css';
 
 const APPLICATION_SERVER_URL = process.env.NODE_ENV === "production" ? "" : "https://demos.openvidu.io/";
 
@@ -241,25 +242,70 @@ class OpenviduFinal extends Component {
     render() {
         const { mainStreamManager, subscribers, isSharingScreen } = this.state;
 
+        const getClientData = (streamManager) => {
+            if (streamManager) {
+                const connectionData = streamManager.stream.connection;
+                return JSON.parse(connectionData.data)?.clientData || "Unknown User";
+            }
+            return "No Data";
+        };
+
+        const clientData = mainStreamManager ? getClientData(mainStreamManager) : "No Data";
+    
         return (
             <div className="openvidu-final">
-                {/* 본인 화면 */}
-                <div className="main-video">
-                    {mainStreamManager && <UserVideoComponent streamManager={mainStreamManager} />}
+                {/* 본인 화면과 버튼 그룹 */}
+                <div className="main-container">
+                    <div className="main-video">
+                        {mainStreamManager && (
+                            <UserVideoComponent streamManager={mainStreamManager} />
+                        )}
+                    </div>
+    
+                    {/* 유저 정보와 버튼 */}
+                    <div className="info-and-buttons">
+                        <p className="user-info">User: {clientData}</p>
+    
+                        {!this.props.isObserver && (
+                            <div className="button-container">
+                                {/* 화면 공유 버튼 */}
+                                <button
+                                    className="screen-share-button"
+                                    onClick={isSharingScreen ? this.stopScreenShare : this.startScreenShare}
+                                    style={{ background: "none", border: "none", padding: 0 }}
+                                >
+                                    <img
+                                        src={isSharingScreen ? "/Buttonimg/stopshare.png" : "/Buttonimg/share.png"}
+                                        alt={isSharingScreen ? "Stop Screen Sharing" : "Start Screen Sharing"}
+                                        style={{ width: "50px", height: "50px" }}
+                                    />
+                                </button>
+    
+                                {/* 방 나가기 버튼 */}
+                                <button
+                                    className="leave-session-button"
+                                    onClick={this.leaveSession}
+                                    style={{ background: "none", border: "none", padding: 0 }}
+                                >
+                                    <img
+                                        src="/Buttonimg/leaveroom.png"
+                                        alt="Leave Room"
+                                        style={{ width: "50px", height: "50px" }}
+                                    />
+                                </button>
+                            </div>
+                        )}
+                    </div>
                 </div>
     
-                {/* 화면 공유 버튼 - Observer가 아닌 경우에만 표시 */}
-                {!this.props.isObserver && (
-                    <button onClick={isSharingScreen ? this.stopScreenShare : this.startScreenShare}>
-                        {isSharingScreen ? "Stop Screen Sharing" : "Start Screen Sharing"}
-                    </button>
-                )}
-
-                {/* 다른 사용자 화면 */}
+                {/* 상대방 화면 */}
                 <div className="subscribers">
                     {subscribers.map((subItem, index) => (
-                        <div key={index}>
-                            <UserVideoComponent streamManager={subItem.subscriber} userName={subItem.userName} />
+                        <div key={index} className="subscriber-container">
+                            <div className="subscriber-video">
+                                <UserVideoComponent streamManager={subItem.subscriber} />
+                            </div>
+                            <p className="subscriber-info">User: {subItem.userName}</p>
                         </div>
                     ))}
                 </div>
