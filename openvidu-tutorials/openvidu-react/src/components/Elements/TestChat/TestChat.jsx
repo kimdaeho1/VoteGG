@@ -4,6 +4,8 @@ import useSocket from "../../useSocket"; // 커스텀 훅 가져오기
 import "./TestChat.css";
 import VoteModal from "../../Modals/VoteModal/VoteModal"; // 모달 컴포넌트
 
+import EmojiButton from "../../../components/Elements/Buttons/EmojiButton/EmojiButton";
+
 const TestChat = () => {
   const { roomNumber } = useParams(); // URL에서 roomId 받기
   const [message, setMessage] = useState("");
@@ -98,9 +100,9 @@ const TestChat = () => {
             }}
             placeholder="채팅 입력"
           />
-          <button className="room-send-button" onClick={sendMessage}>
-            <img src="/send.png" alt="Send" className="send-icon" />
-          </button>
+          <EmojiButton
+            onEmojiSelect={(emoji) => setMessage((prev) => prev + emoji)}
+          />
           {/* 옵저버일 경우만 모달 열기 버튼 표시 */}
           {isObserver && (
             <button className="modal-button" onClick={toggleModal}>
