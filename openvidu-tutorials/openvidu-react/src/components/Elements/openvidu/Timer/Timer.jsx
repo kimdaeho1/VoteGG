@@ -36,12 +36,17 @@ const Timer = () => {
   const formatTime = (seconds) => {
     const min = Math.floor(seconds / 60);
     const sec = seconds % 60;
-    return `${min}분 ${sec < 10 ? '0' : ''}${sec}초`;
+    return `${min.toString().padStart(2, "0")}:${sec
+      .toString()
+      .padStart(2, "0")}`;
   };
 
   return (
-    <div>
-      <h1>남은 시간: {formatTime(timeLeft)}</h1>
+    <div className="timer-container">
+      <div className="timer-text">
+        <span>{formatTime(timeLeft).split(" : ")[0]}</span> {/* 분 */}
+        <span>{formatTime(timeLeft).split(" : ")[1]}</span> {/* 초 */}
+      </div>
     </div>
   );
 };
