@@ -265,6 +265,7 @@ class OpenviduFinal extends Component {
                 </div>
 
                 {/* 상대방 화면 */}
+
                 <div className="subscribers">
                     {subscribers.map((subItem, index) => (
                         <div key={index} className="subscriber-container">
