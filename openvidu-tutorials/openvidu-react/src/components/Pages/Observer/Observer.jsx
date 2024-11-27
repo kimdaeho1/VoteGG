@@ -16,8 +16,6 @@ const Observer = () => {
           isObserver={true} // 관전자 모드 활성화
           subs={false}
         />
-      </div>
-      <div>
         <Timer roomId={roomNumber} />
       </div>
       <div className="right-side">
