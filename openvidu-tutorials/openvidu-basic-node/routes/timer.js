@@ -1,4 +1,5 @@
 // routes/timer.js
+
 const express = require('express');
 const router = express.Router();
 const rooms = {}; // 방별 타이머 정보를 저장할 객체
@@ -19,11 +20,11 @@ function timerSocketHandler(io) {
       if (!rooms[roomId]) {
         // 타이머 초기 설정
         rooms[roomId] = {
-          durations: [5, 4, 3], // 타이머 단계들의 지속 시간 (초)
-          cycleCount: 10, // 총 사이클 수
+          durations: [31, 31, 31], // 타이머 단계들의 지속 시간 (초)
+          cycleCount: 100, // 총 사이클 수
           currentCycle: 0, // 현재 사이클
           currentIndex: 0, // 현재 단계 인덱스
-          timeLeft: 5, // 초기 남은 시간
+          timeLeft: 30, // 초기 남은 시간
           isRunning: false,
           timer: null, // 타이머 객체
         };
@@ -47,11 +48,11 @@ function timerSocketHandler(io) {
       }
     });
 
-    // 타이머 초기화 이벤트 처리
+    // 타이머 초기화 이벤트 처리 -> 사이클 넘김으로 변경
     socket.on('reset_timer', (roomId) => {
       const room = rooms[roomId];
       if (room) {
-        resetTimer(roomId);
+        skipToNextCycle(roomId);
       }
     });
 
@@ -112,25 +113,33 @@ function timerSocketHandler(io) {
         room.isRunning = false;
 
         // 다음 단계로 이동
-        room.currentIndex++;
-
-        // 모든 단계가 끝나면 사이클 증가 및 초기화
-        if (room.currentIndex >= room.durations.length) {
-          room.currentIndex = 0;
-          room.currentCycle++;
-
-          // 모든 사이클이 끝났는지 확인
-          if (room.currentCycle >= room.cycleCount) {
-            // 타이머 종료
-            timerNamespace.to(roomId).emit('timerFinished');
-            return;
-          }
-        }
-
-        // 다음 단계 자동 시작
-        startTimer(roomId);
+        moveToNextStage(roomId);
       }
     }, 1000);
+  }
+
+  // 다음 단계로 이동하는 함수
+  function moveToNextStage(roomId) {
+    const room = rooms[roomId];
+    if (!room) return;
+
+    room.currentIndex++;
+
+    // 모든 단계가 끝나면 사이클 증가 및 초기화
+    if (room.currentIndex >= room.durations.length) {
+      room.currentIndex = 0;
+      room.currentCycle++;
+
+      // 모든 사이클이 끝났는지 확인
+      if (room.currentCycle >= room.cycleCount) {
+        // 타이머 종료
+        timerNamespace.to(roomId).emit('timerFinished');
+        return;
+      }
+    }
+
+    // 다음 단계 자동 시작
+    startTimer(roomId);
   }
 
   // 타이머 정지 함수
@@ -143,23 +152,26 @@ function timerSocketHandler(io) {
     }
   }
 
-  // 타이머 초기화 함수
-  function resetTimer(roomId) {
+  // 사이클 넘어가는 함수
+  function skipToNextCycle(roomId) {
     const room = rooms[roomId];
-    if (room) {
-      stopTimer(roomId);
-      room.timeLeft = room.durations[0];
-      room.currentIndex = 0;
-      room.currentCycle = 0;
+    if (!room) return;
 
-      // 방에 있는 모든 클라이언트에게 타이머 업데이트 전송
-      timerNamespace.to(roomId).emit('timerUpdate', {
-        timeLeft: room.timeLeft,
-        isRunning: room.isRunning,
-        currentCycle: room.currentCycle,
-        totalCycles: room.cycleCount,
-      });
+    stopTimer(roomId);
+
+    // 현재 사이클을 증가시키고 단계 인덱스 초기화
+    room.currentCycle++;
+    room.currentIndex = 0;
+
+    // 모든 사이클이 끝났는지 확인
+    if (room.currentCycle >= room.cycleCount) {
+      // 타이머 종료
+      timerNamespace.to(roomId).emit('timerFinished');
+      return;
     }
+
+    // 다음 사이클의 첫 번째 단계로 타이머 재시작
+    startTimer(roomId);
   }
 }
 

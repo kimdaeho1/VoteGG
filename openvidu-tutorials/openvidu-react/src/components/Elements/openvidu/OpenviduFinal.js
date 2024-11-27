@@ -5,6 +5,7 @@ import { OpenVidu } from "openvidu-browser";
 import axios from "axios";
 import UserVideoComponent from "./UserVideoComponent";
 import './OpenviduFinal.css';
+import { triggerResetTimer } from '../../../stores/setTimerState';
 import { useParams } from "react-router-dom";
 
 const APPLICATION_SERVER_URL = process.env.NODE_ENV === "production" ? "" : "https://demos.openvidu.io/";
@@ -23,6 +24,7 @@ class OpenviduFinal extends Component {
             rightUserList: [],
             userName: this.props.userName || 'Unknown', // 사용자 이름 설정
             currentPhase: 1,
+            currentTurn: 'left',
         };
 
         this.joinSession = this.joinSession.bind(this);
@@ -47,10 +49,15 @@ class OpenviduFinal extends Component {
 
         session.on("signal:phaseChange", (event) => {
             const data = JSON.parse(event.data);
-            console.log("Phase changed to:", data.currentPhase);
+            console.log("Phase changed to:", data.currentPhase, "Turn:", data.currentTurn);
 
             // 수신한 phase 값을 업데이트
-            this.setState({ currentPhase: data.currentPhase });
+            this.setState({
+                currentPhase: data.currentPhase,
+                currentTurn: data.currentTurn,
+            }, () => {
+                this.updateAudioStatus();
+            });
         });
 
 
@@ -119,6 +126,15 @@ class OpenviduFinal extends Component {
             });
         });
 
+        session.on('signal:toggleAudio', (event) => {
+            const data = JSON.parse(event.data);
+            const shouldEnableAudio = data.enableAudio;
+
+            if (this.state.publisher) {
+                this.state.publisher.publishAudio(shouldEnableAudio);
+            }
+        });
+
         session.on('streamDestroyed', (event) => {
             const connectionId = event.stream.connection.connectionId;
 
@@ -181,6 +197,7 @@ class OpenviduFinal extends Component {
                         autoGainControl: true,
                     }
                 });
+                publisher.publishAudio(false);
 
                 session.publish(publisher);
             }
@@ -252,8 +269,44 @@ class OpenviduFinal extends Component {
                 leftUserList,
                 rightUserList,
             };
+        }, () => {
+            // 상태 업데이트 후 마이크 상태 업데이트
+            this.updateAudioStatus();
         });
     }
+
+    handleTurnChange = () => {
+        const { session, currentPhase, currentTurn } = this.state;
+        let newPhase = currentPhase;
+        let newTurn = currentTurn;
+
+        if (currentTurn === 'left') {
+            newTurn = 'right';
+        } else {
+            // 양측 참가자들의 발언이 끝나면 다음 phase로 이동
+            newTurn = 'left';
+            newPhase = currentPhase === 1 ? 2 : 1; // Phase를 1과 2 사이에서 변경
+        }
+
+        // 새로운 phase와 turn을 모든 참가자에게 브로드캐스트
+        if (session) {
+            session.signal({
+                type: 'phaseChange',
+                data: JSON.stringify({ currentPhase: newPhase, currentTurn: newTurn }),
+            });
+        }
+
+        // 타이머 초기화 등 필요한 작업 수행 (필요한 경우)
+        triggerResetTimer();
+
+        // 상태 업데이트
+        this.setState({
+            currentPhase: newPhase,
+            currentTurn: newTurn,
+        }, () => {
+            this.updateAudioStatus();
+        });
+    };
 
     leaveSession() {
         const { session } = this.state;
@@ -345,6 +398,31 @@ class OpenviduFinal extends Component {
         }
     }
 
+    updateAudioStatus = () => {
+        const { currentPhase, currentTurn, leftUserList, rightUserList, session } = this.state;
+
+        const localConnectionId = session.connection.connectionId;
+        let shouldEnableAudio = false;
+
+        // 현재 발언자인지 확인
+        if (currentTurn === 'left') {
+            const currentLeftUser = leftUserList[currentPhase - 1];
+            if (currentLeftUser && currentLeftUser.connectionId === localConnectionId) {
+                shouldEnableAudio = true;
+            }
+        } else {
+            const currentRightUser = rightUserList[currentPhase - 1];
+            if (currentRightUser && currentRightUser.connectionId === localConnectionId) {
+                shouldEnableAudio = true;
+            }
+        }
+
+        // 마이크 상태 변경
+        if (this.state.publisher) {
+            this.state.publisher.publishAudio(shouldEnableAudio);
+        }
+    };
+
     async getToken(sessionId) {
         const session = await this.createSession(sessionId);
         return await this.createToken(session);
@@ -369,7 +447,7 @@ class OpenviduFinal extends Component {
     }
 
     render() {
-        const { mainStreamManager, subscribers, isSharingScreen, leftUserList, rightUserList, currentPhase } = this.state;
+        const { mainStreamManager, subscribers, isSharingScreen, leftUserList, rightUserList, currentPhase, currentTurn, } = this.state;
 
         // 현재 세션의 모든 사용자 (본인 포함)
         const allStreamManagers = [];
@@ -411,29 +489,36 @@ class OpenviduFinal extends Component {
             return manager;
         }).filter(Boolean);
 
+        // 현재 phase의 참가자들
+        const currentLeftUser = leftStreamManagers[currentPhase - 1];
+        const currentRightUser = rightStreamManagers[currentPhase - 1];
+
         console.log('Left Stream Managers:', leftStreamManagers);
         console.log('Right Stream Managers:', rightStreamManagers);
 
-        const handlePhaseChange = (newPhase) => {
-            const { session } = this.state;
-            if (session) {
-                // 시그널을 통해 phase 변경값 브로드캐스트
-                session.signal({
-                    type: 'phaseChange',
-                    data: JSON.stringify({ currentPhase: newPhase }),
-                });
-            }
-        };
+        // const handlePhaseChange = (newPhase) => {
+        //     const { session } = this.state;
+        //     if (session) {
+        //         // 단계 변경 시그널 보내기
+        //         session.signal({
+        //             type: 'phaseChange',
+        //             data: JSON.stringify({ currentPhase: newPhase }),
+        //         });
+        //     }
+        //     // 타이머 초기화 트리거
+        //     triggerResetTimer();
+        // }
+
 
         return (
             <div className="openvidu-final">
                 <div className="video-container">
                     {/* 왼쪽 참가자 */}
                     <div className="left-video">
-                        {leftStreamManagers[currentPhase - 1] ? (
+                        {currentLeftUser ? (
                             <div className="user-video">
-                                <UserVideoComponent streamManager={leftStreamManagers[currentPhase - 1].streamManager} />
-                                <p className="user-name">{leftStreamManagers[currentPhase - 1].userName}</p>
+                                <UserVideoComponent streamManager={currentLeftUser.streamManager} />
+                                <p className="user-name">{currentLeftUser.userName}</p>
 
                             </div>
                         ) : (
@@ -443,10 +528,10 @@ class OpenviduFinal extends Component {
 
                     {/* 오른쪽 참가자 */}
                     <div className="right-video">
-                        {rightStreamManagers[currentPhase - 1] ? (
+                        {currentRightUser ? (
                             <div className="user-video">
-                                <UserVideoComponent streamManager={rightStreamManagers[currentPhase - 1].streamManager} />
-                                <p className="user-name">{rightStreamManagers[currentPhase - 1].userName}</p>
+                                <UserVideoComponent streamManager={currentRightUser.streamManager} />
+                                <p className="user-name">{currentRightUser.userName}</p>
 
                             </div>
                         ) : (
@@ -483,18 +568,7 @@ class OpenviduFinal extends Component {
                         </button>
                         {/* 단계 변경 버튼 */}
                         <div className="phase-controls">
-                            <button
-                                onClick={() => handlePhaseChange(Math.max(currentPhase - 1, 1))}
-                                disabled={currentPhase === 1}
-                            >
-                                이전 참가자
-                            </button>
-                            <button
-                                onClick={() => handlePhaseChange(Math.min(currentPhase + 1, 2))}
-                                disabled={currentPhase === 2}
-                            >
-                                다음 참가자
-                            </button>
+                            <button onClick={this.handleTurnChange}>다음 차례</button>
                         </div>
                     </div>
                 )}

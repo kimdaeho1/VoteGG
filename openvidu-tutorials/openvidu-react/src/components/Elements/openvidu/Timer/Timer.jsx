@@ -1,18 +1,39 @@
+// Timer.jsx
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import useSocket from "../../../useSocket"; // 커스텀 훅 가져오기
+import useSocket from "../../../useSocket";
 import "./Timer.css";
-import VoteStatistic from "../../../Modals/VoteResultModal/VoteStatistic.jsx"; // 모달 컴포넌트 가져오기
+import VoteStatistic from "../../../Modals/VoteResultModal/VoteStatistic.jsx";
+
+import { useRecoilState } from 'recoil';
+import { resetTimerState } from '../../../../stores/TimerAtom'; // 수정된 경로
+import { registerSetResetTimerFunc } from '../../../../stores/setTimerState'; // 수정된 경로
 
 const Timer = () => {
-  const { roomNumber } = useParams(); // URL의 :id 부분 추출
+  const { roomNumber } = useParams();
   const roomId = roomNumber;
-  const socket = useSocket("/timer", roomId); // 소켓 연결 가져오기
+  const socket = useSocket("/timer", roomId);
   const [timeLeft, setTimeLeft] = useState(null);
   const [isRunning, setIsRunning] = useState(false);
   const [currentCycle, setCurrentCycle] = useState(0);
   const [totalCycles, setTotalCycles] = useState(4);
   const [timerFinished, setTimerFinished] = useState(false);
+
+  const [resetTimer, setResetTimer] = useRecoilState(resetTimerState);
+
+  // setResetTimer 함수를 헬퍼 함수에 등록
+  useEffect(() => {
+    registerSetResetTimerFunc(setResetTimer);
+  }, [setResetTimer]);
+
+  // resetTimer 상태 변경 감지
+  useEffect(() => {
+    if (resetTimer) {
+      handleReset();
+      setResetTimer(false);
+    }
+  }, [resetTimer]);
 
   useEffect(() => {
     if (!socket) return;
@@ -31,7 +52,7 @@ const Timer = () => {
     const handleTimerFinished = () => {
       console.log("타이머가 완료되었습니다.");
       setIsRunning(false);
-      setTimerFinished(true);  // 타이머 종료 시 모달 띄우기 위한 상태 설정
+      setTimerFinished(true);
     };
 
     socket.on('timerUpdate', handleTimerUpdate);
@@ -48,7 +69,7 @@ const Timer = () => {
   const handleStart = () => {
     if (socket) {
       socket.emit('start_timer', roomId);
-      setTimerFinished(false);  // 타이머 시작 시 모달 닫기
+      setTimerFinished(false);
     }
   };
 
@@ -56,7 +77,7 @@ const Timer = () => {
   const handleReset = () => {
     if (socket) {
       socket.emit('reset_timer', roomId);
-      setTimerFinished(false);  // 초기화 후 모달 닫기
+      setTimerFinished(false);
     }
   };
 
@@ -71,20 +92,22 @@ const Timer = () => {
     const sec = seconds % 60;
     return `${min.toString().padStart(2, "0")}:${sec
       .toString()
-      .padStart(2, "0")}`;
+      .padStart(2, "0")}`.trim();
   };
+  
 
   return (
     <div>
       <div className="timer-container">
         <div className="timer-text">
-          <span>{formatTime(timeLeft).split(" : ")[0]}</span> {/* 분 */}
-          <span>{formatTime(timeLeft).split(" : ")[1]}</span> {/* 초 */}
+          <span>{formatTime(timeLeft).split(":")[0]}</span> {/* 분 */}
+          {/* <span>:</span> */}
+          <span>{formatTime(timeLeft).split(":")[1]}</span> {/* 초 */}
         </div>
       </div>
       <p>현재 사이클: {currentCycle} / {totalCycles}</p>
       {timerFinished && <p>타이머가 완료되었습니다.</p>}
-      
+
       <button onClick={handleStart} disabled={isRunning || timeLeft <= 0 || currentCycle >= totalCycles}>
         타이머 시작
       </button>
