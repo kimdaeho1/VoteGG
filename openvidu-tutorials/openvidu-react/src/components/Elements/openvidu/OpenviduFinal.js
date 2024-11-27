@@ -429,11 +429,12 @@ class OpenviduFinal extends Component {
             <div className="openvidu-final">
                 <div className="video-container">
                     {/* 왼쪽 참가자 */}
-                    <div className="left-side">
+                    <div className="left-video">
                         {leftStreamManagers[currentPhase - 1] ? (
                             <div className="user-video">
                                 <UserVideoComponent streamManager={leftStreamManagers[currentPhase - 1].streamManager} />
                                 <p className="user-name">{leftStreamManagers[currentPhase - 1].userName}</p>
+
                             </div>
                         ) : (
                             <p className="empty-slot">대기 중</p>
@@ -441,11 +442,12 @@ class OpenviduFinal extends Component {
                     </div>
 
                     {/* 오른쪽 참가자 */}
-                    <div className="right-side">
+                    <div className="right-video">
                         {rightStreamManagers[currentPhase - 1] ? (
                             <div className="user-video">
                                 <UserVideoComponent streamManager={rightStreamManagers[currentPhase - 1].streamManager} />
                                 <p className="user-name">{rightStreamManagers[currentPhase - 1].userName}</p>
+
                             </div>
                         ) : (
                             <p className="empty-slot">대기 중</p>

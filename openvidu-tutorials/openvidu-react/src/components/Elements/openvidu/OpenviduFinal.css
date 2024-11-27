@@ -21,8 +21,8 @@
 }
 
 /* 왼쪽 영역과 오른쪽 영역 */
-.left-side,
-.right-side {
+.left-video,
+.right-video {
     display: flex;
     flex-direction: column; /* 세로로 비디오 나열 */
     align-items: center; /* 가로 방향 가운데 정렬 */
