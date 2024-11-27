@@ -101,19 +101,22 @@ const Timer = () => {
       <div className="timer-container">
         <div className="timer-text">
           <span>{formatTime(timeLeft).split(":")[0]}</span> {/* 분 */}
-          {/* <span>:</span> */}
+          <span>:</span>
           <span>{formatTime(timeLeft).split(":")[1]}</span> {/* 초 */}
         </div>
       </div>
-      <p>현재 사이클: {currentCycle} / {totalCycles}</p>
+      <p className="cycle-info">
+        현재 사이클: {currentCycle} / {totalCycles}
+        </p>
       {timerFinished && <p>타이머가 완료되었습니다.</p>}
-
+      <div className = "button-container">
       <button onClick={handleStart} disabled={isRunning || timeLeft <= 0 || currentCycle >= totalCycles}>
         타이머 시작
       </button>
       <button onClick={handleReset}>
         타이머 초기화
       </button>
+      </div>
 
       {/* 타이머가 끝나면 모달을 띄움 */}
       {timerFinished && <VoteStatistic roomNumber={roomId} onClose={() => setTimerFinished(false)} />}
