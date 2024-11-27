@@ -8,48 +8,44 @@ import EmojiButton from "../../../components/Elements/Buttons/EmojiButton/EmojiB
 import MatterCanvas from "./MatterCanvas"; // MatterCanvas 컴포넌트 추가
 
 const TestChat = () => {
-  const { roomNumber } = useParams(); // URL에서 roomId 받기
+  const { roomNumber } = useParams(); // URL에서 roomNumber 가져오기
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
   const [voteCount, setVoteCount] = useState(() => {
-    // 초기 로드 시 로컬스토리지에서 투표권 값 가져오기
     const storedVotes = JSON.parse(localStorage.getItem("votes")) || {};
     return storedVotes[roomNumber] || 0;
   });
   const messagesEndRef = useRef(null);
 
-  // 토큰에서 사용자 이름 추출
   const token = localStorage.getItem("token");
   const username = token ? getUsernameFromToken(token) : "Unknown User";
 
-  // 옵저버인지 룸인지 구분
   const isObserver = window.location.pathname.includes("/observer"); // 옵저버인지 판단
-
   const socket = useSocket("/chat", roomNumber); // 소켓 연결
+
+  // 디버깅: roomNumber 출력
+  useEffect(() => {
+    console.log(`Current roomNumber: ${roomNumber}`);
+  }, [roomNumber]);
 
   useEffect(() => {
     if (!socket) return;
 
-    // 소켓 메시지 수신 이벤트 등록
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
     });
 
-    // 소켓에서 투표권 업데이트 이벤트 받기
     socket.on("update_vote_count", ({ userId, voteCount }) => {
       if (userId === socket.id) {
-        setVoteCount(voteCount); // 본인의 투표권 업데이트
-
-        // 로컬스토리지에 투표권 저장
+        setVoteCount(voteCount);
         const storedVotes = JSON.parse(localStorage.getItem("votes")) || {};
         storedVotes[roomNumber] = voteCount;
-        localStorage.setItem("votes", JSON.stringify(storedVotes)); // 업데이트된 투표권 저장
+        localStorage.setItem("votes", JSON.stringify(storedVotes)); // 투표권 저장
         console.log(`투표권 업데이트: 방 ID=${roomNumber}, 투표권=${voteCount}`);
       }
     });
 
-    // 정리 함수
     return () => {
       socket.off("receive_message");
       socket.off("update_vote_count");
@@ -57,7 +53,6 @@ const TestChat = () => {
   }, [socket, roomNumber]);
 
   useEffect(() => {
-    // 메시지 목록이 업데이트될 때마다 자동 스크롤
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messageList]);
 
@@ -75,7 +70,6 @@ const TestChat = () => {
     }
   };
 
-  // 모달 열기/닫기 함수
   const toggleModal = () => setIsModalOpen(!isModalOpen);
 
   return (
@@ -98,7 +92,7 @@ const TestChat = () => {
             </div>
           </div>
         ))}
-        <div ref={messagesEndRef} /> {/* 스크롤 끝 참조 요소 */}
+        <div ref={messagesEndRef} />
       </div>
       <div className="chat-footer">
         <div className="input-wrapper">
@@ -114,7 +108,6 @@ const TestChat = () => {
           <EmojiButton
             onEmojiSelect={(emoji) => setMessage((prev) => prev + emoji)}
           />
-          {/* 옵저버일 경우만 모달 열기 버튼 표시 */}
           {isObserver && (
             <button className="modal-button" onClick={toggleModal}>
               <img src="/ticket.jpg" alt="Modal" className="modal-icon" />
@@ -124,8 +117,8 @@ const TestChat = () => {
       </div>
       
       {/* 모달 컴포넌트 */}
-      {isModalOpen && <VoteModal toggleModal={toggleModal} voteCount={voteCount} />}
-
+      {isModalOpen && <VoteModal toggleModal={toggleModal} voteCount={voteCount} roomNumber={roomNumber} />}
+      
       {/* Matter.js 캔버스 영역 */}
       <MatterCanvas roomNumber={roomNumber}/>
     </div>
@@ -134,11 +127,10 @@ const TestChat = () => {
 
 export default TestChat;
 
-// Utility Function for Token Decoding
 const getUsernameFromToken = (token) => {
   try {
-    const payload = JSON.parse(atob(token.split(".")[1])); // JWT payload parsing
-    return payload.username; // Extract username
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload.username;
   } catch (error) {
     console.error("Failed to parse token:", error);
     return "Unknown User";

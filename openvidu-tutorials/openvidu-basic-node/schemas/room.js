@@ -4,31 +4,31 @@ const roomSchema = new mongoose.Schema({
   roomNumber: {
     type: String,
     required: true,
-    unique: true,
-  },
-  
+    unique: true },
+
   roomname: {
     type: String,
     required: true,
-    unique: true,
-  },
+    unique: true },
 
   memberCount: {
     type: Number,
-    default: 0,
-  },
+    default: 0 },
 
   createdby: {
     type: String,
-    required: true,
-  },
+    required: true },
 
-  // (초대기능)
   invitees: {
-    type: [String], // 초대된 사람들의 사용자 ID나 닉네임 배열
-    default: [],
-  },
+    type: [String],
+    default: [] },
 
+  // 참가자 딕셔너리
+  participant: {
+    type: Map,
+    of: Number, // 딕셔너리 형태의 value는 숫자 (기본값: 0)
+    default: {}, // 초기값은 빈 딕셔너리
+  },
 });
 
 module.exports = mongoose.model("room", roomSchema);

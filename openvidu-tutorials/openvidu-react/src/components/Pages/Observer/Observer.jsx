@@ -7,7 +7,6 @@ import Timer from '../../Elements/openvidu/Timer/Timer';
 
 const Observer = () => {
   const { roomNumber } = useParams();
-
   return (
     <div className="room">
       <div className="left-side">
@@ -24,7 +23,6 @@ const Observer = () => {
       <div>
         <Timer roomId={roomNumber} />
       </div>
-      
     </div>
   );
 };
