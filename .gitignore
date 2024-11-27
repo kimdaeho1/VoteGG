@@ -7,3 +7,7 @@
 .bash_history
 .pacage-lock.json
 .package.json
+.gitconfig
+.gitignore
+.lesshst
+.wget-hsts
