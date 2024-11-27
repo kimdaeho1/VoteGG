@@ -1,9 +1,0 @@
-.npm/
-.vscode-server/
-.ssh/
-.cache/
-.local/
-.node_modules/
-.bash_history
-.pacage-lock.json
-.package.json
