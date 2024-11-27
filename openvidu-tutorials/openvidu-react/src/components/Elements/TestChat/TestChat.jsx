@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import useSocket from "../../useSocket"; // 커스텀 훅 가져오기
+import { getVoteCount, increaseVoteCount } from "../../../votecount.js"; // voteCount.js에서 가져오기
 import "./TestChat.css";
 import VoteModal from "../../Modals/VoteModal/VoteModal"; // 모달 컴포넌트
-
 import EmojiButton from "../../../components/Elements/Buttons/EmojiButton/EmojiButton";
 import MatterCanvas from "./MatterCanvas"; // MatterCanvas 컴포넌트 추가
 
@@ -12,10 +12,8 @@ const TestChat = () => {
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
-  const [voteCount, setVoteCount] = useState(() => {
-    const storedVotes = JSON.parse(localStorage.getItem("votes")) || {};
-    return storedVotes[roomNumber] || 0;
-  });
+  const [voteCount, setVoteCount] = useState(0); // 투표권 상태
+
   const messagesEndRef = useRef(null);
 
   const token = localStorage.getItem("token");
@@ -27,7 +25,23 @@ const TestChat = () => {
   // 디버깅: roomNumber 출력
   useEffect(() => {
     console.log(`Current roomNumber: ${roomNumber}`);
-  }, [roomNumber]);
+    
+    // voteCount.js의 getVoteCount 함수 호출 디버깅
+    const { maxVoteCount, usedVoteCount } = getVoteCount(roomNumber, username);
+    console.log("Initial Vote Counts:", maxVoteCount, usedVoteCount);
+    
+    // 10초마다 투표권을 증가시키는 로직
+    const interval = setInterval(() => {
+      console.log("Increasing Vote Count...");
+      increaseVoteCount(roomNumber, username);  // 투표권 증가 함수 호출
+      const { maxVoteCount, usedVoteCount } = getVoteCount(roomNumber, username);
+      console.log("After Increasing Vote Count:", maxVoteCount, usedVoteCount);
+    }, 10000);  // 10초마다 증가시키는 함수 호출
+
+    return () => {
+      clearInterval(interval);  // clean up on unmount
+    };
+  }, [roomNumber, username]);
 
   useEffect(() => {
     if (!socket) return;
@@ -36,19 +50,8 @@ const TestChat = () => {
       setMessageList((list) => [...list, data]);
     });
 
-    socket.on("update_vote_count", ({ userId, voteCount }) => {
-      if (userId === socket.id) {
-        setVoteCount(voteCount);
-        const storedVotes = JSON.parse(localStorage.getItem("votes")) || {};
-        storedVotes[roomNumber] = voteCount;
-        localStorage.setItem("votes", JSON.stringify(storedVotes)); // 투표권 저장
-        console.log(`투표권 업데이트: 방 ID=${roomNumber}, 투표권=${voteCount}`);
-      }
-    });
-
     return () => {
       socket.off("receive_message");
-      socket.off("update_vote_count");
     };
   }, [socket, roomNumber]);
 
@@ -105,9 +108,7 @@ const TestChat = () => {
             }}
             placeholder="채팅 입력"
           />
-          <EmojiButton
-            onEmojiSelect={(emoji) => setMessage((prev) => prev + emoji)}
-          />
+          <EmojiButton onEmojiSelect={(emoji) => setMessage((prev) => prev + emoji)} />
           {isObserver && (
             <button className="modal-button" onClick={toggleModal}>
               <img src="/ticket.jpg" alt="Modal" className="modal-icon" />
@@ -120,7 +121,7 @@ const TestChat = () => {
       {isModalOpen && <VoteModal toggleModal={toggleModal} voteCount={voteCount} roomNumber={roomNumber} />}
       
       {/* Matter.js 캔버스 영역 */}
-      <MatterCanvas roomNumber={roomNumber}/>
+      <MatterCanvas roomNumber={roomNumber} />
     </div>
   );
 };
