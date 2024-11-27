@@ -1,21 +1,23 @@
-/* @font-face {
-    font-family: 'Digital-7';
-    src: url('/assets/fonts/digital-7.ttf') format('truetype'); 
-  } */
-  
 .timer-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #000; /* 검정 배경 */
-    color: #ff0; /* 디지털 노란색 */
-    width: 200px; /* 타이머 폭 */
-    height: 100px; /* 타이머 높이 */
-    border-radius: 10px; /* 둥근 테두리 */
-    box-shadow: 0 4px 15px rgba(255, 255, 0, 0.5); /* 빛나는 효과 */
-    font-family: 'Digital-7', monospace; /* 디지털 폰트 적용 */
-    font-size: 5rem; /* 글자 크기 */
-    text-align: center;
-    letter-spacing: 10px; /* 숫자 간격 */
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000; /* 검정 배경 */
+  color: #ff0; /* 디지털 노란색 */
+  width: 300px; /* 타이머 폭 */
+  height: 100px; /* 타이머 높이 */
+  border-radius: 10px; /* 둥근 테두리 */
+  box-shadow: 0 4px 15px rgba(255, 255, 0, 0.5); /* 빛나는 효과 */
+  font-family: 'Digital-7', monospace; /* 디지털 폰트 적용 */
+  font-size: 5rem; /* 글자 크기 */
+  text-align: center;
+}
+
+.timer-text {
+  display: flex;
+  gap: 5px; /* 숫자와 : 사이 간격을 손쉽게 조정 */
+}
+
+.timer-text span {
+  letter-spacing: 0; /* 숫자 간격 조정 */
+}
