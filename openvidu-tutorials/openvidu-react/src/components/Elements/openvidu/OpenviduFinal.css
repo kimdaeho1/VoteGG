@@ -1,53 +1,93 @@
-/* src/components/Elements/openvidu/OpenviduFinal.css */
-
+/* 전체 레이아웃 */
 .openvidu-final {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto 70px; /* 첫 번째 행: 비디오, 두 번째 행: 버튼 */
+    grid-template-columns: 1fr; /* 한 열만 사용 */
+    gap: 20px; /* 비디오와 버튼 간격 */
     width: 100%;
-    height: 100%;
-    position: relative;
+    height: 100vh; /* 전체 화면 높이를 사용 */
+    padding: 10px;
+    box-sizing: border-box;
 }
 
+/* 비디오 컨테이너 */
 .video-container {
-    display: flex;
-    flex-direction: row;
-    flex: 1;
+    display: flex; /* 좌우로 나누기 */
+    justify-content: space-between; /* 좌우 균등 분배 */
+    align-items: stretch; /* 높이를 균일하게 맞춤 */
+    gap: 20px;
+    width: 100%; /* 부모 컨테이너 너비 */
+    height: 100%; /* 부모 컨테이너의 남은 공간 */
 }
 
+/* 왼쪽 영역과 오른쪽 영역 */
 .left-side,
 .right-side {
-    flex: 1;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-bottom : 3px solid #eeee76;
+    flex-direction: column; /* 세로로 비디오 나열 */
+    align-items: center; /* 가로 방향 가운데 정렬 */
+    justify-content: flex-start; /* 세로 방향 상단 정렬 */
+    flex: 1; /* 동일한 너비로 분배 */
+    max-width: 48%; /* 각 영역의 최대 너비 */
+    gap: 10px; /* 비디오 간 간격 */
+    border: 2px solid #eeee76; /* 영역 구분용 테두리 */
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden; /* 비디오가 영역을 넘지 않도록 설정 */
 }
 
+/* 비디오 컨테이너 */
 .user-video {
-    flex: 1;
-    width: 100%;
-    position: relative;
+    width: 100%; /* 부모 컨테이너의 너비 */
+    aspect-ratio: 16 / 9; /* 비율 유지 */
+    background-color: #ffffff; /* 비디오 배경색 */
+    border-radius: 8px; /* 모서리를 둥글게 */
+    display: flex; /* 비디오를 중앙 정렬 */
+    justify-content: center;
+    align-items: center;
+    position: relative; /* 이름 배치를 위해 필요 */
 }
 
+/* 비디오 태그 스타일 */
 .user-video video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 100%; /* 부모 컨테이너의 너비에 맞춤 */
+    height: 100%; /* 부모 컨테이너의 높이에 맞춤 */
+    object-fit: contain; /* 비율을 유지하며 비디오 전체 표시 */
 }
 
+/* 사용자 이름 스타일 */
 .user-name {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    color: white;
+    position: absolute; /* 비디오 위에 위치 */
+    bottom: -20px; /* 비디오 아래에 배치 */
+    font-size: 14px;
     font-weight: bold;
-    text-shadow: 1px 1px 2px black;
+    text-align: center;
+    width: 100%;
+    color: #333;
 }
 
+/* 버튼 컨테이너 */
 .button-container {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    display: flex;
-    gap: 10px;
+    display: flex; /* 버튼들을 가로로 배치 */
+    justify-content: center; /* 가운데 정렬 */
+    align-items: center;
+    gap: 10px; /* 버튼 간 간격 */
+    width: 100%; /* 부모 컨테이너의 너비 */
+    height: 100%; /* 부모(grid-template-rows)에서 지정된 높이 사용 */
+    background-color: #f9f9f9; /* 버튼 영역 배경색 */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* 상단 그림자 효과 */
+    border-top: 2px solid #eeee76; /* 상단 구분선 */
+}
+
+/* 버튼 스타일 */
+.button-container button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.button-container img {
+    width: 50px;
+    height: 50px;
 }
