@@ -1,8 +1,8 @@
-// Timer.jsx
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useSocket from "../../../useSocket"; // 커스텀 훅 가져오기
 import "./Timer.css";
+import VoteStatistic from "../../../Modals/VoteResultModal/VoteStatistic.jsx"; // 모달 컴포넌트 가져오기
 
 const Timer = () => {
   const { roomNumber } = useParams(); // URL의 :id 부분 추출
@@ -31,7 +31,7 @@ const Timer = () => {
     const handleTimerFinished = () => {
       console.log("타이머가 완료되었습니다.");
       setIsRunning(false);
-      setTimerFinished(true);
+      setTimerFinished(true);  // 타이머 종료 시 모달 띄우기 위한 상태 설정
     };
 
     socket.on('timerUpdate', handleTimerUpdate);
@@ -48,7 +48,7 @@ const Timer = () => {
   const handleStart = () => {
     if (socket) {
       socket.emit('start_timer', roomId);
-      setTimerFinished(false);
+      setTimerFinished(false);  // 타이머 시작 시 모달 닫기
     }
   };
 
@@ -56,7 +56,7 @@ const Timer = () => {
   const handleReset = () => {
     if (socket) {
       socket.emit('reset_timer', roomId);
-      setTimerFinished(false);
+      setTimerFinished(false);  // 초기화 후 모달 닫기
     }
   };
 
@@ -84,12 +84,16 @@ const Timer = () => {
       </div>
       <p>현재 사이클: {currentCycle} / {totalCycles}</p>
       {timerFinished && <p>타이머가 완료되었습니다.</p>}
+      
       <button onClick={handleStart} disabled={isRunning || timeLeft <= 0 || currentCycle >= totalCycles}>
         타이머 시작
       </button>
       <button onClick={handleReset}>
         타이머 초기화
       </button>
+
+      {/* 타이머가 끝나면 모달을 띄움 */}
+      {timerFinished && <VoteStatistic roomNumber={roomId} onClose={() => setTimerFinished(false)} />}
     </div>
   );
 };
