@@ -5,18 +5,30 @@
 * the Visual Studio Code Server License Terms (https://aka.ms/vscode-server-license) and
 * the Microsoft Privacy Statement (https://privacy.microsoft.com/en-US/privacystatement).
 *
-Server bound to /tmp/code-fc4e59a4-e479-4155-bd0e-bff77e258eb7
-Extension host agent listening on /tmp/code-fc4e59a4-e479-4155-bd0e-bff77e258eb7
+Server bound to /tmp/code-ac314ec6-8fd8-4b7d-be3b-37a2cb6ad912
+Extension host agent listening on /tmp/code-ac314ec6-8fd8-4b7d-be3b-37a2cb6ad912
 
-[02:10:02] 
-
-
+[06:18:08] 
 
 
-[02:10:02] Extension host agent started.
-[02:10:02] [<unknown>][07267376][ManagementConnection] New connection established.
-[02:10:02] [<unknown>][07917728][ExtensionHostConnection] New connection established.
-[02:10:02] [<unknown>][07917728][ExtensionHostConnection] <150681> Launched Extension Host Process.
-New EH opened, aborting shutdown
-[02:15:02] New EH opened, aborting shutdown
-[03:37:39] [<unknown>][07267376][ManagementConnection] The client has disconnected, will wait for reconnection 3h before disposing...
+
+
+[06:18:08] Extension host agent started.
+[06:18:08] Started initializing default profile extensions in extensions installation folder. file:///home/ubuntu/.vscode-server/extensions
+[06:18:08] [<unknown>][a3b9da49][ExtensionHostConnection] New connection established.
+[06:18:08] [<unknown>][088d931d][ManagementConnection] New connection established.
+[06:18:08] Completed initializing default profile extensions in extensions installation folder. file:///home/ubuntu/.vscode-server/extensions
+[06:18:08] [<unknown>][a3b9da49][ExtensionHostConnection] <178766> Launched Extension Host Process.
+[06:18:11] [<unknown>][088d931d][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[06:18:11] [<unknown>][a3b9da49][ExtensionHostConnection] <178766> Extension Host Process exited with code: 0, signal: null.
+Cancelling previous shutdown timeout
+[06:18:11] Cancelling previous shutdown timeout
+Last EH closed, waiting before shutting down
+[06:18:11] Last EH closed, waiting before shutting down
+[06:18:13] [<unknown>][faf1db51][ExtensionHostConnection] New connection established.
+[06:18:13] [<unknown>][faf1db51][ExtensionHostConnection] <178946> Launched Extension Host Process.
+[06:18:13] [<unknown>][e76bd7f4][ManagementConnection] New connection established.
+[06:18:21] [File Watcher (node.js)] Watcher shutdown because watched path got deleted
+[06:18:21] [File Watcher (node.js)] Watcher shutdown because watched path got deleted
+[06:18:21] [File Watcher (node.js)] Watcher shutdown because watched path got deleted
+[06:18:21] [File Watcher (node.js)] Watcher shutdown because watched path got deleted
