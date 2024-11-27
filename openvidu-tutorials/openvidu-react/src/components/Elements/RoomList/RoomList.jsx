@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./RoomList.css";
+import DebateRoom from '../../Pages/DebateRoom/DebateRoom';
 
 const RoomList = () => {
   const navigate = useNavigate();
@@ -79,6 +80,12 @@ const RoomList = () => {
                   onClick={() => joinRoom(room.roomNumber)}
                 >
                   토론하기
+                </button>
+                <button
+                  className="Debateroom-discuss-button"
+                  onClick={() => navigate(`/DebateRoom/${room.roomNumber}`)}
+                >
+                  테스트 룸
                 </button>
               </div>
             </div>
