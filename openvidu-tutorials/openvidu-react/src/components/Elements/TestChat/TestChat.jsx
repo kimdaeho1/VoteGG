@@ -5,6 +5,7 @@ import "./TestChat.css";
 import VoteModal from "../../Modals/VoteModal/VoteModal"; // 모달 컴포넌트
 
 import EmojiButton from "../../../components/Elements/Buttons/EmojiButton/EmojiButton";
+import MatterCanvas from "./MatterCanvas"; // MatterCanvas 컴포넌트 추가
 
 const TestChat = () => {
   const { roomNumber } = useParams(); // URL에서 roomNumber 가져오기
@@ -72,7 +73,7 @@ const TestChat = () => {
   const toggleModal = () => setIsModalOpen(!isModalOpen);
 
   return (
-    <div className="chat-window">
+    <div className="chat-window" style={{ position: "relative" }}>
       <div className="chat-header">
         <p>실시간 채팅</p>
       </div>
@@ -114,7 +115,12 @@ const TestChat = () => {
           )}
         </div>
       </div>
+      
+      {/* 모달 컴포넌트 */}
       {isModalOpen && <VoteModal toggleModal={toggleModal} voteCount={voteCount} roomNumber={roomNumber} />}
+      
+      {/* Matter.js 캔버스 영역 */}
+      <MatterCanvas roomNumber={roomNumber}/>
     </div>
   );
 };
