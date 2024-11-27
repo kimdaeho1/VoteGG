@@ -406,7 +406,7 @@ class OpenviduFinal extends Component {
         return (
             <div className="openvidu-final">
                 <div className="video-container">
-                    <div className="left-side">
+                    <div className="left-video">
                         {leftStreamManagers.map((user, index) => (
                             <div key={index} className="user-video">
                                 {user.streamManager && (
@@ -418,7 +418,7 @@ class OpenviduFinal extends Component {
                             </div>
                         ))}
                     </div>
-                    <div className="right-side">
+                    <div className="right-video">
                         {rightStreamManagers.map((user, index) => (
                             <div key={index} className="user-video">
                                 {user.streamManager && (

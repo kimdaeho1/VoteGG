@@ -1,11 +1,12 @@
 .room {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start; /* 좌측부터 정렬 */
   align-items: flex-start;
   width: 100%; /* 부모 요소의 전체 너비 사용 */
-  height: 100%; /* 높이는 기존 유지 */
-  max-width: 1800px;
-  margin: auto;
+  height: 100vh; /* 전체 화면 높이 */
+  gap: 20px; /* 좌우 간 간격 */
+  padding: 0; /* 내부 여백 제거 */
+  margin: 0; /* 외부 여백 제거 */
   box-sizing: border-box;
 }
 
@@ -15,6 +16,9 @@
   gap: 10px;
   flex: 7; /* 비율로 설정 (70%) */
   height: 100%;
+  padding: 10px; /* 내부 여백 */
+  margin: 0; /* 외부 여백 제거 */
+  box-sizing: border-box;
 }
 
 .right-side {
@@ -22,4 +26,9 @@
   flex-direction: column;
   flex: 3; /* 비율로 설정 (30%) */
   height: 100%;
+  padding: 10px; /* 내부 여백 */
+  margin: 0; /* 외부 여백 제거 */
+  box-sizing: border-box;
+  background-color: #f9f9f9; /* 배경색 추가 (옵션) */
+  border-left: 2px solid #eeee76; /* 왼쪽 구분선 추가 */
 }
