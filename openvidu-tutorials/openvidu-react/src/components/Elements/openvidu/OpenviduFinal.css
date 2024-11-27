@@ -1,100 +1,52 @@
-/* openvidu-final 전체 레이아웃 */
+/* src/components/Elements/openvidu/OpenviduFinal.css */
+
 .openvidu-final {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 본인 화면 + 상대방 화면 */
-    gap: 20px;
-    width: 100%;
-    height: calc(100vh - 150px); /* 화면 높이에서 채팅창 높이 제외 */
-    margin: 0 auto;
-    padding: 10px;
-    box-sizing: border-box;
-    overflow: visible; /* 초과 내용을 숨기지 않음 */
-}
-
-/* 본인 화면과 버튼 그룹 */
-.main-container {
     display: flex;
-    flex-direction: column; /* 세로 방향으로 정렬 */
-    align-items: center;
-    justify-content: flex-start;
+    flex-direction: column;
     width: 100%;
-    height: 100%; /* 부모 컨테이너 높이와 맞춤 */
-    max-width: 600px; /* 최대 너비 제한 */
-    gap: 10px;
-    overflow: visible; /* 초과 내용을 숨기지 않음 */
+    height: 100%;
+    position: relative;
 }
 
-/* 본인 화면 */
-.main-video {
-    width: 100%;
-    height: auto; /* 높이를 자동으로 조정 */
-    aspect-ratio: 16 / 9; /* 비율 유지 */
-    background-color: #ffffff;
-    border-radius: 8px;
-    display: flex; /* 비디오를 중앙 정렬 */
-    justify-content: center;
-    align-items: center;
-}
-
-/* 비디오 태그 스타일 */
-.main-video video, .subscriber-video video {
-    width: 100%; /* 부모 컨테이너의 너비에 맞춤 */
-    height: 100%; /* 부모 컨테이너의 높이에 맞춤 */
-    object-fit: contain; /* 비율을 유지하며 화면 전체를 표시 */
-    background-color: #000;
-}
-
-/* 본인 화면의 유저 정보와 버튼 */
-.info-and-buttons {
+.video-container {
     display: flex;
-    align-items: center; /* 세로 정렬 */
-    justify-content: center; /* 가운데 정렬 */
-    gap: 10px; /* 유저 정보와 버튼 간 간격 */
-    width: 100%;
+    flex-direction: row;
+    flex: 1;
 }
 
-.user-info {
-    font-size: 16px;
-    font-weight: bold;
-}
-
-/* 버튼 컨테이너 */
-.button-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    height: 50px; /* 버튼 높이 */
-}
-
-/* 상대방 화면 */
-.subscribers {
+.left-side,
+.right-side {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+}
+
+.user-video {
+    flex: 1;
+    width: 100%;
+    position: relative;
+}
+
+.user-video video {
     width: 100%;
     height: 100%;
-    max-width: 600px;
-    gap: 10px;
-    overflow: visible; /* 초과 내용을 숨기지 않음 */
+    object-fit: cover;
 }
 
-/* 상대방 화면 비디오 스타일 */
-.subscriber-video {
-    width: 100%;
-    height: auto; /* 높이를 부모 컨테이너에 맞춤 */
-    aspect-ratio: 16 / 9; /* 비율 유지 */
-    background-color: #ffffff;
-    border-radius: 8px;
-    display: flex; /* 비디오를 중앙 정렬 */
-    justify-content: center;
-    align-items: center;
-}
-
-/* 상대방 유저 정보 스타일 */
-.subscriber-info {
-    font-size: 14px;
+.user-name {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: white;
     font-weight: bold;
-    text-align: center;
-    margin-top: 5px;
+    text-shadow: 1px 1px 2px black;
+}
+
+.button-container {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
 }

@@ -1,3 +1,5 @@
+// src/components/Elements/openvidu/OpenviduFinal.js
+
 import React, { Component } from "react";
 import { OpenVidu } from "openvidu-browser";
 import axios from "axios";
@@ -7,19 +9,18 @@ import './OpenviduFinal.css';
 const APPLICATION_SERVER_URL = process.env.NODE_ENV === "production" ? "" : "https://demos.openvidu.io/";
 
 class OpenviduFinal extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             session: undefined,
             publisher: undefined,
             mainStreamManager: undefined,
-            // leftStreamManager: undefined,
-            // rightStreamManager: undefined,
-            // leftSubscribers: [], // 왼쪽 사용자 그룹
-            // rightSubscribers: [], // 오른쪽 사용자 그룹
             subscribers: [],
             isSharingScreen: false,
+            leftUserList: [],
+            rightUserList: [],
+            userName: this.props.userName || 'Unknown', // 사용자 이름 설정
         };
 
         this.joinSession = this.joinSession.bind(this);
@@ -42,6 +43,44 @@ class OpenviduFinal extends Component {
         const OV = new OpenVidu();
         const session = OV.initSession();
 
+        // 시그널링 이벤트 핸들러 등록
+
+        // 다른 참가자로부터 사용자 리스트를 수신
+        session.on('signal:userList', (event) => {
+            const data = JSON.parse(event.data);
+            console.log('수신한 사용자 리스트:', data);
+
+            this.setState((prevState) => {
+                const mergedLeftUserList = mergeUserLists(prevState.leftUserList, data.leftUserList || []);
+                const mergedRightUserList = mergeUserLists(prevState.rightUserList, data.rightUserList || []);
+
+                console.log('병합된 leftUserList:', mergedLeftUserList);
+                console.log('병합된 rightUserList:', mergedRightUserList);
+
+                return {
+                    leftUserList: mergedLeftUserList,
+                    rightUserList: mergedRightUserList,
+                };
+            });
+        });
+
+        // 새로운 참가자가 참여했을 때 사용자 리스트를 요청하는 시그널을 수신
+        session.on('signal:requestUserList', (event) => {
+            // 자신의 사용자 리스트를 요청한 참가자에게 전송
+            session.signal({
+                data: JSON.stringify({
+                    leftUserList: this.state.leftUserList,
+                    rightUserList: this.state.rightUserList,
+                }),
+                to: [event.from],
+                type: 'userList',
+            });
+            console.log('사용자 리스트를 요청받아 전송함:', {
+                leftUserList: this.state.leftUserList,
+                rightUserList: this.state.rightUserList,
+            });
+        });
+
         // 다른 사용자의 스트림 구독
         session.on('streamCreated', (event) => {
             const subscriber = session.subscribe(event.stream, undefined);
@@ -60,29 +99,48 @@ class OpenviduFinal extends Component {
             const newSubscriber = {
                 subscriber: subscriber,
                 userName: userName,
-                left: false,
+                connectionId: event.stream.connection.connectionId,
             };
 
-            this.setState(
-                (prevState) => ({
-                    subscribers: [...prevState.subscribers, newSubscriber],
-                }),
-                () => {
-                    // 상태가 업데이트된 후 로그 출력
-                    console.log("---------구독과좋아요-----------", this.state.subscribers);
-                    console.log("---------유저네임-----------", this.props.userName);
-                }
-            );
+            this.setState((prevState) => ({
+                subscribers: [...prevState.subscribers, newSubscriber],
+            }), () => {
+                console.log('구독자 추가됨:', newSubscriber);
+                console.log('현재 구독자 리스트:', this.state.subscribers);
+            });
         });
 
         session.on('streamDestroyed', (event) => {
-            const subscriberToRemove = event.stream.streamManager;
+            const connectionId = event.stream.connection.connectionId;
 
-            this.setState((prevState) => ({
-                subscribers: prevState.subscribers.filter(
-                    (subItem) => subItem.subscriber !== subscriberToRemove
-                ),
-            }));
+            this.setState((prevState) => {
+                const subscribers = prevState.subscribers.filter(
+                    (sub) => sub.connectionId !== connectionId
+                );
+
+                const leftUserList = prevState.leftUserList.filter(
+                    (user) => user.connectionId !== connectionId
+                );
+                const rightUserList = prevState.rightUserList.filter(
+                    (user) => user.connectionId !== connectionId
+                );
+
+                console.log('사용자 퇴장 - connectionId:', connectionId);
+                console.log('업데이트된 leftUserList:', leftUserList);
+                console.log('업데이트된 rightUserList:', rightUserList);
+
+                // 모든 참가자에게 업데이트된 사용자 리스트 전송
+                session.signal({
+                    data: JSON.stringify({ leftUserList, rightUserList }),
+                    type: 'userList',
+                });
+
+                return {
+                    subscribers,
+                    leftUserList,
+                    rightUserList,
+                };
+            });
         });
 
         session.on("exception", (exception) => {
@@ -91,14 +149,16 @@ class OpenviduFinal extends Component {
 
         try {
             const sessionId = this.props.sessionId; // 세션 ID
-            const userName = this.props.userName; // 사용자 이름
+            const userName = this.state.userName; // 사용자 이름
 
             const token = await this.getToken(sessionId);
             await session.connect(token, { clientData: userName });
 
+            let publisher = null;
+
             if (!this.props.isObserver) {
                 // 관전자가 아니면 발행자 생성
-                const publisher = await OV.initPublisherAsync(undefined, {
+                publisher = await OV.initPublisherAsync(undefined, {
                     audioSource: undefined,
                     videoSource: undefined,
                     publishAudio: true,
@@ -107,25 +167,80 @@ class OpenviduFinal extends Component {
                     frameRate: 30,
                     mirror: false,
                     audioProcessing: {
-                        echoCancellation: true, // 에코 제거 활성화
-                        noiseSuppression: true, // 잡음 제거 활성화
-                        autoGainControl: true,  // 자동 게인 컨트롤 활성화
+                        echoCancellation: true,
+                        noiseSuppression: true,
+                        autoGainControl: true,
                     }
                 });
 
                 session.publish(publisher);
-
-                this.setState({
-                    publisher: publisher,
-                    mainStreamManager: publisher,
-                });
             }
 
-            this.setState({ session: session });
+            this.setState({
+                session: session,
+                publisher: publisher,
+                mainStreamManager: publisher,
+            }, () => {
+                const connectionId = session.connection.connectionId;
+                const newUser = { connectionId, userName };
+
+                // 다른 참가자들에게 사용자 리스트 요청
+                session.signal({
+                    type: 'requestUserList',
+                });
+
+                // 1초 후에 사용자 리스트 확인 및 자신의 정보 추가
+                setTimeout(() => {
+                    console.log('현재 사용자 리스트 확인:', this.state.leftUserList, this.state.rightUserList);
+                    this.assignUserToGroup(newUser);
+                }, 1000);
+            });
 
         } catch (error) {
             console.error("Error joining session:", error);
         }
+    }
+
+    assignUserToGroup(newUser) {
+        this.setState((prevState) => {
+            let leftUserList = [...prevState.leftUserList];
+            let rightUserList = [...prevState.rightUserList];
+
+            // 이미 리스트에 존재하는지 확인
+            const existsInLeft = leftUserList.some(user => user.connectionId === newUser.connectionId);
+            const existsInRight = rightUserList.some(user => user.connectionId === newUser.connectionId);
+
+            if (existsInLeft || existsInRight) {
+                // 이미 리스트에 존재하면 추가하지 않음
+                return null;
+            }
+
+            if (leftUserList.length < 2) {
+                leftUserList.push(newUser);
+                console.log('사용자를 leftUserList에 추가:', newUser);
+            } else if (rightUserList.length < 2) {
+                rightUserList.push(newUser);
+                console.log('사용자를 rightUserList에 추가:', newUser);
+            } else {
+                alert('참가자 수가 최대입니다.');
+                this.leaveSession();
+                return null;
+            }
+
+            // 모든 참가자에게 업데이트된 사용자 리스트 전송
+            this.state.session.signal({
+                data: JSON.stringify({ leftUserList, rightUserList }),
+                type: 'userList',
+            });
+
+            console.log('업데이트된 leftUserList:', leftUserList);
+            console.log('업데이트된 rightUserList:', rightUserList);
+
+            return {
+                leftUserList,
+                rightUserList,
+            };
+        });
     }
 
     leaveSession() {
@@ -138,6 +253,8 @@ class OpenviduFinal extends Component {
             publisher: undefined,
             mainStreamManager: undefined,
             subscribers: [],
+            leftUserList: [],
+            rightUserList: [],
         });
     }
 
@@ -155,8 +272,8 @@ class OpenviduFinal extends Component {
 
             const OV = new OpenVidu();
             const screenPublisher = OV.initPublisher(undefined, {
-                videoSource: "screen", // 화면 공유
-                audioSource: undefined, // 화면 공유 시 음소거
+                videoSource: "screen",
+                audioSource: undefined,
                 publishAudio: false,
                 publishVideo: true,
             });
@@ -165,7 +282,7 @@ class OpenviduFinal extends Component {
                 session.publish(screenPublisher);
                 this.setState({
                     publisher: screenPublisher,
-                    mainStreamManager: screenPublisher, // 화면 공유 퍼블리셔로 전환
+                    mainStreamManager: screenPublisher,
                     isSharingScreen: true,
                 });
                 console.log("Screen sharing started");
@@ -190,7 +307,7 @@ class OpenviduFinal extends Component {
 
         try {
             const screenPublisher = this.state.publisher;
-            session.unpublish(screenPublisher); // 화면 공유 퍼블리셔 중단
+            session.unpublish(screenPublisher);
             screenPublisher.stream.getMediaStream().getTracks().forEach((track) => track.stop());
 
             const OV = new OpenVidu();
@@ -206,7 +323,7 @@ class OpenviduFinal extends Component {
                 session.publish(cameraPublisher);
                 this.setState({
                     publisher: cameraPublisher,
-                    mainStreamManager: cameraPublisher, // 카메라 퍼블리셔로 복원
+                    mainStreamManager: cameraPublisher,
                     isSharingScreen: false,
                 });
                 console.log("Screen sharing stopped, camera restored");
@@ -240,78 +357,126 @@ class OpenviduFinal extends Component {
     }
 
     render() {
-        const { mainStreamManager, subscribers, isSharingScreen } = this.state;
+        const { mainStreamManager, subscribers, isSharingScreen, leftUserList, rightUserList } = this.state;
 
-        const getClientData = (streamManager) => {
-            if (streamManager) {
-                const connectionData = streamManager.stream.connection;
-                return JSON.parse(connectionData.data)?.clientData || "Unknown User";
+        // 현재 세션의 모든 사용자 (본인 포함)
+        const allStreamManagers = [];
+
+        // 본인의 connectionId
+        const localConnectionId = this.state.session?.connection?.connectionId;
+
+        // 본인의 스트림 매니저 추가
+        if (mainStreamManager && localConnectionId) {
+            allStreamManagers.push({
+                connectionId: localConnectionId,
+                streamManager: mainStreamManager,
+                userName: this.state.userName,
+            });
+        }
+
+        // 구독자 스트림 추가
+        subscribers.forEach((sub) => {
+            allStreamManagers.push({
+                connectionId: sub.connectionId,
+                streamManager: sub.subscriber,
+                userName: sub.userName,
+            });
+        });
+
+        // 좌측 및 우측 사용자 스트림 매니저 매핑
+        const leftStreamManagers = leftUserList.map((user) => {
+            const manager = allStreamManagers.find((manager) => manager.connectionId === user.connectionId);
+            if (!manager) {
+                console.warn('Left user의 스트림 매니저를 찾지 못함:', user);
             }
-            return "No Data";
-        };
+            return manager;
+        }).filter(Boolean);
 
-        const clientData = mainStreamManager ? getClientData(mainStreamManager) : "No Data";
-    
+        const rightStreamManagers = rightUserList.map((user) => {
+            const manager = allStreamManagers.find((manager) => manager.connectionId === user.connectionId);
+            if (!manager) {
+                console.warn('Right user의 스트림 매니저를 찾지 못함:', user);
+            }
+            return manager;
+        }).filter(Boolean);
+
+        console.log('Left Stream Managers:', leftStreamManagers);
+        console.log('Right Stream Managers:', rightStreamManagers);
+
         return (
             <div className="openvidu-final">
-                {/* 본인 화면과 버튼 그룹 */}
-                <div className="main-container">
-                    <div className="main-video">
-                        {mainStreamManager && (
-                            <UserVideoComponent streamManager={mainStreamManager} />
-                        )}
-                    </div>
-    
-                    {/* 유저 정보와 버튼 */}
-                    <div className="info-and-buttons">
-                        <p className="user-info">User: {clientData}</p>
-    
-                        {!this.props.isObserver && (
-                            <div className="button-container">
-                                {/* 화면 공유 버튼 */}
-                                <button
-                                    className="screen-share-button"
-                                    onClick={isSharingScreen ? this.stopScreenShare : this.startScreenShare}
-                                    style={{ background: "none", border: "none", padding: 0 }}
-                                >
-                                    <img
-                                        src={isSharingScreen ? "/Buttonimg/stopshare.png" : "/Buttonimg/share.png"}
-                                        alt={isSharingScreen ? "Stop Screen Sharing" : "Start Screen Sharing"}
-                                        style={{ width: "50px", height: "50px" }}
-                                    />
-                                </button>
-    
-                                {/* 방 나가기 버튼 */}
-                                <button
-                                    className="leave-session-button"
-                                    onClick={this.leaveSession}
-                                    style={{ background: "none", border: "none", padding: 0 }}
-                                >
-                                    <img
-                                        src="/Buttonimg/leaveroom.png"
-                                        alt="Leave Room"
-                                        style={{ width: "50px", height: "50px" }}
-                                    />
-                                </button>
+                <div className="video-container">
+                    <div className="left-side">
+                        {leftStreamManagers.map((user, index) => (
+                            <div key={index} className="user-video">
+                                {user.streamManager && (
+                                    <>
+                                        <UserVideoComponent streamManager={user.streamManager} />
+                                        <p className="user-name">{user.userName}</p>
+                                    </>
+                                )}
                             </div>
-                        )}
+                        ))}
+                    </div>
+                    <div className="right-side">
+                        {rightStreamManagers.map((user, index) => (
+                            <div key={index} className="user-video">
+                                {user.streamManager && (
+                                    <>
+                                        <UserVideoComponent streamManager={user.streamManager} />
+                                        <p className="user-name">{user.userName}</p>
+                                    </>
+                                )}
+                            </div>
+                        ))}
                     </div>
                 </div>
-    
-                {/* 상대방 화면 */}
-                <div className="subscribers">
-                    {subscribers.map((subItem, index) => (
-                        <div key={index} className="subscriber-container">
-                            <div className="subscriber-video">
-                                <UserVideoComponent streamManager={subItem.subscriber} />
-                            </div>
-                            <p className="subscriber-info">User: {subItem.userName}</p>
-                        </div>
-                    ))}
-                </div>
+
+                {/* 화면 공유 및 방 나가기 버튼 */}
+                {!this.props.isObserver && (
+                    <div className="button-container">
+                        <button
+                            className="screen-share-button"
+                            onClick={isSharingScreen ? this.stopScreenShare : this.startScreenShare}
+                            style={{ background: "none", border: "none", padding: 0 }}
+                        >
+                            <img
+                                src={isSharingScreen ? "/Buttonimg/stopshare.png" : "/Buttonimg/share.png"}
+                                alt={isSharingScreen ? "Stop Screen Sharing" : "Start Screen Sharing"}
+                                style={{ width: "50px", height: "50px" }}
+                            />
+                        </button>
+
+                        <button
+                            className="leave-session-button"
+                            onClick={this.leaveSession}
+                            style={{ background: "none", border: "none", padding: 0 }}
+                        >
+                            <img
+                                src="/Buttonimg/leaveroom.png"
+                                alt="Leave Room"
+                                style={{ width: "50px", height: "50px" }}
+                            />
+                        </button>
+                    </div>
+                )}
             </div>
         );
     }
 }
 
 export default OpenviduFinal;
+
+// 리스트 병합 함수
+function mergeUserLists(list1, list2) {
+    const combined = [...list1, ...list2];
+    const uniqueUsers = combined.reduce((acc, current) => {
+        const x = acc.find(item => item.connectionId === current.connectionId);
+        if (!x) {
+            return acc.concat([current]);
+        } else {
+            return acc;
+        }
+    }, []);
+    return uniqueUsers;
+}

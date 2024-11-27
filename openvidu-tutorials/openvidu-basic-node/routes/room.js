@@ -182,5 +182,22 @@ router.post("/vote", async (req, res) => {
   }
 });
 
+// 특정 방 정보 가져오기 API
+router.get("/rooms/:roomId", async (req, res) => {
+  const roomId = req.params.roomId;
+  try {
+    const room = await Room.findOne({ roomNumber: roomId }).select(
+      "roomNumber roomname createdby memberCount"
+    );
+    if (!room) {
+      return res.status(404).json({ error: 'Room not found' });
+    }
+    res.status(200).json(room);
+  } catch (error) {
+    console.error("방 정보 가져오기 실패:", error.message);
+    res.status(500).json({ error: "방 정보를 가져오는 중 오류가 발생했습니다." });
+  }
+});
+
 
 module.exports = router;

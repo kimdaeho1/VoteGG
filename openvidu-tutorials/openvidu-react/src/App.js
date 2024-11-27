@@ -1,13 +1,12 @@
 import React from 'react';
 import Layers from './Layers.js';
-import { Provider } from 'react-redux';
-import { store } from './store.js';
+import { RecoilRoot } from 'recoil';
 
 function App() {
   return (
-    <Provider store={store}>
+    <RecoilRoot>
       <Layers />
-    </Provider>
+    </RecoilRoot>
   );
 }
 
