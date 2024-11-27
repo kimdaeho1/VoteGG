@@ -10,9 +10,9 @@ const RoomControl = () => {
 
   return (
     <div className="roomcontrol">
-      <div className='aa'>
+      {/* <div className='aa'>
         <EndButton />
-      </div>
+      </div> */}
       <div className='bb'>
         <Timer roomId={roomNumber} />
       </div>
