@@ -5,6 +5,7 @@ import { OpenVidu } from "openvidu-browser";
 import axios from "axios";
 import UserVideoComponent from "./UserVideoComponent";
 import './OpenviduFinal.css';
+import { useParams } from "react-router-dom";
 
 const APPLICATION_SERVER_URL = process.env.NODE_ENV === "production" ? "" : "https://demos.openvidu.io/";
 
@@ -21,6 +22,7 @@ class OpenviduFinal extends Component {
             leftUserList: [],
             rightUserList: [],
             userName: this.props.userName || 'Unknown', // 사용자 이름 설정
+            currentPhase: 1,
         };
 
         this.joinSession = this.joinSession.bind(this);
@@ -43,7 +45,14 @@ class OpenviduFinal extends Component {
         const OV = new OpenVidu();
         const session = OV.initSession();
 
-        // 시그널링 이벤트 핸들러 등록
+        session.on("signal:phaseChange", (event) => {
+            const data = JSON.parse(event.data);
+            console.log("Phase changed to:", data.currentPhase);
+
+            // 수신한 phase 값을 업데이트
+            this.setState({ currentPhase: data.currentPhase });
+        });
+
 
         // 다른 참가자로부터 사용자 리스트를 수신
         session.on('signal:userList', (event) => {
@@ -205,7 +214,8 @@ class OpenviduFinal extends Component {
         this.setState((prevState) => {
             let leftUserList = [...prevState.leftUserList];
             let rightUserList = [...prevState.rightUserList];
-
+            // const { roomNumber } = useParams(); 
+            // const roomId = roomNumber
             // 이미 리스트에 존재하는지 확인
             const existsInLeft = leftUserList.some(user => user.connectionId === newUser.connectionId);
             const existsInRight = rightUserList.some(user => user.connectionId === newUser.connectionId);
@@ -215,16 +225,18 @@ class OpenviduFinal extends Component {
                 return null;
             }
 
-            if (leftUserList.length < 2) {
+            if (leftUserList.length < 2 && !this.props.isObserver) {
                 leftUserList.push(newUser);
                 console.log('사용자를 leftUserList에 추가:', newUser);
-            } else if (rightUserList.length < 2) {
+            } else if (rightUserList.length < 2 && !this.props.isObserver) {
                 rightUserList.push(newUser);
                 console.log('사용자를 rightUserList에 추가:', newUser);
             } else {
-                alert('참가자 수가 최대입니다.');
-                this.leaveSession();
+                alert('옵져버입니다.');
+                // this.leaveSession();
+                // window.location.href = `https://whirae3433.shop:8443/observer/${roomId}`;
                 return null;
+
             }
 
             // 모든 참가자에게 업데이트된 사용자 리스트 전송
@@ -357,11 +369,10 @@ class OpenviduFinal extends Component {
     }
 
     render() {
-        const { mainStreamManager, subscribers, isSharingScreen, leftUserList, rightUserList } = this.state;
+        const { mainStreamManager, subscribers, isSharingScreen, leftUserList, rightUserList, currentPhase } = this.state;
 
         // 현재 세션의 모든 사용자 (본인 포함)
         const allStreamManagers = [];
-
         // 본인의 connectionId
         const localConnectionId = this.state.session?.connection?.connectionId;
 
@@ -403,32 +414,42 @@ class OpenviduFinal extends Component {
         console.log('Left Stream Managers:', leftStreamManagers);
         console.log('Right Stream Managers:', rightStreamManagers);
 
+        const handlePhaseChange = (newPhase) => {
+            const { session } = this.state;
+            if (session) {
+                // 시그널을 통해 phase 변경값 브로드캐스트
+                session.signal({
+                    type: 'phaseChange',
+                    data: JSON.stringify({ currentPhase: newPhase }),
+                });
+            }
+        };
+
         return (
             <div className="openvidu-final">
                 <div className="video-container">
+                    {/* 왼쪽 참가자 */}
                     <div className="left-side">
-                        {leftStreamManagers.map((user, index) => (
-                            <div key={index} className="user-video">
-                                {user.streamManager && (
-                                    <>
-                                        <UserVideoComponent streamManager={user.streamManager} />
-                                        <p className="user-name">{user.userName}</p>
-                                    </>
-                                )}
+                        {leftStreamManagers[currentPhase - 1] ? (
+                            <div className="user-video">
+                                <UserVideoComponent streamManager={leftStreamManagers[currentPhase - 1].streamManager} />
+                                <p className="user-name">{leftStreamManagers[currentPhase - 1].userName}</p>
                             </div>
-                        ))}
+                        ) : (
+                            <p className="empty-slot">대기 중</p>
+                        )}
                     </div>
+
+                    {/* 오른쪽 참가자 */}
                     <div className="right-side">
-                        {rightStreamManagers.map((user, index) => (
-                            <div key={index} className="user-video">
-                                {user.streamManager && (
-                                    <>
-                                        <UserVideoComponent streamManager={user.streamManager} />
-                                        <p className="user-name">{user.userName}</p>
-                                    </>
-                                )}
+                        {rightStreamManagers[currentPhase - 1] ? (
+                            <div className="user-video">
+                                <UserVideoComponent streamManager={rightStreamManagers[currentPhase - 1].streamManager} />
+                                <p className="user-name">{rightStreamManagers[currentPhase - 1].userName}</p>
                             </div>
-                        ))}
+                        ) : (
+                            <p className="empty-slot">대기 중</p>
+                        )}
                     </div>
                 </div>
 
@@ -458,6 +479,21 @@ class OpenviduFinal extends Component {
                                 style={{ width: "50px", height: "50px" }}
                             />
                         </button>
+                        {/* 단계 변경 버튼 */}
+                        <div className="phase-controls">
+                            <button
+                                onClick={() => handlePhaseChange(Math.max(currentPhase - 1, 1))}
+                                disabled={currentPhase === 1}
+                            >
+                                이전 참가자
+                            </button>
+                            <button
+                                onClick={() => handlePhaseChange(Math.min(currentPhase + 1, 2))}
+                                disabled={currentPhase === 2}
+                            >
+                                다음 참가자
+                            </button>
+                        </div>
                     </div>
                 )}
             </div>
