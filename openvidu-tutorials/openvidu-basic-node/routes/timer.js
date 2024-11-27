@@ -19,32 +19,39 @@ function timerSocketHandler(io) {
       if (!rooms[roomId]) {
         // 타이머 초기 설정
         rooms[roomId] = {
-          duration: 180, // 총 시간 (초)
-          startTime: Date.now(),
-          interval: null,
-          timeLeft: 180,
+          durations: [10, 20], // 타이머 단계들의 지속 시간 (초)
+          cycleCount: 4, // 총 사이클 수
+          currentCycle: 0, // 현재 사이클
+          currentIndex: 0, // 현재 단계 인덱스
+          timeLeft: 10, // 초기 남은 시간
+          isRunning: false,
+          timer: null, // 타이머 객체
         };
+      }
 
-        // 1초마다 타이머 업데이트
-        rooms[roomId].interval = setInterval(() => {
-          const elapsed = Math.floor((Date.now() - rooms[roomId].startTime) / 1000);
-          rooms[roomId].timeLeft = Math.max(rooms[roomId].duration - elapsed, 0);
+      // 현재 타이머 상태를 클라이언트에게 전송
+      const room = rooms[roomId];
+      socket.emit('timerUpdate', {
+        timeLeft: room.timeLeft,
+        isRunning: room.isRunning,
+        currentCycle: room.currentCycle,
+        totalCycles: room.cycleCount,
+      });
+    });
 
-          // 타이머가 끝나면 인터벌 클리어
-          if (rooms[roomId].timeLeft <= 0) {
-            clearInterval(rooms[roomId].interval);
-            rooms[roomId].interval = null;
-          }
+    // 타이머 시작 이벤트 처리
+    socket.on('start_timer', (roomId) => {
+      const room = rooms[roomId];
+      if (room && !room.isRunning && room.currentCycle < room.cycleCount) {
+        startTimer(roomId);
+      }
+    });
 
-          // 방에 있는 모든 클라이언트에게 타이머 업데이트 전송
-          timerNamespace.to(roomId).emit('timerUpdate', rooms[roomId].timeLeft);
-        }, 1000);
-      } else {
-        // 기존 타이머의 남은 시간을 전송
-        const elapsed = Math.floor((Date.now() - rooms[roomId].startTime) / 1000);
-        rooms[roomId].timeLeft = Math.max(rooms[roomId].duration - elapsed, 0);
-
-        socket.emit('timerUpdate', rooms[roomId].timeLeft);
+    // 타이머 초기화 이벤트 처리
+    socket.on('reset_timer', (roomId) => {
+      const room = rooms[roomId];
+      if (room) {
+        resetTimer(roomId);
       }
     });
 
@@ -68,7 +75,7 @@ function timerSocketHandler(io) {
         if (numUsers === 0) {
           // 방에 사용자가 없으므로 타이머 정리
           if (rooms[roomId]) {
-            clearInterval(rooms[roomId].interval);
+            stopTimer(roomId);
             delete rooms[roomId];
             console.log(`방 ${roomId}의 타이머가 정리되었습니다.`);
           }
@@ -76,6 +83,84 @@ function timerSocketHandler(io) {
       });
     });
   });
+
+  // 타이머 시작 함수
+  function startTimer(roomId) {
+    const room = rooms[roomId];
+    if (!room) return;
+
+    room.isRunning = true;
+    const currentDuration = room.durations[room.currentIndex];
+    room.timeLeft = currentDuration;
+    const endTime = Date.now() + room.timeLeft * 1000;
+
+    room.timer = setInterval(() => {
+      const remainingTime = Math.round((endTime - Date.now()) / 1000);
+      room.timeLeft = Math.max(remainingTime, 0);
+
+      // 방에 있는 모든 클라이언트에게 타이머 업데이트 전송
+      timerNamespace.to(roomId).emit('timerUpdate', {
+        timeLeft: room.timeLeft,
+        isRunning: room.isRunning,
+        currentCycle: room.currentCycle,
+        totalCycles: room.cycleCount,
+      });
+
+      if (room.timeLeft <= 0) {
+        clearInterval(room.timer);
+        room.timer = null;
+        room.isRunning = false;
+
+        // 다음 단계로 이동
+        room.currentIndex++;
+
+        // 모든 단계가 끝나면 사이클 증가 및 초기화
+        if (room.currentIndex >= room.durations.length) {
+          room.currentIndex = 0;
+          room.currentCycle++;
+
+          // 모든 사이클이 끝났는지 확인
+          if (room.currentCycle >= room.cycleCount) {
+            // 타이머 종료
+            timerNamespace.to(roomId).emit('timerFinished');
+            return;
+          }
+        }
+
+        // 다음 단계 자동 시작
+        startTimer(roomId);
+      }
+    }, 1000);
+  }
+
+  // 타이머 정지 함수
+  function stopTimer(roomId) {
+    const room = rooms[roomId];
+    if (room && room.timer) {
+      clearInterval(room.timer);
+      room.timer = null;
+      room.isRunning = false;
+    }
+  }
+
+  // 타이머 초기화 함수
+  function resetTimer(roomId) {
+    const room = rooms[roomId];
+    if (room) {
+      stopTimer(roomId);
+      room.timeLeft = room.durations[0];
+      room.currentIndex = 0;
+      room.currentCycle = 0;
+
+      // 방에 있는 모든 클라이언트에게 타이머 업데이트 전송
+      timerNamespace.to(roomId).emit('timerUpdate', {
+        timeLeft: room.timeLeft,
+        isRunning: room.isRunning,
+        currentCycle: room.currentCycle,
+        totalCycles: room.cycleCount,
+      });
+    }
+  }
 }
 
 module.exports = { router, timerSocketHandler };
