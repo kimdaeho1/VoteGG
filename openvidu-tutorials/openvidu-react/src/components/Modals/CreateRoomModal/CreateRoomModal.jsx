@@ -6,12 +6,19 @@ import axios from "axios"; // POST 요청을 위한 axios
 const CreateRoomModal = ({ onClose, onCreateRoom }) => {
   const [roomTitle, setRoomTitle] = useState('');
   const [invitees, setInvitees] = useState(['', '', '']); // 초대할 사람 3명
+  const [thumbnail, setThumbnail] = useState(null);
+
   const handleInviteeChange = (index, value) => {
     const updatedInvitees = [...invitees];
     updatedInvitees[index] = value;
     setInvitees(updatedInvitees);
   };
   const navigate = useNavigate(); // useNavigate 훅 초기화
+
+  //썸네일 등록하기
+  const handleThumbnailChange = (e) => {
+    setThumbnail(e.target.files[0]);
+  }
 
   // 토큰에서 사용자 이름 추출
   const token = localStorage.getItem("token");
@@ -23,12 +30,22 @@ const CreateRoomModal = ({ onClose, onCreateRoom }) => {
       // 초대할 사람 중 비어있는 입력 필드는 제외 (초대기능)
       const filteredInvitees = invitees.filter((invitee) => invitee.trim() !== '');
 
+      //썸네일 - formData생성
+      const formData = new FormData();
+      formData.append("roomname", roomTitle);
+      formData.append("createdby", username);
+      filteredInvitees.forEach((invitee, index) => {
+        formData.append(`invitees[${index}]` , invitee);
+      });
+      if(thumbnail) {
+        formData.append("thumbnail", thumbnail);
+      }
 
       // 서버로 POST 요청 보내기
-      const response = await axios.post(window.location.origin + "/api/room/roomCreate", {
-        roomname: roomTitle,
-        createdby: username, // 임의 사용자 ID, 필요에 따라 수정
-        invitees: filteredInvitees, // 초대할 사람 정보 추가 (초대기능)
+      const response = await axios.post(`${window.location.origin}/api/room/roomCreate`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data", // FormData 전송
+        },
       });
 
       if (response.status === 201) {
@@ -71,6 +88,14 @@ const CreateRoomModal = ({ onClose, onCreateRoom }) => {
             />
           </div>
         ))}
+        {/* 썸네일 업로드 */}
+        <label className = "input-label">썸네일 이미지</label>
+        <input
+          type = "file"
+          accept="image/*"
+          onChange={handleThumbnailChange}
+          className="modal-input"
+          />
         {/* 버튼들 */}
         <div className="modal-buttons">
           <button className="modal-create-button" onClick={handleCreateRoom}>

@@ -3,7 +3,7 @@
 /* 채팅창 전체 스타일 */
 .chat-window {
   width: 100%;
-  height: 100%;
+  height: 90%;
   display: flex;
   flex-direction: column;
   border: 5px solid #eeee76;

@@ -5,6 +5,24 @@ const { v4 } = require("uuid"); // UUID 생성기
 const router = express.Router();
 const max_Room_Count = 2 << 4; // 최대 방 갯수 (32)
 
+//썸네일 관련 라이브러리
+const multer = require("multer");
+// const upload = multer({ dest : "public/uploads/"});
+const path = require("path");
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/uploads/"); // 파일이 저장될 경로
+  },
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname); // 파일 확장자 추출
+    const baseName = path.basename(file.originalname, ext); // 파일 이름만 추출
+    cb(null, `${baseName}-${Date.now()}${ext}`); // 파일 이름에 타임스탬프 추가
+  },
+});
+
+const upload = multer({ storage }); // 변경된 storage 설정 사용
+
 // UUID 생성 함수
 const getNextRoomNumber = async (maxRooms = max_Room_Count) => {
   const rooms = await Room.countDocuments({});
@@ -35,16 +53,24 @@ const getUsernameFromToken = (token) => {
 };
 
 // 방 생성 API
-router.post("/roomCreate", async (req, res) => {
+router.post("/roomCreate", upload.single("thumbnail"), async (req, res) => {
   try {
+
+    console.log("요청 데이터(req.body):", req.body); // 클라이언트에서 전송한 텍스트 데이터 확인
+    console.log("업로드된 파일(req.file):", req.file); // multer로 처리된 파일 정보 확인
+
     const { roomname, createdby } = req.body;
     const roomNumber = await getNextRoomNumber(max_Room_Count);
+
+    // 썸네일 파일 처리
+    const thumbnail = req.file ? `/uploads/${req.file.filename}` : "";
 
     const newRoom = new Room({
       roomNumber,
       roomname,
       createdby,
       participant: { [createdby]: 0 },
+      thumbnail, //썸네일 추가
     });
 
     const savedRoom = await newRoom.save();
@@ -54,6 +80,7 @@ router.post("/roomCreate", async (req, res) => {
       roomNumber: savedRoom.roomNumber,
       roomname: savedRoom.roomname,
       createdby: savedRoom.createdby,
+      thumbnail: savedRoom.thumbnail,
       inviteLink: `/room/${savedRoom.roomNumber}`,
     });
   } catch (error) {
@@ -66,7 +93,7 @@ router.post("/roomCreate", async (req, res) => {
 router.get("/roomList", async (req, res) => {
   try {
     const rooms = await Room.find().select(
-      "roomNumber roomname createdby memberCount"
+      "roomNumber roomname createdby memberCount thumbnail"
     );
     console.log("방 목록 응답:", rooms);
     res.status(200).json(rooms);
