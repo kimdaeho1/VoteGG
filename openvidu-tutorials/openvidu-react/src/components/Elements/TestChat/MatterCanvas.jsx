@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Engine, Render, Runner, Bodies, World, MouseConstraint, Mouse, Events } from 'matter-js';
+import { useVoteCount } from '../../../votecount';
 
 const MatterCanvas = ({ roomNumber }) => {
   const canvasRef = useRef(null);
@@ -86,7 +87,10 @@ const MatterCanvas = ({ roomNumber }) => {
         draggedEgg.current = null; // 더 이상 드래그 중이 아님
       }
       
-      findUserInformation(); // 드래그 한 위치의 스트리밍 화면을 확인하고 유저 정보 찾아오기
+      var user = findUserInformation(); // 드래그 한 위치의 스트리밍 화면을 확인하고 유저 정보 찾아오기
+      if(user){
+        useVoteCount(roomNumber, user, 1);
+      }      
     });
 
     // 해당 마우스 위치의 스트리밍 화면 유저 정보 가져오기
@@ -109,6 +113,8 @@ const MatterCanvas = ({ roomNumber }) => {
             const clientData = JSON.parse(connection.data).clientData; // 클라이언트 Data찾기
             const sessionId = JSON.parse(connection.data).session; // 클라이언트 Data찾기
             console.log("UserName:", clientData);
+
+            return clientData
           }
         }
       }
