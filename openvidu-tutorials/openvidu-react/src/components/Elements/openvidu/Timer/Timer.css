@@ -11,6 +11,7 @@
   font-family: 'Digital-7', monospace; /* 디지털 폰트 적용 */
   font-size: 5rem; /* 글자 크기 */
   text-align: center;
+  margin : 0 auto;
 }
 
 .timer-text {
@@ -20,4 +21,42 @@
 
 .timer-text span {
   letter-spacing: 0; /* 숫자 간격 조정 */
+}
+
+/* 현재 사이클 정보 */
+.cycle-info {
+  text-align: center; /* 중앙 정렬 */
+  font-size: 1rem;
+  margin-bottom: 20px; /* 아래 여백 */
+  color: #666;
+}
+
+/* 버튼 컨테이너 */
+.button-container {
+  display: flex;
+  justify-content: center; /* 버튼들을 중앙 정렬 */
+  gap: 10px; /* 버튼 간 간격 */
+  margin-top: 20px;
+}
+
+/* 타이머 시작 버튼 */
+.start-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* 타이머 초기화 버튼 */
+.reset-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
 }

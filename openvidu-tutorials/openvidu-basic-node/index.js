@@ -19,12 +19,16 @@ var OPENVIDU_URL = process.env.OPENVIDU_URL || 'http://localhost:4443';
 // Environment variable: secret shared with our OpenVidu server
 var OPENVIDU_SECRET = process.env.OPENVIDU_SECRET || 'MY_SECRET';
 
+
+
 const { chatSocketHandler } = require('./routes/chat');
 const { timerSocketHandler } = require('./routes/timer');
 const userRouter = require('./routes/user');
 const newsRouter = require('./routes/newsRouter'); // 정책 뉴스 라우터
 const roomRouter = require('./routes/room'); // 룸생성 라우터
 app.use(express.json());
+
+
 
 // HTTP 라우터 추가
 // app.use('/chat', chatRouter);
@@ -92,6 +96,11 @@ const JWT_SECRET = process.env.JWT_SECRET;
 app.use(bodyParser.urlencoded({ extended: true }));
 // Allow application/json
 app.use(bodyParser.json());
+
+
+// 썸네일 이미지 업로드
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
+
 
 // Serve static resources if available
 app.use(express.static(__dirname + '/public'));
