@@ -29,6 +29,11 @@ const roomSchema = new mongoose.Schema({
     of: Number, // 딕셔너리 형태의 value는 숫자 (기본값: 0)
     default: {}, // 초기값은 빈 딕셔너리
   },
+
+  thumbnail : {
+    type : String,
+    default : "",
+  },
 });
 
 module.exports = mongoose.model("room", roomSchema);
