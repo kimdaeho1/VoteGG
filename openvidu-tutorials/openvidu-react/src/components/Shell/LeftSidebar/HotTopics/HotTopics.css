@@ -1,24 +1,11 @@
-/* 컨테이너 스타일 */
-.hot-topics {
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
-  height: 60vh;
-  scrollbar-width: thin;
-  scrollbar-color: #cccccc #f9f9f9;
-  font-family: 'Arial', sans-serif;
-
-  /* 중앙 정렬 */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 /* 스크롤바 스타일 */
 .hot-topics::-webkit-scrollbar {
   width: 8px;
+}
+/* 모든 a 태그에 대한 스타일을 초기화 */
+a {
+  text-decoration: none; /* 기본적으로 밑줄 제거 */
+  color: inherit; /* 부모 요소의 색상 상속 */
 }
 
 .hot-topics::-webkit-scrollbar-track {
@@ -30,66 +17,114 @@
   border-radius: 4px;
 }
 
-/* 제목 */
-.hot-topics h3 {
-  margin-bottom: 20px;
-  font-size: 20px;
-  font-weight: bold;
-  color: #333333;
-  text-align: center; /* 제목도 중앙 정렬 */
-  border-bottom: 2px solid #eaeaea;
-  padding-bottom: 10px;
-}
-
-/* 각 아이템 스타일 */
+/* 카드형태 스타일 */
 .topic-item {
-  padding: 15px 20px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  background-color: #ffffff;
+  background-color: #dcdcdc;  /* 기본 카드 배경색 변경 */
+  padding: 10px;  /* 패딩을 줄여서 크기 고정 */
+  margin-bottom: 10px;  /* 항목 간격 */
+  border-radius: 8px;  /* 카드 형태 */
   border: 1px solid #eeeeee;
-  transition: all 0.3s ease;
-  width: 80%; /* 중앙 배치를 위해 너비를 설정 */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  color: #222;  /* 글씨 색상 변경 */
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;  /* 배경색 전환 효과 */
 }
 
+/* 카드 호버시 배경색 변경 */
 .topic-item:hover {
-  background-color: #f4f4f4;
-  transform: translateY(-2px);
+  background-color: #add8e6;  /* 호버 시 카드 배경색 */
 }
 
-/* 제목과 순위가 한 줄에 표시되도록 설정 */
+/* 제목 */
 .topic-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  font-size: 14px;
 }
 
 /* 순위 */
 .topic-rank {
+  font-size: 16px;
   font-weight: bold;
-  font-size: 18px;
-  color: #555555;
-  line-height: 1.5;
 }
 
-/* 제목 */
+/* 제목 텍스트 */
 .topic-title {
-  text-decoration: none;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 두 줄까지 보여주기 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 16px;
-  font-weight: 500;
-  color: #222222;
-  line-height: 1.5;
+  font-weight: normal;
+  color: #222;
+  width: 250px;  /* 제목 길이 제한 */
 }
 
 .topic-title:hover {
-  text-decoration: underline;
-  color: #0073e6;
+  text-decoration: none;
+  color: #222;  /* 호버 시 색상 유지 */
 }
 
-/* 리스트 점 제거 */
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* 전체 hot-topics 컴포넌트 크기 고정 */
+.hot-topics {
+  margin-top: 0px; /* 상단 마진을 제거 */
+  padding-top: 10px; /* 필요시 패딩 추가 */
+  height: 450px; /* 고정된 높이 */
+  overflow-y: auto; /* 스크롤이 생기지 않도록 설정 */
 }
+
+
+/* 기본 상태에서 링크 밑줄 없애기 */
+.topic-title a {
+  text-decoration: none !important; /* 기본적으로 밑줄 없애기 */
+  color: #222 !important; /* 기본 글씨 색상 검정색으로 설정 */
+}
+
+/* 링크 기본 스타일 제거 */
+.topic-title a {
+  text-decoration: none !important;  /* 기본적으로 밑줄 제거 */
+  color: #222 !important;  /* 기본 글씨 색상 검정색으로 설정 */
+}
+
+/* 클릭 상태에서도 밑줄 없애기 */
+.topic-title a:focus {
+  text-decoration: none !important; /* 클릭 시에도 밑줄 없애기 */
+  color: #222 !important; /* 클릭 시 색상 유지 */
+}
+
+/* 링크 호버 시 스타일 */
+.topic-title a:hover {
+  text-decoration: none !important;  /* 호버 시에도 밑줄 제거 */
+  color: #222 !important;  /* 호버 시에도 색상 유지 */
+}
+
+
+#root > div > div > div.left-sidebar > div.container.mt-5.hot-topics {
+  margin-top: 0 !important;  /* 0으로 설정, 필요 시 !important 추가 */
+}
+
+
+#root > div > div > div.left-sidebar > div.container.mt-5.hot-topics > h3 {
+  margin-bottom: 30px; /* 아래쪽 마진 추가 */
+}
+
+#root > div > div > div.left-sidebar > div.container.mt-5.hot-topics {
+  padding: 0; /* 패딩을 0으로 설정 */
+}
+
+
+/*#carouselExampleIndicators .carousel-item .topic-item {*/
+/*  padding: 0; /* 패딩을 0으로 설정 */
+/*  margin-bottom: 10px; /* 항목 간격 유지 */
+/*}*/ 
+
+#carouselExampleIndicators .carousel-item .topic-item {
+  padding-left: 5px;  /* 좌측 여백 */
+  padding-right: 5px; /* 우측 여백 */
+  margin-left: 0;     /* 좌측 여백 제거 */
+  margin-right: 0;    /* 우측 여백 제거 */
+  width: 90%;  /* 너비를 90%로 줄여서 여백. */
+}
+

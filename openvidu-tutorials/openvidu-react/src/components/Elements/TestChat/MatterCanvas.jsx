@@ -31,7 +31,7 @@ const MatterCanvas = ({ roomNumber }) => {
     const runner = Runner.create();
     Runner.run(runner, engine);
   
-    const positionX = 1430; // 전체 X 좌표 위치
+    const positionX = 1730; // 전체 X 좌표 위치
     const positionY = 120;
     // 바닥 생성
     const ground = Bodies.rectangle(positionX + 400, positionY + 700, 810, 30, { 
