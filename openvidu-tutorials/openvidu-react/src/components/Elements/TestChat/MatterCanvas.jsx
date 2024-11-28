@@ -85,7 +85,34 @@ const MatterCanvas = ({ roomNumber }) => {
         draggedEgg.current.render.sprite.yScale = 0.3;
         draggedEgg.current = null; // 더 이상 드래그 중이 아님
       }
+      
+      findUserInformation(); // 드래그 한 위치의 스트리밍 화면을 확인하고 유저 정보 찾아오기
     });
+
+    // 해당 마우스 위치의 스트리밍 화면 유저 정보 가져오기
+    const findUserInformation = () => {
+      if (event.target.closest('.streamcomponent')) {
+        const videoElement = event.target.closest('video'); // 누른 요소의 id 가져오기
+        console.log("Clicked on a streamcomponent element!");
+        if (videoElement) {
+          const videoId = videoElement.id; // id 저장
+          console.log("Clicked video element ID:", videoId);
+          const connectionId = "con_" + videoId.split("_con_")[1]; // 뒷부분 정보만 가져오기
+          console.log(connectionId);
+
+          // OpenviduFinal에서 session 가져오기          
+          const session = window.session;
+          console.log('Openvidu session:', session);
+
+          const connection = session.remoteConnections.get(connectionId); // 연결정보로 유저 찾기
+          if (connection) {
+            const clientData = JSON.parse(connection.data).clientData; // 클라이언트 Data찾기
+            const sessionId = JSON.parse(connection.data).session; // 클라이언트 Data찾기
+            console.log("UserName:", clientData);
+          }
+        }
+      }
+    }
   
     // 계란을 생성하는 함수
     const addEgg = () => {
