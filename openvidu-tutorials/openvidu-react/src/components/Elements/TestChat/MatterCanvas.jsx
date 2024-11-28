@@ -31,26 +31,27 @@ const MatterCanvas = ({ roomNumber }) => {
     const runner = Runner.create();
     Runner.run(runner, engine);
   
-    const positionX = 1730; // 전체 X 좌표 위치
-    const positionY = 120;
+    const positionX = window.innerWidth / 1.35; // 전체 X 좌표 위치
+    const positionY = window.innerHeight / 12;
     // 바닥 생성
-    const ground = Bodies.rectangle(positionX + 400, positionY + 700, 810, 30, { 
+    const ground = Bodies.rectangle(positionX + 400, positionY + 710, 810, 60, { 
       isStatic: true,
       render: {
-        fillStyle: 'rgba(0, 0, 0, 0)', // 투명한 검정색
+        fillStyle: 'rgba(0, 0, 0, 0.1)', // 투명한 검정색
       },
     });
     World.add(world, ground);
   
     // 양옆 벽 생성
-    const leftWall = Bodies.rectangle(positionX + 0, positionY + 400, 30, 800, { isStatic: true, render: { fillStyle: 'rgba(0,0,0,1)' } });
-    const rightWall = Bodies.rectangle(positionX + 460, positionY + 400, 30, 800, { isStatic: true, render: { fillStyle: 'rgba(0,0,0,1)' } });
-    const roopWall = Bodies.rectangle(positionX + 235, positionY + 0, 500, 100, { isStatic: true, render: { fillStyle: 'rgba(0,0,0,1)' } });
-  
-    const removeBoxT = Bodies.rectangle(window.innerWidth / 2 , 0, window.innerWidth, 30, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.5)', } });
-    const removeBoxB = Bodies.rectangle(window.innerWidth / 2, window.innerHeight + 30, window.innerWidth, 30, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.5)', } });
-    const removeBoxL = Bodies.rectangle(0 - 30, window.innerHeight / 2, 30, window.innerHeight, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.5)', } });
-    const removeBoxR = Bodies.rectangle(window.innerWidth, window.innerHeight / 2, 30, window.innerHeight, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.5)', } });
+    const leftWall = Bodies.rectangle(positionX + 0, positionY + 400, 30, 700, { isStatic: true, render: { fillStyle: 'rgba(0,0,0,0.1)' } });
+    const rightWall = Bodies.rectangle(positionX + 460, positionY + 400, 30, 700, { isStatic: true, render: { fillStyle: 'rgba(0,0,0,0.1)' } });
+    const roopWall = Bodies.rectangle(positionX + 235, positionY + 0, 500, 100, { isStatic: true, render: { fillStyle: 'rgba(0,0,0,0.1)' } });
+    
+    var thick = 100
+    const removeBoxT = Bodies.rectangle(window.innerWidth / 2 , 0, window.innerWidth, thick, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.5)', } });
+    const removeBoxB = Bodies.rectangle(window.innerWidth / 2, window.innerHeight + (thick / 2), window.innerWidth, thick, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.5)', } });
+    const removeBoxL = Bodies.rectangle(0 - 100, window.innerHeight / 2, thick, window.innerHeight, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.5)', } });
+    const removeBoxR = Bodies.rectangle(window.innerWidth + (thick / 2), window.innerHeight / 2, thick, window.innerHeight, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.5)', } });
   
     World.add(world, [leftWall, rightWall, roopWall]); // 채팅창
     World.add(world, [removeBoxT, removeBoxB, removeBoxL, removeBoxR]) // 화면 밖
@@ -75,7 +76,45 @@ const MatterCanvas = ({ roomNumber }) => {
     });
   
     document.addEventListener("mousedown", () => {
+      mouse.button = 0; // 마우스 버튼 눌림 상태      
+    });
+
+    document.addEventListener("mouseover", () => {
       mouse.button = 0; // 마우스 버튼 눌림 상태
+      /* 계란 드래그 상태에서 스트리밍 화면에 아웃라인 생성 */
+      if (draggedEgg.current){
+        const streamComponent = event.target.closest('.streamcomponent');
+        if (event.target.closest('.streamcomponent')) {
+          streamComponent.style.outline = "5px solid red";
+
+          const voteOverlay = document.createElement("div");
+          voteOverlay.style.position = "absolute";
+          voteOverlay.style.top = "0";
+          voteOverlay.style.left = "0";
+          voteOverlay.style.width = "100%";
+          voteOverlay.style.height = "100%";
+          voteOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.1)"; // 반투명 회색 배경
+          voteOverlay.style.color = "white"; // 텍스트 색상
+          voteOverlay.style.display = "flex";
+          voteOverlay.style.alignItems = "center";
+          voteOverlay.style.justifyContent = "center";
+          voteOverlay.style.fontSize = "100px";
+          voteOverlay.style.fontWeight = "bold";
+          voteOverlay.textContent = "투표하기";
+
+          // 기존 .streamcomponent 안에 voteOverlay 추가
+          streamComponent.style.position = "relative"; // streamComponent가 상대적인 위치를 가질 수 있도록 설정
+          streamComponent.appendChild(voteOverlay);
+
+          /* 아웃라인 초기화 */
+          streamComponent.addEventListener("mouseleave", () => {
+              streamComponent.style.outline = "";
+              if (streamComponent.contains(voteOverlay)) {
+                streamComponent.removeChild(voteOverlay); // voteOverlay 제거
+              }
+          });
+        }
+      }      
     });
   
     document.addEventListener("mouseup", () => {
@@ -85,11 +124,11 @@ const MatterCanvas = ({ roomNumber }) => {
         draggedEgg.current.render.sprite.xScale = 0.3;
         draggedEgg.current.render.sprite.yScale = 0.3;
         draggedEgg.current = null; // 더 이상 드래그 중이 아님
-      }
-      
-      var user = findUserInformation(); // 드래그 한 위치의 스트리밍 화면을 확인하고 유저 정보 찾아오기
-      if(user){
-        useVoteCount(roomNumber, user, 1);
+
+        var user = findUserInformation(); // 드래그 한 위치의 스트리밍 화면을 확인하고 유저 정보 찾아오기
+        if(user){
+          useVoteCount(roomNumber, user, 1);
+        }
       }      
     });
 
