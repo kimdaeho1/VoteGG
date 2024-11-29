@@ -1,0 +1,16 @@
+
+
+.search-input {
+    flex: 1; /* 검색창이 넓게 펼쳐지도록 설정 */
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 5px;
+  }
+  
+  .search-icon {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+  }

@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./RoomList.css";
-import DebateRoom from '../../Pages/DebateRoom/DebateRoom';
+import { SearchContext } from "../../../stores/SearchContext"; // Context import
 
 const RoomList = () => {
   const navigate = useNavigate();
-  const [rooms, setRooms] = useState([]);
+  const [rooms, setRooms] = useState([]); // 전체 방 목록
+  const { searchQuery } = useContext(SearchContext); // Context에서 검색어 가져오기
 
   // 데이터베이스에서 방 정보 가져오기
   useEffect(() => {
@@ -21,6 +22,13 @@ const RoomList = () => {
 
     fetchRooms();
   }, []);
+
+  // 검색어에 따라 필터링된 방 목록 생성
+  const displayedRooms = searchQuery
+    ? rooms.filter((room) =>
+        room.roomname.toLowerCase().includes(searchQuery.toLowerCase()) // 검색어와 방 이름 비교
+      )
+    : rooms; // 검색어가 없으면 전체 방 목록 표시
 
   // 방 참가 요청 함수
   const joinRoom = async (roomNumber) => {
@@ -51,53 +59,47 @@ const RoomList = () => {
         <h1 className="room-list-title">LIVE 토론</h1>
       </div>
       <div className="room-list">
-  {rooms.map((room) => {
-    // 로그 추가
-    console.log("Thumbnail URL:", room.thumbnail);
-
-    return (
-      <div key={room.roomNumber} className="room-card">
-        <div className="room-image">
-          <img
-            src={`${window.location.origin}${room.thumbnail}` || "./default-thumbnail.jpg"}
-            alt={`${room.roomname} 썸네일`}
-            onClick={() => navigate(`/observer/${room.roomNumber}`)}
-            className="entry-room"
-          />
-          <p className="room-member-count">{room.memberCount}명</p>
-          <p className="room-live">LIVE</p>
-        </div>
-        <div className="room-details">
-          <h2 className="room-name">{room.roomname}</h2>
-          <div className="room-info">
-            <p className="room-creator">{room.createdby} 님</p>
+        {displayedRooms.map((room) => (
+          <div key={room.roomNumber} className="room-card">
+            <div className="room-image">
+              <img
+                src={`${window.location.origin}${room.thumbnail}` || "./default-thumbnail.jpg"}
+                alt={`${room.roomname} 썸네일`}
+                onClick={() => navigate(`/observer/${room.roomNumber}`)}
+                className="entry-room"
+              />
+              <p className="room-member-count">{room.memberCount}명</p>
+              <p className="room-live">LIVE</p>
+            </div>
+            <div className="room-details">
+              <h2 className="room-name">{room.roomname}</h2>
+              <div className="room-info">
+                <p className="room-creator">{room.createdby} 님</p>
+              </div>
+              <div className="room-buttons">
+                <button
+                  className="room-spectate-button"
+                  onClick={() => navigate(`/observer/${room.roomNumber}`)}
+                >
+                  참관하기
+                </button>
+                <button
+                  className="room-discuss-button"
+                  onClick={() => joinRoom(room.roomNumber)}
+                >
+                  토론하기
+                </button>
+                <button
+                  className="Debateroom-discuss-button"
+                  onClick={() => navigate(`/DebateRoom/${room.roomNumber}`)}
+                >
+                  테스트 룸
+                </button>
+              </div>
+            </div>
           </div>
-          <div className="room-buttons">
-            <button
-              className="room-spectate-button"
-              onClick={() => navigate(`/observer/${room.roomNumber}`)}
-            >
-              참관하기
-            </button>
-            <button
-              className="room-discuss-button"
-              onClick={() => joinRoom(room.roomNumber)}
-            >
-              토론하기
-            </button>
-            <button
-              className="Debateroom-discuss-button"
-              onClick={() => navigate(`/DebateRoom/${room.roomNumber}`)}
-            >
-              테스트 룸
-            </button>
-          </div>
-        </div>
+        ))}
       </div>
-    );
-  })}
-</div>
-
     </div>
   );
 };
