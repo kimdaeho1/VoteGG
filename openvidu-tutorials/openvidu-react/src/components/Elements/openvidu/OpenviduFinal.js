@@ -62,7 +62,12 @@ class OpenviduFinal extends Component {
         const OV = new OpenVidu();
         const session = OV.initSession();
 
+
         // Handle phaseChange signal
+
+        window.session = session;
+
+
         session.on("signal:phaseChange", (event) => {
             const data = JSON.parse(event.data);
 
