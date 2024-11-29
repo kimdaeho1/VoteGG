@@ -20,3 +20,42 @@
     font-weight: bold;
     pointer-events: none; /* 사용자가 이 요소를 클릭할 수 없도록 설정 */
 }
+
+/* 흔들림 애니메이션 */
+@keyframes shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-10px);
+    }
+    50% {
+      transform: translateX(10px);
+    }
+    75% {
+      transform: translateX(-10px);
+    }
+  }
+  
+  /* 애니메이션 적용 클래스 */
+  .shake {
+    animation: shake 0.5s ease-in-out;
+  }
+  
+  /* 크기 변화 애니메이션 */
+  @keyframes grow {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .grow {
+    animation: grow 0.6s ease-in-out;
+  }
+  

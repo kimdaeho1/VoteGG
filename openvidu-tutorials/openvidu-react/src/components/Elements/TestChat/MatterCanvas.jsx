@@ -117,9 +117,22 @@ const MatterCanvas = ({ roomNumber }) => {
         draggedEgg.current.render.sprite.yScale = 0.3;
         draggedEgg.current = null; // 더 이상 드래그 중이 아님
 
+        const streamComponent = event.target.closest('.streamcomponent');
+        if (streamComponent){
+          streamComponent.classList.add('shake');
+          // streamComponent.classList.add('grow');
+          console.log("animation!");
+
+          // 일정 시간 후 애니메이션 클래스 제거
+          setTimeout(() => {
+            streamComponent.classList.remove('shake');
+            // streamComponent.classList.remove('grow');
+          }, 500);
+        }        
+
         var user = findUserInformation(); // 드래그 한 위치의 스트리밍 화면을 확인하고 유저 정보 찾아오기
         if(user){
-          useVoteCount(roomNumber, user, 1);
+          useVoteCount(roomNumber, user, 1); // 투표 처리          
         }
       }      
     });
@@ -142,7 +155,6 @@ const MatterCanvas = ({ roomNumber }) => {
           const connection = session.remoteConnections.get(connectionId); // 연결정보로 유저 찾기
           if (connection) {
             const clientData = JSON.parse(connection.data).clientData; // 클라이언트 Data찾기
-            const sessionId = JSON.parse(connection.data).session; // 클라이언트 Data찾기
             console.log("UserName:", clientData);
 
             return clientData
@@ -217,7 +229,13 @@ const MatterCanvas = ({ roomNumber }) => {
         console.log(eggCount);
       }
       else if (eggCount > nowVoteCount) {
-        removeEggs(nowVoteCount - eggCount);
+        if (draggedEgg.current) {
+          World.remove(world, draggedEgg.current); // 드래그 중인 계란 제거
+          eggs = eggs.filter(egg => egg !== draggedEgg.current); // 배열에서 드래그 중인 계란 필터링
+          eggCount -= 1; // 계란 개수 감소
+          draggedEgg.current = null; // draggedEgg 초기화
+        }
+        removeEggs(nowVoteCount - eggCount); // 추가로 계란 제거
       }
     }, 1000);
     
