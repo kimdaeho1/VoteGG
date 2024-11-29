@@ -4,6 +4,7 @@ import CreateRoomButton from '../../Elements/Buttons/CreateRoomButton/CreateRoom
 import AlarmButton from '../../Elements/Buttons/AlarmButton/AlarmButton';
 import LoginButton from '../../Elements/Buttons/LoginoutButton/LoginoutButton';
 import LogoButton from '../../Elements/Buttons/LogoButton/LogoButton';
+import Search from './Search/Search.jsx'; // Search.jsx import
 import './Header.css';
 
 const Header = () => {
@@ -16,7 +17,6 @@ const Header = () => {
 
   useEffect(() => {
     if (roomId) {
-      // 방 정보 가져오기
       fetch(`/api/room/rooms/${roomId}`)
         .then(response => {
           if (!response.ok) {
@@ -40,10 +40,7 @@ const Header = () => {
         {roomId ? (
           <div className="room-id-display">Room: {roomname || roomId}</div>
         ) : (
-          <div className="search-container">
-            <input type="text" placeholder="Search" className="search-input" />
-            <img src="/magnifier.png" alt="Search Icon" className="search-icon" />
-          </div>
+          <Search /> // Search 컴포넌트 사용
         )}
         <div className="right">
           <AlarmButton />
