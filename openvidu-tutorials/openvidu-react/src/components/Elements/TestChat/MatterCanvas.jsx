@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Engine, Render, Runner, Bodies, World, MouseConstraint, Mouse, Events } from 'matter-js';
 import { useVoteCount } from '../../../votecount';
+import './MatterCanvas.css';
 
 const MatterCanvas = ({ roomNumber }) => {
   const canvasRef = useRef(null);
@@ -85,33 +86,24 @@ const MatterCanvas = ({ roomNumber }) => {
       if (draggedEgg.current){
         const streamComponent = event.target.closest('.streamcomponent');
         if (event.target.closest('.streamcomponent')) {
-          streamComponent.style.outline = "5px solid red";
+          streamComponent.classList.add('highlighted');
 
-          const voteOverlay = document.createElement("div");
-          voteOverlay.style.position = "absolute";
-          voteOverlay.style.top = "0";
-          voteOverlay.style.left = "0";
-          voteOverlay.style.width = "100%";
-          voteOverlay.style.height = "100%";
-          voteOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.1)"; // 반투명 회색 배경
-          voteOverlay.style.color = "white"; // 텍스트 색상
-          voteOverlay.style.display = "flex";
-          voteOverlay.style.alignItems = "center";
-          voteOverlay.style.justifyContent = "center";
-          voteOverlay.style.fontSize = "100px";
-          voteOverlay.style.fontWeight = "bold";
-          voteOverlay.textContent = "투표하기";
+          // voteOverlay가 이미 추가되어 있지 않다면 추가
+          if (!streamComponent.querySelector('.vote-overlay')) {
+            const voteOverlay = document.createElement("div");
+            voteOverlay.className = "vote-overlay"; // 클래스 설정
+            voteOverlay.textContent = "투표하기";
 
-          // 기존 .streamcomponent 안에 voteOverlay 추가
-          streamComponent.style.position = "relative"; // streamComponent가 상대적인 위치를 가질 수 있도록 설정
-          streamComponent.appendChild(voteOverlay);
+            streamComponent.appendChild(voteOverlay);
+          }
 
           /* 아웃라인 초기화 */
           streamComponent.addEventListener("mouseleave", () => {
-              streamComponent.style.outline = "";
-              if (streamComponent.contains(voteOverlay)) {
+            streamComponent.classList.remove('highlighted');
+            const voteOverlay = streamComponent.querySelector('.vote-overlay');
+            if (voteOverlay) {
                 streamComponent.removeChild(voteOverlay); // voteOverlay 제거
-              }
+            }
           });
         }
       }      
