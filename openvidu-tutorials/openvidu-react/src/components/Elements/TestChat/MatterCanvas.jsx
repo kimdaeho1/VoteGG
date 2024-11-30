@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Engine, Render, Runner, Bodies, World, MouseConstraint, Mouse, Events } from 'matter-js';
-import { useVoteCount } from '../../../votecount';
+import { handleVote, getVoteCount } from '../../../votecount';
+import './MatterCanvas.css';
 
 const MatterCanvas = ({ roomNumber }) => {
   const canvasRef = useRef(null);
@@ -34,7 +35,7 @@ const MatterCanvas = ({ roomNumber }) => {
     const positionX = window.innerWidth / 1.35; // 전체 X 좌표 위치
     const positionY = window.innerHeight / 12;
     // 바닥 생성
-    const ground = Bodies.rectangle(positionX + 400, positionY + 710, 810, 60, { 
+    const ground = Bodies.rectangle(positionX + 400, positionY + 710, 810, 80, { 
       isStatic: true,
       render: {
         fillStyle: 'rgba(0, 0, 0, 0.1)', // 투명한 검정색
@@ -85,36 +86,27 @@ const MatterCanvas = ({ roomNumber }) => {
       if (draggedEgg.current){
         const streamComponent = event.target.closest('.streamcomponent');
         if (event.target.closest('.streamcomponent')) {
-          streamComponent.style.outline = "5px solid red";
+          streamComponent.classList.add('highlighted');
 
-          const voteOverlay = document.createElement("div");
-          voteOverlay.style.position = "absolute";
-          voteOverlay.style.top = "0";
-          voteOverlay.style.left = "0";
-          voteOverlay.style.width = "100%";
-          voteOverlay.style.height = "100%";
-          voteOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.1)"; // 반투명 회색 배경
-          voteOverlay.style.color = "white"; // 텍스트 색상
-          voteOverlay.style.display = "flex";
-          voteOverlay.style.alignItems = "center";
-          voteOverlay.style.justifyContent = "center";
-          voteOverlay.style.fontSize = "100px";
-          voteOverlay.style.fontWeight = "bold";
-          voteOverlay.textContent = "투표하기";
+          // voteOverlay가 이미 추가되어 있지 않다면 추가
+          if (!streamComponent.querySelector('.vote-overlay')) {
+            const voteOverlay = document.createElement("div");
+            voteOverlay.className = "vote-overlay"; // 클래스 설정
+            voteOverlay.textContent = "투표하기";
 
-          // 기존 .streamcomponent 안에 voteOverlay 추가
-          streamComponent.style.position = "relative"; // streamComponent가 상대적인 위치를 가질 수 있도록 설정
-          streamComponent.appendChild(voteOverlay);
+            streamComponent.appendChild(voteOverlay);
+          }
 
           /* 아웃라인 초기화 */
           streamComponent.addEventListener("mouseleave", () => {
-              streamComponent.style.outline = "";
-              if (streamComponent.contains(voteOverlay)) {
+            streamComponent.classList.remove('highlighted');
+            const voteOverlay = streamComponent.querySelector('.vote-overlay');
+            if (voteOverlay) {
                 streamComponent.removeChild(voteOverlay); // voteOverlay 제거
-              }
+            }
           });
         }
-      }      
+      }
     });
   
     document.addEventListener("mouseup", () => {
@@ -125,9 +117,31 @@ const MatterCanvas = ({ roomNumber }) => {
         draggedEgg.current.render.sprite.yScale = 0.3;
         draggedEgg.current = null; // 더 이상 드래그 중이 아님
 
+        const streamComponent = event.target.closest('.streamcomponent');
+        if (streamComponent){
+          // streamComponent.classList.add('shake');
+          streamComponent.classList.add('grow');
+          console.log("animation!");
+
+          // 일정 시간 후 애니메이션 클래스 제거
+          setTimeout(() => {
+            // streamComponent.classList.remove('shake');
+            streamComponent.classList.remove('grow');
+          }, 500);
+
+           /* 아웃라인 초기화 */
+          streamComponent.classList.remove('highlighted');
+          const voteOverlay = streamComponent.querySelector('.vote-overlay');
+          if (voteOverlay) {
+              streamComponent.removeChild(voteOverlay); // voteOverlay 제거
+          }
+        }        
+
         var user = findUserInformation(); // 드래그 한 위치의 스트리밍 화면을 확인하고 유저 정보 찾아오기
         if(user){
-          useVoteCount(roomNumber, user, 1);
+          // 투표 처리
+          const { maxVoteCount, usedVoteCount} = getVoteCount( roomNumber, username );
+          handleVote(roomNumber, username, user, 1, maxVoteCount - usedVoteCount); // 1은 사용된 투표권 수
         }
       }      
     });
@@ -150,7 +164,6 @@ const MatterCanvas = ({ roomNumber }) => {
           const connection = session.remoteConnections.get(connectionId); // 연결정보로 유저 찾기
           if (connection) {
             const clientData = JSON.parse(connection.data).clientData; // 클라이언트 Data찾기
-            const sessionId = JSON.parse(connection.data).session; // 클라이언트 Data찾기
             console.log("UserName:", clientData);
 
             return clientData
@@ -201,6 +214,7 @@ const MatterCanvas = ({ roomNumber }) => {
 
     // 계란을 한 번에 n개 제거하는 함수
     const removeEggs = (n) => {
+      console.log(n + ' egg removed');
       const eggsToRemove = eggs.slice(0, n); // 배열에서 첫 n개의 계란을 선택
       eggsToRemove.forEach(egg => {
         World.remove(world, egg);  // Matter.js에서 해당 계란 제거
@@ -225,7 +239,13 @@ const MatterCanvas = ({ roomNumber }) => {
         console.log(eggCount);
       }
       else if (eggCount > nowVoteCount) {
-        removeEggs(nowVoteCount - eggCount);
+        if (draggedEgg.current) {
+          World.remove(world, draggedEgg.current); // 드래그 중인 계란 제거
+          eggs = eggs.filter(egg => egg !== draggedEgg.current); // 배열에서 드래그 중인 계란 필터링
+          eggCount -= 1; // 계란 개수 감소
+          draggedEgg.current = null; // draggedEgg 초기화
+        }
+        removeEggs(nowVoteCount - eggCount); // 추가로 계란 제거
       }
     }, 1000);
     
