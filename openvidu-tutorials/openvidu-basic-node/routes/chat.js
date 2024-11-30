@@ -57,7 +57,7 @@ function chatSocketHandler(io) {
           );
           console.log(`인구 다운 ${roomId}`);
 
-          if (updatedRoom && updatedRoom.memberCount === 0) {
+          if (updatedRoom && (updatedRoom.memberCount === 1 || updatedRoom.memberCount === 0)) {
             await Room.deleteOne({ roomNumber: roomId });
             console.log(`방 ${roomId}가 삭제되었습니다.`);
           }
