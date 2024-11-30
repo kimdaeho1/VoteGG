@@ -14,7 +14,7 @@ function timerSocketHandler(io) {
     // 방에 조인하는 이벤트 처리
     socket.on('join_room', (roomId) => {
       socket.join(roomId);
-      console.log(`클라이언트 ${socket.id}가 방 ${roomId}에 참여했습니다.`);
+      console.log(`타이머방 ${socket.id}가 방 ${roomId}에 참여했습니다.`);
 
       // 해당 방의 타이머가 없으면 생성
       if (!rooms[roomId]) {
@@ -62,7 +62,7 @@ function timerSocketHandler(io) {
 
     // 클라이언트 연결 해제 시 처리
     socket.on('disconnect', () => {
-      console.log('클라이언트 연결 해제:', socket.id);
+      console.log('타이머방 연결 해제:', socket.id);
 
       // 사용자가 속한 방들에 대해 처리
       const roomsJoined = socket.rooms;
@@ -82,7 +82,7 @@ function timerSocketHandler(io) {
           if (rooms[roomId]) {
             stopTimer(roomId);
             delete rooms[roomId];
-            console.log(`방 ${roomId}의 타이머가 정리되었습니다.`);
+            console.log(`타이머방 ${roomId}의 타이머가 정리되었습니다.`);
           }
         }
       });
