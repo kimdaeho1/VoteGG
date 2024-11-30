@@ -1,0 +1,73 @@
+/* streamcomponent에 마우스를 올렸을 때 아웃라인 표시 */
+.streamcomponent.highlighted {
+    outline: 5px solid red;
+    position: relative; /* 추가 스타일 적용을 위해 상대적 위치 설정 */
+}
+
+/* voteOverlay 스타일 */
+.vote-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명 회색 배경 */
+    color: white; /* 텍스트 색상 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 100px;
+    font-weight: bold;
+    pointer-events: none; /* 사용자가 이 요소를 클릭할 수 없도록 설정 */
+}
+
+/* 흔들림 애니메이션 */
+@keyframes shake {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  12.5% {
+    transform: translate(-10px, -10px);
+  }
+  25% {
+    transform: translate(10px, -10px);
+  }
+  37.5% {
+    transform: translate(-10px, 10px);
+  }
+  50% {
+    transform: translate(10px, 10px);
+  }
+  62.5% {
+    transform: translate(-10px, -10px);
+  }
+  75% {
+    transform: translate(10px, -10px);
+  }
+  87.5% {
+    transform: translate(-10px, 10px);
+  }
+}
+  
+  /* 애니메이션 적용 클래스 */
+  .shake {
+    animation: shake 0.5s ease-in-out;
+  }
+  
+  /* 크기 변화 애니메이션 */
+  @keyframes grow {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .grow {
+    animation: grow 0.6s ease-in-out;
+  }
+  

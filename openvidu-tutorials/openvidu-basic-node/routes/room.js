@@ -1,7 +1,7 @@
 const express = require("express");
 const Room = require("../schemas/room");
 const { v4 } = require("uuid"); // UUID 생성기
-
+const { usersNumber } = require('../schemas/usersNumber');
 const router = express.Router();
 const max_Room_Count = 2 << 4; // 최대 방 갯수 (32)
 
@@ -92,11 +92,23 @@ router.post("/roomCreate", upload.single("thumbnail"), async (req, res) => {
 // 방 목록 조회 API
 router.get("/roomList", async (req, res) => {
   try {
+    // 데이터베이스에서 방 정보 가져오기
     const rooms = await Room.find().select(
       "roomNumber roomname createdby memberCount thumbnail"
     );
-    console.log("방 목록 응답:", rooms);
-    res.status(200).json(rooms);
+
+    // usersNumber 기반으로 memberCount 업데이트
+    const updatedRooms = rooms.map(room => {
+      const roomId = room.roomNumber.toString(); // roomNumber를 문자열로 변환
+      const currentUserCount = usersNumber[roomId] || 0; // usersNumber에서 현재 사용자 수 가져오기
+      return {
+        ...room.toObject(), // 기존 Room 객체의 데이터를 그대로 복사
+        memberCount: currentUserCount, // memberCount를 usersNumber의 값으로 대체
+      };
+    });
+
+    console.log("방 목록 응답:", updatedRooms);
+    res.status(200).json(updatedRooms);
   } catch (error) {
     console.error("방 목록 가져오기 실패:", error.message);
     res.status(500).json({ error: "방 목록을 가져오는 중 오류가 발생했습니다." });
@@ -124,7 +136,6 @@ router.post("/participant", async (req, res) => {
 
     if (!room.participant.has(userId)) {
       room.participant.set(userId, 0);
-      room.memberCount += 1;
       await room.save();
       console.log("참가자 추가 완료:", room.participant);
     } else {
