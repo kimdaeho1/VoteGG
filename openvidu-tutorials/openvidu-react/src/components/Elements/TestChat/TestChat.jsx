@@ -1,3 +1,5 @@
+// src/components/Elements/TestChat/TestChat.jsx
+
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import useSocket from "../../useSocket"; // 커스텀 훅 가져오기
