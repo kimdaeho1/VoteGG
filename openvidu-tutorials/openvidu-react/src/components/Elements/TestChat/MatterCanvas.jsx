@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Engine, Render, Runner, Bodies, World, MouseConstraint, Mouse, Events } from 'matter-js';
-import { useVoteCount } from '../../../votecount';
+import { handleVote, getVoteCount } from '../../../votecount';
 import './MatterCanvas.css';
 
 const MatterCanvas = ({ roomNumber }) => {
@@ -139,7 +139,9 @@ const MatterCanvas = ({ roomNumber }) => {
 
         var user = findUserInformation(); // 드래그 한 위치의 스트리밍 화면을 확인하고 유저 정보 찾아오기
         if(user){
-          useVoteCount(roomNumber, user, 1); // 투표 처리
+          // 투표 처리
+          const { maxVoteCount, usedVoteCount} = getVoteCount( roomNumber, username );
+          handleVote(roomNumber, username, user, 1, maxVoteCount - usedVoteCount); // 1은 사용된 투표권 수
         }
       }      
     });
@@ -212,6 +214,7 @@ const MatterCanvas = ({ roomNumber }) => {
 
     // 계란을 한 번에 n개 제거하는 함수
     const removeEggs = (n) => {
+      console.log(n + ' egg removed');
       const eggsToRemove = eggs.slice(0, n); // 배열에서 첫 n개의 계란을 선택
       eggsToRemove.forEach(egg => {
         World.remove(world, egg);  // Matter.js에서 해당 계란 제거

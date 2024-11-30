@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { getVoteCount, useVoteCount } from "../../../votecount.js"; // voteCount.js에서 가져오기
+import { handleVote, getVoteCount } from "../../../votecount.js"; // handleVote 함수 가져오기
 import "./VoteModal.css";
 
 const getUsernameFromToken = (token) => {
@@ -26,9 +25,8 @@ const VoteModal = ({ toggleModal, roomNumber }) => {
   const { maxVoteCount, usedVoteCount } = getVoteCount(roomNumber, userId);
 
   useEffect(() => {
-    // 로컬스토리지에서 가져온 값을 기반으로 remainingVoteCount를 계산하여 상태 업데이트
-    setRemainingVoteCount(maxVoteCount - usedVoteCount);
-  }, [maxVoteCount, usedVoteCount]); // maxVoteCount나 usedVoteCount가 변경될 때마다 업데이트
+    setRemainingVoteCount(maxVoteCount - usedVoteCount); // 남은 투표권 계산
+  }, [maxVoteCount, usedVoteCount]);
 
   useEffect(() => {
     const fetchParticipants = async () => {
@@ -49,38 +47,18 @@ const VoteModal = ({ toggleModal, roomNumber }) => {
   }, [roomNumber]);
 
   // 투표 처리
-  const handleVote = async () => {
-    if (!selectedParticipant) {
-      alert("투표할 참가자를 선택해주세요.");
-      return;
-    }
+  const handleVoteClick = async () => {
+    const updatedRemainingVoteCount = await handleVote(
+      roomNumber,
+      userId,
+      selectedParticipant,
+      currentVote,
+      remainingVoteCount,
+      toggleModal
+    );
 
-    if (currentVote <= 0 || currentVote > remainingVoteCount) {
-      alert("남은 투표권을 초과할 수 없습니다.");
-      return;
-    }
-
-    // 투표권 사용
-    const voteSuccess = useVoteCount(roomNumber, userId, currentVote);
-
-    if (voteSuccess) {
-      try {
-        await axios.post("/api/room/vote", {
-          roomNumber,
-          participant: selectedParticipant,
-          votes: parseInt(currentVote, 10), // parseInt로 정수로 변환
-        });
-
-        alert(`${selectedParticipant}님에게 ${currentVote} 투표 완료!`);
-        toggleModal(); // 모달 닫기
-
-        // 투표 후 투표권을 새로 가져오기
-        const updatedVoteCount = getVoteCount(roomNumber, userId);
-        setRemainingVoteCount(updatedVoteCount.maxVoteCount - updatedVoteCount.usedVoteCount); // 업데이트된 투표권 상태 반영
-      } catch (error) {
-        console.error("투표 실패:", error.message);
-        alert("투표 중 오류가 발생했습니다.");
-      }
+    if (updatedRemainingVoteCount !== undefined) {
+      setRemainingVoteCount(updatedRemainingVoteCount); // 남은 투표권 갱신
     }
   };
 
@@ -122,12 +100,12 @@ const VoteModal = ({ toggleModal, roomNumber }) => {
           min="0"
           max={remainingVoteCount}
           value={currentVote}
-          onChange={(e) => setCurrentVote(Number(e.target.value))} // 숫자로 변환
+          onChange={(e) => setCurrentVote(Number(e.target.value))}
         />
         <p>{currentVote} 투표권 사용</p>
 
         {/* 투표 버튼 */}
-        <button onClick={handleVote} className="vote-button">
+        <button onClick={handleVoteClick} className="vote-button">
           투표하기
         </button>
       </div>
