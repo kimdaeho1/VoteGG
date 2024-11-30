@@ -73,7 +73,7 @@ const useVoteCount = (roomNumber, userId, voteCountToUse) => {
 // 투표 처리 함수
 const handleVote = async (roomNumber, userId, selectedParticipant, currentVote, remainingVoteCount) => {
   // 투표권 사용
-  const voteSuccess = useVoteCount(roomNumber, userId, currentVote);
+  const voteSuccess = useVoteCount(roomNumber, userId, Math.abs(currentVote));
 
   if (voteSuccess) {
     try {
