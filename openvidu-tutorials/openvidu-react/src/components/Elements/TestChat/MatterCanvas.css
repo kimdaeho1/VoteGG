@@ -23,19 +23,31 @@
 
 /* 흔들림 애니메이션 */
 @keyframes shake {
-    0%, 100% {
-      transform: translateX(0);
-    }
-    25% {
-      transform: translateX(-10px);
-    }
-    50% {
-      transform: translateX(10px);
-    }
-    75% {
-      transform: translateX(-10px);
-    }
+  0%, 100% {
+    transform: translate(0, 0);
   }
+  12.5% {
+    transform: translate(-10px, -10px);
+  }
+  25% {
+    transform: translate(10px, -10px);
+  }
+  37.5% {
+    transform: translate(-10px, 10px);
+  }
+  50% {
+    transform: translate(10px, 10px);
+  }
+  62.5% {
+    transform: translate(-10px, -10px);
+  }
+  75% {
+    transform: translate(10px, -10px);
+  }
+  87.5% {
+    transform: translate(-10px, 10px);
+  }
+}
   
   /* 애니메이션 적용 클래스 */
   .shake {
@@ -48,7 +60,7 @@
       transform: scale(1);
     }
     50% {
-      transform: scale(1.1);
+      transform: scale(1.2);
     }
     100% {
       transform: scale(1);

@@ -35,7 +35,7 @@ const MatterCanvas = ({ roomNumber }) => {
     const positionX = window.innerWidth / 1.35; // 전체 X 좌표 위치
     const positionY = window.innerHeight / 12;
     // 바닥 생성
-    const ground = Bodies.rectangle(positionX + 400, positionY + 710, 810, 60, { 
+    const ground = Bodies.rectangle(positionX + 400, positionY + 710, 810, 80, { 
       isStatic: true,
       render: {
         fillStyle: 'rgba(0, 0, 0, 0.1)', // 투명한 검정색
@@ -106,7 +106,7 @@ const MatterCanvas = ({ roomNumber }) => {
             }
           });
         }
-      }      
+      }
     });
   
     document.addEventListener("mouseup", () => {
@@ -119,20 +119,27 @@ const MatterCanvas = ({ roomNumber }) => {
 
         const streamComponent = event.target.closest('.streamcomponent');
         if (streamComponent){
-          streamComponent.classList.add('shake');
-          // streamComponent.classList.add('grow');
+          // streamComponent.classList.add('shake');
+          streamComponent.classList.add('grow');
           console.log("animation!");
 
           // 일정 시간 후 애니메이션 클래스 제거
           setTimeout(() => {
-            streamComponent.classList.remove('shake');
-            // streamComponent.classList.remove('grow');
+            // streamComponent.classList.remove('shake');
+            streamComponent.classList.remove('grow');
           }, 500);
+
+           /* 아웃라인 초기화 */
+          streamComponent.classList.remove('highlighted');
+          const voteOverlay = streamComponent.querySelector('.vote-overlay');
+          if (voteOverlay) {
+              streamComponent.removeChild(voteOverlay); // voteOverlay 제거
+          }
         }        
 
         var user = findUserInformation(); // 드래그 한 위치의 스트리밍 화면을 확인하고 유저 정보 찾아오기
         if(user){
-          useVoteCount(roomNumber, user, 1); // 투표 처리          
+          useVoteCount(roomNumber, user, 1); // 투표 처리
         }
       }      
     });
