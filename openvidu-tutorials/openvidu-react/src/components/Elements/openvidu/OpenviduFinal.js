@@ -34,17 +34,17 @@ class OpenviduFinal extends Component {
 
     componentDidMount() {
         window.addEventListener("beforeunload", this.leaveSession);
-        
+
         // Timer에서 phaseChange 이벤트 처리
         window.handlePhaseChange = (newPhase, newTurn) => {
             this.setState(
-            {
-                currentPhase: newPhase,
-                currentTurn: newTurn,
-            },
-            () => {
-                this.updateAudioStatus();
-            }
+                {
+                    currentPhase: newPhase,
+                    currentTurn: newTurn,
+                },
+                () => {
+                    this.updateAudioStatus();
+                }
             );
         };
 
@@ -214,7 +214,7 @@ class OpenviduFinal extends Component {
                     videoSource: undefined,
                     publishAudio: true,
                     publishVideo: true,
-                    resolution: '640x480',
+                    resolution: '640x640',
                     frameRate: 30,
                     mirror: false,
                     audioProcessing: {
@@ -334,12 +334,12 @@ class OpenviduFinal extends Component {
             session.disconnect();
             console.log('Disconnected from session');
         }
-    
+
         // OpenVidu 객체 해제
         if (this.OV) {
             this.OV = null;
         }
-    
+
         // 상태 초기화
         this.setState({
             session: undefined,
@@ -422,9 +422,14 @@ class OpenviduFinal extends Component {
             videoSource: undefined,
             publishAudio: true,
             publishVideo: true,
-            resolution: "640x480",
+            resolution: '640x480',
             frameRate: 30,
             mirror: false,
+            audioProcessing: {
+                echoCancellation: true,
+                noiseSuppression: true,
+                autoGainControl: true,
+            }
         }).then((pub) => {
             cameraPublisher = pub;
             session.publish(cameraPublisher);
@@ -552,6 +557,15 @@ class OpenviduFinal extends Component {
         const currentLeftUser = leftStreamManagers[currentPhase - 1];
         const currentRightUser = rightStreamManagers[currentPhase - 1];
 
+        // 현재 발언자 connectionId 계산
+        const currentSpeakerConnectionId = currentTurn === 'left'
+            ? currentLeftUser?.connectionId
+            : currentRightUser?.connectionId;
+
+        // 현재 사용자가 발언자인지 확인
+        const isCurrentUserSpeaker = localConnectionId === currentSpeakerConnectionId;
+
+
         return (
             <div className="openvidu-final">
                 <div className="video-container">
@@ -613,9 +627,24 @@ class OpenviduFinal extends Component {
                             />
                         </button>
                         {/* 단계 변경 버튼 */}
-                        <div className="phase-controls">
-                            <button onClick={this.handleTurnChange}>다음 차례</button>
-                        </div>
+                        {isCurrentUserSpeaker ? (
+                            <div className="phase-controls">
+                                <img
+                                    src="/skip.png" // 발언자일 때 보일 이미지 경로
+                                    alt="다음 차례"
+                                    onClick={this.handleTurnChange} // 클릭 시 handleTurnChange 호출
+                                    className="phase-controls__button phase-controls__button--active" // 스타일 추가
+                                />
+                            </div>
+                        ) : (
+                            <div className="phase-controls">
+                                <img
+                                    src="/skip.png" // 발언자가 아닐 때 보일 이미지 경로
+                                    alt="기다리는 중."
+                                    className="phase-controls__button phase-controls__button--inactive" // 스타일 추가
+                                />
+                            </div>
+                        )}
                     </div>
                 )}
             </div>
