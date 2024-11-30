@@ -20,13 +20,15 @@ function timerSocketHandler(io) {
       if (!rooms[roomId]) {
         // 타이머 초기 설정
         rooms[roomId] = {
-          durations: [31, 31, 31], // 타이머 단계들의 지속 시간 (초)
+          durations: [4, 3], // 타이머 단계들의 지속 시간 (초)
           cycleCount: 100, // 총 사이클 수
           currentCycle: 0, // 현재 사이클
           currentIndex: 0, // 현재 단계 인덱스
-          timeLeft: 30, // 초기 남은 시간
+          timeLeft: 3, // 초기 남은 시간
           isRunning: false,
           timer: null, // 타이머 객체
+          currentPhase: 1, // 초기 phase
+          currentTurn: 'left', // 초기 turn
         };
       }
 
@@ -37,6 +39,8 @@ function timerSocketHandler(io) {
         isRunning: room.isRunning,
         currentCycle: room.currentCycle,
         totalCycles: room.cycleCount,
+        currentPhase: room.currentPhase,
+        currentTurn: room.currentTurn,
       });
     });
 
@@ -105,6 +109,8 @@ function timerSocketHandler(io) {
         isRunning: room.isRunning,
         currentCycle: room.currentCycle,
         totalCycles: room.cycleCount,
+        currentPhase: room.currentPhase,
+        currentTurn: room.currentTurn,
       });
 
       if (room.timeLeft <= 0) {
@@ -129,6 +135,28 @@ function timerSocketHandler(io) {
     if (room.currentIndex >= room.durations.length) {
       room.currentIndex = 0;
       room.currentCycle++;
+
+      // 새로운 phase와 turn 설정
+      let newPhase = room.currentPhase;
+      let newTurn = room.currentTurn;
+
+      if (room.currentTurn === 'left') {
+        newTurn = 'right';
+      } else {
+        // 양측 참가자들의 발언이 끝나면 다음 phase로 이동
+        newTurn = 'left';
+        newPhase = room.currentPhase === 1 ? 2 : 1; // Phase를 1과 2 사이에서 변경
+      }
+
+      // 방의 currentPhase와 currentTurn 업데이트
+      room.currentPhase = newPhase;
+      room.currentTurn = newTurn;
+
+      // 클라이언트에 phaseChange 이벤트 emit
+      timerNamespace.to(roomId).emit('phaseChange', {
+        newPhase,
+        newTurn,
+      });
 
       // 모든 사이클이 끝났는지 확인
       if (room.currentCycle >= room.cycleCount) {

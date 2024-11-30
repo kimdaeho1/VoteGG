@@ -34,19 +34,18 @@ class OpenviduFinal extends Component {
 
     componentDidMount() {
         window.addEventListener("beforeunload", this.leaveSession);
+        
         // Timer에서 phaseChange 이벤트 처리
         window.handlePhaseChange = (newPhase, newTurn) => {
-            console.log("Phase change triggered:", newPhase, newTurn);
-
-            this.setState({
+            this.setState(
+            {
                 currentPhase: newPhase,
                 currentTurn: newTurn,
-            }, () => {
+            },
+            () => {
                 this.updateAudioStatus();
-            });
-
-            // 타이머 초기화 트리거
-            triggerResetTimer();
+            }
+            );
         };
 
         this.joinSession();
@@ -335,6 +334,13 @@ class OpenviduFinal extends Component {
             session.disconnect();
             console.log('Disconnected from session');
         }
+    
+        // OpenVidu 객체 해제
+        if (this.OV) {
+            this.OV = null;
+        }
+    
+        // 상태 초기화
         this.setState({
             session: undefined,
             publisher: undefined,

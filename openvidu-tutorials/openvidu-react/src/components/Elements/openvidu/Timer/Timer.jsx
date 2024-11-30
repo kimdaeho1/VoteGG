@@ -55,13 +55,26 @@ const Timer = () => {
       setTimerFinished(true);
     };
 
+    // phaseChange 이벤트 받기
+    const handlePhaseChange = (data) => {
+      const { newPhase, newTurn } = data;
+      console.log("Phase change detected:", data);
+
+      // OpenviduFinal.js의 handlePhaseChange 함수 호출
+      if (window.handlePhaseChange) {
+        window.handlePhaseChange(newPhase, newTurn);
+      }
+    };
+
     socket.on('timerUpdate', handleTimerUpdate);
     socket.on('timerFinished', handleTimerFinished);
+    socket.on('phaseChange', handlePhaseChange); // 추가된 부분
 
     // 클린업
     return () => {
       socket.off('timerUpdate', handleTimerUpdate);
       socket.off('timerFinished', handleTimerFinished);
+      socket.off('phaseChange', handlePhaseChange); // 추가된 부분
     };
   }, [socket]);
 
