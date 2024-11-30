@@ -640,7 +640,7 @@ class OpenviduFinal extends Component {
                             <div className="phase-controls">
                                 <img
                                     src="/skip.png" // 발언자가 아닐 때 보일 이미지 경로
-                                    alt="기다리는 중"
+                                    alt="기다리는 중."
                                     className="phase-controls__button phase-controls__button--inactive" // 스타일 추가
                                 />
                             </div>
