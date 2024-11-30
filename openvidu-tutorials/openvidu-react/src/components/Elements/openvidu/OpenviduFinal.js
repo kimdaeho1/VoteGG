@@ -205,13 +205,24 @@ class OpenviduFinal extends Component {
         }
 
         let publisher = null;
-
+        
         if (!this.props.isObserver) {
             try {
-                // 관전자가 아니면 발행자 생성
+                 // 관전자가 아니면 발행자 생성
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                const videoDevices = devices.filter(device => device.kind === 'videoinput');
+                console.log('Available video devices:', videoDevices);
+
+                // 카메라가 하나도 없는 경우 처리
+                if (videoDevices.length === 0) {
+                    console.error('No video input devices found');
+                    return;
+                }
+
+                const deviceId = videoDevices[0]?.deviceId; // 첫 번째 카메라 사용
                 publisher = await OV.initPublisherAsync(undefined, {
                     audioSource: undefined,
-                    videoSource: undefined,
+                    videoSource: deviceId,
                     publishAudio: true,
                     publishVideo: true,
                     resolution: '640x640',
