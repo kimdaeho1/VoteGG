@@ -11,6 +11,10 @@ const roomSchema = new mongoose.Schema({
     required: true,
     unique: true },
 
+    memberCount: {
+      type: Number,
+      default: 0 },
+
   createdby: {
     type: String,
     required: true },
