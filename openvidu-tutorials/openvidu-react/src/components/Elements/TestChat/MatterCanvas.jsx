@@ -36,25 +36,67 @@ const MatterCanvas = ({ roomNumber, socket }) => {
   
     const positionX = window.innerWidth / 1.35; // 전체 X 좌표 위치
     const positionY = window.innerHeight / 12;
+
+    const chatWindow = document.querySelector('.chat-window');
+    const chatRect = chatWindow.getBoundingClientRect();
     // 바닥 생성
-    const ground = Bodies.rectangle(positionX + 400, positionY + 710, 810, 80, { 
-      isStatic: true,
-      render: {
-        fillStyle: 'rgba(0, 0, 0, 0.1)', // 투명한 검정색
-      },
-    });
+    const ground = Bodies.rectangle(
+      chatRect.left + chatRect.width / 2,
+      chatRect.bottom - 60, // 바닥을 채팅창 하단에 위치하도록 조정
+      chatRect.width,
+      80,
+      {
+        isStatic: true,
+        render: {
+          fillStyle: 'rgba(0, 0, 0, 0)', // CSS의 테두리 색상과 유사한 색상
+        },
+      }
+    );
     World.add(world, ground);
   
     // 양옆 벽 생성
-    const leftWall = Bodies.rectangle(positionX + 0, positionY + 400, 30, 700, { isStatic: true, render: { fillStyle: 'rgba(0,0,0,0.1)' } });
-    const rightWall = Bodies.rectangle(positionX + 460, positionY + 400, 30, 700, { isStatic: true, render: { fillStyle: 'rgba(0,0,0,0.1)' } });
-    const roopWall = Bodies.rectangle(positionX + 235, positionY + 0, 500, 100, { isStatic: true, render: { fillStyle: 'rgba(0,0,0,0.1)' } });
+    const leftWall = Bodies.rectangle(
+      chatRect.left, // 왼쪽 벽을 채팅창의 왼쪽에 위치하도록 조정
+      chatRect.top + chatRect.height / 2,
+      30,
+      chatRect.height,
+      {
+        isStatic: true,
+        render: {
+          fillStyle: 'rgba(0, 0, 0, 0)',
+        },
+      }
+    );
+    const rightWall = Bodies.rectangle(
+      chatRect.right, // 오른쪽 벽을 채팅창의 오른쪽에 위치하도록 조정
+      chatRect.top + chatRect.height / 2,
+      30,
+      chatRect.height,
+      {
+        isStatic: true,
+        render: {
+          fillStyle: 'rgba(0, 0, 0, 0)',
+        },
+      }
+    );
+    const roopWall = Bodies.rectangle(
+      chatRect.left + chatRect.width / 2,
+      chatRect.top + 30, // 천장을 채팅창의 위쪽에 위치하도록 조정
+      chatRect.width,
+      70,
+      {
+        isStatic: true,
+        render: {
+          fillStyle: 'rgba(0, 0, 0, 0)',
+        },
+      }
+    );
     
     var thick = 100
-    const removeBoxT = Bodies.rectangle(window.innerWidth / 2 , 0, window.innerWidth, thick, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.5)', } });
-    const removeBoxB = Bodies.rectangle(window.innerWidth / 2, window.innerHeight + (thick / 2), window.innerWidth, thick, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.5)', } });
-    const removeBoxL = Bodies.rectangle(0 - 100, window.innerHeight / 2, thick, window.innerHeight, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.5)', } });
-    const removeBoxR = Bodies.rectangle(window.innerWidth + (thick / 2), window.innerHeight / 2, thick, window.innerHeight, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.5)', } });
+    const removeBoxT = Bodies.rectangle(window.innerWidth / 2 , 0, window.innerWidth, thick, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.1)', } });
+    const removeBoxB = Bodies.rectangle(window.innerWidth / 2, window.innerHeight + (thick / 2), window.innerWidth, thick, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.1)', } });
+    const removeBoxL = Bodies.rectangle(0 - 100, window.innerHeight / 2, thick, window.innerHeight, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.1)', } });
+    const removeBoxR = Bodies.rectangle(window.innerWidth + (thick / 2), window.innerHeight / 2, thick, window.innerHeight, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.1)', } });
   
     World.add(world, [leftWall, rightWall, roopWall]); // 채팅창
     World.add(world, [removeBoxT, removeBoxB, removeBoxL, removeBoxR]) // 화면 밖
@@ -83,7 +125,6 @@ const MatterCanvas = ({ roomNumber, socket }) => {
     });
 
     document.addEventListener("mouseover", () => {
-      mouse.button = 0; // 마우스 버튼 눌림 상태
       /* 계란 드래그 상태에서 스트리밍 화면에 아웃라인 생성 */
       if (draggedEgg.current){
         const streamComponent = event.target.closest('.streamcomponent');
@@ -223,8 +264,12 @@ const MatterCanvas = ({ roomNumber, socket }) => {
   
     // 계란을 생성하는 함수
     const addEgg = () => {
-      const randomX = positionX + (Math.random() * 400);
-      const randomY = positionY + 100;
+      // 채팅창 위치와 크기 정보를 이용해 계란 생성 위치를 설정
+      const chatWindow = document.querySelector('.chat-window');
+      const chatRect = chatWindow.getBoundingClientRect();
+
+      const randomX = chatRect.left + 10 + Math.random() * (chatRect.width - 20);
+      const randomY = chatRect.top + 100;
       const img = new Image();
       img.src = "/resources/images/egg.png"; // 올바른 이미지 URL
   
@@ -371,22 +416,6 @@ const MatterCanvas = ({ roomNumber, socket }) => {
               World.add(engine.world, newEgg);
               console.log("egg broken!");
 
-              // // 계란이 맞은 후 콜백 실행
-              // if (callback) {
-              //   console.log('egg hit!');
-              //   callback(); // 이펙트 실행
-              //   // 목표 위치에서 streamcomponent 요소 찾기
-              //   const streamComponent = document.elementFromPoint(targetX, targetY).closest('.streamcomponent');
-              //   if (streamComponent) {
-              //     streamComponent.classList.add('shake');
-
-              //     // 일정 시간 후 애니메이션 클래스 제거
-              //     setTimeout(() => {
-              //       streamComponent.classList.remove('shake');
-              //     }, 500);
-              //   }
-              // }
-
               // 3초 후 계란 제거
               setTimeout(() => {
                 console.log('egg hit!');
@@ -500,27 +529,6 @@ const MatterCanvas = ({ roomNumber, socket }) => {
       console.error("Socket not available");
     }
   }, [roomNumber]); // eggCount를 의존성 배열에서 제외
-
-  // useEffect(() => {
-  //   if (!socket) {
-  //     console.error("Socket not available");
-  //     return;
-  //   }
-
-  //   const handleEggThrow = (data) => {
-  //     console.log('Egg throw received:', data);
-  //     const { targetX, targetY } = data;
-  //     throwEgg(targetX, targetY, () => {
-  //       console.log("Throw animation complete");
-  //     });
-  //   };
-
-  //   socket.on('egg_throw', handleEggThrow);
-
-  //   return () => {
-  //     socket.off('egg_throw', handleEggThrow);  // 컴포넌트 언마운트 시 리스너 해제
-  //   };
-  // }, [roomNumber]);
 
   return (
     <div
