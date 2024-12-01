@@ -113,7 +113,7 @@ const TestChat = () => {
           <EmojiButton onEmojiSelect={(emoji) => setMessage((prev) => prev + emoji)} />
           {isObserver && (
             <button className="modal-button" onClick={toggleModal}>
-              <img src="/ticket.jpg" alt="Modal" className="modal-icon" />
+              <img src="/resources/images/egg.png" alt="Modal" className="modal-icon" style={{ width: "20px", height: "auto" }}/>
             </button>
           )}
         </div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios"; // axios 추가
 import { handleVote, getVoteCount } from "../../../votecount.js"; // handleVote 함수 가져오기
 import "./VoteModal.css";
 
@@ -15,18 +16,17 @@ const getUsernameFromToken = (token) => {
 const VoteModal = ({ toggleModal, roomNumber }) => {
   const token = localStorage.getItem("token");
   const userId = token ? getUsernameFromToken(token) : "Unknown User";
-  
+
   const [currentVote, setCurrentVote] = useState(0); // 현재 투표권
   const [participants, setParticipants] = useState([]); // 참가자 목록
   const [selectedParticipant, setSelectedParticipant] = useState(""); // 선택된 참가자
   const [remainingVoteCount, setRemainingVoteCount] = useState(0); // 남은 투표권 상태
 
   // 로컬스토리지에서 최대 투표권과 사용된 투표권을 가져옴
-  const { maxVoteCount, usedVoteCount } = getVoteCount(roomNumber, userId);
-
   useEffect(() => {
+    const { maxVoteCount, usedVoteCount } = getVoteCount(roomNumber, userId);
     setRemainingVoteCount(maxVoteCount - usedVoteCount); // 남은 투표권 계산
-  }, [maxVoteCount, usedVoteCount]);
+  }, [roomNumber, userId]);
 
   useEffect(() => {
     const fetchParticipants = async () => {
@@ -35,7 +35,12 @@ const VoteModal = ({ toggleModal, roomNumber }) => {
         const response = await axios.get(`/api/room/${roomNumber}/participants`);
         const participantsArray = Array.isArray(response.data) ? response.data : [];
         console.log("Participants received from server:", participantsArray);
-        setParticipants(participantsArray);
+
+        // 본인을 제외한 참가자 목록으로 설정
+        const filteredParticipants = participantsArray.filter(
+          ([participantId]) => participantId !== userId
+        );
+        setParticipants(filteredParticipants);
       } catch (error) {
         console.error("Failed to fetch participants:", error.message);
       }
@@ -44,21 +49,32 @@ const VoteModal = ({ toggleModal, roomNumber }) => {
     if (roomNumber) {
       fetchParticipants();
     }
-  }, [roomNumber]);
+  }, [roomNumber, userId]);
 
   // 투표 처리
   const handleVoteClick = async () => {
+    if (!selectedParticipant) {
+      alert("투표할 참가자를 선택해주세요.");
+      return;
+    }
+
+    if (currentVote <= 0) {
+      alert("1 이상의 투표권을 사용해야 합니다.");
+      return;
+    }
+
     const updatedRemainingVoteCount = await handleVote(
       roomNumber,
       userId,
       selectedParticipant,
       currentVote,
-      remainingVoteCount,
-      toggleModal
+      remainingVoteCount
     );
 
     if (updatedRemainingVoteCount !== undefined) {
       setRemainingVoteCount(updatedRemainingVoteCount); // 남은 투표권 갱신
+      setCurrentVote(0); // 투표 후 슬라이더 초기화
+      toggleModal(); // 투표 완료 후 모달 닫기
     }
   };
 
