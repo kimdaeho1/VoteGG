@@ -32,7 +32,7 @@
 }
 
 /* 버튼 컨테이너 */
-.button-container {
+.button-container-2 {
   display: flex;
   justify-content: center; /* 버튼들을 중앙 정렬 */
   gap: 10px; /* 버튼 간 간격 */
