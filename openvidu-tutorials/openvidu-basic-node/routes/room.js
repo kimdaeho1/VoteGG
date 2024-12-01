@@ -231,7 +231,7 @@ router.get("/rooms/:roomId", async (req, res) => {
 
   try {
     const room = await Room.findOne({ roomNumber: roomId }).select(
-      "roomNumber roomname createdby" // memberCount 제외
+      "roomNumber roomname createdby tags" // tags 포함
     );
 
     if (!room) {
@@ -239,7 +239,7 @@ router.get("/rooms/:roomId", async (req, res) => {
     }
 
     // usersNumber 객체에서 현재 방의 사용자 수 가져오기
-    const memberCount = usersNumber[roomId]+1 || 0; // 없을 경우 기본값 0
+    const memberCount = (usersNumber[roomId]+1 || 0); // 없을 경우 기본값 0
 
     // room 객체에 memberCount 추가
     const roomWithMemberCount = {
@@ -247,7 +247,7 @@ router.get("/rooms/:roomId", async (req, res) => {
       memberCount,
     };
 
-    res.status(200).json(roomWithMemberCount);
+    res.status(200).json(roomWithMemberCount); // tags가 포함된 응답 반환
   } catch (error) {
     console.error("방 정보 가져오기 실패:", error.message);
     res.status(500).json({ error: "방 정보를 가져오는 중 오류가 발생했습니다." });
@@ -256,4 +256,6 @@ router.get("/rooms/:roomId", async (req, res) => {
 
 
 
+
 module.exports = router;
+

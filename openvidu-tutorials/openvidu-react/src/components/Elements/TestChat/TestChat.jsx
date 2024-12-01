@@ -123,7 +123,7 @@ const TestChat = () => {
       {isModalOpen && <VoteModal toggleModal={toggleModal} voteCount={voteCount} roomNumber={roomNumber} />}
       
       {/* Matter.js 캔버스 영역 */}
-      <MatterCanvas roomNumber={roomNumber} />
+      {socket && <MatterCanvas roomNumber={roomNumber} socket={socket} />}
     </div>
   );
 };
