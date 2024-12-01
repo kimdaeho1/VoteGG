@@ -3,6 +3,7 @@
   margin: 0 auto;
   width: 95%;
   max-width: 1700px;
+  min-width: 1700px;
 }
 
 .room-list-header {
