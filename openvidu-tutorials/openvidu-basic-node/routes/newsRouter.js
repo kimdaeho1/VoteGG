@@ -108,7 +108,7 @@ router.get('/billboard-chart', async (req, res) => {
         const cleanedTitle = title.replace(/(Songwriter\(s\):|Producer\(s\):|Imprint\/Promotion Label:)/g, '').trim();
 
         if (cleanedTitle) {
-          chartList.push({ title: cleanedTitle, link: "" }); // 링크는 빈 문자열로 설정
+          chartList.push({ title: cleanedTitle, link: "https://www.billboard.com/charts/hot-100/" }); // 링크는 빈 문자열로 설정
         }
       }
     });

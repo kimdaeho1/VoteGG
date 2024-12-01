@@ -1,5 +1,4 @@
 // Timer.jsx
-
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useSocket from "../../../useSocket";
@@ -19,6 +18,7 @@ const Timer = () => {
   const [currentCycle, setCurrentCycle] = useState(0);
   const [totalCycles, setTotalCycles] = useState(4);
   const [timerFinished, setTimerFinished] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(null); // 추가된 상태
 
   const [resetTimer, setResetTimer] = useRecoilState(resetTimerState);
 
@@ -40,12 +40,13 @@ const Timer = () => {
 
     // 타이머 업데이트 받기
     const handleTimerUpdate = (data) => {
-      const { timeLeft, isRunning, currentCycle, totalCycles } = data;
+      const { timeLeft, isRunning, currentCycle, totalCycles, currentIndex } = data;
       console.log("타이머 업데이트:", data);
       setTimeLeft(timeLeft);
       setIsRunning(isRunning);
       setCurrentCycle(currentCycle);
       setTotalCycles(totalCycles);
+      setCurrentIndex(currentIndex); // 업데이트
     };
 
     // 타이머 종료 이벤트 받기
@@ -107,7 +108,12 @@ const Timer = () => {
       .toString()
       .padStart(2, "0")}`.trim();
   };
-  
+
+  // currentIndex 값을 변환하는 함수
+  const getIndexCharacter = (index) => {
+    const indexMapping = ["ㄱ", "ㄴ", "ㄷ", "ㄹ"];
+    return indexMapping[index] || "알 수 없음"; // 범위를 벗어난 경우 처리
+  };
 
   return (
     <div>
@@ -118,17 +124,21 @@ const Timer = () => {
           <span>{formatTime(timeLeft).split(":")[1]}</span> {/* 초 */}
         </div>
       </div>
-      <p className="cycle-info">
+      {/* <p className="cycle-info">
         현재 사이클: {currentCycle} / {totalCycles}
-        </p>
+      </p> */}
+      <div>
+        현재 인덱스: {getIndexCharacter(currentIndex)} {/* 변환된 값 표시 */}
+      </div>
+
       {timerFinished && <p>타이머가 완료되었습니다.</p>}
-      <div className = "button-container">
-      <button onClick={handleStart} disabled={isRunning || timeLeft <= 0 || currentCycle >= totalCycles}>
-        타이머 시작
-      </button>
-      <button onClick={handleReset}>
-        타이머 초기화
-      </button>
+      <div className="button-container">
+        <button onClick={handleStart} disabled={isRunning || timeLeft <= 0 || currentCycle >= totalCycles}>
+          타이머 시작
+        </button>
+        {/* <button onClick={handleReset}>
+          타이머 초기화
+        </button> */}
       </div>
 
       {/* 타이머가 끝나면 모달을 띄움 */}

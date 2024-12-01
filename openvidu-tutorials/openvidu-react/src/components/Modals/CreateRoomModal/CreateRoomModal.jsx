@@ -75,7 +75,7 @@ const CreateRoomModal = ({ onClose, onCreateRoom }) => {
           className="modal-input"
           placeholder="방 제목을 입력하세요"
         />
-        {/* 초대할 사람 입력 */}
+        {/* 초대할 사람 입력
         {invitees.map((invitee, index) => (
           <div key={index}>
             <label className="input-label">{`초대할 사람 ${index + 1}`}</label>
@@ -87,7 +87,7 @@ const CreateRoomModal = ({ onClose, onCreateRoom }) => {
               placeholder={`초대할 사람 ${index + 1} 닉네임`}
             />
           </div>
-        ))}
+        ))} */}
         {/* 썸네일 업로드 */}
         <label className = "input-label">썸네일 이미지</label>
         <input
