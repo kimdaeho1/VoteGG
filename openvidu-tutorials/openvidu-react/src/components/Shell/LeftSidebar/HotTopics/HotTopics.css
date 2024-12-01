@@ -8,14 +8,150 @@
 .topic-content {
   position: absolute;
   top: 0;
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 85%;
   opacity: 0;
-  transform: translateX(-100%);
+  transform: translateX(-100%);  /* 왼쪽에서 시작 */
   transition: all 0.5s ease-in-out;
+  border-radius: 15px; /* 모서리를 둥글게 */
+  padding: 20px; /* 내부 여백 추가 */
 }
 
 .topic-content.active {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0);  /* 제자리로 이동 */
+}
+
+.d-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.ms-3 {
+  margin-left: 1rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.topic-item {
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.topic-item:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.topic-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topic-rank {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.topic-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* 두 줄까지 보여주기 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 17px;
+  font-weight: normal;
+  color: inherit;
+  width: 250px;  /* 제목 길이 제한 */
+  text-decoration: none; /* 밑줄 제거 */
+  padding: 2px; /* 글자에 칸 추가 */
+}
+
+.topic-title:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 그라데이션 배경 색상 */
+.news-topic {
+  background: linear-gradient(135deg, #e4e5e6 30%, #cfd9df 70%);
+  color: #2a2a2a; /* 중간 톤의 회색으로 여전히 모던한 느낌 */
+}
+
+.game-topic {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: #2d3e50; /* 세련된 다크 블루로 가독성 강화 */
+}
+
+.music-topic {
+  background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+  color: #1c3d57; /* 세련된 네이비 블루 */
+}
+
+
+.movie-topic {
+  background: linear-gradient(135deg, #ffe29f 0%, #ffa99f 100%);
+  color: #5c2a2a; /* 클래식한 느낌의 브라운 */
+}
+
+
+/* ///////////////////// */
+/* 뉴스 제목 색상 */
+.news-topic-title {
+  color: #000000d3; /* 강렬한 빨간색으로 눈에 잘 띄도록 변경 */
+  font-weight: bold; /* 글자 굵기를 추가하여 강조 */
+}
+
+/* 게임 제목 색상 */
+.game-topic-title {
+  color: #4b83c0cc; /* 선명한 블루로 시각적 강조 */
+  font-weight: bold; /* 글자 굵기를 추가하여 눈에 띄게 */
+}
+
+/* 음악 제목 색상 */
+.music-topic-title {
+  color: #008080; /* 밝은 청록색으로 생동감 있게 */
+  font-weight: bold; /* 글자 굵기를 추가하여 강렬하게 */
+}
+
+/* 영화 제목 색상 */
+.movie-topic-title {
+  color: #ff8c00; /* 선명한 오렌지로 영화의 생동감을 표현 */
+  font-weight: bold; /* 글자 굵기로 강조 */
+}
+
+
+
+
+/* ///////////////////// */
+/* 제목 배경 색상 */
+.news-topic-background {
+  background: linear-gradient(135deg, #e4e5e6 30%, #cfd9df 70%);
+  color: #2a2a2a; /* 중간 톤의 회색으로 여전히 모던한 느낌 */
+  border-radius: 8px;
+}
+
+.game-topic-background {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: #2d3e50; /* 세련된 다크 블루로 가독성 강화 */
+  border-radius: 8px;
+}
+
+.music-topic-background {
+  background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+  color: #1c3d57; /* 세련된 네이비 블루 */
+  border-radius: 8px;
+}
+
+.movie-topic-background {
+  background: linear-gradient(135deg, #ffe29f 0%, #ffa99f 100%);
+  color: #5c2a2a; /* 클래식한 느낌의 브라운 */
+  border-radius: 8px;
 }
