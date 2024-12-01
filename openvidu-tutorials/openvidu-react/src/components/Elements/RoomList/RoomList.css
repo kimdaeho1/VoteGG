@@ -16,7 +16,7 @@
   font-size: 1.8em;
   color: #333;
   margin-left: 45px;
-  
+
 }
 
 .room-list {
@@ -75,7 +75,7 @@
 .room-live {
   position: absolute;
   bottom: 155px;
-  right: 280px;
+  right: 270px;
   font-size: 1em;
   font-weight: bold;
   color: red;
@@ -95,10 +95,10 @@
   margin: 5px 0;
   font-weight: bold;
   color: #333;
-  white-space: nowrap; 
-  overflow: hidden; 
-  text-overflow: ellipsis; 
-  max-width: 200px; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
 }
 
 .room-info {
@@ -238,9 +238,8 @@
 
 .room-buttons {
   display: flex;
-  gap: 10px;
+  gap: 5px;
   justify-content: right;
-  margin-top: -10px;
   /* 상단 요소 아래로 이동 */
 }
 
@@ -249,15 +248,16 @@
   color: white;
   border: none;
   border-radius: 8px;
-  padding: 10px 10px;
-  font-size: 0.9rem;
+  padding: 5px 5px;
+  font-size: 1rem;
+  line-height: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-family: 'GmarketSans', sans-serif;
 }
 
 .room-discuss-button:hover {
   background-color: #a8a8a8;
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
 }
 
 .room-spectate-button {
@@ -265,16 +265,17 @@
   color: rgb(0, 0, 0);
   border: 1px solid black;
   border-radius: 8px;
-  padding: 10px 10px;
-  font-size: 0.9rem;
+  padding: 5px 5px;
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-family: 'GmarketSans', sans-serif;
 }
 
 .room-spectate-button:hover {
   background-color: #a8a8a8;
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
 }
+
 /*============================룸 태그 css ===================================*/
 .room-tags {
   display: flex;
@@ -299,3 +300,11 @@
   padding: 5px 8px;
 }
 
+.card-bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: -15px;
+}
