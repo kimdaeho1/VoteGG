@@ -239,7 +239,7 @@ router.get("/rooms/:roomId", async (req, res) => {
     }
 
     // usersNumber 객체에서 현재 방의 사용자 수 가져오기
-    const memberCount = (usersNumber[roomId] || 0) + 1; // 없을 경우 기본값 0
+    const memberCount = (usersNumber[roomId]+1 || 0); // 없을 경우 기본값 0
 
     // room 객체에 memberCount 추가
     const roomWithMemberCount = {
