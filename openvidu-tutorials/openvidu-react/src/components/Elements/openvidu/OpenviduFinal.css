@@ -111,9 +111,9 @@
     /* 부모 컨테이너의 너비 */
     height: 100%;
     /* 부모(grid-template-rows)에서 지정된 높이 사용 */
-    background-color: #f9f9f9;
+    /* background-color: #f9f9f9; */
     /* 버튼 영역 배경색 */
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); */
     /* 상단 그림자 효과 */
     border-top: 2px solid #eeee76;
     /* 상단 구분선 */

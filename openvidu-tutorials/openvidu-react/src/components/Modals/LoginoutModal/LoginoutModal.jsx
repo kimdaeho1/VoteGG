@@ -9,14 +9,14 @@ const LoginoutModal = ({ username, handleLogout, closeModal }) => {
         <p>로그아웃 하시겠습니까?</p>
         <div className="modal-buttons">
           <button onClick={handleLogout} className="modal-logout-button">
-            로그아웃
+            확인
           </button>
           <button onClick={closeModal} className="cancel-button">
             취소
           </button>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
