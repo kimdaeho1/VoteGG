@@ -1,5 +1,5 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
 import './Room.css';
 import TestChat from '../../Elements/TestChat/TestChat.jsx';
 import RoomControl from '../../Elements/RoomControl/RoomControl.jsx';
@@ -7,15 +7,46 @@ import OpenviduFinal from '../../Elements/openvidu/OpenviduFinal.js';
 
 const Room = () => {
   const { roomNumber } = useParams();
+  const location = useLocation();
 
   // 토큰에서 사용자 이름 추출
   const token = localStorage.getItem("token");
   const userId = token ? getUsernameFromToken(token) : "Unknown User";
 
+  // 방 제목 상태 관리
+  const [roomname, setRoomname] = useState('');
+
+  useEffect(() => {
+    const pathParts = location.pathname.split('/');
+    const roomId = (pathParts[1] === 'room' || pathParts[1] === 'observer')
+      ? decodeURIComponent(pathParts[2])
+      : null;
+
+    if (roomId) {
+      fetch(`/api/room/rooms/${roomId}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('방 정보를 가져오는 데 실패했습니다.');
+          }
+          return response.json();
+        })
+        .then(data => {
+          setRoomname(data.roomname || roomId);
+        })
+        .catch(error => {
+          console.error('방 정보 가져오기 오류:', error);
+        });
+    }
+  }, [location.pathname]);
+
   return (
     <div className="room">
       <div className="left-side">
         <OpenviduFinal sessionId={roomNumber} userName={userId} />
+
+        {/* 방 제목 추가 */}
+        <h1 className="room-title">방 제목: {roomname}</h1>
+
         <RoomControl />
       </div>
       <div className="right-side">

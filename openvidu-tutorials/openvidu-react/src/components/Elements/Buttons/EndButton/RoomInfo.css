@@ -1,46 +1,79 @@
-/* RoomInfo.css */
+/* 컨테이너 정렬 */
 .room-naming {
-  text-align: center;
-  margin-top: 20px;
-  padding: 20px;
-  border: 2px solid #eeee76;
-  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
   background-color: #f9f9f9;
 }
 
-.room-info__title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
+/* 프로필 이미지 섹션 */
+.room-info__profile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* 태그 추가 css */
+.room-info__profile-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
 
-.room-info__tags {
-  margin-top: 10px;
+/* LIVE 태그 스타일 */
+.room-info__live-tag {
+  position: absolute;
+  bottom: 0; /* 프로필 이미지 아래쪽에 겹치도록 설정 */
+  left: 50%;
+  transform: translate(-50%, 50%); /* 태그가 중앙에 겹치도록 조정 */
+  background-color: #ff0000;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* 방 정보 섹션 */
+.room-info__details {
   display: flex;
-  gap: 10px; /* 태그 간격 */
-  justify-content: center; /* 가운데 정렬 */
-  flex-wrap: wrap; /* 태그가 여러 줄로 넘어갈 경우 처리 */
+  flex-direction: column;
+}
+
+.room-info__user-id {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+}
+
+.room-info__count {
+  font-size: 14px;
+  color: #555;
+  margin: 4px 0;
+}
+
+/* 태그 스타일 */
+.room-info__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .room-info__tag {
-  background-color: #f1f1f1;
+  background-color: #e0e0e0;
   color: #333;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 5px 10px;
-  font-size: 0.9em;
-  cursor: default;
-  transition: background-color 0.3s ease;
-}
-
-.room-info__tag:hover {
-  background-color: #ddd; /* 호버 시 배경색 변경 */
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 16px;
 }
 
 .room-info__tag--none {
   color: #999;
-  font-size: 0.9em;
+  font-size: 12px;
 }
-

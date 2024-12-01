@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import './RoomInfo.css';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import "./RoomInfo.css";
 
 const RoomInfo = () => {
   const { roomNumber } = useParams(); // URL에서 방 번호 가져오기
   const [roomData, setRoomData] = useState({
-    roomname: '',
+    roomname: "",
     memberCount: 0,
-    tags: [], // 태그 상태 추가
+    createdby: "", // 방 생성자 추가
+    tags: [],
   });
 
   useEffect(() => {
@@ -21,14 +22,16 @@ const RoomInfo = () => {
         setRoomData({
           roomname: data.roomname,
           memberCount: data.memberCount,
-          tags: data.tags || [], // 태그가 없으면 빈 배열 처리
+          createdby: data.createdby || "Unknown Creator", // 생성자 정보 추가
+          tags: data.tags || [],
         });
       } catch (error) {
         console.error("방 정보 가져오기 오류:", error);
         setRoomData({
-          roomname: 'Unknown Room',
+          roomname: "Unknown Room",
           memberCount: 9999,
-          tags: [], // 오류 시 기본 값
+          createdby: "Unknown Creator",
+          tags: [],
         });
       }
     };
@@ -38,23 +41,34 @@ const RoomInfo = () => {
 
   return (
     <div className="room-naming">
-      <h1 className="room-info__title">{roomData.roomname}</h1>
-      <p className="room-info__count">{roomData.memberCount}명이 시청중</p>
-      {/* 태그 추가 */}
-      <div className="room-info__tags">
-        {roomData.tags.length > 0 ? (
-          roomData.tags.map((tag, index) => (
-            <span key={index} className="room-info__tag">
-              #{tag}
-            </span>
-          ))
-        ) : (
-          <span className="room-info__tag--none">태그 없음</span>
-        )}
+      {/* 프로필 이미지와 LIVE 태그 추가 */}
+      <div className="room-info__profile">
+        <img
+          src="/default-profile.png" // 기본 프로필 이미지 경로
+          alt="프로필"
+          className="room-info__profile-img"
+        />
+        <span className="room-info__live-tag">LIVE</span>
+      </div>
+      {/* 방 정보 */}
+      <div className="room-info__details">
+        <h2 className="room-info__creator">{roomData.createdby}</h2> {/* 방 생성자 ID 표시 */}
+        <p className="room-info__count">{roomData.memberCount}명이 시청중</p>
+        {/* 태그 추가 */}
+        <div className="room-info__tags">
+          {roomData.tags.length > 0 ? (
+            roomData.tags.map((tag, index) => (
+              <span key={index} className="room-info__tag">
+                #{tag}
+              </span>
+            ))
+          ) : (
+            <span className="room-info__tag--none">태그 없음</span>
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
 export default RoomInfo;
-
