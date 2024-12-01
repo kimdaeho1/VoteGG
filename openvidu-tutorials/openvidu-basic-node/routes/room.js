@@ -55,22 +55,25 @@ const getUsernameFromToken = (token) => {
 // 방 생성 API
 router.post("/roomCreate", upload.single("thumbnail"), async (req, res) => {
   try {
+    console.log("요청 데이터(req.body):", req.body);
+    console.log("업로드된 파일(req.file):", req.file);
 
-    console.log("요청 데이터(req.body):", req.body); // 클라이언트에서 전송한 텍스트 데이터 확인
-    console.log("업로드된 파일(req.file):", req.file); // multer로 처리된 파일 정보 확인
-
-    const { roomname, createdby } = req.body;
+    const { roomname, createdby, tags = [] } = req.body;
     const roomNumber = await getNextRoomNumber(max_Room_Count);
 
-    // 썸네일 파일 처리
+    // 썸네일 기본값 처리
     const thumbnail = req.file ? `/uploads/${req.file.filename}` : "";
+
+    // 태그 데이터를 배열 형태로 변환 (Multer가 처리한 데이터는 문자열일 수 있음)
+    const parsedTags = Array.isArray(tags) ? tags : [tags];
 
     const newRoom = new Room({
       roomNumber,
       roomname,
       createdby,
       participant: { [createdby]: 0 },
-      thumbnail, //썸네일 추가
+      thumbnail,
+      tags: parsedTags, // 태그 추가
     });
 
     const savedRoom = await newRoom.save();
@@ -81,6 +84,7 @@ router.post("/roomCreate", upload.single("thumbnail"), async (req, res) => {
       roomname: savedRoom.roomname,
       createdby: savedRoom.createdby,
       thumbnail: savedRoom.thumbnail,
+      tags: savedRoom.tags,
       inviteLink: `/room/${savedRoom.roomNumber}`,
     });
   } catch (error) {
@@ -94,7 +98,7 @@ router.get("/roomList", async (req, res) => {
   try {
     // 데이터베이스에서 방 정보 가져오기
     const rooms = await Room.find().select(
-      "roomNumber roomname createdby memberCount thumbnail"
+      "roomNumber roomname createdby thumbnail tags" // memberCount 제외
     );
 
     // usersNumber 기반으로 memberCount 업데이트
@@ -108,12 +112,13 @@ router.get("/roomList", async (req, res) => {
     });
 
     console.log("방 목록 응답:", updatedRooms);
-    res.status(200).json(updatedRooms);
+    res.status(200).json(updatedRooms); // 태그 포함된 방 목록 응답
   } catch (error) {
     console.error("방 목록 가져오기 실패:", error.message);
     res.status(500).json({ error: "방 목록을 가져오는 중 오류가 발생했습니다." });
   }
 });
+
 
 // 방 참가자 추가 API
 router.post("/participant", async (req, res) => {
@@ -223,14 +228,26 @@ router.post("/vote", async (req, res) => {
 // 특정 방 정보 가져오기 API
 router.get("/rooms/:roomId", async (req, res) => {
   const roomId = req.params.roomId;
+
   try {
     const room = await Room.findOne({ roomNumber: roomId }).select(
-      "roomNumber roomname createdby memberCount"
+      "roomNumber roomname createdby tags" // tags 포함
     );
+
     if (!room) {
-      return res.status(404).json({ error: 'Room not found' });
+      return res.status(404).json({ error: "Room not found" });
     }
-    res.status(200).json(room);
+
+    // usersNumber 객체에서 현재 방의 사용자 수 가져오기
+    const memberCount = (usersNumber[roomId]+1 || 0); // 없을 경우 기본값 0
+
+    // room 객체에 memberCount 추가
+    const roomWithMemberCount = {
+      ...room.toObject(),
+      memberCount,
+    };
+
+    res.status(200).json(roomWithMemberCount); // tags가 포함된 응답 반환
   } catch (error) {
     console.error("방 정보 가져오기 실패:", error.message);
     res.status(500).json({ error: "방 정보를 가져오는 중 오류가 발생했습니다." });
@@ -238,4 +255,7 @@ router.get("/rooms/:roomId", async (req, res) => {
 });
 
 
+
+
 module.exports = router;
+
