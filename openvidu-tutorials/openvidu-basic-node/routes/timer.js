@@ -21,7 +21,7 @@ function timerSocketHandler(io) {
         // 타이머 초기 설정
         rooms[roomId] = {
           durations: [4, 3], // 타이머 단계들의 지속 시간 (초)
-          cycleCount: 100, // 총 사이클 수
+          cycleCount: 1000, // 총 사이클 수
           currentCycle: 0, // 현재 사이클
           currentIndex: 0, // 현재 단계 인덱스
           timeLeft: 3, // 초기 남은 시간
@@ -37,6 +37,7 @@ function timerSocketHandler(io) {
       socket.emit('timerUpdate', {
         timeLeft: room.timeLeft,
         isRunning: room.isRunning,
+        currentIndex: room.currentIndex, 
         currentCycle: room.currentCycle,
         totalCycles: room.cycleCount,
         currentPhase: room.currentPhase,
@@ -107,6 +108,7 @@ function timerSocketHandler(io) {
       timerNamespace.to(roomId).emit('timerUpdate', {
         timeLeft: room.timeLeft,
         isRunning: room.isRunning,
+        currentIndex: room.currentIndex,
         currentCycle: room.currentCycle,
         totalCycles: room.cycleCount,
         currentPhase: room.currentPhase,
