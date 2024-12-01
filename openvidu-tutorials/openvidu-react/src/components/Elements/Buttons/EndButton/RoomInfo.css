@@ -13,3 +13,34 @@
   font-weight: bold;
   margin-bottom: 10px;
 }
+
+/* 태그 추가 css */
+
+.room-info__tags {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px; /* 태그 간격 */
+  justify-content: center; /* 가운데 정렬 */
+  flex-wrap: wrap; /* 태그가 여러 줄로 넘어갈 경우 처리 */
+}
+
+.room-info__tag {
+  background-color: #f1f1f1;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 0.9em;
+  cursor: default;
+  transition: background-color 0.3s ease;
+}
+
+.room-info__tag:hover {
+  background-color: #ddd; /* 호버 시 배경색 변경 */
+}
+
+.room-info__tag--none {
+  color: #999;
+  font-size: 0.9em;
+}
+
