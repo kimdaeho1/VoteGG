@@ -32,9 +32,16 @@ const RoomList = () => {
 
   // 검색어에 따라 필터링된 방 목록 생성
   const displayedRooms = searchQuery
-    ? rooms.filter((room) =>
-        room.roomname.toLowerCase().includes(searchQuery.toLowerCase()) // 검색어와 방 이름 비교
-      )
+    ? rooms.filter((room) => {
+        // 제목 또는 태그에 검색어 포함 여부 확인
+        const titleMatch = room.roomname
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase());
+        const tagMatch = room.tags?.some((tag) =>
+          tag.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        return titleMatch || tagMatch; // 둘 중 하나라도 true면 해당 방 포함
+      })
     : rooms; // 검색어가 없으면 전체 방 목록 표시
 
   // 총 페이지 수 계산
@@ -188,4 +195,3 @@ const RoomList = () => {
 };
 
 export default RoomList;
-
