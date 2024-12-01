@@ -40,7 +40,8 @@ const CreateRoomModal = ({ onClose }) => {
       if (thumbnail) {
         formData.append("thumbnail", thumbnail);
       } else {
-        formData.append("thumbnail", ""); // 빈 문자열로 전송
+        const defaultImage = "defaultdebate.jpeg"; // 기본 이미지 파일명 (서버에 있어야 함)
+        formData.append("thumbnail", defaultImage);
       }
   
       // 태그 추가

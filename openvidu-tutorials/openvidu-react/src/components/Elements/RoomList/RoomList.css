@@ -1,7 +1,8 @@
 .room-list-container {
   padding: 20px;
   margin: 0 auto;
-  max-width: 1800px;
+  width: 95%;
+  max-width: 1700px;
 }
 
 .room-list-header {
@@ -14,6 +15,8 @@
   text-align: left;
   font-size: 1.8em;
   color: #333;
+  margin-left: 45px;
+  
 }
 
 .room-list {
@@ -27,7 +30,7 @@
 
 .room-card {
   border-radius: 15px;
-  width: 360px;
+  width: 320px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -39,7 +42,7 @@
   position: relative;
   background-color: #bbbbbb;
   height: 200px;
-  width: 360px;
+  width: 320px;
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -60,7 +63,7 @@
   display: flex;
   position: absolute;
   bottom: 132px;
-  right: 313px;
+  right: 280px;
   background-color: rgba(0, 0, 0, 0.5);
   color: rgba(255, 255, 255, 0.712);
   padding: 2px 5px;
@@ -72,7 +75,7 @@
 .room-live {
   position: absolute;
   bottom: 155px;
-  right: 315px;
+  right: 280px;
   font-size: 1em;
   font-weight: bold;
   color: red;
@@ -91,6 +94,11 @@
   font-size: 1.2em;
   margin: 5px 0;
   font-weight: bold;
+  color: #333;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  max-width: 200px; 
 }
 
 .room-info {
@@ -188,7 +196,8 @@
 .room-list {
   display: flex;
   gap: 20px;
-  transition: transform 0.3s ease; /* 슬라이드 전환 효과 */
+  transition: transform 0.3s ease;
+  /* 슬라이드 전환 효과 */
 }
 
 .room-list-wrapper.left .room-list {
@@ -200,20 +209,69 @@
 }
 
 .room-list-wrapper:not(.left):not(.right) .room-list {
-  transform: translateX(0); /* 기본 위치 */
+  transform: translateX(0);
+  /* 기본 위치 */
 }
 
 /* ==========룸카드 css ============== */
 .room-card {
-  padding: 15px; /* 카드 내부 여백 추가 */
-  border: 1px solid #ccc; /* 회색 테두리 */
-  border-radius: 15px; /* 둥근 모서리 */
-  background-color: white; /* 배경색 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 살짝 그림자 추가 (선택 사항) */
-  transition: transform 0.2s ease, box-shadow 0.2s ease; /* 호버 시 효과 추가 */
+  padding: 15px;
+  /* 카드 내부 여백 추가 */
+  border: 1px solid #ccc;
+  /* 회색 테두리 */
+  border-radius: 15px;
+  /* 둥근 모서리 */
+  background-color: white;
+  /* 배경색 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* 살짝 그림자 추가 (선택 사항) */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  /* 호버 시 효과 추가 */
 }
 
 .room-card:hover {
-  transform: scale(1.03); /* 살짝 확대 효과 */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강조 */
+  transform: scale(1.03);
+  /* 살짝 확대 효과 */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  /* 호버 시 그림자 강조 */
+}
+
+.room-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: right;
+  margin-top: -10px;
+  /* 상단 요소 아래로 이동 */
+}
+
+.room-discuss-button {
+  background-color: #000000d3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.room-discuss-button:hover {
+  background-color: #a8a8a8;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.room-spectate-button {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 10px 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.room-spectate-button:hover {
+  background-color: #a8a8a8;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
 }
