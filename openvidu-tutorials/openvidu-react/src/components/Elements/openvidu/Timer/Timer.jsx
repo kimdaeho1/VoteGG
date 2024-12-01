@@ -132,13 +132,13 @@ const Timer = () => {
       </div>
 
       {timerFinished && <p>타이머가 완료되었습니다.</p>}
-      <div className="button-container">
+      <div className="button-container-2">
         <button onClick={handleStart} disabled={isRunning || timeLeft <= 0 || currentCycle >= totalCycles}>
           타이머 시작
         </button>
-        {/* <button onClick={handleReset}>
+        <button onClick={handleReset}>
           타이머 초기화
-        </button> */}
+        </button>
       </div>
 
       {/* 타이머가 끝나면 모달을 띄움 */}
