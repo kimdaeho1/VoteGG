@@ -113,3 +113,66 @@
 .Debateroom-discuss-button {
   background-color: red;
 }
+
+/* ================= 케러셀 인디케이터 =================== */
+
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.carousel-button {
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.carousel-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.room-list {
+  display: flex;
+  gap: 20px;
+  overflow: hidden;
+  width: 100%;
+  justify-content: center;
+}
+
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  background-color: lightgray;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.indicator.active {
+  background-color: gray;
+}
+
+.room-list.align-left {
+  justify-content: flex-start;
+}
+
+.room-list.align-left-center {
+  justify-content: flex-start;
+  gap: 30px;
+}
+
+.room-list.align-evenly {
+  justify-content: space-evenly;
+}
