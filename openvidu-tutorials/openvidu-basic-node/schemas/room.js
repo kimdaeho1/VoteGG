@@ -11,10 +11,6 @@ const roomSchema = new mongoose.Schema({
     required: true,
     unique: true },
 
-  memberCount: {
-    type: Number,
-    default: 0 },
-
   createdby: {
     type: String,
     required: true },
@@ -33,6 +29,10 @@ const roomSchema = new mongoose.Schema({
   thumbnail : {
     type : String,
     default : "",
+  },
+  tags: {
+    type: [String], // 태그 배열로 저장
+    default: [],
   },
 });
 
