@@ -176,3 +176,29 @@
 .room-list.align-evenly {
   justify-content: space-evenly;
 }
+
+
+.room-list-wrapper {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.room-list {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.3s ease; /* 슬라이드 전환 효과 */
+}
+
+.room-list-wrapper.left .room-list {
+  transform: translateX(-100%);
+}
+
+.room-list-wrapper.right .room-list {
+  transform: translateX(100%);
+}
+
+.room-list-wrapper:not(.left):not(.right) .room-list {
+  transform: translateX(0); /* 기본 위치 */
+}

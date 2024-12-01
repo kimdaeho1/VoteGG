@@ -9,6 +9,7 @@ const RoomList = () => {
   const [rooms, setRooms] = useState([]); // 전체 방 목록
   const { searchQuery } = useContext(SearchContext); // Context에서 검색어 가져오기
   const [currentPage, setCurrentPage] = useState(0); // 현재 페이지 상태
+  const [direction, setDirection] = useState(""); // 슬라이드 방향 (left or right)
 
   // 한 페이지에 보여줄 카드 개수
   const cardsPerPage = 3;
@@ -51,16 +52,51 @@ const RoomList = () => {
     ...Array(cardsPerPage - visibleRooms.length).fill({ empty: true }),
   ];
 
+  // 참가 로직
+  const joinRoom = async (roomNumber) => {
+    try {
+      const token = localStorage.getItem("token"); // 사용자 인증 토큰 가져오기
+      if (!token) {
+        alert("로그인이 필요합니다.");
+        return;
+      }
+
+      // 참가자 추가 API 호출
+      const response = await axios.post(`${window.location.origin}/api/room/participant`, {
+        roomNumber,
+        token,
+      });
+
+      if (response.status === 200) {
+        // 방으로 이동
+        navigate(`/room/${roomNumber}`);
+      } else {
+        alert("참가에 실패했습니다. 다시 시도해주세요.");
+      }
+    } catch (error) {
+      console.error("방 참가 실패:", error.message);
+      alert("방 참가 중 오류가 발생했습니다.");
+    }
+  };
+
   // 페이지 이동 핸들러
   const handleNext = () => {
     if (currentPage < totalIndicators - 1) {
-      setCurrentPage(currentPage + 1);
+      setDirection("right");
+      setTimeout(() => {
+        setCurrentPage(currentPage + 1);
+        setDirection("");
+      }, 300); // 애니메이션 시간과 동기화
     }
   };
 
   const handlePrev = () => {
     if (currentPage > 0) {
-      setCurrentPage(currentPage - 1);
+      setDirection("left");
+      setTimeout(() => {
+        setCurrentPage(currentPage - 1);
+        setDirection("");
+      }, 300); // 애니메이션 시간과 동기화
     }
   };
 
@@ -77,45 +113,47 @@ const RoomList = () => {
         >
           &lt;
         </button>
-        <div className="room-list align-evenly">
-          {filledRooms.map((room, index) =>
-            room.empty ? (
-              <div key={`empty-${index}`} className="room-card empty"></div>
-            ) : (
-              <div key={room.roomNumber} className="room-card">
-                <div className="room-image">
-                  <img
-                    src={`${window.location.origin}${room.thumbnail}` || "./default-thumbnail.jpg"}
-                    alt={`${room.roomname} 썸네일`}
-                    onClick={() => navigate(`/observer/${room.roomNumber}`)}
-                    className="entry-room"
-                  />
-                  <p className="room-member-count">{room.memberCount}명</p>
-                  <p className="room-live">LIVE</p>
-                </div>
-                <div className="room-details">
-                  <h2 className="room-name">{room.roomname}</h2>
-                  <div className="room-info">
-                    <p className="room-creator">{room.createdby} 님</p>
-                  </div>
-                  <div className="room-buttons">
-                    <button
-                      className="room-spectate-button"
+        <div className={`room-list-wrapper ${direction}`}>
+          <div className="room-list align-evenly">
+            {filledRooms.map((room, index) =>
+              room.empty ? (
+                <div key={`empty-${index}`} className="room-card empty"></div>
+              ) : (
+                <div key={room.roomNumber} className="room-card">
+                  <div className="room-image">
+                    <img
+                      src={`${window.location.origin}${room.thumbnail}` || "./default-thumbnail.jpg"}
+                      alt={`${room.roomname} 썸네일`}
                       onClick={() => navigate(`/observer/${room.roomNumber}`)}
-                    >
-                      참관하기
-                    </button>
-                    <button
-                      className="room-discuss-button"
-                      onClick={() => joinRoom(room.roomNumber)}
-                    >
-                      토론하기
-                    </button>
+                      className="entry-room"
+                    />
+                    <p className="room-member-count">{room.memberCount}명</p>
+                    <p className="room-live">LIVE</p>
+                  </div>
+                  <div className="room-details">
+                    <h2 className="room-name">{room.roomname}</h2>
+                    <div className="room-info">
+                      <p className="room-creator">{room.createdby} 님</p>
+                    </div>
+                    <div className="room-buttons">
+                      <button
+                        className="room-spectate-button"
+                        onClick={() => navigate(`/observer/${room.roomNumber}`)}
+                      >
+                        참관하기
+                      </button>
+                      <button
+                        className="room-discuss-button"
+                        onClick={() => joinRoom(room.roomNumber)} // 참가 함수 호출
+                      >
+                        토론하기
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )
-          )}
+              )
+            )}
+          </div>
         </div>
         <button
           className="carousel-button next"
