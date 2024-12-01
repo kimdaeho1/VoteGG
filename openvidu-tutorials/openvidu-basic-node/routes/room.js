@@ -222,19 +222,32 @@ router.post("/vote", async (req, res) => {
 // 특정 방 정보 가져오기 API
 router.get("/rooms/:roomId", async (req, res) => {
   const roomId = req.params.roomId;
+
   try {
     const room = await Room.findOne({ roomNumber: roomId }).select(
-      "roomNumber roomname createdby memberCount"
+      "roomNumber roomname createdby" // memberCount 제외
     );
+
     if (!room) {
-      return res.status(404).json({ error: 'Room not found' });
+      return res.status(404).json({ error: "Room not found" });
     }
-    res.status(200).json(room);
+
+    // usersNumber 객체에서 현재 방의 사용자 수 가져오기
+    const memberCount = usersNumber[roomId]+1 || 0; // 없을 경우 기본값 0
+
+    // room 객체에 memberCount 추가
+    const roomWithMemberCount = {
+      ...room.toObject(),
+      memberCount,
+    };
+
+    res.status(200).json(roomWithMemberCount);
   } catch (error) {
     console.error("방 정보 가져오기 실패:", error.message);
     res.status(500).json({ error: "방 정보를 가져오는 중 오류가 발생했습니다." });
   }
 });
+
 
 
 module.exports = router;

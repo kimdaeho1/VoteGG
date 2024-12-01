@@ -111,34 +111,48 @@ const Timer = () => {
 
   // currentIndex 값을 변환하는 함수
   const getIndexCharacter = (index) => {
-    const indexMapping = ["ㄱ", "ㄴ", "ㄷ", "ㄹ"];
+    const indexMapping = ["발언 준비", "발언 중", "ㄷ", "ㄹ"];
     return indexMapping[index] || "알 수 없음"; // 범위를 벗어난 경우 처리
+  };
+
+  // currentIndex에 따른 클래스 이름 반환 함수
+  const getStatusClass = (index) => {
+    switch (index) {
+      case 0:
+        return "status-preparing";
+      case 1:
+        return "status-speaking";
+      case 2:
+        return "status-third";
+      case 3:
+        return "status-fourth";
+      default:
+        return "status-unknown";
+    }
   };
 
   return (
     <div>
-      <div className="timer-container">
-        <div className="timer-text">
-          <span>{formatTime(timeLeft).split(":")[0]}</span> {/* 분 */}
-          <span>:</span>
-          <span>{formatTime(timeLeft).split(":")[1]}</span> {/* 초 */}
+      <div className="timer-wrapper">
+        <div className="status-and-button">
+          <span className={`current-status ${getStatusClass(currentIndex)}`}>
+            {getIndexCharacter(currentIndex)} {/* 변환된 값 표시 */}
+          </span>
+          <button
+            className="start-button"
+            onClick={handleStart}
+            disabled={isRunning || timeLeft <= 0 || currentCycle >= totalCycles}
+          >
+            토론 시작
+          </button>
         </div>
-      </div>
-      {/* <p className="cycle-info">
-        현재 사이클: {currentCycle} / {totalCycles}
-      </p> */}
-      <div>
-        현재 인덱스: {getIndexCharacter(currentIndex)} {/* 변환된 값 표시 */}
-      </div>
-
-      {timerFinished && <p>타이머가 완료되었습니다.</p>}
-      <div className="button-container-2">
-        <button onClick={handleStart} disabled={isRunning || timeLeft <= 0 || currentCycle >= totalCycles}>
-          타이머 시작
-        </button>
-        <button onClick={handleReset}>
-          타이머 초기화
-        </button>
+        <div className="timer-container">
+          <div className="timer-text">
+            <span>{formatTime(timeLeft).split(":")[0]}</span> {/* 분 */}
+            <span>:</span>
+            <span>{formatTime(timeLeft).split(":")[1]}</span> {/* 초 */}
+          </div>
+        </div>
       </div>
 
       {/* 타이머가 끝나면 모달을 띄움 */}
