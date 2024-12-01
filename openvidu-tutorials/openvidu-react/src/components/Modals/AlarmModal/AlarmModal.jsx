@@ -8,7 +8,7 @@ const AlarmModal = ({ onClose }) => {
       <div className="alarm-modal-content">
         <h2>알림</h2>
         <p>여기에 알림 내용이 표시됩니다.</p>
-        <button className="close-button" onClick={onClose}>
+        <button className="close-alarm-button" onClick={onClose}>
           닫기
         </button>
       </div>

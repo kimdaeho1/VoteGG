@@ -26,7 +26,8 @@
 /* 모달 버튼 */
 .modal-buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 10px;
   margin-top: 20px;
 }
 

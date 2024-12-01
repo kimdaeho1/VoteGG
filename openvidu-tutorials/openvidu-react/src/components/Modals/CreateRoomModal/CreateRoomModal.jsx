@@ -35,9 +35,9 @@ const CreateRoomModal = ({ onClose, onCreateRoom }) => {
       formData.append("roomname", roomTitle);
       formData.append("createdby", username);
       filteredInvitees.forEach((invitee, index) => {
-        formData.append(`invitees[${index}]` , invitee);
+        formData.append(`invitees[${index}]`, invitee);
       });
-      if(thumbnail) {
+      if (thumbnail) {
         formData.append("thumbnail", thumbnail);
       }
 
@@ -89,17 +89,17 @@ const CreateRoomModal = ({ onClose, onCreateRoom }) => {
           </div>
         ))} */}
         {/* 썸네일 업로드 */}
-        <label className = "input-label">썸네일 이미지</label>
+        <label className="input-label">썸네일 이미지</label>
         <input
-          type = "file"
+          type="file"
           accept="image/*"
           onChange={handleThumbnailChange}
           className="modal-input"
-          />
+        />
         {/* 버튼들 */}
         <div className="modal-buttons">
           <button className="modal-create-button" onClick={handleCreateRoom}>
-            방 생성하기
+            생성
           </button>
           <button className="modal-cancel-button" onClick={onClose}>
             취소
@@ -119,7 +119,8 @@ const getUsernameFromToken = (token) => {
   try {
     const payload = JSON.parse(atob(token.split('.')[1])); // JWT payload parsing
     return payload.username; // Extract username
-  } catch (error) {1
+  } catch (error) {
+    1
     console.error('Failed to parse token:', error);
     return 'Unknown User';
   }
