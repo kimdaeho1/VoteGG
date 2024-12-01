@@ -17,7 +17,7 @@ const RoomInfo = () => {
         setRoomData({ roomname: data.roomname, memberCount: data.memberCount });
       } catch (error) {
         console.error("방 정보 가져오기 오류:", error);
-        setRoomData({ roomname: 'Unknown Room', memberCount: 0 }); // 오류 시 기본 값
+        setRoomData({ roomname: 'Unknown Room', memberCount: 9999 }); // 오류 시 기본 값
       }
     };
 
