@@ -40,6 +40,11 @@ function chatSocketHandler(io) {
       console.log(`방 ${data.roomId}에 메시지 전송: ${data.message}`);
       socket.to(data.roomId).emit('receive_message', data);
     });
+    
+    socket.on('egg_throw', (data) => {
+      console.log('계란 던지기 이벤트 수신:', data);
+      socket.broadcast.emit('egg_throw', data); // 다른 클라이언트로 이벤트 전송
+    });
 
     // 유저가 방을 떠날 때
     socket.on('disconnect', async () => {

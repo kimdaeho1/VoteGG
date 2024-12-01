@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState  } from 'react';
 import Matter from 'matter-js';
 import { handleVote, getVoteCount } from '../../../votecount';
 import './MatterCanvas.css';
 
 const { Engine, Render, Runner, Bodies, World, MouseConstraint, Mouse, Events } = Matter;
-const MatterCanvas = ({ roomNumber }) => {
+const MatterCanvas = ({ roomNumber, socket }) => {
   const canvasRef = useRef(null);
   const draggedEgg = useRef(null); // 드래그 중인 계란을 추적
   let eggCount = 0; // 계란 숫자
@@ -12,7 +12,8 @@ const MatterCanvas = ({ roomNumber }) => {
 
   const token = localStorage.getItem("token");
   const username = token ? getUsernameFromToken(token) : "Unknown User"; // username 가져오기
-
+  const isObserver = window.location.pathname.includes("/observer"); // 옵저버 판단
+  
   useEffect(() => {
     // Matter.js 엔진 설정
     const engine = Engine.create();
@@ -171,18 +172,10 @@ const MatterCanvas = ({ roomNumber }) => {
                 const targetwidth = Math.max(rect.left, Math.min(randomX, rect.right)); // 왼쪽과 오른쪽 범위 제한
                 const targetheight = Math.max(rect.top, Math.min(randomY, rect.bottom)); // 위와 아래 범위 제한
                 
-                throwEgg(targetwidth, targetheight, () =>{
-                  console.log("오른쪽 클릭 - 던지기");
-                  streamComponent.classList.add('shake');
-
-                  const { maxVoteCount, usedVoteCount} = getVoteCount( roomNumber, username );
-                  handleVote(roomNumber, username, user, -1, maxVoteCount - usedVoteCount);
-  
-                  // 일정 시간 후 애니메이션 클래스 제거
-                  setTimeout(() => {
-                    streamComponent.classList.remove('shake');
-                  }, 500);
-                });            
+                throwEgg(targetwidth, targetheight);            
+                console.log("오른쪽 클릭 - 던지기");
+                const { maxVoteCount, usedVoteCount} = getVoteCount( roomNumber, username );
+                handleVote(roomNumber, username, user, -1, maxVoteCount - usedVoteCount);
               }
             }
             World.remove(world, draggedEgg.current); // 드래그 중인 계란 제거
@@ -288,7 +281,7 @@ const MatterCanvas = ({ roomNumber }) => {
       const screenHeight = window.innerHeight;
 
       // 화면 가장자리에서 계란을 생성할 때, 가장자리로부터 떨어진 거리 (패딩)
-      const edgePadding = 75;
+      const edgePadding = 100;
 
       // 화면 가장자리에서 랜덤한 위치 선택
       const randomEdge = Math.floor(Math.random() * 3);  // 0: 상단, 1: 우측, 2: 하단, 3: 좌측
@@ -312,16 +305,24 @@ const MatterCanvas = ({ roomNumber }) => {
           startY = Math.random() * (screenHeight - 2 * edgePadding) + edgePadding;
           break;
       }
-      
-      const flightTime = 20; // 계란이 목표에 도달할 시간 (초 단위)
-      const gravity = engine.world.gravity.y || 1; // 중력 가속도 (기본값 1)
+    
+      // 소켓 통신으로 이벤트 전송
+      const data = { startX, startY, targetX, targetY, callback };
+      socket.emit('egg_throw', data);
+    
+      // 실제 애니메이션 구현
+      executeThrowAnimation(startX, startY, targetX, targetY, callback);
+    };
+    
+    const executeThrowAnimation = (startX, startY, targetX, targetY, callback ) => {
+      const flightTime = 20;
+      const gravity = engine.world.gravity.y || 1;
     
       const img = new Image();
-      img.src = "/resources/images/egg.png"; // 계란 이미지 경로
+      img.src = "/resources/images/egg.png";
     
       img.onload = () => {
         const egg = Bodies.circle(startX, startY, 10, {
-          collisionFilter: { group: -1 },
           restitution: 0.3,
           friction: 0.4,
           render: {
@@ -333,19 +334,15 @@ const MatterCanvas = ({ roomNumber }) => {
           },
         });
     
-        // 월드에 계란 추가
         World.add(engine.world, egg);
     
-        // 초기 속도 계산
         const deltaX = targetX - startX;
         const deltaY = targetY - startY;
         const velocityX = deltaX / flightTime;
-        const velocityY = (deltaY / flightTime) - (0.2 * gravity * flightTime);
+        const velocityY = deltaY / flightTime - 0.2 * gravity * flightTime;
     
-        // 계란에 초기 속도 설정
         Matter.Body.setVelocity(egg, { x: velocityX, y: velocityY });
-    
-        // 계란이 목표에 도달했을 때 변경할 이미지
+
         const newImg = new Image();
         newImg.src = "/resources/images/eggthrow.png"; // 새로운 이미지 경로
     
@@ -374,10 +371,36 @@ const MatterCanvas = ({ roomNumber }) => {
               World.add(engine.world, newEgg);
               console.log("egg broken!");
 
-              // 계란이 맞은 후 콜백 실행
-              if (callback) {
-                callback(); // 이펙트 실행
-              }
+              // // 계란이 맞은 후 콜백 실행
+              // if (callback) {
+              //   console.log('egg hit!');
+              //   callback(); // 이펙트 실행
+              //   // 목표 위치에서 streamcomponent 요소 찾기
+              //   const streamComponent = document.elementFromPoint(targetX, targetY).closest('.streamcomponent');
+              //   if (streamComponent) {
+              //     streamComponent.classList.add('shake');
+
+              //     // 일정 시간 후 애니메이션 클래스 제거
+              //     setTimeout(() => {
+              //       streamComponent.classList.remove('shake');
+              //     }, 500);
+              //   }
+              // }
+
+              // 3초 후 계란 제거
+              setTimeout(() => {
+                console.log('egg hit!');
+                // 목표 위치에서 streamcomponent 요소 찾기
+                const streamComponent = document.elementFromPoint(targetX, targetY).closest('.streamcomponent');
+                if (streamComponent) {
+                  streamComponent.classList.add('shake');
+
+                  // 일정 시간 후 애니메이션 클래스 제거
+                  setTimeout(() => {
+                    streamComponent.classList.remove('shake');
+                  }, 500);
+                }
+              }, 20);
     
               // 3초 후 계란 제거
               setTimeout(() => {
@@ -399,24 +422,27 @@ const MatterCanvas = ({ roomNumber }) => {
         console.error("이미지 로드 실패:", e);
       };
     };
-  
-    // 계란을 주기적으로 추가 (3초마다)
-    const interval = setInterval(() => {
-      const votes = JSON.parse(localStorage.getItem("votes")) || {};
-      // votes[roomNumber][userId]가 존재하는지 확인
-      var maxVoteCount = votes[roomNumber]?.[username]?.maxVoteCount || 0; // 기본값 0
-      var usedVoteCount = Number(votes[roomNumber]?.[username]?.usedVoteCount || 0); // 기본값 0
-      var nowVoteCount = maxVoteCount - usedVoteCount;
-  
-      if (eggCount < nowVoteCount) {
-        addEgg(); // 계란 개수가 nowVoteCount보다 적으면 계란 생성
-        console.log(nowVoteCount)
-        console.log(eggCount);
-      }
-      else if (eggCount > nowVoteCount) {
-        removeEggs(nowVoteCount - eggCount); // 추가로 계란 제거
-      }
-    }, 1000);
+    
+    if(isObserver)
+    {
+      // 계란을 주기적으로 추가 (3초마다)
+      const interval = setInterval(() => {
+        const votes = JSON.parse(localStorage.getItem("votes")) || {};
+        // votes[roomNumber][userId]가 존재하는지 확인
+        var maxVoteCount = votes[roomNumber]?.[username]?.maxVoteCount || 0; // 기본값 0
+        var usedVoteCount = Number(votes[roomNumber]?.[username]?.usedVoteCount || 0); // 기본값 0
+        var nowVoteCount = maxVoteCount - usedVoteCount;
+    
+        if (eggCount < nowVoteCount) {
+          addEgg(); // 계란 개수가 nowVoteCount보다 적으면 계란 생성
+          console.log(nowVoteCount)
+          console.log(eggCount);
+        }
+        else if (eggCount > nowVoteCount) {
+          removeEggs(nowVoteCount - eggCount); // 추가로 계란 제거
+        }
+      }, 1000);
+    }    
     
     // 충돌 감지 및 물체 제거
     Events.on(engine, 'collisionStart', (event) => {
@@ -446,14 +472,55 @@ const MatterCanvas = ({ roomNumber }) => {
       });
     });
   
-    // Cleanup: 컴포넌트가 unmount 될 때 Matter.js 설정을 정리
-    return () => {
-      clearInterval(interval);
-      Render.stop(render);
-      Runner.stop(runner);
-      Engine.clear(engine);
-    };
+    // 소켓 이벤트 설정
+    if (socket) {
+      const handleEggThrow = (data) => {
+        // 자신이 보낸 이벤트는 무시합니다.
+        if (data.senderId === socket.id) {
+          return;
+        }
+    
+        console.log('Egg throw received:', data);
+        const { startX, startY, targetX, targetY, callback } = data;
+        executeThrowAnimation(startX, startY, targetX, targetY, callback, () => {
+          console.log("Throw animation complete");          
+        });
+      };
+
+      socket.on('egg_throw', handleEggThrow);
+
+      // 컴포넌트 언마운트 시 리스너 해제
+      return () => {
+        socket.off('egg_throw', handleEggThrow);
+        Render.stop(render);
+        Runner.stop(runner);
+        Engine.clear(engine);
+      };
+    } else {
+      console.error("Socket not available");
+    }
   }, [roomNumber]); // eggCount를 의존성 배열에서 제외
+
+  // useEffect(() => {
+  //   if (!socket) {
+  //     console.error("Socket not available");
+  //     return;
+  //   }
+
+  //   const handleEggThrow = (data) => {
+  //     console.log('Egg throw received:', data);
+  //     const { targetX, targetY } = data;
+  //     throwEgg(targetX, targetY, () => {
+  //       console.log("Throw animation complete");
+  //     });
+  //   };
+
+  //   socket.on('egg_throw', handleEggThrow);
+
+  //   return () => {
+  //     socket.off('egg_throw', handleEggThrow);  // 컴포넌트 언마운트 시 리스너 해제
+  //   };
+  // }, [roomNumber]);
 
   return (
     <div
