@@ -39,6 +39,9 @@ const CreateRoomModal = ({ onClose, onCreateRoom }) => {
       });
       if (thumbnail) {
         formData.append("thumbnail", thumbnail);
+      } else {
+        const defaultImage = "defaultdebate.jpeg"; // 기본 이미지 파일명 (서버에 있어야 함)
+        formData.append("thumbnail", defaultImage);
       }
 
       // 서버로 POST 요청 보내기

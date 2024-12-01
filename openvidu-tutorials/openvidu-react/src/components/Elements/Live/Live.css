@@ -1,13 +1,14 @@
 /* 전체 Live 컴포넌트 */
 .live {
   position: relative; /* 그라데이션과 이미지 겹치기 */
-  width: 100%;
+  width: 90%;
   height: 400px; /* 높이 조정 */
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  max-width: 1800px;
+  max-width: 1550px;
+  min-width: 1400px;
   margin: 0 auto;
   cursor: pointer;
 }

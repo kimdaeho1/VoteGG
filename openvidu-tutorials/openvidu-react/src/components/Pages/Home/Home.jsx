@@ -14,7 +14,6 @@ const Home = () => {
   return (
     <div className="home">
       <div className="home-content">
-        <h1>인기 방송</h1>
         <Live />
         <RoomList rooms={rooms} />
       </div>

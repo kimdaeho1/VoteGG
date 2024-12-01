@@ -12,7 +12,7 @@ const RoomList = () => {
   const [direction, setDirection] = useState(""); // 슬라이드 방향 (left or right)
 
   // 한 페이지에 보여줄 카드 개수
-  const cardsPerPage = 3;
+  const cardsPerPage = 4;
 
   // 데이터베이스에서 방 정보 가져오기
   useEffect(() => {
@@ -33,8 +33,8 @@ const RoomList = () => {
   // 검색어에 따라 필터링된 방 목록 생성
   const displayedRooms = searchQuery
     ? rooms.filter((room) =>
-        room.roomname.toLowerCase().includes(searchQuery.toLowerCase()) // 검색어와 방 이름 비교
-      )
+      room.roomname.toLowerCase().includes(searchQuery.toLowerCase()) // 검색어와 방 이름 비교
+    )
     : rooms; // 검색어가 없으면 전체 방 목록 표시
 
   // 총 페이지 수 계산
@@ -123,7 +123,7 @@ const RoomList = () => {
                   <div className="room-image">
                     <img
                       src={`${window.location.origin}${room.thumbnail}` || "./default-thumbnail.jpg"}
-                      alt={`${room.roomname} 썸네일`}
+                      // alt={`${room.roomname} 썸네일`}
                       onClick={() => navigate(`/observer/${room.roomNumber}`)}
                       className="entry-room"
                     />
@@ -135,22 +135,23 @@ const RoomList = () => {
                     <div className="room-info">
                       <p className="room-creator">{room.createdby} 님</p>
                     </div>
-                    <div className="room-buttons">
-                      <button
-                        className="room-spectate-button"
-                        onClick={() => navigate(`/observer/${room.roomNumber}`)}
-                      >
-                        참관하기
-                      </button>
-                      <button
-                        className="room-discuss-button"
-                        onClick={() => joinRoom(room.roomNumber)} // 참가 함수 호출
-                      >
-                        토론하기
-                      </button>
-                    </div>
+                  </div>
+                  <div className="room-buttons">
+                    <button
+                      className="room-spectate-button"
+                      onClick={() => navigate(`/observer/${room.roomNumber}`)}
+                    >
+                      참관하기
+                    </button>
+                    <button
+                      className="room-discuss-button"
+                      onClick={() => joinRoom(room.roomNumber)} // 참가 함수 호출
+                    >
+                      토론하기
+                    </button>
                   </div>
                 </div>
+
               )
             )}
           </div>
@@ -172,7 +173,7 @@ const RoomList = () => {
           ></span>
         ))}
       </div>
-    </div>
+    </div >
   );
 };
 
