@@ -93,28 +93,24 @@ router.post("/roomCreate", upload.single("thumbnail"), async (req, res) => {
   }
 });
 
-
-
-
-
 // 방 목록 조회 API
 router.get("/roomList", async (req, res) => {
   try {
     // 데이터베이스에서 방 정보 가져오기
     const rooms = await Room.find().select(
-      "roomNumber roomname createdby memberCount thumbnail tags" // 태그 추가
+      "roomNumber roomname createdby thumbnail tags" // memberCount 제외
     );
 
-        // usersNumber 기반으로 memberCount 업데이트
-        const updatedRooms = rooms.map(room => {
-          const roomId = room.roomNumber.toString(); // roomNumber를 문자열로 변환
-          const currentUserCount = usersNumber[roomId] || 0; // usersNumber에서 현재 사용자 수 가져오기
-          return {
-            ...room.toObject(), // 기존 Room 객체의 데이터를 그대로 복사
-            memberCount: currentUserCount, // memberCount를 usersNumber의 값으로 대체
-          };
-        });
-        
+    // usersNumber 기반으로 memberCount 업데이트
+    const updatedRooms = rooms.map(room => {
+      const roomId = room.roomNumber.toString(); // roomNumber를 문자열로 변환
+      const currentUserCount = usersNumber[roomId] || 0; // usersNumber에서 현재 사용자 수 가져오기
+      return {
+        ...room.toObject(), // 기존 Room 객체의 데이터를 그대로 복사
+        memberCount: currentUserCount, // memberCount를 usersNumber의 값으로 대체
+      };
+    });
+
     console.log("방 목록 응답:", updatedRooms);
     res.status(200).json(updatedRooms); // 태그 포함된 방 목록 응답
   } catch (error) {
