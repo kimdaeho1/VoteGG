@@ -202,3 +202,18 @@
 .room-list-wrapper:not(.left):not(.right) .room-list {
   transform: translateX(0); /* 기본 위치 */
 }
+
+/* ==========룸카드 css ============== */
+.room-card {
+  padding: 15px; /* 카드 내부 여백 추가 */
+  border: 1px solid #ccc; /* 회색 테두리 */
+  border-radius: 15px; /* 둥근 모서리 */
+  background-color: white; /* 배경색 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 살짝 그림자 추가 (선택 사항) */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* 호버 시 효과 추가 */
+}
+
+.room-card:hover {
+  transform: scale(1.03); /* 살짝 확대 효과 */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강조 */
+}
