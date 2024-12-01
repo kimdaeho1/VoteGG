@@ -7,7 +7,7 @@
   height: 32vh;
   background-color: #ffffff; 
 }
-
+ 
 .aa {
   width: 60%;
   background-color: #ffffff;
@@ -17,6 +17,6 @@
 .bb {
   width: 40%;
   background-color: #ffffff;
+  height: 100%;
   margin: 0 auto;
 }
-
