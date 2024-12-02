@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import CreateRoomButton from '../../Elements/Buttons/CreateRoomButton/CreateRoomButton';
 import AlarmButton from '../../Elements/Buttons/AlarmButton/AlarmButton';
+import InviteButton from '../../Elements/Buttons/InviteButton/InviteButton';
 import LoginButton from '../../Elements/Buttons/LoginoutButton/LoginoutButton';
 import LogoButton from '../../Elements/Buttons/LogoButton/LogoButton';
 import Search from './Search/Search.jsx'; // Search.jsx import
@@ -44,6 +45,7 @@ const Header = () => {
         )} */}
         <Search />
         <div className="right">
+          {pathParts[1] === 'room' && <InviteButton />}
           <AlarmButton />
           <CreateRoomButton />
           <LoginButton />
