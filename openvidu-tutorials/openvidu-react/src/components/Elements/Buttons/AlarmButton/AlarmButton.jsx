@@ -7,8 +7,8 @@ import { useToast } from '../../Toast/ToastContext';
 const AlarmButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [hasNewData, setHasNewData] = useState(false); // 새 데이터 여부 상태
-  const dataRef = useRef([]);
-  const [data, setData] = useState([]); // 데이터 상태
+  const previousDataLengthRef = useRef(0); // 이전 초대 데이터 길이
+  const [isPolling, setIsPolling] = useState(true); // 폴링 활성화 상태 관리
   const token = localStorage.getItem('token');
   const { addToast } = useToast();
 
@@ -21,30 +21,41 @@ const AlarmButton = () => {
     setIsModalOpen(false);
   };
 
-  const fetchData = async () => {
-    try {
-      const username = token ? getUsernameFromToken(token) : '';
-      const response = await axios.get(`${window.location.origin}/api/invitation/invitations/${username}`);
-      console.log('Fetched invitations:', response.data);
+  const startLongPolling = async () => {
+    while (isPolling) {
+      try {
+        const username = token ? getUsernameFromToken(token) : '';
+        const response = await axios.get(`${window.location.origin}/api/invitation/invitations/${username}`, {
+          timeout: 30000, // 30초 동안 대기
+        });
 
-      if (response.data.length > 0) {
-        setHasNewData(true); // 초대가 존재하면 알림 활성화
-        addToast("초대가 있습니다!", "success");
-      } else {
-        setHasNewData(false); // 초대가 없으면 알림 비활성화
+        const currentDataLength = response.data.length;
+        const previousDataLength = previousDataLengthRef.current;
+
+        if (currentDataLength > 0 && currentDataLength !== previousDataLength) {
+          setHasNewData(true);
+          addToast("초대가 있습니다!", "success");
+          previousDataLengthRef.current = currentDataLength;
+        } else if (currentDataLength === 0) {
+          setHasNewData(false);
+          previousDataLengthRef.current = 0;
+        }
+      } catch (error) {
+        if (error.code !== 'ECONNABORTED') {
+          console.error('Error during long polling:', error);
+        }
       }
-
-      setData(response.data); // 초대 데이터 업데이트
-    } catch (error) {
-      console.error('Error fetching data:', error);
     }
   };
 
   useEffect(() => {
-    fetchData(); // 초기 데이터 가져오기
-    const interval = setInterval(fetchData, 5000); // 5초마다 초대 확인
-    return () => clearInterval(interval); // 컴포넌트 언마운트 시 정리
-  }, [token]); // `token`에 의존
+    setIsPolling(true);
+    startLongPolling();
+
+    return () => {
+      setIsPolling(false); // 컴포넌트 언마운트 시 폴링 중지
+    };
+  }, [token]);
 
   return (
     <div className="alarm-button-container">

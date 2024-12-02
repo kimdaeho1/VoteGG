@@ -13,6 +13,12 @@ const InviteModal = ({ onClose }) => {
     const handleInvite = async () => {
         try {
         const username = token ? getUsernameFromToken(token) : "";
+
+        if (username === invitee) {
+            addToast("자기 자신은 초대할 수 없습니다.", "error");
+            return; // 요청 중단
+        }
+        
         const response = await axios.post(`${window.location.origin}/api/invitation/invite`, {
             inviter: username,
             invitee,

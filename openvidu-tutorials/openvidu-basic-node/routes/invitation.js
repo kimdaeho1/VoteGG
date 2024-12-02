@@ -29,12 +29,37 @@ router.post('/invite', async (req, res) => {
 // 초대 목록 조회 API (사용자별)
 router.get('/invitations/:username', async (req, res) => {
   const { username } = req.params;
+  let responded = false; // 응답 여부 추적 변수
 
   try {
-    const userInvitations = await Invitation.find({ invitee: username, status: 'pending' });
-    res.json(userInvitations);
+    const pendingInvitations = await Invitation.find({ invitee: username, status: 'pending' });
+
+    if (pendingInvitations.length > 0) {
+      responded = true;
+      return res.json(pendingInvitations); // 초대가 있으면 즉시 응답
+    }
+
+    const checkForNewInvitations = setInterval(async () => {
+      const updatedInvitations = await Invitation.find({ invitee: username, status: 'pending' });
+
+      if (updatedInvitations.length > 0 && !responded) {
+        clearInterval(checkForNewInvitations);
+        responded = true; // 응답 상태 업데이트
+        return res.json(updatedInvitations); // 새 초대가 있으면 응답
+      }
+    }, 1000);
+
+    setTimeout(() => {
+      if (!responded) {
+        clearInterval(checkForNewInvitations);
+        responded = true; // 응답 상태 업데이트
+        res.json([]); // 타임아웃 시 빈 배열 반환
+      }
+    }, 30000); // 최대 30초 대기
   } catch (error) {
-    res.status(500).json({ message: '초대 목록 조회 중 오류가 발생했습니다.', error });
+    if (!responded) {
+      res.status(500).json({ message: '초대 목록 조회 중 오류가 발생했습니다.', error });
+    }
   }
 });
 

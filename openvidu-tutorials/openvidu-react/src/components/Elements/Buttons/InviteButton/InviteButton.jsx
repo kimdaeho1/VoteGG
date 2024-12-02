@@ -17,7 +17,7 @@ const InviteButton = () => {
     <div className="Invite-button-container">
       <button className="Invite-button" onClick={handleOpenModal}>
       <img
-          src="/resources/images/egg.png" // 이미지 경로
+          src="/resources/images/invite.png" // 이미지 경로
           alt="초대 버튼"
           className="Invite-icon"
         />

@@ -45,7 +45,7 @@ const Header = () => {
         )} */}
         <Search />
         <div className="right">
-          <InviteButton/>
+          {pathParts[1] === 'room' && <InviteButton />}
           <AlarmButton />
           <CreateRoomButton />
           <LoginButton />
