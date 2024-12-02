@@ -1,39 +1,84 @@
-/* 모달 오버레이 - 화면 전체를 덮는 배경 */
+/* 모달 오버레이 */
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 배경색을 어둡게 */
-    display: flex;
-    justify-content: center; /* 수평 중앙 */
-    align-items: center; /* 수직 중앙 */
-    z-index: 1000; /* 모달을 다른 요소들 위에 표시 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* 배경색을 어둡게 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* 모달 콘텐츠 */
+.modal-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 450px;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* 부드러운 그림자 */
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* 모달 제목 */
+.modal-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* 모달 부제목 */
+.modal-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* 닫기 버튼 */
+.close-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.close-button:hover {
+  background-color: #0056b3;
+}
+
+/* 로딩 메시지 */
+.loading-message {
+  font-size: 18px;
+  color: #555;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* 에러 메시지 */
+.error-message {
+  font-size: 16px;
+  color: red;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
   }
-  
-  /* 모달 콘텐츠 박스 */
-  .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 400px; /* 모달의 너비 */
-    text-align: center; /* 텍스트 가운데 정렬 */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
-  
-  /* 버튼 스타일 */
-  button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
+}
