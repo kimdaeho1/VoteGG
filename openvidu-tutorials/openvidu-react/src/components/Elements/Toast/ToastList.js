@@ -6,11 +6,11 @@ const ToastList = ({ toasts }) => {
     <div
       style={{
         position: "fixed",
-        bottom: "20px",
-        left: "20px",
+        top: "20px",
+        right: "15%",
         zIndex: 1000,
         maxWidth: "1000px",
-        width: "15%",
+        width: "20%",
       }}
     >
       {toasts.map(({ message, type }, index) => (

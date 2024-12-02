@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './SetUsername.css';
+import { useToast } from '../../Elements/Toast/ToastContext';
 
 const SetUsername = () => {
   const [username, setUsername] = useState('');
@@ -9,6 +10,7 @@ const SetUsername = () => {
   const [socialId, setSocialId] = useState('');
   const [nickname, setNickname] = useState('');
   const [provider, setProvider] = useState('');
+  const { addToast } = useToast();
 
   useEffect(() => {
     // URL 파라미터에서 socialId, nickname, provider 가져오기
@@ -33,7 +35,7 @@ const SetUsername = () => {
       });
 
       if (response.status === 200) {
-        alert('아이디 설정이 완료되었습니다.');
+        addToast('아이디 설정이 완료되었습니다.', 'success');
         // 홈으로 리디렉션
         window.location.href = '/';
       }
