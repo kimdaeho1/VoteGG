@@ -9,6 +9,7 @@ const AlarmButton = () => {
   const [hasNewData, setHasNewData] = useState(false); // 새 데이터 여부 상태
   const previousDataLengthRef = useRef(0); // 이전 초대 데이터 길이
   const [isPolling, setIsPolling] = useState(true); // 폴링 활성화 상태 관리
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 확인
   const token = localStorage.getItem('token');
   const { addToast } = useToast();
 
@@ -49,13 +50,31 @@ const AlarmButton = () => {
   };
 
   useEffect(() => {
-    setIsPolling(true);
-    startLongPolling();
+    // 로그인 상태 확인
+    const checkLoginStatus = () => {
+      if (token) {
+        const username = getUsernameFromToken(token);
+        if (username && username !== 'Unknown User') {
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+        }
+      } else {
+        setIsLoggedIn(false);
+      }
+    };
+
+    checkLoginStatus();
+
+    if (isLoggedIn) {
+      setIsPolling(true);
+      startLongPolling();
+    }
 
     return () => {
       setIsPolling(false); // 컴포넌트 언마운트 시 폴링 중지
     };
-  }, [token]);
+  }, [token, isLoggedIn]);
 
   return (
     <div className="alarm-button-container">
