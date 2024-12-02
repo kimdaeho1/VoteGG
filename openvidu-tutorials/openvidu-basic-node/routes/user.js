@@ -94,82 +94,123 @@ router.get('/auth/kakao', (req, res) => {
 
 
  // 리디렉션 후 로그인시 콜백함수
-router.get('/auth/kakao/callback', async (req, res) => {
-    const { code } = req.query;
-  
-    try {
-      // Authorization Code로 카카오 액세스 토큰 요청
+ router.get('/auth/kakao/callback', async (req, res) => {
+  const { code } = req.query;
+
+  try {
+      // 카카오 액세스 토큰 요청
       const tokenResponse = await axios.post('https://kauth.kakao.com/oauth/token', null, {
-        params: {
-          grant_type: 'authorization_code',
-          client_id: '13ff40fb648001aaef443060fec9946a',
-          redirect_uri: 'https://recordstudio.site:8443/api/user/auth/kakao/callback',
-          code: code,
-        },
+          params: {
+              grant_type: 'authorization_code',
+              client_id: '13ff40fb648001aaef443060fec9946a',
+              redirect_uri: 'https://recordstudio.site:8443/api/user/auth/kakao/callback',
+              code,
+          },
       });
-  
+
       const { access_token } = tokenResponse.data;
-  
-      // 카카오 액세스 토큰으로 사용자 정보 요청
+
+      // 카카오 사용자 정보 요청
       const userInfoResponse = await axios.get('https://kapi.kakao.com/v2/user/me', {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
+          headers: { Authorization: `Bearer ${access_token}` },
       });
-  
+
       const { id, properties } = userInfoResponse.data;
-      const nickname = properties ? properties.nickname : null;
-  
+      const nickname = properties?.nickname;
+
       if (!nickname) {
-        return res.status(400).json({ message: '사용자 정보에 닉네임이 없습니다.' });
+          return res.status(400).json({ message: '사용자 정보에 닉네임이 없습니다.' });
       }
-  
+
+      // DB에서 소셜 ID로 사용자 찾기
       let existingUser = await user.findOne({ socialId: id });
-  
-      if (!existingUser) {
-        // 신규 사용자 생성
-        existingUser = new user({
-          username: nickname,
-          socialId: id,
-          provider: 'kakao',
-        });
-        await existingUser.save();
-      }
-  
-      // JWT 생성
-      const payload = {
-        userId: existingUser._id,
-        username: existingUser.username,
-        profileImageUrl: existingUser.profileImageUrl || '',
-        totalParticipations: existingUser.totalParticipations || 0,
-        totalWins: existingUser.totalWins || 0,
-        firstPlaceWins: existingUser.firstPlaceWins || 0,
-        provider: 'kakao',
-        socialId: id,
-      };
-  
-      const jwtToken = jwt.sign(payload, 'magic_number', { expiresIn: '1h' });
-  
-      // 지금 카카오 서버의 콜백으로 불러진거라 리디렉션을 강제로 해야되서 쿠키에 저장하고 jwt토큰은
-      // /(즉 home) 홈 컴포넌트에서 httponly옵션을 false로 함으로써 document.cookie로 그걸 읽어서 
-      //token인걸 똑같인 localstorage에 저장해주는 방식으로 사용함
-      // 쿠키 저장
-      res.cookie('token', jwtToken, { httpOnly: false, secure: true }); // JWT 토큰 
-      res.cookie('access_token', access_token, { httpOnly: false, secure: true }); // 카카오 액세스 토큰
-  
-      // 리디렉션 처리
+
       if (existingUser) {
-        // 기존 가입자 -> 홈으로 리디렉션
-        return res.redirect('https://recordstudio.site:8443/');
-      } else {
-        // 신규 가입자 -> 사용자 정보 입력 페이지로 리디렉션
-        return res.redirect(`https://recordstudio.site:8443/set-username?kakaoId=${id}&nickname=${nickname}`);
+          // 기존 유저 - JWT 생성
+          const jwtToken = jwt.sign(
+              {
+                  userId: existingUser._id,
+                  username: existingUser.username,
+                  profileImageUrl: existingUser.profileImageUrl || '',
+                  totalParticipations: existingUser.totalParticipations || 0,
+                  totalWins: existingUser.totalWins || 0,
+                  firstPlaceWins: existingUser.firstPlaceWins || 0,
+                  provider: existingUser.provider,
+                  socialId: id,
+              },
+              'magic_number',
+              { expiresIn: '1h' }
+          );
+
+          // 쿠키에 저장 후 홈으로 리디렉션
+          res.cookie('token', jwtToken, { httpOnly: false, secure: true });
+          res.cookie('access_token', access_token, { httpOnly: false, secure: true });
+          return res.redirect('https://recordstudio.site:8443/');
       }
-    } catch (error) {
+
+      // 신규 유저 - 리디렉션하여 username 설정
+      res.cookie('access_token', access_token, { httpOnly: false, secure: true }); // 액세스 토큰 저장
+      return res.redirect(`https://recordstudio.site:8443/set-username?kakaoId=${id}&nickname=${nickname}`);
+  } catch (error) {
       console.error('카카오 로그인 처리 오류:', error);
       res.status(500).json({ message: '로그인 오류', error: error.message });
-    }
-  });
-   
+  }
+});
+
+
+// 최초가입시 아이디 설정 api
+router.post("/set-username", async (req, res) => {
+  const { socialId, username, provider, nickname } = req.body;
+
+  if (!socialId || !username || !provider) {
+      return res.status(400).json({ message: "필수 정보가 누락되었습니다." });
+  }
+
+  try {
+      // 중복된 아이디 검사
+      const existingUsername = await user.findOne({ username });
+      if (existingUsername) {
+          return res.status(400).json({ message: "중복된 아이디입니다." });
+      }
+
+      // 신규 유저 저장
+      const newUser = new user({
+          username,
+          socialId,
+          provider,
+          profileImageUrl: "", // 초기 프로필 이미지
+          totalParticipations: 0,
+          totalWins: 0,
+          firstPlaceWins: 0,
+      });
+
+      await newUser.save();
+
+      // JWT 생성
+      const token = jwt.sign(
+          {
+              userId: newUser._id,
+              username: newUser.username,
+              provider: newUser.provider,
+              socialId: newUser.socialId,
+              profileImageUrl: newUser.profileImageUrl,
+              totalParticipations: newUser.totalParticipations,
+              totalWins: newUser.totalWins,
+              firstPlaceWins: newUser.firstPlaceWins,
+          },
+          "magic_number", // 시크릿 키
+          { expiresIn: "1h" }
+      );
+
+      // JWT를 쿠키에 저장
+      res.cookie('token', token, { httpOnly: false, secure: true }); // HTTP-only는 false로 설정
+      res.status(200).json({ message: "아이디 설정 완료" });
+  } catch (error) {
+      console.error("아이디 설정 오류:", error);
+      res.status(500).json({ message: "서버 오류가 발생했습니다." });
+  }
+});
+
+
 
 module.exports = router; // 라우터 내보내기

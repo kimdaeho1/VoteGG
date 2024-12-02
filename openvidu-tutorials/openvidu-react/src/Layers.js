@@ -9,6 +9,7 @@ import Header from './components/Shell/Header/Header.jsx';
 import LeftSidebar from './components/Shell/LeftSidebar/LeftSidebar.jsx';
 import './Layers.css';
 import DebateRoom from './components/Pages/DebateRoom/DebateRoom.jsx';
+import SetUsername from './components/Pages/Login/SetUsername.jsx'; //소셜로그인중 처음 로그인할떄 아이디 설정페이지 ㅏ우팅용
 
 const Layers = () => {
   return (
@@ -24,6 +25,8 @@ const Layers = () => {
 
               {/* 테스트 */}
 
+              {/* 아이디 설정 페이지 라우트 */}
+              <Route path="/set-username" element={<SetUsername />} />          
 
               {/* 참여자와 관전자 라우트 */}
               <Route
