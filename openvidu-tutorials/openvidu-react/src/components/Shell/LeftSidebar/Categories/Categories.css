@@ -1,12 +1,20 @@
 /* Categories.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
 .profile-container {
-  width: 200px;
-  background-color: #d3d3d3;
-  border-radius: 10px;
+  width: 170px;
+  background-color: #f7f9fc;
+  border-radius: 12px;
   padding: 20px;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', Arial, sans-serif; /* 폰트 변경 */
+  min-height: 360px; /* 높이 조정 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .profile-header {
@@ -14,52 +22,71 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center; /* 중앙 정렬 */
+  margin-bottom: 20px; /* 적절한 하단 여백 */
 }
 
 .profile-img {
   width: 100px;
   height: 100px;
-  background-color: #f1f870;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .edit-button {
   position: absolute;
-  top: 10px;
-  right: 20px;
-  background-color: #ffcccc;
+  top: -5px; /* 더 위로 이동 */
+  right: -10px; /* 더 자연스럽게 배치 */
+  background-color: #4caf50;
   border: none;
-  border-radius: 10px;
-  padding: 5px 10px;
-  font-size: 12px;
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-size: 14px; /* 버튼 폰트 크기 증가 */
+  font-family: 'Poppins', Arial, sans-serif; /* 폰트 변경 */
   cursor: pointer;
-  color: #333;
+  color: #fff;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .edit-button:hover {
-  background-color: #ffa7a7;
+  background-color: #45a049;
+  transform: scale(1.05);
 }
 
 .profile-info {
-  text-align: left;
-  margin-top: 20px;
+  text-align: center; /* 중앙 정렬 */
+  margin-top: 15px; /* 위쪽 간격 줄이기 */
+  color: #333;
 }
 
 .username {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 10px;
+  font-size: 22px; /* 폰트 크기 증가 */
+  font-weight: 700; /* 폰트 굵기 변경 */
+  margin-bottom: 12px;
+  color: #2c3e50;
 }
 
 .profile-info p {
-  font-size: 14px;
-  margin: 5px 0;
+  font-size: 16px; /* 폰트 크기 증가 */
+  margin: 8px 0; /* 간격 조정 */
+  color: #555;
 }
 
+.profile-info p span {
+  font-weight: bold;
+  color: #2980b9;
+}
