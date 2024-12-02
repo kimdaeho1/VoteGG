@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LoginoutModal from '../../../Modals/LoginoutModal/LoginoutModal';
-import './LoginoutButton.css';
+import LoginoutModal from '../../../Modals/LoginoutModal/LoginoutModal'
+import './LoginoutButton.css'
+import { useToast } from '../../Toast/ToastContext';
+
 
 const LoginoutButton = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { addToast } = useToast();
 
   // Extract username from the token
   const username = token ? getUsernameFromToken(token) : "";
@@ -68,6 +71,9 @@ const LoginoutButton = () => {
     document.cookie = "access_token=; path=/; domain=recordstudio.site; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 
     // Redirect to the home page
+
+    addToast("로그아웃 되었습니다.", "success");
+
     setIsModalOpen(false);
     navigate('/');
     window.location.reload(); // Reload the page

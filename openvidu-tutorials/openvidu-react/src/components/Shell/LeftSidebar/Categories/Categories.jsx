@@ -1,3 +1,5 @@
+//src/components/Shell/LeftSidebar/Categories/Categories.jsx
+
 import React, { useEffect, useState } from "react";
 import "./Categories.css";
 
@@ -45,9 +47,13 @@ const Categories = () => {
   if (!isLoggedIn) {
     // 로그인 상태가 false면 "로그인이 필요합니다" 메시지 표시
     return (
-      <div className="login-message">
-        <p>로그인이 필요합니다</p>
+      <div className="profile-container">
+      <div className="profile-header">
+      <div className="profile-info">
+        <p className="username">로그인이 필요합니다.</p>
+        </div>
       </div>
+    </div>
     );
   }
 

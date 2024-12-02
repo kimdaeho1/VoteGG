@@ -9,7 +9,7 @@ import { useRecoilState } from 'recoil';
 import { resetTimerState } from '../../../../stores/TimerAtom'; // 수정된 경로
 import { registerSetResetTimerFunc } from '../../../../stores/setTimerState'; // 수정된 경로
 
-const Timer = () => {
+const Timer = ({ isObserver }) => {
   const { roomNumber } = useParams();
   const roomId = roomNumber;
   const socket = useSocket("/timer", roomId);
@@ -135,16 +135,26 @@ const Timer = () => {
     <div>
       <div className="timer-wrapper">
         <div className="status-and-button">
-          <span className={`current-status ${getStatusClass(currentIndex)}`}>
-            {getIndexCharacter(currentIndex)} {/* 변환된 값 표시 */}
-          </span>
-          <button
-            className="start-button"
-            onClick={handleStart}
-            disabled={isRunning || timeLeft <= 0 || currentCycle >= totalCycles}
-          >
-            토론 시작
-          </button>
+        <span className={`current-status ${getStatusClass(currentIndex)}`}>
+          {!isRunning && !timerFinished
+            ? "토론 준비" // 토론 시작 전
+            : timerFinished
+            ? "토론 끝" // 토론 종료
+            : getIndexCharacter(currentIndex)} {/* 토론 진행 중 */}
+        </span>
+          {!isObserver && (
+            <button
+              className="start-button"
+              onClick={handleStart}
+              disabled={
+                isRunning || // 타이머 실행 중
+                timeLeft <= 0 || // 시간이 없을 때
+                currentCycle >= totalCycles // 모든 사이클 완료 시
+              }
+            >
+              토론 시작
+            </button>
+          )}
         </div>
         <div className="timer-container">
           <div className="timer-text">
