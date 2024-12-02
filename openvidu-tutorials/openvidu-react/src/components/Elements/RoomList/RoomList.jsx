@@ -75,7 +75,7 @@ const displayedRooms = searchQuery
       const participantCount = roomResponse.data.participantCount;
 
       if (participantCount >= 4) {
-        alert("인원 초과로 참가할 수 없습니다.");
+        addToast("인원 초과로 참가할 수 없습니다.", "error");
         return;
       }
 

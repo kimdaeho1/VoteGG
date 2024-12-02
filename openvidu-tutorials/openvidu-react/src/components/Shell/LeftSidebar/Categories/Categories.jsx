@@ -5,43 +5,43 @@ import "./Categories.css";
 
 const Categories = () => {
   const [userData, setUserData] = useState(null); // 사용자 데이터 상태
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // 로그인 여부 상태
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token")); // 로그인 여부 상태
 
-  useEffect(() => {
-    const token = localStorage.getItem("token"); // JWT 토큰 가져오기
+  const updateUserData = () => {
+    const token = localStorage.getItem("token");
     if (token) {
       try {
-        const payload = JSON.parse(atob(token.split(".")[1])); // JWT 페이로드 디코딩
-        const {
-          username = "정보 없음",
-          profileImageUrl = "/defaultportrait.jpg", // 기본 프로필 사진 경로
-          totalParticipations = 0, // 기본값: 0
-          totalWins = 0, // 기본값: 0
-          firstPlaceWins = 0, // 기본값: 0
-        } = payload;
-
-        // 승률 계산
-        const winRate =
-          totalParticipations > 0
-            ? ((totalWins / totalParticipations) * 100).toFixed(2)
-            : 0;
-
-        // 사용자 데이터 설정
+        const payload = JSON.parse(atob(token.split(".")[1]));
         setUserData({
-          username,
-          profileImageUrl,
-          totalParticipations,
-          totalWins,
-          firstPlaceWins,
-          winRate,
+          username: payload.username || "정보 없음",
+          profileImageUrl: payload.profileImageUrl || "/defaultportrait.jpg",
+          totalParticipations: payload.totalParticipations || 0,
+          totalWins: payload.totalWins || 0,
+          firstPlaceWins: payload.firstPlaceWins || 0,
+          winRate:
+            payload.totalParticipations > 0
+              ? ((payload.totalWins / payload.totalParticipations) * 100).toFixed(2)
+              : 0,
         });
+        setIsLoggedIn(true);
       } catch (error) {
         console.error("토큰 파싱 오류:", error);
-        setIsLoggedIn(false); // 로그인 상태를 false로 설정
+        setIsLoggedIn(false);
       }
     } else {
-      setIsLoggedIn(false); // 토큰이 없을 경우 로그인 상태를 false로 설정
+      setIsLoggedIn(false);
     }
+  };
+
+  useEffect(() => {
+    updateUserData();
+    const handleUserStatusChanged = () => updateUserData();
+
+    document.addEventListener("userStatusChanged", handleUserStatusChanged);
+
+    return () => {
+      document.removeEventListener("userStatusChanged", handleUserStatusChanged);
+    };
   }, []);
 
   if (!isLoggedIn) {

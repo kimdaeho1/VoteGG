@@ -33,7 +33,7 @@ const LoginoutButton = () => {
         if (!accessToken) {
           console.warn("유효한 액세스 토큰이 없습니다. 이미 로그아웃되었을 수 있습니다.");
           cleanupAfterLogout();
-          alert("이미 로그아웃된 상태입니다.");
+          addToast("이미 로그아웃된 상태입니다.", "error");
           return;
         }
 
@@ -48,7 +48,7 @@ const LoginoutButton = () => {
           console.log("카카오 REST API 로그아웃 성공");
           window.Kakao.Auth.setAccessToken(null); // Reset Kakao SDK session
           cleanupAfterLogout();
-          alert("로그아웃 되었습니다.");
+          addToast("로그아웃 되었습니다.", "error");
         } else {
           const errorData = await response.json();
           console.error("카카오 REST API 로그아웃 실패:", errorData);
@@ -59,7 +59,7 @@ const LoginoutButton = () => {
       }
     } catch (error) {
       console.error("로그아웃 중 오류 발생:", error);
-      alert("로그아웃 중 문제가 발생했습니다. 관리자에게 문의하세요.");
+      addToast("로그아웃 중 문제가 발생했습니다. 관리자에게 문의하세요.", "error");
     }
   };
 
@@ -69,6 +69,7 @@ const LoginoutButton = () => {
     localStorage.removeItem("token");
     document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
     document.cookie = "access_token=; path=/; domain=recordstudio.site; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    document.dispatchEvent(new CustomEvent("userStatusChanged")); // 이벤트 발생
 
     // Redirect to the home page
 
@@ -76,7 +77,6 @@ const LoginoutButton = () => {
 
     setIsModalOpen(false);
     navigate('/');
-    window.location.reload(); // Reload the page
   };
 
   // Navigate to login page

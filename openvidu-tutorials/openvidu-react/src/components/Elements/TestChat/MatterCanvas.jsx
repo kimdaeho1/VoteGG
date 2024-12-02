@@ -532,12 +532,25 @@ const MatterCanvas = ({ roomNumber, socket }) => {
     }
   }, [roomNumber]); // eggCount를 의존성 배열에서 제외
 
+  useEffect(() => {
+    const updateCanvasPosition = () => {
+      if (canvasRef.current) {
+        canvasRef.current.style.top = `${-window.scrollY}px`;
+      }
+    };
+  
+    window.addEventListener("scroll", updateCanvasPosition);
+    return () => {
+      window.removeEventListener("scroll", updateCanvasPosition);
+    };
+  }, []);
+
   return (
     <div
       ref={canvasRef}
       style={{
         position: "fixed", // 화면 전체를 덮도록 고정
-        top: 0,
+        top: `${window.scrollY}px`,
         left: 0,
         width: "100%", // 화면 전체 너비
         height: "100%", // 화면 전체 높이

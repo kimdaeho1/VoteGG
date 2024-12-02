@@ -23,10 +23,8 @@ const Login = () => {
 
         localStorage.setItem("token", token);
         navigate('/'); // 로그인 성공 시 메인 페이지로 리디렉션
-        window.location.reload(); // 강제 페이지 리로드
-        addToast('로그인 성공!', 'success'); // 성공 토스트 메시지
-
-        
+        document.dispatchEvent(new CustomEvent("userStatusChanged")); // 이벤트 발생
+        addToast('로그인 성공!', 'success'); // 성공 토스트 메시지        
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
