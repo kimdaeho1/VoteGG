@@ -1,3 +1,4 @@
+// src/components/Modals/VoteResultModal/VoteStatistic.jsx
 import React, { useEffect, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
@@ -42,8 +43,11 @@ const VoteStatistic = ({ onClose }) => {
     chart: {
       type: 'pie',
       backgroundColor: 'transparent',
+      style: {
+        fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+      },
     },
-    colors: ['#3498db', '#e74c3c', '#2ecc71', '#f1c40f', '#9b59b6', '#1abc9c', '#e67e22', '#34495e'],
+    colors: ['#FF6B6B', '#6BCB77', '#4D96FF', '#FFC75F', '#F9F871', '#FF8C42', '#8D93AB', '#845EC2'],
     title: {
       text: null,
     },
@@ -52,18 +56,30 @@ const VoteStatistic = ({ onClose }) => {
     },
     tooltip: {
       pointFormat: '{series.name}: <b>{point.y}</b>',
+      backgroundColor: 'rgba(0, 0, 0, 0.7)',
+      style: {
+        color: '#FFFFFF',
+      },
     },
     plotOptions: {
       pie: {
-        innerSize: '60%',
+        innerSize: '50%',
         allowPointSelect: true,
         cursor: 'pointer',
         dataLabels: {
           enabled: true,
-          style: { fontSize: '14px', color: '#333333' },
-          format: '{point.name}: {point.y}',
+          style: { fontSize: '16px', color: '#333333', textOutline: 'none' },
+          format: '<b>{point.name}</b>: {point.y}',
         },
         showInLegend: true,
+        borderColor: '#ffffff',
+        borderWidth: 2,
+        shadow: {
+          color: 'rgba(0, 0, 0, 0.3)',
+          width: 5,
+          offsetX: 0,
+          offsetY: 0,
+        },
       },
     },
     legend: {
@@ -71,7 +87,7 @@ const VoteStatistic = ({ onClose }) => {
       verticalAlign: 'bottom',
       layout: 'horizontal',
       itemStyle: {
-        fontSize: '14px',
+        fontSize: '16px',
         color: '#333333',
       },
     },
@@ -103,11 +119,11 @@ const VoteStatistic = ({ onClose }) => {
 
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-content1" onClick={(e) => e.stopPropagation()}>
         <h2 className="modal-title">결과 확인</h2>
         <p className="modal-subtitle">참가자들의 득표 결과를 확인하세요.</p>
         <HighchartsReact highcharts={Highcharts} options={options} />
-        <button onClick={handleClose} className="close-button">
+        <button onClick={handleClose} className="close-button1">
           닫기
         </button>
       </div>
