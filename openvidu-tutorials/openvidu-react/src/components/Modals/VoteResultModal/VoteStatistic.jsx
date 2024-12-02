@@ -3,6 +3,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './VoteStatistic.css'; // 스타일 시트 임포트
 
 const VoteStatistic = ({ onClose }) => {
   const [chartData, setChartData] = useState([]);
@@ -40,19 +41,38 @@ const VoteStatistic = ({ onClose }) => {
   const options = {
     chart: {
       type: 'pie',
+      backgroundColor: 'transparent',
     },
+    colors: ['#3498db', '#e74c3c', '#2ecc71', '#f1c40f', '#9b59b6', '#1abc9c', '#e67e22', '#34495e'],
     title: {
-      text: '참가자 득표 현황',
-      style: { fontSize: '20px', fontWeight: 'bold' },
+      text: null,
+    },
+    credits: {
+      enabled: false,
+    },
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.y}</b>',
     },
     plotOptions: {
       pie: {
-        innerSize: '50%',
+        innerSize: '60%',
+        allowPointSelect: true,
+        cursor: 'pointer',
         dataLabels: {
           enabled: true,
-          style: { fontSize: '14px', color: '#333' },
+          style: { fontSize: '14px', color: '#333333' },
           format: '{point.name}: {point.y}',
         },
+        showInLegend: true,
+      },
+    },
+    legend: {
+      align: 'center',
+      verticalAlign: 'bottom',
+      layout: 'horizontal',
+      itemStyle: {
+        fontSize: '14px',
+        color: '#333333',
       },
     },
     series: [
@@ -76,13 +96,20 @@ const VoteStatistic = ({ onClose }) => {
     navigate('/');
   };
 
+  const handleOverlayClick = () => {
+    navigate('/');
+    if (onClose) onClose();
+  };
+
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className="modal-overlay" onClick={handleOverlayClick}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h2 className="modal-title">결과 확인</h2>
         <p className="modal-subtitle">참가자들의 득표 결과를 확인하세요.</p>
         <HighchartsReact highcharts={Highcharts} options={options} />
-        <button onClick={handleClose} className="close-button">닫기</button>
+        <button onClick={handleClose} className="close-button">
+          닫기
+        </button>
       </div>
     </div>
   );
