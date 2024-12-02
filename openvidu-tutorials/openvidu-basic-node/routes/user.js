@@ -3,10 +3,13 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const user = require("../schemas/user"); // 'user' 소문자로 모델 불러오기
 const axios = require("axios"); // axios 추가
+const AWS = require("aws-sdk");
+const multer = require("multer"); // multer 패키지 가져오기
 require("dotenv").config(!!process.env.CONFIG ? { path: process.env.CONFIG } : {});
 
 const router = express.Router(); // 라우터 정의
 
+const upload = multer({ storage: multer.memoryStorage() });
 const { KAKAO_CLIENT_ID, KAKAO_REDIRECT_URI, JWT_SECRET } = process.env; // 환경 변수 추출
 
 // 회원가입 API
@@ -161,5 +164,79 @@ router.post("/set-username", async (req, res) => {
     res.status(500).json({ message: "서버 오류가 발생했습니다." });
   }
 });
+
+
+/*================================프로필 사진 s3 및 쿠키 토큰 재갱신 =========================*/
+// S3 설정
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: "ap-northeast-2", // S3 리전
+});
+
+// 프로필 이미지 업로드 API
+router.post("/profile-image", upload.single("profileImage"), async (req, res) => {
+  try {
+    const { file } = req;
+    const token = req.headers.authorization?.split(" ")[1];
+
+    if (!file) {
+      return res.status(400).json({ message: "파일이 필요합니다." });
+    }
+
+    if (!token) {
+      return res.status(401).json({ message: "JWT 토큰이 필요합니다." });
+    }
+
+    // JWT 토큰 검증 및 디코딩
+    let decoded;
+    try {
+      decoded = jwt.verify(token, process.env.JWT_SECRET);
+    } catch (err) {
+      return res.status(401).json({ message: "유효하지 않은 JWT 토큰입니다." });
+    }
+
+    // S3 업로드 설정
+    const uploadParams = {
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Key: `profile-images/${Date.now()}_${file.originalname}`,
+      Body: file.buffer,
+      ContentType: file.mimetype,
+    };
+
+    // S3 업로드 실행
+    const uploadResult = await s3.upload(uploadParams).promise();
+    const profileImageUrl = uploadResult.Location;
+
+    // MongoDB에서 유저 업데이트
+    const currentUser = await user.findOne({ username: decoded.username });
+    if (!currentUser) {
+      return res.status(404).json({ message: "사용자를 찾을 수 없습니다." });
+    }
+
+    currentUser.profileImageUrl = profileImageUrl;
+    await currentUser.save();
+
+    // 새로운 JWT 발급
+    const newToken = jwt.sign(
+      {
+        userId: currentUser._id,
+        username: currentUser.username,
+        profileImageUrl: currentUser.profileImageUrl,
+        totalParticipations: currentUser.totalParticipations,
+        totalWins: currentUser.totalWins,
+        firstPlaceWins: currentUser.firstPlaceWins,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    res.status(200).json({ profileImageUrl, token: newToken });
+  } catch (error) {
+    console.error("파일 업로드 중 오류:", error);
+    res.status(500).json({ message: "서버 오류가 발생했습니다." });
+  }
+});
+
 
 module.exports = router;
