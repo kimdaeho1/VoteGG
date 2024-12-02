@@ -1,5 +1,3 @@
-//src/components/Shell/LeftSidebar/Categories/Categories.jsx
-
 import React, { useEffect, useState } from "react";
 import "./Categories.css";
 
@@ -33,6 +31,41 @@ const Categories = () => {
     }
   };
 
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const token = localStorage.getItem("token");
+    const formData = new FormData();
+    formData.append("profileImage", file);
+
+    try {
+      const response = await fetch("/api/user/profile-image", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert("프로필 이미지가 업데이트되었습니다!");
+
+        // JWT를 로컬스토리지에 저장
+        localStorage.setItem("token", data.token);
+
+        // 사용자 데이터 업데이트
+        updateUserData();
+      } else {
+        alert(data.message || "업로드에 실패했습니다.");
+      }
+    } catch (error) {
+      console.error("파일 업로드 중 오류:", error);
+      alert("업로드 중 오류가 발생했습니다.");
+    }
+  };
+
   useEffect(() => {
     updateUserData();
     const handleUserStatusChanged = () => updateUserData();
@@ -45,22 +78,20 @@ const Categories = () => {
   }, []);
 
   if (!isLoggedIn) {
-    // 로그인 상태가 false면 "로그인이 필요합니다" 메시지 표시
     return (
       <div className="profile-container">
-      <div className="profile-header">
-      <div className="profile-info">
-        <p className="username">로그인이 필요합니다.</p>
+        <div className="profile-header">
+          <div className="profile-info">
+            <p className="username">로그인이 필요합니다.</p>
+          </div>
         </div>
       </div>
-    </div>
     );
   }
 
   return (
     <div className="profile-container">
       <div className="profile-header">
-        {/* 프로필 이미지 */}
         <div className="profile-img">
           <img
             src={userData?.profileImageUrl || "/defaultportrait.jpg"}
@@ -68,8 +99,19 @@ const Categories = () => {
             className="profile-image"
           />
         </div>
-        {/* 수정 버튼 */}
-        <button className="edit-button">수정</button>
+        <button
+          className="edit-button"
+          onClick={() => document.getElementById("fileInput").click()}
+        >
+          수정
+        </button>
+        <input
+          id="fileInput"
+          type="file"
+          accept="image/*"
+          style={{ display: "none" }}
+          onChange={handleFileChange}
+        />
       </div>
       <div className="profile-info">
         <p className="username">{userData?.username || "정보 없음"} 님</p>
