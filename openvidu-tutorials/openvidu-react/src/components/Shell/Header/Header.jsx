@@ -37,11 +37,12 @@ const Header = () => {
     <header className="header">
       <div className="header-top">
         <LogoButton />
-        {roomId ? (
+        {/* {roomId ? (
           <div className="room-id-display">Room: {roomname || roomId}</div>
         ) : (
           <Search /> // Search 컴포넌트 사용
-        )}
+        )} */}
+        <Search />
         <div className="right">
           <AlarmButton />
           <CreateRoomButton />
