@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Signup.css';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '../../Elements/Toast/ToastContext';
 
 const Signup = () => {
   const [username, setUsername] = useState(''); // nickname을 username으로 변경
@@ -9,6 +10,7 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { addToast } = useToast();
 
   const handleSignup = async () => {
     try {
@@ -21,8 +23,7 @@ const Signup = () => {
 
       // 요청 성공 시 처리
       if (response.status === 201) {
-        setError('');
-        alert('회원가입이 완료되었습니다!');
+        addToast("회원가입이 완료되었습니다!", "success");
         navigate('/login'); // 회원가입 성공 시 로그인 페이지로 이동
       }
     } catch (error) {
@@ -38,7 +39,7 @@ const Signup = () => {
   return (
     <div className="signup-container">
       <h2>Sign Up</h2>
-      <p>Fill in the details to create an account</p>
+      <p>회원가입에 필요한 정보를 입력하세요.</p>
       <form className="signup-form" onSubmit={(e) => e.preventDefault()}>
         <div className="input-wrapper">
           <span className="input-icon">👤</span>
@@ -46,7 +47,7 @@ const Signup = () => {
             type="text"
             value={username} // nickname을 username으로 변경
             onChange={(e) => setUsername(e.target.value)} // nickname을 username으로 변경
-            placeholder="Enter your username"
+            placeholder="Enter your ID"
             required
           />
         </div>
@@ -56,7 +57,7 @@ const Signup = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
+            placeholder="Enter your Password"
             required
           />
         </div>
@@ -66,7 +67,7 @@ const Signup = () => {
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="Confirm your password"
+            placeholder="Confirm your Password"
             required
           />
         </div>
@@ -76,7 +77,7 @@ const Signup = () => {
         </button>
       </form>
       <a href="/login" className="login-link">
-        Already have an account? Log in
+        이미 아이디가 존재한가요? 로그인
       </a>
     </div>
   );

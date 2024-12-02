@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./RoomList.css";
 import { SearchContext } from "../../../stores/SearchContext"; // Context import
+import { useToast } from "../Toast/ToastContext";
 
 const RoomList = () => {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ const RoomList = () => {
   const { searchQuery } = useContext(SearchContext); // Context에서 검색어 가져오기
   const [currentPage, setCurrentPage] = useState(0); // 현재 페이지 상태
   const [direction, setDirection] = useState(""); // 슬라이드 방향 (left or right)
+  const { addToast } = useToast();
 
   // 한 페이지에 보여줄 카드 개수
   const cardsPerPage = 4;
@@ -64,7 +66,16 @@ const RoomList = () => {
     try {
       const token = localStorage.getItem("token"); // 사용자 인증 토큰 가져오기
       if (!token) {
-        alert("로그인이 필요합니다.");
+        addToast("로그인이 필요합니다.", "error");
+        return;
+      }
+
+      // 해당 방의 participantCount를 확인
+      const roomResponse = await axios.get(`${window.location.origin}/api/room/rooms/${roomNumber}`);
+      const participantCount = roomResponse.data.participantCount;
+
+      if (participantCount >= 4) {
+        alert("인원 초과로 참가할 수 없습니다.");
         return;
       }
 
@@ -78,11 +89,11 @@ const RoomList = () => {
         // 방으로 이동
         navigate(`/room/${roomNumber}`);
       } else {
-        alert("참가에 실패했습니다. 다시 시도해주세요.");
+        addToast("참가에 실패했습니다. 다시 시도해주세요.", "error");
       }
     } catch (error) {
       console.error("방 참가 실패:", error.message);
-      alert("방 참가 중 오류가 발생했습니다.");
+      addToast("방 참가 중 오류가 발생했습니다.", "error");
     }
   };
 
@@ -165,8 +176,9 @@ const RoomList = () => {
                       <button
                         className="room-discuss-button"
                         onClick={() => joinRoom(room.roomNumber)} // 참가 함수 호출
+                        disabled={room.participantCount >= 4}
                       >
-                        토론하기
+                        {room.participantCount >= 4 ? "인원 초과" : "토론하기"}
                       </button>
                     </div>
                   </div>

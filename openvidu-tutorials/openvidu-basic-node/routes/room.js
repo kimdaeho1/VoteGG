@@ -98,16 +98,19 @@ router.get("/roomList", async (req, res) => {
   try {
     // 데이터베이스에서 방 정보 가져오기
     const rooms = await Room.find().select(
-      "roomNumber roomname createdby thumbnail tags" // memberCount 제외
+      "roomNumber roomname createdby thumbnail tags participant" // memberCount 제외
     );
 
     // usersNumber 기반으로 memberCount 업데이트
     const updatedRooms = rooms.map(room => {
       const roomId = room.roomNumber.toString(); // roomNumber를 문자열로 변환
       const currentUserCount = usersNumber[roomId] || 0; // usersNumber에서 현재 사용자 수 가져오기
+      const participantCount = room.participant ? room.participant.size : 0; // 참가자 수 계산 (participant의 키 개수)
+
       return {
         ...room.toObject(), // 기존 Room 객체의 데이터를 그대로 복사
         memberCount: currentUserCount, // memberCount를 usersNumber의 값으로 대체
+        participantCount, // 참가자 수
       };
     });
 
@@ -231,7 +234,7 @@ router.get("/rooms/:roomId", async (req, res) => {
 
   try {
     const room = await Room.findOne({ roomNumber: roomId }).select(
-      "roomNumber roomname createdby tags" // tags 포함
+      "roomNumber roomname createdby tags participant" // tags 포함
     );
 
     if (!room) {
@@ -240,11 +243,13 @@ router.get("/rooms/:roomId", async (req, res) => {
 
     // usersNumber 객체에서 현재 방의 사용자 수 가져오기
     const memberCount = (usersNumber[roomId]+1 || 0); // 없을 경우 기본값 0
+    const participantCount = room.participant ? room.participant.size : 0; // 참가자 수 계산 (participant의 키 개수)
 
     // room 객체에 memberCount 추가
     const roomWithMemberCount = {
       ...room.toObject(),
       memberCount,
+      participantCount, // 참가자 수
     };
 
     res.status(200).json(roomWithMemberCount); // tags가 포함된 응답 반환

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState  } from 'react';
 import Matter from 'matter-js';
 import { handleVote, getVoteCount } from '../../../votecount';
 import './MatterCanvas.css';
+import { useToast } from '../Toast/ToastContext';
 
 const { Engine, Render, Runner, Bodies, World, MouseConstraint, Mouse, Events } = Matter;
 const MatterCanvas = ({ roomNumber, socket }) => {
@@ -13,6 +14,7 @@ const MatterCanvas = ({ roomNumber, socket }) => {
   const token = localStorage.getItem("token");
   const username = token ? getUsernameFromToken(token) : "Unknown User"; // username 가져오기
   const isObserver = window.location.pathname.includes("/observer"); // 옵저버 판단
+  const { addToast } = useToast();
   
   useEffect(() => {
     // Matter.js 엔진 설정
@@ -192,7 +194,7 @@ const MatterCanvas = ({ roomNumber, socket }) => {
                   console.log("왼쪽 클릭 - 투표하기");                
                   // 투표 처리
                   const { maxVoteCount, usedVoteCount} = getVoteCount( roomNumber, username );
-                  handleVote(roomNumber, username, user, 1, maxVoteCount - usedVoteCount); // 1은 사용된 투표권 수
+                  handleVote(roomNumber, username, user, 1, maxVoteCount - usedVoteCount, addToast); // 1은 사용된 투표권 수
   
                   streamComponent.classList.add('grow');
   
@@ -216,7 +218,7 @@ const MatterCanvas = ({ roomNumber, socket }) => {
                 throwEgg(targetwidth, targetheight);            
                 console.log("오른쪽 클릭 - 던지기");
                 const { maxVoteCount, usedVoteCount} = getVoteCount( roomNumber, username );
-                handleVote(roomNumber, username, user, -1, maxVoteCount - usedVoteCount);
+                handleVote(roomNumber, username, user, -1, maxVoteCount - usedVoteCount, addToast);
               }
             }
             World.remove(world, draggedEgg.current); // 드래그 중인 계란 제거
@@ -269,7 +271,7 @@ const MatterCanvas = ({ roomNumber, socket }) => {
       const chatRect = chatWindow.getBoundingClientRect();
 
       const randomX = chatRect.left + 10 + Math.random() * (chatRect.width - 20);
-      const randomY = chatRect.top + 100;
+      const randomY = chatRect.top + 150;
       const img = new Image();
       img.src = "/resources/images/egg.png"; // 올바른 이미지 URL
   

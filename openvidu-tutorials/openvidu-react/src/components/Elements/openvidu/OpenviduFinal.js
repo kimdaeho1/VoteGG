@@ -6,10 +6,11 @@ import axios from "axios";
 import UserVideoComponent from "./UserVideoComponent";
 import './OpenviduFinal.css';
 import { triggerResetTimer } from '../../../stores/setTimerState';
+import { useToast } from "../Toast/ToastContext";
 
 const APPLICATION_SERVER_URL = process.env.NODE_ENV === "production" ? "" : "https://demos.openvidu.io/";
 
-class OpenviduFinal extends Component {
+class OpenviduFinal extends Component {    
     constructor(props) {
         super(props);
 
@@ -284,7 +285,7 @@ class OpenviduFinal extends Component {
                 rightUserList.push(newUser);
                 console.log('Added to rightUserList:', newUser);
             } else {
-                alert('Observer');
+                // alert('Observer');
                 // 옵저버로 전환하는 로직 필요 시 추가
                 return null;
             }
@@ -591,7 +592,7 @@ class OpenviduFinal extends Component {
                                 <p className="user-name">{currentLeftUser.userName}</p>
                             </div>
                         ) : (
-                            <p className="empty-slot">대기 중</p>
+                            <img className="empty-slot" src="/4.png"/>
                         )}
                     </div>
 
@@ -606,7 +607,7 @@ class OpenviduFinal extends Component {
                                 <p className="user-name">{currentRightUser.userName}</p>
                             </div>
                         ) : (
-                            <p className="empty-slot">대기 중</p>
+                            <img className="empty-slot" src="/4.png"/>
                         )}
                     </div>
                 </div>
