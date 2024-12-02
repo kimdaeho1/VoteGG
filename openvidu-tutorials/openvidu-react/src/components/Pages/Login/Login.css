@@ -88,3 +88,48 @@
 .login-container .signup-link:hover {
   text-decoration: underline;
 }
+
+
+/* =================소셜 로그인부분 ========================================
+/* 소셜 로그인 버튼 컨테이너 */
+.social-login-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* 버튼 사이의 간격 */
+  margin-top: 20px; /* 폼과 버튼 사이의 간격 */
+}
+
+/* 소셜 로그인 원형 버튼 기본 스타일 */
+.social-login-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* 원형으로 만들기 */
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: #ccc; /* 기본 배경색 */
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.social-login-button:hover {
+  opacity: 0.8; /* hover 효과 */
+}
+
+/* Google 버튼 스타일 */
+.social-login-button.google {
+  background-color: #db4437; /* Google의 빨간색 */
+}
+
+/* Kakao 버튼 스타일 */
+.social-login-button.kakao {
+  background-color: #ffcd00; /* Kakao의 노란색 */
+}
+
+/* Naver 버튼 스타일 */
+.social-login-button.naver {
+  background-color: #1ec800; /* Naver의 초록색 */
+}

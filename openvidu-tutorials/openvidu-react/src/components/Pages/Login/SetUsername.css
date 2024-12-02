@@ -1,0 +1,31 @@
+.set-username-container {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .set-username-container h2 {
+    font-size: 24px;
+  }
+  
+  .set-username-container form {
+    margin-top: 20px;
+  }
+  
+  .set-username-container input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .set-username-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 14px;
+  }
