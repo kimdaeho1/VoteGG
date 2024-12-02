@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './SetUsername.css';
+import { useToast } from '../../Elements/Toast/ToastContext'; // ToastContext 가져오기
 
 const SetUsername = () => {
   const [username, setUsername] = useState('');
@@ -9,6 +10,7 @@ const SetUsername = () => {
   const [socialId, setSocialId] = useState('');
   const [nickname, setNickname] = useState('');
   const [provider, setProvider] = useState('');
+  const { addToast } = useToast(); // Toast 사용을 위한 함수
 
   useEffect(() => {
     // URL 파라미터에서 socialId, nickname, provider 가져오기
@@ -33,15 +35,16 @@ const SetUsername = () => {
       });
 
       if (response.status === 200) {
-        alert('아이디 설정이 완료되었습니다.');
+        addToast('아이디 설정이 완료되었습니다.', 'success'); // Toast 메시지
         // 홈으로 리디렉션
         window.location.href = '/';
       }
     } catch (error) {
       // 오류 처리
-      setError(
-        error.response?.data?.message || '아이디 설정 중 오류가 발생했습니다.'
-      );
+      const errorMessage =
+        error.response?.data?.message || '아이디 설정 중 오류가 발생했습니다.';
+      setError(errorMessage);
+      addToast(errorMessage, 'error'); // Toast로 오류 메시지 표시
       console.error('아이디 설정 실패:', error);
     } finally {
       setLoading(false);
