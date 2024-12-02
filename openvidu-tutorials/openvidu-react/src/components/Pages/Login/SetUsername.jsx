@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './SetUsername.css';
-import { useToast } from '../../Elements/Toast/ToastContext';
 
 const SetUsername = () => {
   const [username, setUsername] = useState('');
@@ -10,14 +9,13 @@ const SetUsername = () => {
   const [socialId, setSocialId] = useState('');
   const [nickname, setNickname] = useState('');
   const [provider, setProvider] = useState('');
-  const { addToast } = useToast();
 
   useEffect(() => {
     // URL 파라미터에서 socialId, nickname, provider 가져오기
     const params = new URLSearchParams(window.location.search);
     setSocialId(params.get('kakaoId') || ''); // 'kakaoId'로 전달됨
     setNickname(params.get('nickname') || '');
-    setProvider('kakao'); // 현재 카카오만 사용
+    setProvider('카카오'); // 현재 카카오만 사용
   }, []);
 
   const handleSubmit = async (e) => {
@@ -35,7 +33,7 @@ const SetUsername = () => {
       });
 
       if (response.status === 200) {
-        addToast('아이디 설정이 완료되었습니다.', 'success');
+        alert('아이디 설정이 완료되었습니다.');
         // 홈으로 리디렉션
         window.location.href = '/';
       }
@@ -52,10 +50,11 @@ const SetUsername = () => {
 
   return (
     <div className="set-username-container">
-      <h2>아이디 설정</h2>
-      <p>제공자: {provider}</p>
-      <p>소셜 닉네임: {nickname}</p>
-      <form onSubmit={handleSubmit}>
+      <h2>처음 가입 시 아이디를 설정해 주세요</h2>
+      <p className="unique-warning-text">아이디는 한 번 설정 후 변경이 불가능합니다.</p>
+      <p>소셜 플랫폼: {provider}</p>
+      <p>플랫폼 닉네임: {nickname}</p>
+      <form onSubmit={handleSubmit} className="set-username-form">
         <input
           type="text"
           value={username}
