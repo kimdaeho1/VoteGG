@@ -9,9 +9,10 @@ const LeftSidebar = () => {
   return (
     <div className="left-sidebar">
       <HotTopics />
-      {/* <Categories /> */}
+      <Categories />
     </div>
   );
 };
 
 export default LeftSidebar;
+

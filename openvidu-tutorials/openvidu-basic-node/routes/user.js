@@ -19,7 +19,7 @@ router.post("/users", async (req, res) => {
         return res.status(400).json({ message: "비밀번호는 최소 4자 이상이어야 하며 닉네임을 포함할 수 없습니다." });
     }
 
-    if (password !== confirmPasswoFrd) {
+    if (password !== confirmPassword) {
         return res.status(400).json({ message: "비밀번호가 비밀번호 확인과 일치하지 않습니다." });
     }
 
@@ -51,14 +51,32 @@ router.post("/login", async (req, res) => {
         return res.status(400).json({ message: "닉네임 또는 패스워드를 확인해주세요" });
     }
 
+    // 데이터 기본값 처리
+    const profileImageUrl = existingUser.profileImageUrl || ""; // 없으면 빈 문자열
+    const totalParticipations = existingUser.totalParticipations || 0; // 없으면 0
+    const totalWins = existingUser.totalWins || 0; // 없으면 0
+    const firstPlaceWins = existingUser.firstPlaceWins || 0; // 없으면 0
+
     // 로그인 성공 시 JWT 발급
-    const token = jwt.sign({ userId: existingUser._id, username:existingUser.username }, "magic_number", { expiresIn: "1h" });
+    const token = jwt.sign(
+        {
+            userId: existingUser._id,
+            username: existingUser.username,
+            profileImageUrl,
+            totalParticipations,
+            totalWins,
+            firstPlaceWins,
+        },
+        "magic_number",
+        { expiresIn: "1h" }
+    );
 
     res.cookie("authorization", `Bearer ${token}`); // 쿠키 설정
     res.json({ 
         message: "로그인 성공",
-        token,
+        token, // 토큰 반환
     });
 });
+
 
 module.exports = router; // 라우터 내보내기

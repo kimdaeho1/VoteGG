@@ -70,6 +70,15 @@ const RoomList = () => {
         return;
       }
 
+      // 해당 방의 participantCount를 확인
+      const roomResponse = await axios.get(`${window.location.origin}/api/room/rooms/${roomNumber}`);
+      const participantCount = roomResponse.data.participantCount;
+
+      if (participantCount >= 4) {
+        alert("인원 초과로 참가할 수 없습니다.");
+        return;
+      }
+
       // 참가자 추가 API 호출
       const response = await axios.post(`${window.location.origin}/api/room/participant`, {
         roomNumber,
@@ -167,8 +176,9 @@ const RoomList = () => {
                       <button
                         className="room-discuss-button"
                         onClick={() => joinRoom(room.roomNumber)} // 참가 함수 호출
+                        disabled={room.participantCount >= 4}
                       >
-                        토론하기
+                        {room.participantCount >= 4 ? "인원 초과" : "토론하기"}
                       </button>
                     </div>
                   </div>

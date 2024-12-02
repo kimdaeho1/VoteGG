@@ -103,7 +103,7 @@ const HotTopics = () => {
 
   return (
     <div className="container mt-5 hot-topics" style={{ height: '450px' }}>
-      <h3 className={`text-center ${topics[activeIndex].className}-title`}>Hot Topics</h3>
+      {/* <h3 className={`text-center ${topics[activeIndex].className}-title`}>Hot Topics</h3> */}
       <div className="topics-slider">
         {topics.map((topic, index) => (
           

@@ -4,6 +4,7 @@ import LoginoutModal from '../../../Modals/LoginoutModal/LoginoutModal'
 import './LoginoutButton.css'
 import { useToast } from '../../Toast/ToastContext';
 
+
 const LoginoutButton = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -14,47 +15,47 @@ const LoginoutButton = () => {
 
   const openModal = () => {
     setIsModalOpen(true);
-  }
+  };
 
   const closeModal = () => {
     setIsModalOpen(false);
-  }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     addToast("로그아웃 되었습니다.", "success");
     setIsModalOpen(false);
-    navigate('/');
+    navigate('/'); // 홈 경로로 이동
+    window.location.reload(); // 강제 페이지 리로드
   };
 
   const handleLoginClick = () => {
     navigate('/login');
-  }
+  };
 
   return (
-    token ?
-      (
-        <>
-          <button type="button" onClick={openModal} className="logout-button">
-            {username} 님
-          </button >
-          {
-            isModalOpen && (
-              <LoginoutModal
-                username={username}
-                handleLogout={handleLogout}
-                closeModal={closeModal}
-              />
-            )
-          }
-        </>
-      ) : (
-        <button type="button" onClick={handleLoginClick} className="login-button">
-          Login
-        </button >
-      )
-  )
-}
+    token ? (
+      <>
+        <button type="button" onClick={openModal} className="logout-button">
+          {username} 님
+        </button>
+        {
+          isModalOpen && (
+            <LoginoutModal
+              username={username}
+              handleLogout={handleLogout}
+              closeModal={closeModal}
+            />
+          )
+        }
+      </>
+    ) : (
+      <button type="button" onClick={handleLoginClick} className="login-button">
+        Login
+      </button>
+    )
+  );
+};
 
 export default LoginoutButton;
 
@@ -66,4 +67,4 @@ const getUsernameFromToken = (token) => {
     console.error('Failed to parse token:', error);
     return 'Unknown User';
   }
-}
+};

@@ -592,7 +592,7 @@ class OpenviduFinal extends Component {
                                 <p className="user-name">{currentLeftUser.userName}</p>
                             </div>
                         ) : (
-                            <p className="empty-slot">대기 중</p>
+                            <img className="empty-slot" src="/4.png"/>
                         )}
                     </div>
 
@@ -607,7 +607,7 @@ class OpenviduFinal extends Component {
                                 <p className="user-name">{currentRightUser.userName}</p>
                             </div>
                         ) : (
-                            <p className="empty-slot">대기 중</p>
+                            <img className="empty-slot" src="/4.png"/>
                         )}
                     </div>
                 </div>

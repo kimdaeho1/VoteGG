@@ -23,6 +23,7 @@ const Login = () => {
         localStorage.setItem("token", token);
         addToast('로그인 성공!', 'success'); // 성공 토스트 메시지
         navigate('/'); // 로그인 성공 시 메인 페이지로 리디렉션
+        window.location.reload(); // 강제 페이지 리로드
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -38,7 +39,7 @@ const Login = () => {
   return (
     <div className="login-container">
       <h2>Login</h2>
-      <p>Enter your details to sign in to your account</p>
+      <p>아이디와 비밀번호를 입력하세요.</p>
       <form className="login-form" onSubmit={(e) => e.preventDefault()}>
         <div className="input-wrapper">
           <span className="input-icon">👤</span>
@@ -46,7 +47,7 @@ const Login = () => {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="Enter your username"
+            placeholder="Enter your ID"
             required
           />
         </div>
@@ -56,17 +57,17 @@ const Login = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
+            placeholder="Enter your Password"
             required
           />
         </div>
         {error && <p className="error-message">{error}</p>}
         <button type="button" onClick={handleLogin} className='login-login-button'>
-          Login In
+          Login
         </button>
       </form>
       <a href="/signup" className="signup-link">
-        Don't have an account? Signup Now
+      <h3>아이디가 없다면? 회원가입</h3>
       </a>
     </div>
   );

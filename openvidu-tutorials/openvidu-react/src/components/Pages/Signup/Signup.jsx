@@ -39,7 +39,7 @@ const Signup = () => {
   return (
     <div className="signup-container">
       <h2>Sign Up</h2>
-      <p>Fill in the details to create an account</p>
+      <p>회원가입에 필요한 정보를 입력하세요.</p>
       <form className="signup-form" onSubmit={(e) => e.preventDefault()}>
         <div className="input-wrapper">
           <span className="input-icon">👤</span>
@@ -47,7 +47,7 @@ const Signup = () => {
             type="text"
             value={username} // nickname을 username으로 변경
             onChange={(e) => setUsername(e.target.value)} // nickname을 username으로 변경
-            placeholder="Enter your username"
+            placeholder="Enter your ID"
             required
           />
         </div>
@@ -57,7 +57,7 @@ const Signup = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
+            placeholder="Enter your Password"
             required
           />
         </div>
@@ -67,7 +67,7 @@ const Signup = () => {
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="Confirm your password"
+            placeholder="Confirm your Password"
             required
           />
         </div>
@@ -77,7 +77,7 @@ const Signup = () => {
         </button>
       </form>
       <a href="/login" className="login-link">
-        Already have an account? Log in
+        이미 아이디가 존재한가요? 로그인
       </a>
     </div>
   );
