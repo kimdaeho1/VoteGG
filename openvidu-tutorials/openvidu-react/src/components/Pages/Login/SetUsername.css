@@ -1,31 +1,67 @@
 .set-username-container {
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .set-username-container h2 {
-    font-size: 24px;
-  }
-  
-  .set-username-container form {
-    margin-top: 20px;
-  }
-  
-  .set-username-container input {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  .set-username-container button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin-top: 10px;
-    cursor: pointer;
-  }
-  
-  .error-message {
-    color: red;
-    font-size: 14px;
-  }
+  width: 400px;
+  margin: 100px auto;
+  padding: 30px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.set-username-container h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+
+
+.set-username-container p {
+  font-size: 14px;
+  color: #555;
+  margin: 5px 0;
+}
+
+.set-username-form {
+  margin-top: 20px;
+}
+
+.set-username-form input {
+  width: 80%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.set-username-form button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.set-username-form button:disabled {
+  background-color: #999;
+}
+
+.set-username-form button:hover:enabled {
+  background-color: #0056b3;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.unique-warning-text {
+  font-size: 12px;
+  color: red !important; /* 빨간색 */
+  margin-bottom: 20px;
+  font-weight: bold; /* 강조를 위해 추가 */
+}
