@@ -17,7 +17,7 @@ const Observer = () => {
           isObserver={true} // 관전자 모드 활성화
           subs={false}
         />
-        <RoomControl />
+        <RoomControl isObserver={true}/>
       </div>
       <div className="right-side">
         <TestChat roomId={roomNumber} isObserver={true} /> {/* 옵저버 페이지는 isObserver=true */}

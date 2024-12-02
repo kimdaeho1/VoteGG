@@ -6,7 +6,7 @@ import Timer from '../openvidu/Timer/Timer';
 import { useParams } from 'react-router-dom';
 import RoomInfo from '../Buttons/EndButton/RoomInfo';
 
-const RoomControl = () => {
+const RoomControl = ({ isObserver }) => {
   const { roomNumber } = useParams(); // URL의 :id 부분 추출
 
   return (
@@ -15,7 +15,7 @@ const RoomControl = () => {
         <RoomInfo />
       </div>
       <div className='bb'>
-        <Timer roomId={roomNumber} />
+        <Timer roomId={roomNumber} isObserver={isObserver}/>
       </div>
     </div>
   );
