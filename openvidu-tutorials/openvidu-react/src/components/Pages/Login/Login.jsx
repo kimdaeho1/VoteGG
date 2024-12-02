@@ -19,10 +19,9 @@ const Login = () => {
       if (response.status === 200) {
         setError('');
         const token = response.data.token;
-        localStorage.setItem("token", token);
+        localStorage.setItem('token', token);
         alert('로그인 성공');
         navigate('/'); // 로그인 성공 시 메인 페이지로 리디렉션
-        window.location.reload(); // 강제 페이지 리로드
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -31,6 +30,11 @@ const Login = () => {
         setError('로그인 중 문제가 발생했습니다. 다시 시도해주세요.');
       }
     }
+  };
+
+  const handleKakaoLogin = () => {
+    console.log('Redirecting to Kakao login...'); // 디버깅용
+    window.location.href = '/api/user/auth/kakao'; // 서버에서 리디렉션 처리
   };
 
   return (
@@ -59,10 +63,18 @@ const Login = () => {
           />
         </div>
         {error && <p className="error-message">{error}</p>}
-        <button type="button" onClick={handleLogin} className='login-login-button'>
+        <button type="button" onClick={handleLogin} className="login-login-button">
           Login In
         </button>
       </form>
+
+      {/* 소셜 로그인 버튼 */}
+      <div className="social-login-container">
+        <button className="social-login-button google">G</button>
+        <button className="social-login-button kakao" onClick={handleKakaoLogin}>K</button>
+        <button className="social-login-button naver">N</button>
+      </div>
+
       <a href="/signup" className="signup-link">
         Don't have an account? Signup Now
       </a>
