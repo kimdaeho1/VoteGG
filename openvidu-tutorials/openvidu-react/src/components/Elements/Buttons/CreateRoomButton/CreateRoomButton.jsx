@@ -2,18 +2,20 @@ import React, { useState } from 'react';
 import './CreateRoomButton.css';
 import RoomModal from '../../../Modals/CreateRoomModal/CreateRoomModal';
 import { useNavigate } from "react-router-dom";
+import { useToast } from '../../Toast/ToastContext';
 
 const CreateRoomButton = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const closeModal = () => setIsModalOpen(false);
+  const { addToast } = useToast();
   
   const openModal = () => {
   if (token){
    setIsModalOpen(true)
   }else{
-    alert("로그인해주세요.");
+    addToast("로그인해주세요.", "error");
     navigate('/login');
   }}
 

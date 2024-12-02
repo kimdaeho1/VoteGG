@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Tagify from "@yaireo/tagify"; // Tagify 라이브러리 가져오기
 import "@yaireo/tagify/dist/tagify.css"; // Tagify 스타일 가져오기
+import { useToast } from '../../Elements/Toast/ToastContext';
 
 const CreateRoomModal = ({ onClose }) => {
   const [roomTitle, setRoomTitle] = useState('');
@@ -12,6 +13,8 @@ const CreateRoomModal = ({ onClose }) => {
   const tagifyRef = useRef(null); // Tagify 인스턴스를 참조
 
   const navigate = useNavigate();
+
+  const { addToast } = useToast();
 
   // 썸네일 변경 핸들러
   const handleThumbnailChange = (e) => {
@@ -27,7 +30,7 @@ const CreateRoomModal = ({ onClose }) => {
     try {
       const token = localStorage.getItem("token"); // 사용자 인증 토큰
       if (!token) {
-        alert("로그인이 필요합니다.");
+        addToast("로그인이 필요합니다.", "error");
         return;
       }
   
@@ -75,7 +78,7 @@ const CreateRoomModal = ({ onClose }) => {
       }
     } catch (error) {
       console.error("방 생성 실패:", error.message);
-      alert("방 생성에 실패했습니다. 다시 시도해주세요.");
+      addToast("방 생성에 실패했습니다. 다시 시도해주세요.", "error");
     }
   };
   

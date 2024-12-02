@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Signup.css';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '../../Elements/Toast/ToastContext';
 
 const Signup = () => {
   const [username, setUsername] = useState(''); // nickname을 username으로 변경
@@ -9,6 +10,7 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { addToast } = useToast();
 
   const handleSignup = async () => {
     try {
@@ -21,8 +23,7 @@ const Signup = () => {
 
       // 요청 성공 시 처리
       if (response.status === 201) {
-        setError('');
-        alert('회원가입이 완료되었습니다!');
+        addToast("회원가입이 완료되었습니다!", "success");
         navigate('/login'); // 회원가입 성공 시 로그인 페이지로 이동
       }
     } catch (error) {
