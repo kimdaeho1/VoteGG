@@ -9,9 +9,13 @@ const LeftSidebar = () => {
   return (
     <div className="left-sidebar">
       <HotTopics />
-      <Categories />
+
+      <div></div>
+      <div></div>
+      { <Categories /> }
     </div>
   );
 };
 
 export default LeftSidebar;
+
