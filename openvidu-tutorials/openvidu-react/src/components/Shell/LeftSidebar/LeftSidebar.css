@@ -1,11 +1,13 @@
 .left-sidebar {
+  position: fixed;
   width: 210px;
   padding: 20px;
+  padding-right: 0px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   /* border-right: 1px solid black;  */
-  margin-bottom: 80px;
+  margin-bottom: 0px;
   height: 80vh;
   max-height: 1200px;
   min-width: 210px;

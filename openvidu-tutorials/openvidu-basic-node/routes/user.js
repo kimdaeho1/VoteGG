@@ -19,7 +19,7 @@ router.post("/users", async (req, res) => {
         return res.status(400).json({ message: "비밀번호는 최소 4자 이상이어야 하며 닉네임을 포함할 수 없습니다." });
     }
 
-    if (password !== confirmPasswoFrd) {
+    if (password !== confirmPassword) {
         return res.status(400).json({ message: "비밀번호가 비밀번호 확인과 일치하지 않습니다." });
     }
 

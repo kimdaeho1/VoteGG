@@ -9,6 +9,7 @@ const LeftSidebar = () => {
   return (
     <div className="left-sidebar">
       <HotTopics />
+
       <div></div>
       <div></div>
       { <Categories /> }
