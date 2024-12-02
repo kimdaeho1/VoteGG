@@ -32,9 +32,9 @@ const RoomList = () => {
     fetchRooms();
   }, []);
 
-  // 검색어에 따라 필터링된 방 목록 생성
-  const displayedRooms = searchQuery
-    ? rooms.filter((room) => {
+// 검색어에 따라 필터링된 방 목록 생성
+const displayedRooms = searchQuery
+  ? rooms.filter((room) => {
       // 제목 또는 태그에 검색어 포함 여부 확인
       const titleMatch = room.roomname
         .toLowerCase()
@@ -42,9 +42,9 @@ const RoomList = () => {
       const tagMatch = room.tags?.some((tag) =>
         tag.toLowerCase().includes(searchQuery.toLowerCase())
       );
-      return titleMatch || tagMatch; // 둘 중 하나라도 true면 해당 방 포함
+      return (titleMatch || tagMatch) && room.memberCount > 0; // 추가 조건: room.memberCount > 0
     })
-    : rooms; // 검색어가 없으면 전체 방 목록 표시
+  : rooms.filter((room) => room.memberCount > 0); // 검색어가 없으면 전체 방 목록 중 memberCount > 0인 방만 표시
 
   // 총 페이지 수 계산
   const totalIndicators = Math.ceil(displayedRooms.length / cardsPerPage);

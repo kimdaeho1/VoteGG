@@ -135,9 +135,13 @@ const Timer = ({ isObserver }) => {
     <div>
       <div className="timer-wrapper">
         <div className="status-and-button">
-          <span className={`current-status ${getStatusClass(currentIndex)}`}>
-            {getIndexCharacter(currentIndex)} {/* 변환된 값 표시 */}
-          </span>
+        <span className={`current-status ${getStatusClass(currentIndex)}`}>
+          {!isRunning && !timerFinished
+            ? "토론 준비" // 토론 시작 전
+            : timerFinished
+            ? "토론 끝" // 토론 종료
+            : getIndexCharacter(currentIndex)} {/* 토론 진행 중 */}
+        </span>
           {!isObserver && (
             <button
               className="start-button"
