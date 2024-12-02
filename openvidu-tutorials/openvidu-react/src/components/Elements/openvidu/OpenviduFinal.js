@@ -10,7 +10,7 @@ import { useToast } from "../Toast/ToastContext";
 
 const APPLICATION_SERVER_URL = process.env.NODE_ENV === "production" ? "" : "https://demos.openvidu.io/";
 
-class OpenviduFinal extends Component {    
+class OpenviduFinal extends Component {
     constructor(props) {
         super(props);
 
@@ -206,10 +206,10 @@ class OpenviduFinal extends Component {
         }
 
         let publisher = null;
-        
+
         if (!this.props.isObserver) {
             try {
-                 // 관전자가 아니면 발행자 생성
+                // 관전자가 아니면 발행자 생성
                 const devices = await navigator.mediaDevices.enumerateDevices();
                 const videoDevices = devices.filter(device => device.kind === 'videoinput');
                 console.log('Available video devices:', videoDevices);
@@ -579,86 +579,78 @@ class OpenviduFinal extends Component {
 
 
         return (
-            <div className="openvidu-final">
-                <div className="video-container">
-                    {/* 왼쪽 참가자 */}
-                    <div className={`left-video ${currentTurn === 'left' && currentLeftUser ? 'active-speaker' : ''}`}>
-                        {currentLeftUser ? (
-                            <div className="user-video">
-                                <UserVideoComponent
-                                    streamManager={currentLeftUser.streamManager}
-                                    localConnectionId={localConnectionId} // 로컬 connectionId 전달
-                                />
-                                <p className="user-name">{currentLeftUser.userName}</p>
-                            </div>
-                        ) : (
-                            <img className="empty-slot" src="/4.png"/>
-                        )}
-                    </div>
+            <div>
+                <div className="openvidu-final">
+                    <div className="video-container">
+                        {/* 왼쪽 참가자 */}
+                        <div className={`left-video ${currentTurn === 'left' && currentLeftUser ? 'active-speaker' : 'none-active-speaker'}`}>
+                            {currentLeftUser ? (
+                                <div className="user-video">
+                                    <UserVideoComponent
+                                        streamManager={currentLeftUser.streamManager}
+                                        localConnectionId={localConnectionId} // 로컬 connectionId 전달
+                                    />
+                                    <p className="user-name">{currentLeftUser.userName} 님</p>
+                                    {currentTurn === 'left' && <img className="active-speaker-image" src="/resources/images/radio.png" alt="Active Speaker" />}
+                                </div>
+                            ) : (
+                                <img className="empty-slot" src="/unknown.png" />
+                            )}
+                        </div>
 
-                    {/* 오른쪽 참가자 */}
-                    <div className={`right-video ${currentTurn === 'right' && currentRightUser ? 'active-speaker' : ''}`}>
-                        {currentRightUser ? (
-                            <div className="user-video">
-                                <UserVideoComponent
-                                    streamManager={currentRightUser.streamManager}
-                                    localConnectionId={localConnectionId} // 로컬 connectionId 전달
-                                />
-                                <p className="user-name">{currentRightUser.userName}</p>
-                            </div>
-                        ) : (
-                            <img className="empty-slot" src="/4.png"/>
-                        )}
+                        {/* 오른쪽 참가자 */}
+                        <div className={`right-video ${currentTurn === 'right' && currentRightUser ? 'active-speaker' : 'none-active-speaker'}`}>
+                            {currentRightUser ? (
+                                <div className="user-video">
+                                    <UserVideoComponent
+                                        streamManager={currentRightUser.streamManager}
+                                        localConnectionId={localConnectionId} // 로컬 connectionId 전달
+                                    />
+                                    <p className="user-name">{currentRightUser.userName} 님</p>
+                                    {currentTurn === 'right' && <img className="active-speaker-image" src="/resources/images/radio.png" alt="Active Speaker" />}
+                                </div>
+                            ) : (
+                                <img className="empty-slot" src="/unknown.png" />
+                            )}
+                        </div>
                     </div>
                 </div>
-
-                {/* 화면 공유 및 방 나가기 버튼 */}
-                {!this.props.isObserver && (
-                    <div className="button-container">
-                        <button
-                            className="screen-share-button"
-                            onClick={isSharingScreen ? this.stopScreenShare : this.startScreenShare}
-                            style={{ background: "none", border: "none", padding: 0 }}
-                        >
-                            <img
-                                src={isSharingScreen ? "/Buttonimg/stopshare.png" : "/Buttonimg/share.png"}
-                                alt={isSharingScreen ? "Stop Screen Sharing" : "Start Screen Sharing"}
-                                style={{ width: "50px", height: "50px" }}
-                            />
-                        </button>
-
-                        <button
-                            className="leave-session-button"
-                            onClick={this.leaveSession}
-                            style={{ background: "none", border: "none", padding: 0 }}
-                        >
-                            <img
-                                src="/Buttonimg/leaveroom.png"
-                                alt="Leave Room"
-                                style={{ width: "50px", height: "50px" }}
-                            />
-                        </button>
-                        {/* 단계 변경 버튼 */}
-                        {isCurrentUserSpeaker ? (
-                            <div className="phase-controls">
+                <div>
+                    {/* 화면 공유 및 방 나가기 버튼 */}
+                    {!this.props.isObserver && (
+                        <div className="button-container">
+                            <button
+                                className="screen-share-button"
+                                onClick={isSharingScreen ? this.stopScreenShare : this.startScreenShare}
+                                style={{ background: "none", border: "none", padding: 0 }}
+                            >
                                 <img
-                                    src="/skip.png" // 발언자일 때 보일 이미지 경로
-                                    alt="다음 차례"
-                                    onClick={this.handleTurnChange} // 클릭 시 handleTurnChange 호출
-                                    className="phase-controls__button phase-controls__button--active" // 스타일 추가
+                                    src={isSharingScreen ? "/Buttonimg/stopshare.png" : "/Buttonimg/share.png"}
+                                    alt={isSharingScreen ? "Stop Screen Sharing" : "Start Screen Sharing"}
+                                    style={{ width: "50px", height: "50px" }}
                                 />
-                            </div>
-                        ) : (
-                            <div className="phase-controls">
-                                <img
-                                    src="/skip.png" // 발언자가 아닐 때 보일 이미지 경로
-                                    alt="기다리는 중."
-                                    className="phase-controls__button phase-controls__button--inactive" // 스타일 추가
-                                />
-                            </div>
-                        )}
-                    </div>
-                )}
+                            </button>
+                            {isCurrentUserSpeaker ? (
+                                <div className="phase-controls">
+                                    <img
+                                        src="/Buttonimg/leaveroom.png" // 발언자일 때 보일 이미지 경로
+                                        alt="다음 차례"
+                                        onClick={this.handleTurnChange} // 클릭 시 handleTurnChange 호출
+                                        className="phase-controls__button phase-controls__button--active" // 스타일 추가
+                                    />
+                                </div>
+                            ) : (
+                                <div className="phase-controls">
+                                    <img
+                                        src="/Buttonimg/leaveroom.png" // 발언자가 아닐 때 보일 이미지 경로
+                                        alt="기다리는 중."
+                                        className="phase-controls__button phase-controls__button--inactive" // 스타일 추가
+                                    />
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
             </div>
         );
     }

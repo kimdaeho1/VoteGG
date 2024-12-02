@@ -2,8 +2,8 @@
   padding: 20px;
   margin: 0 auto;
   width: 95%;
-  max-width: 1700px;
-  min-width: 1700px;
+  max-width: 1550px;
+  min-width: 1550px;
 }
 
 .room-list-header {
@@ -17,7 +17,6 @@
   font-size: 1.8em;
   color: #333;
   margin-left: 45px;
-
 }
 
 .room-list {
@@ -107,7 +106,7 @@
   justify-content: space-between;
   font-size: 0.9em;
   color: #666;
-  margin-top: 8px;
+  /* margin-top: 8px; */
 }
 
 .entry-room {

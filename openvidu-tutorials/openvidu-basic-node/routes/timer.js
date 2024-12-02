@@ -20,7 +20,7 @@ function timerSocketHandler(io) {
       if (!rooms[roomId]) {
         // 타이머 초기 설정
         rooms[roomId] = {
-          durations: [3, 1], // 타이머 단계들의 지속 시간 (초)
+          durations: [4, 3], // 타이머 단계들의 지속 시간 (초)
           cycleCount: 5, // 총 사이클 수
           currentCycle: 0, // 현재 사이클
           currentIndex: 0, // 현재 단계 인덱스

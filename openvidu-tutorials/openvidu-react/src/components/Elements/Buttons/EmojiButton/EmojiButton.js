@@ -15,7 +15,7 @@ const EmojiButton = ({ onEmojiSelect }) => {
   return (
     <div className="emoji-button-wrapper">
       <button className="emoji-button" onClick={togglePicker}>
-        <img src="/Emoji/Emoji.png" alt="Emoji" className="emoji-icon" />
+        <img src="/Emoji/imt.png" alt="Emoji" className="emoji-icon" />
       </button>
       {isPickerOpen && (
         <div className="emoji-picker">

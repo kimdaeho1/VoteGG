@@ -1,12 +1,62 @@
+/* Timer.css */
+
 /* 전체 타이머 섹션 래퍼 */
 .timer-wrapper {
   display: flex;
   flex-direction: column; /* 요소를 수직으로 정렬 */
   align-items: center; /* 수평 중앙 정렬 */
   justify-content: flex-start; 
-  gap: 2px; /* 요소 간 간격 */
+  gap: 10px; /* 요소 간 간격 */
   width: 100%;
   height: 100%;
+}
+
+/* 현재 상태와 버튼 컨테이너 */
+.status-and-button {
+  display: flex;
+  align-items: center; /* 수직 중앙 정렬 */
+  gap: 15px; /* 텍스트와 버튼 간 간격 */
+}
+
+/* StatusText 컴포넌트에서 사용되는 상태 텍스트 */
+.status-text {
+  display: inline-block;
+  font-size: 1.2rem; /* 글자 크기 조정 */
+  font-weight: bold;
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+  color: #bdc3c7; /* 기본 글자 색상 (연한 회색) */
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.status-text.status-preparing {
+  color: #7f8c8d; /* 준비 중 색상 (중간 회색) */
+}
+
+.status-text.status-speaking {
+  color: #ff0000; /* 발언 중 색상 (중간 회색) */
+}
+
+.status-text.status-third {
+  color: #bdc3c7; /* 세 번째 상태 색상 (연한 회색) */
+}
+
+.status-text.status-fourth {
+  color: #ecf0f1; /* 네 번째 상태 색상 (매우 연한 회색) */
+}
+
+.status-text.status-unknown {
+  color: #7f8c8d; /* 알 수 없는 상태 색상 (중간 회색) */
+}
+
+/* 애니메이션 클래스 */
+.status-text.fade-out {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.status-text.fade-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* 타이머 컨테이너 */
@@ -14,113 +64,110 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #2c3e50, #4a6076); /* 모던한 색상으로 변경 */
-  color: #ecf0f1; /* 글자 색상 변경 */
+  background: white; 
+  color: #000000; /* 글자 색상 밝은 회색 */
   width: 300px; /* 크기 조정 */
   height: 100px; /* 크기 조정 */
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(44, 62, 80, 0.5); /* 그림자 색상 변경 */
-  font-family: 'Digital-7', monospace;
+  /* border-radius: 15px; */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* 그림자 색상 조정 */
+  /* font-family: 'Roboto Mono', monospace;  */
   font-size: 4.5rem; /* 글자 크기 조정 */
   text-align: center;
+  position: relative;
+  overflow: hidden; /* 애니메이션을 위해 숨김 처리 */
 }
 
+/* 타이머 텍스트 */
 .timer-text {
   display: flex;
   gap: 5px; /* 숫자와 : 사이 간격을 손쉽게 조정 */
 }
 
-.timer-text span {
-  letter-spacing: 0; /* 숫자 간격 조정 */
+/* 콜론 스타일 */
+.colon {
+  display: inline-block;
+  width: 0.5em;
+  text-align: center;
+  color: #ecf0f1; /* 밝은 회색 */
 }
 
-@keyframes pulse {
-  0%, 100% {
-    box-shadow: 0 8px 20px rgba(44, 62, 80, 0.5); /* 그림자 색상 변경 */
-  }
-  50% {
-    box-shadow: 0 8px 30px rgba(44, 62, 80, 0.8); /* 그림자 색상 변경 */
-  }
+/* Digit 컴포넌트에서 사용되는 각 숫자 */
+.digit-container {
+  position: relative;
+  width: 1em;
+  height: 1.2em;
+  overflow: hidden;
 }
 
-.button-container-2 {
-  display: flex;
-  justify-content: center; /* 버튼들을 중앙 정렬 */
-  gap: 15px; /* 버튼 간 간격 */
-  margin-top: 20px;
+.digit-container .digit-prev,
+.digit-container .digit-current {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.digit-container .digit-prev {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.digit-container .digit-current {
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.digit-container.slide-up .digit-prev {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+.digit-container.slide-up .digit-current {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 /* 버튼 스타일 */
 .start-button {
-  background: linear-gradient(135deg, #3498db, #5dade2); /* 모던한 색상으로 변경 */
-  color: white;
+  /* background: #95a5a6;  */
+  color: rgb(0, 0, 0);
   border: none;
-  padding: 5px 18px; /* 크기 조정 */
+  padding: 5px 10px; /* 크기 조정 */
   font-size: 1rem; /* 글자 크기 조정 */
   cursor: pointer;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3); /* 그림자 색상 변경 */
-  transition: transform 0.2s, box-shadow 0.2s;
+  /* border-radius: 8px; */
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  /* box-shadow: 0 4px 10px rgba(149, 165, 166, 0.3);  */
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
 }
 
 .start-button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(52, 152, 219, 0.5); /* 그림자 색상 변경 */
+  box-shadow: 0 6px 15px rgba(149, 165, 166, 0.5); 
+  background: #7f8c8d; 
 }
 
 .start-button:active {
   transform: translateY(1px);
-  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3); /* 그림자 색상 변경 */
+  box-shadow: 0 2px 8px rgba(149, 165, 166, 0.3); /* 그림자 색상 변경 */
 }
 
 .start-button:disabled {
-  background: #bdc3c7; /* 비활성화 상태 색상 변경 */
+  background: #ffffff;
   cursor: not-allowed;
   box-shadow: none;
 }
 
-/* 타이머 섹션 */
-.timer-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px; /* 타이머와의 간격 */
-}
-
-/* 상태와 버튼 컨테이너 */
-.status-and-button {
-  display: flex;
-  align-items: center; /* 수직 중앙 정렬 */
-  gap: 15px; /* 텍스트와 버튼 간 간격 */
-}
-
-/* 현재 상태 표시 */
-.current-status {
-  font-size: 1.2rem; /* 글자 크기 조정 */
-  font-weight: bold;
-  color: #ecf0f1; /* 기본 글자 색상 */
-  /* text-shadow: 0 2px 4px rgba(44, 62, 80, 0.8); 기본 그림자 색상 */
-  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
-}
-
-/* currentIndex에 따른 상태 색상 */
-.status-preparing {
-  color: #f39c12; /* 준비 중 색상 */
-}
-
-.status-speaking {
-  color: #e74c3c; /* 발언 중 색상 */
-}
-
-.status-third {
-  color: #8e44ad; /* 세 번째 상태 색상 */
-}
-
-.status-fourth {
-  color: #3498db; /* 네 번째 상태 색상 */
-}
-
-.status-unknown {
-  color: #95a5a6; /* 알 수 없는 상태 색상 */
+/* 응답성을 위해 폰트 크기 조정 */
+@media (max-width: 600px) {
+  .timer-container {
+    width: 200px;
+    height: 80px;
+    font-size: 3rem;
+  }
+  .status-text {
+    font-size: 1rem;
+  }
 }

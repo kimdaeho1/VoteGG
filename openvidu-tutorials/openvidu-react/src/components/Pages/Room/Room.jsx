@@ -43,10 +43,6 @@ const Room = () => {
     <div className="room">
       <div className="left-side">
         <OpenviduFinal sessionId={roomNumber} userName={userId} />
-
-        {/* 방 제목 추가 */}
-        <h1 className="room-title">방 제목: {roomname}</h1>
-
         <RoomControl />
       </div>
       <div className="right-side">
