@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginoutModal from '../../../Modals/LoginoutModal/LoginoutModal'
 import './LoginoutButton.css'
+import { useToast } from '../../Toast/ToastContext';
 
 const LoginoutButton = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { addToast } = useToast();
 
   const username = token ? getUsernameFromToken(token) : "";
 
@@ -20,7 +22,7 @@ const LoginoutButton = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    alert("로그아웃 되었습니다.");
+    addToast("로그아웃 되었습니다.", "success");
     setIsModalOpen(false);
     navigate('/');
   };
