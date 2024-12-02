@@ -32,28 +32,20 @@
 /* 아이콘과 함께 사용할 입력 필드 래퍼 */
 .input-wrapper {
   position: relative;
-  margin-bottom: 20px;
+  width: 100%; /* 부모 컨테이너 너비에 맞춤 */
+  display: flex; /* 내부 아이콘과 입력 필드 정렬 */
+  align-items: center; /* 입력 필드 세로 중앙 정렬 */
+  justify-content: center; /* 입력 필드 가로 중앙 정렬 */
 }
 
 /* 입력 필드 스타일 */
 .login-form input {
-  width: 80%;
+  width: 80%; 
   padding: 12px 40px; /* 아이콘 위치를 고려해 패딩 추가 */
   font-size: 16px;
   border-radius: 8px;
   border: 1px solid #ddd;
-  background-color: #f9f9f9;
- 
-}
-
-/* 입력 필드 아이콘 */
-.input-icon {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 18px;
-  color: #888;
+  background-color: #f9f9f9; 
 }
 
 /* 로그인 버튼 스타일 */
