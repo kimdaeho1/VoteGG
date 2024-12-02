@@ -1,22 +1,24 @@
 /* 전체 레이아웃 */
 .openvidu-final {
     display: grid;
-    grid-template-rows: auto 70px;
+    background-color: rgb(0, 0, 0, 0.85);
+    /* grid-template-rows: auto 70px; */
     /* 첫 번째 행: 비디오, 두 번째 행: 버튼 */
     grid-template-columns: 1fr;
     /* 한 열만 사용 */
-    gap: 20px;
+    /* gap: 20px; */
     /* 비디오와 버튼 간격 */
     width: 100%;
     height: auto;
     /* 전체 화면 높이를 사용 */
-    padding: 10px;
+    /* padding: 10px; */
     box-sizing: border-box;
-    padding-bottom : 60px;
+    /* padding-bottom : 60px; */
 }
 
 /* 비디오 컨테이너 */
 .video-container {
+    margin-top: 30px;
     display: flex;
     /* 좌우로 나누기 */
     justify-content: space-between;
@@ -42,19 +44,19 @@
     /* 세로 방향 상단 정렬 */
     flex: 1;
     /* 동일한 너비로 분배 */
-    max-width: 48%;
+    /* max-width: 48%; */
     /* 각 영역의 최대 너비 */
     gap: 10px;
     /* 비디오 간 간격 */
-    border: 2px solid #eeee76;
+    /* border: 1px solid rgb(0, 0, 0, 0.3); */
     /* 영역 구분용 테두리 */
-    padding: 10px;
+    padding: 15px;
     box-sizing: border-box;
     overflow: hidden;
     /* 비디오가 영역을 넘지 않도록 설정 */
 
     height: 100%;
-    padding-bottom : 60px;
+    padding-bottom: 30px;
 }
 
 /* 비디오 컨테이너 */
@@ -64,7 +66,7 @@
 
     aspect-ratio: 16 / 9;
     /* 비율 유지 */
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     /* 비디오 배경색 */
     border-radius: 8px;
     /* 모서리를 둥글게 */
@@ -90,14 +92,17 @@
 /* 사용자 이름 스타일 */
 .user-name {
     position: absolute;
-    /* 비디오 위에 위치 */
-    bottom: -60px;
-    /* 비디오 아래에 배치 */
-    font-size: 28px;
+    bottom: 10px;
+    font-size: 1.6rem;
     font-weight: bold;
     text-align: center;
     width: 100%;
-    color: #333;
+    color: #ffffff;
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
 }
 
 /* 버튼 컨테이너 */
@@ -117,9 +122,9 @@
     /* 버튼 영역 배경색 */
     /* box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); */
     /* 상단 그림자 효과 */
-    border-top: 2px solid #eeee76;
+    border-bottom: 1px solid rgb(0, 0, 0, 0.3);
     /* 상단 구분선 */
-    margin-top : 20px;
+    margin-top: 5px;
 }
 
 /* 버튼 스타일 */
@@ -135,24 +140,50 @@
     height: 50px;
 }
 
-.active-speaker {
-    border: 2px solid red;
+.none-active-speaker {
+    opacity: 30%;
 }
 
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.active-speaker-image {
+    position: absolute;
+    /* 부모 요소를 기준으로 위치 */
+    top: 10px;
+    /* 원하는 위치로 조정 */
+    right: 10px;
+    width: 60px;
+    /* 이미지 크기 조정 */
+    height: auto;
+    animation: blink 1s infinite;
+    /* 깜빡이는 애니메이션 추가 */
+}
 
 /* 전체 phase-controls 컨테이너 */
 .phase-controls {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
 }
 
 /* 버튼 기본 스타일 */
 .phase-controls__button {
     width: 60px;
     height: 60px;
-    
+
     transition: transform 0.2s, opacity 0.2s;
 }
 

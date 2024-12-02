@@ -17,6 +17,7 @@ const Observer = () => {
           isObserver={true} // 관전자 모드 활성화
           subs={false}
         />
+        <div className='emptyspace'>.</div>
         <RoomControl isObserver={true}/>
       </div>
       <div className="right-side">

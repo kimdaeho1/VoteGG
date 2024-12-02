@@ -135,7 +135,7 @@ const TestChat = () => {
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                     color: userColors[msgContent.author] || "#000",
-                    
+
                   }}
                 >
                   {msgContent.author}
@@ -160,16 +160,22 @@ const TestChat = () => {
       </div>
       <div className="chat-footer">
         <div className="input-wrapper">
-          <input
-            type="text"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") sendMessage();
-            }}
-            placeholder="채팅 입력"
-          />
-          <EmojiButton onEmojiSelect={(emoji) => setMessage((prev) => prev + emoji)} />
+          <div className='input-container'>
+            <input
+              type="text"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") sendMessage();
+              }}
+              placeholder="채팅을 입력해주세요"
+            />
+            <div className="emoji-button-container">
+              <EmojiButton onEmojiSelect={(emoji) => setMessage((prev) => prev + emoji)}
+                className="emoji-buttons"
+              />
+            </div>
+          </div>
           {isObserver && (
             <button className="modal-button" onClick={toggleModal}>
               <img src="/resources/images/egg.png" alt="Modal" className="modal-icon" style={{ width: "20px", height: "auto" }} />
