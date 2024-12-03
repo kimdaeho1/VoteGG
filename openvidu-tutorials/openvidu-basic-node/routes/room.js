@@ -6,22 +6,39 @@ const router = express.Router();
 const max_Room_Count = 2 << 4; // 최대 방 갯수 (32)
 const user = require("../schemas/user");
 //썸네일 관련 라이브러리
+const AWS = require("aws-sdk");
 const multer = require("multer");
 // const upload = multer({ dest : "public/uploads/"});
 const path = require("path");
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "public/uploads/"); // 파일이 저장될 경로
-  },
-  filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname); // 파일 확장자 추출
-    const baseName = path.basename(file.originalname, ext); // 파일 이름만 추출
-    cb(null, `${baseName}-${Date.now()}${ext}`); // 파일 이름에 타임스탬프 추가
-  },
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "public/uploads/"); // 파일이 저장될 경로
+//   },
+//   filename: (req, file, cb) => {
+//     const ext = path.extname(file.originalname); // 파일 확장자 추출
+//     const baseName = path.basename(file.originalname, ext); // 파일 이름만 추출
+//     cb(null, `${baseName}-${Date.now()}${ext}`); // 파일 이름에 타임스탬프 추가
+//   },
+// });
+
+// S3 설정
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: "ap-northeast-2", // S3 리전
 });
 
-const upload = multer({ storage }); // 변경된 storage 설정 사용
+const upload = multer({
+  storage: multer.memoryStorage(),
+  fileFilter: (req, file, cb) => {
+    if (file.fieldname === "thumbnail") {
+      cb(null, true);
+    } else {
+      cb(new Error("Unexpected field"));
+    }
+  },
+});
 
 // UUID 생성 함수
 const getNextRoomNumber = async (maxRooms = max_Room_Count) => {
@@ -55,29 +72,50 @@ const getUsernameFromToken = (token) => {
 // 방 생성 API
 router.post("/roomCreate", upload.single("thumbnail"), async (req, res) => {
   try {
-    console.log("요청 데이터(req.body):", req.body);
-    console.log("업로드된 파일(req.file):", req.file);
+    console.log("req.body:", req.body);
+    console.log("req.file:", req.file);
+    const { roomname, createdby, thumbnail, tags } = req.body;
 
-    const { roomname, createdby, tags = [] } = req.body;
-    const roomNumber = await getNextRoomNumber(max_Room_Count);
+    // 태그 처리
+    let parsedTags = [];
+    try {
+      parsedTags = JSON.parse(req.body.tags);
+    } catch (error) {
+      console.warn("태그 파싱 오류:", error.message);
+    }
+    
+    // S3에 썸네일 업로드
+    let thumbnailUrl = "";
+    if (req.file) {
+      const uploadParams = {
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: `room-thumbnails/${Date.now()}_${req.file.originalname}`, // 고유 파일명 생성
+        Body: req.file.buffer,
+        ContentType: req.file.mimetype,
+      };
 
-    // 썸네일 기본값 처리
-    const thumbnail = req.file ? `/uploads/${req.file.filename}` : "";
+      try {
+        const uploadResult = await s3.upload(uploadParams).promise();
+        thumbnailUrl = uploadResult.Location; // 업로드된 URL
+      } catch (uploadError) {
+        console.error("S3 업로드 실패:", uploadError.message);
+        return res.status(500).json({ error: "S3 업로드 중 오류가 발생했습니다." });
+      }
+    }
 
-    // 태그 데이터를 배열 형태로 변환 (Multer가 처리한 데이터는 문자열일 수 있음)
-    const parsedTags = Array.isArray(tags) ? tags : [tags];
+    const roomNumber = await getNextRoomNumber();
 
+    // MongoDB에 방 정보 저장
     const newRoom = new Room({
       roomNumber,
       roomname,
       createdby,
       participant: { [createdby]: 0 },
-      thumbnail,
-      tags: parsedTags, // 태그 추가
+      thumbnail: thumbnailUrl, // 업로드된 썸네일 URL
+      tags: parsedTags,
     });
 
     const savedRoom = await newRoom.save();
-    console.log("방 생성됨:", savedRoom);
 
     res.status(201).json({
       roomNumber: savedRoom.roomNumber,
@@ -89,7 +127,7 @@ router.post("/roomCreate", upload.single("thumbnail"), async (req, res) => {
     });
   } catch (error) {
     console.error("방 생성 실패:", error.message);
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: "방 생성 중 오류가 발생했습니다." });
   }
 });
 

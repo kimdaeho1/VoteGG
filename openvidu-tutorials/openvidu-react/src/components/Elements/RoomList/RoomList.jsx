@@ -140,7 +140,7 @@ const displayedRooms = searchQuery
                 <div key={room.roomNumber} className="room-card">
                   <div className="room-image">
                     <img
-                      src={room.thumbnail ? `${window.location.origin}${room.thumbnail}` : "./default-thumbnail.jpg"}
+                      src={room.thumbnail ? `${room.thumbnail}` : "./default-thumbnail.jpg"}
                       onClick={() => navigate(`/observer/${room.roomNumber}`)}
                       className="entry-room"
                     />
