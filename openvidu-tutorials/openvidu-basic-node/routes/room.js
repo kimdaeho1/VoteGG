@@ -4,7 +4,7 @@ const { v4 } = require("uuid"); // UUID 생성기
 const { usersNumber } = require('../schemas/usersNumber');
 const router = express.Router();
 const max_Room_Count = 2 << 4; // 최대 방 갯수 (32)
-
+const user = require("../schemas/user");
 //썸네일 관련 라이브러리
 const multer = require("multer");
 // const upload = multer({ dest : "public/uploads/"});
@@ -233,31 +233,37 @@ router.get("/rooms/:roomId", async (req, res) => {
   const roomId = req.params.roomId;
 
   try {
+    // Room 데이터 가져오기
     const room = await Room.findOne({ roomNumber: roomId }).select(
-      "roomNumber roomname createdby tags participant" // tags 포함
+      "roomNumber roomname createdby tags participant"
     );
 
     if (!room) {
       return res.status(404).json({ error: "Room not found" });
     }
 
-    // usersNumber 객체에서 현재 방의 사용자 수 가져오기
-    const memberCount = (usersNumber[roomId]+1 || 0); // 없을 경우 기본값 0
-    const participantCount = room.participant ? room.participant.size : 0; // 참가자 수 계산 (participant의 키 개수)
+    // 방 생성자의 프로필 이미지 가져오기
+    const creator = await user.findOne({ username: room.createdby }).select("profileImageUrl"); // `user`로 변경
+    const creatorProfileImage = creator?.profileImageUrl || "/default-profile.png"; // 기본 프로필 이미지
 
-    // room 객체에 memberCount 추가
-    const roomWithMemberCount = {
-      ...room.toObject(),
-      memberCount,
-      participantCount, // 참가자 수
+    // 응답 데이터 조합
+    const roomWithDetails = {
+      roomname: room.roomname,
+      memberCount: usersNumber[roomId] + 1 || 0, // 시청자 수
+      createdby: room.createdby, // 생성자 이름
+      creatorProfileImage, // 생성자의 프로필 이미지
+      tags: room.tags || [], // 태그
     };
 
-    res.status(200).json(roomWithMemberCount); // tags가 포함된 응답 반환
+    res.status(200).json(roomWithDetails);
   } catch (error) {
     console.error("방 정보 가져오기 실패:", error.message);
     res.status(500).json({ error: "방 정보를 가져오는 중 오류가 발생했습니다." });
   }
 });
+
+
+
 
 
 
