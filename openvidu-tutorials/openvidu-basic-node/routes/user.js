@@ -231,6 +231,8 @@ router.post("/profile-image", upload.single("profileImage"), async (req, res) =>
       { expiresIn: "1h" }
     );
 
+    res.cookie("authorization", `Bearer ${newToken}`); //쿠키 리프레시
+
     res.status(200).json({ profileImageUrl, token: newToken });
   } catch (error) {
     console.error("파일 업로드 중 오류:", error);
