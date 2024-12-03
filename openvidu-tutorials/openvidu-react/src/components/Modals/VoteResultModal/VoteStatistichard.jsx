@@ -1,57 +1,31 @@
-// src/components/Modals/VoteResultModal/VoteStatistic.jsx
-
 import React, { useEffect, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import './VoteStatistic.css'; // 스타일 시트 임포트
 
-const VoteStatistic = ({ onClose, resultData }) => {
-  const [chartDataTeam, setChartDataTeam] = useState([]);
-  const [chartDataParticipants, setChartDataParticipants] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+const VoteStatistichard = () => {
 
-  const navigate = useNavigate();
+  // 하드코딩된 데이터
+  const chartDataTeam = [
+    { name: 'Red 팀', y: 5 },
+    { name: 'Blue 팀', y: 7 },
+  ];
 
-  const roomNumber = window.location.pathname.split('/').pop();
+  const chartDataParticipants = [
+    { name: '참가자 1', y: 2 },
+    { name: '참가자 2', y: 3 },
+    { name: '참가자 3', y: 4 },
+    { name: '참가자 4', y: 5 },
+  ];
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
-  // resultData를 기반으로 팀별 차트 데이터 설정
-  useEffect(() => {
-    if (resultData) {
-      const teamData = [
-        { name: 'Red 팀', y: resultData.redScore },
-        { name: 'Blue 팀', y: resultData.blueScore },
-      ];
-
-      setChartDataTeam(teamData);
-    }
-  }, [resultData]);
-
-  // 참가자별 데이터를 fetch하여 차트 데이터 설정
-  useEffect(() => {
-    const fetchParticipants = async () => {
-      try {
-        const response = await axios.get(`/api/room/${roomNumber}/participants`);
-        const participants = response.data;
-
-        const participantData = participants.map(([id, votes]) => ({
-          name: id,
-          y: votes,
-        }));
-
-        setChartDataParticipants(participantData);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error fetching participants:', error);
-        setError('참가자 목록을 가져오는 중 오류가 발생했습니다.');
-        setIsLoading(false);
-      }
-    };
-
-    fetchParticipants();
-  }, [roomNumber]);
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   // 가장 득표수가 많은 참가자 찾기
   const maxParticipant = chartDataParticipants.reduce((max, participant) => {
@@ -180,35 +154,17 @@ const VoteStatistic = ({ onClose, resultData }) => {
     ],
   };
 
-  if (isLoading || chartDataTeam.length < 2) {
-    return <div className="loading-message">로딩 중...</div>;
-  }
-
-  if (error) {
-    return <div className="error-message">{error}</div>;
-  }
-
-  const handleClose = () => {
-    navigate('/');
-    if (onClose) onClose();
-  };
-
-  const handleOverlayClick = () => {
-    navigate('/');
-    if (onClose) onClose();
-  };
-
   return (
-    <div className="modal-overlay" onClick={handleOverlayClick}>
-      <div className="modal-content1" onClick={(e) => e.stopPropagation()}>
-       <h2 className="modal-title">참가자 및 팀 득표 결과</h2>
+    <div className="modal-overlay">
+      <div className="modal-content1">
+        <h2 className="modal-title">참가자 및 팀 득표 결과</h2>
         <div className="chart-container">
           <HighchartsReact highcharts={Highcharts} options={teamChartOptions} />
         </div>
         <div className="chart-container">
           <HighchartsReact highcharts={Highcharts} options={participantChartOptions} />
         </div>
-        <button onClick={handleClose} className="close-button1">
+        <button className="close-button1" onClick={closeModal}>
           닫기
         </button>
       </div>
@@ -216,4 +172,5 @@ const VoteStatistic = ({ onClose, resultData }) => {
   );
 };
 
-export default VoteStatistic;
+export default VoteStatistichard;
+
