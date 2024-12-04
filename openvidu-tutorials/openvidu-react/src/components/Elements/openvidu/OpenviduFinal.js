@@ -209,18 +209,34 @@ class OpenviduFinal extends Component {
 
         if (!this.props.isObserver) {
             try {
-                // 관전자가 아니면 발행자 생성
+                // 브라우저 호환성 확인
+                if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+                    console.error('Media devices API is not supported in this browser.');
+                    return;
+                }
+
+                // 카메라와 마이크 권한 요청
+                try {
+                    await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                    console.log('Camera and microphone permissions granted.');
+                } catch (error) {
+                    console.error('Camera and microphone permission denied:', error);
+                    return;
+                }
+
+                // 장치 목록 가져오기
                 const devices = await navigator.mediaDevices.enumerateDevices();
                 const videoDevices = devices.filter(device => device.kind === 'videoinput');
                 console.log('Available video devices:', videoDevices);
 
-                // 카메라가 하나도 없는 경우 처리
+                // 비디오 장치 유효성 검증
                 if (videoDevices.length === 0) {
                     console.error('No video input devices found');
                     return;
                 }
 
                 const deviceId = videoDevices[0]?.deviceId; // 첫 번째 카메라 사용
+                console.log('Using video device:', deviceId);
                 publisher = await OV.initPublisherAsync(undefined, {
                     audioSource: undefined,
                     videoSource: deviceId,
