@@ -51,10 +51,10 @@ const Timer = ({ isObserver }) => {
 
     // 타이머 종료 이벤트 받기
     const handleTimerFinished = (data) => {
-      console.log("타이머가 완료되었습니다.");
+      console.log("타이머가 완료되었습니다. 수신된 데이터:", data);
       setIsRunning(false);
       setTimerFinished(true);
-      setResultData(data);
+      setResultData(data || {}); // data가 없을 경우 빈 객체로 설정
     };
 
     // phaseChange 이벤트 받기

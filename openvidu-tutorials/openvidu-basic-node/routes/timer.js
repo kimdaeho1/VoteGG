@@ -265,7 +265,22 @@ function timerSocketHandler(io) {
       // DB 업데이트
       await Promise.all(users.map((user) => user.save()));
 
+
       console.log("투표 결과가 성공적으로 처리되었습니다.");
+// =======
+//         // 클라이언트에게 결과 전송
+//         timerNamespace.to(roomId).emit('timerFinished', {
+//           message: "투표 결과가 성공적으로 처리되었습니다.",
+//           redScore: redScore || 0,
+//           blueScore: blueScore || 0,
+//           topScorers: topScorers.map((user) => user.username),
+//         });
+//       } catch (error) {
+//         console.error("투표 결과 처리 중 오류:", error);
+//         // 클라이언트에게 오류 메시지 전송
+//         timerNamespace.to(roomId).emit('timerFinished', { error: "투표 결과를 처리하는 중 오류가 발생했습니다." });
+//       }
+// >>>>>>> main
 
       // 클라이언트에게 결과 전송
       timerNamespace.to(roomId).emit('timerFinished', {

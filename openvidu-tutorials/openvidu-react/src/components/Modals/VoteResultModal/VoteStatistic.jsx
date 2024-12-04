@@ -19,14 +19,22 @@ const VoteStatistic = ({ onClose, resultData }) => {
 
   // resultData를 기반으로 팀별 차트 데이터 설정
   useEffect(() => {
+    console.log("VoteStatistic에서 수신한 resultData:", resultData);
     if (resultData) {
       const teamData = [
-        { name: 'Red 팀', y: resultData.redScore },
-        { name: 'Blue 팀', y: resultData.blueScore },
+        { name: 'Red 팀', y: resultData.redScore || 0 },
+        { name: 'Blue 팀', y: resultData.blueScore || 0 },
       ];
-
+      setChartDataTeam(teamData);
+    } else {
+      // resultData가 없을 때 기본값 설정
+      const teamData = [
+        { name: 'Red 팀', y: 0 },
+        { name: 'Blue 팀', y: 0 },
+      ];
       setChartDataTeam(teamData);
     }
+    setIsLoading(false); // 로딩 상태 해제
   }, [resultData]);
 
   // 참가자별 데이터를 fetch하여 차트 데이터 설정
@@ -181,7 +189,7 @@ const VoteStatistic = ({ onClose, resultData }) => {
   };
 
   if (isLoading || chartDataTeam.length < 2) {
-    return <div className="loading-message">로딩 중...</div>;
+    return <div className="loading-message">로딩 중......</div>;
   }
 
   if (error) {
