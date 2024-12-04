@@ -71,35 +71,16 @@ export default class OpenViduVideoComponent extends Component {
         }
     }
 
-
     render() {
-        const { muted, streamManager } = this.props;
-
-        // Initialize connectionId and clientData
-        let connectionId = '';
-        let clientData = '';
-
-        if (streamManager && streamManager.stream && streamManager.stream.connection) {
-            const connection = streamManager.stream.connection;
-            connectionId = connection.connectionId || '';
-            try {
-                const data = JSON.parse(connection.data);
-                clientData = data.clientData || 'Unknown';
-            } catch (error) {
-                console.error('Error parsing connection data:', error);
-            }
-        }
+        const { muted } = this.props; // muted prop 추가
 
         return (
             <video
                 autoPlay
                 playsInline
                 ref={this.videoRef}
-                muted={muted}
+                muted={muted} // muted prop 전달
                 style={{ width: '100%', height: '100%' }}
-                id={'video_' + connectionId}
-                data-connection-id={connectionId}
-                data-client-data={clientData}
             />
         );
     }
