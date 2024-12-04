@@ -436,7 +436,7 @@ const MatterCanvas = ({ roomNumber, socket }) => {
               console.log("egg removed due to timeout");
               Matter.Events.off(engine, "afterUpdate");
             }
-          }, 1); // 1초 뒤 계란 제거
+          }, 1000); // 1초 뒤 계란 제거
 
           Matter.Events.on(engine, "afterUpdate", () => {
             const distanceX = Math.abs(egg.position.x - targetX);
