@@ -140,7 +140,7 @@ const CreateRoomModal = ({ onClose }) => {
             생성
           </button>
           <button className="modal-cancel-button" onClick={onClose}>
-            취소
+            닫기
           </button>
         </div>
       </div>

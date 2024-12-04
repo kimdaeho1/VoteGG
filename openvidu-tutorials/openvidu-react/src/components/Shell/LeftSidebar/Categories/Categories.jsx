@@ -94,19 +94,21 @@ const Categories = () => {
   return (
     <div className="profile-container">
       <div className="profile-header">
+        <h2 className='profile-hello'>Hello!</h2>
         <div className="profile-img">
           <img
             src={userData?.profileImageUrl || "/defaultportrait.jpg"}
             alt="프로필"
+            onClick={() => document.getElementById("fileInput").click()}
             className="profile-image"
           />
         </div>
-        <button
+        {/* <button
           className="edit-button"
           onClick={() => document.getElementById("fileInput").click()}
         >
           수정
-        </button>
+        </button> */}
         <input
           id="fileInput"
           type="file"

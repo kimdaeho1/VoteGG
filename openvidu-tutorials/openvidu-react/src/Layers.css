@@ -1,7 +1,7 @@
 .layers {
   display: flex;
   flex-direction: column; /* 위에서 아래로 배치 */
-  height: 97vh; /* 전체 화면을 차지 */
+  height: 96vh; /* 전체 화면을 차지 */
   /* overflow: hidden; */
 }
 
@@ -10,7 +10,7 @@
   /* flex-direction: column; */
   flex: 1;
   margin-top: 70px;
-  height: calc(97vh - 70px); 
+  height: calc(97vh - 100px); 
   box-sizing: border-box;
 }
 

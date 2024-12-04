@@ -48,18 +48,18 @@
   border-radius: 5px;
   cursor: pointer;
 }
-.modal-create-button:hover {
+/* .modal-create-button:hover {
   background-color: #0056b3;
-}
+} */
 .modal-cancel-button {
   padding: 10px 20px;
-  background-color: #ccc;
-  color: black;
+  background-color: #ff4d4f;
+  color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
-.modal-cancel-button:hover {
+/* .modal-cancel-button:hover {
   background-color: #999;
-}
+} */
 

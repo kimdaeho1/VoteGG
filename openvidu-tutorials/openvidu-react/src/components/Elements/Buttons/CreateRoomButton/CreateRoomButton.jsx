@@ -23,7 +23,7 @@ const CreateRoomButton = () => {
     <div className="create-room-container">
       <button className="create-room-button" onClick={openModal}>
         <img
-          src="/live2.png" // PNG 파일 경로
+          src="/debatelast.png" // PNG 파일 경로
           alt="Create Room"
           className="create-room-icon"
         />

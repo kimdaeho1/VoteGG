@@ -6,7 +6,7 @@ const LogoButton = () => {
 
   return (<Link to="/" className="logo-link">
     <img
-      src="/mainlogo2.png" // 로고 이미지 경로
+      src="/logos.png" // 로고 이미지 경로
       alt="Agora Logo"
       className="logo-image"
     />

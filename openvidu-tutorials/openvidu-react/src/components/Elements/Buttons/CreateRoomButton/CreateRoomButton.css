@@ -6,20 +6,20 @@
 }
 .create-room-button {
   border: none;
-  border-radius: 40%; /* 원형 버튼 */
-  background-color: white; /* 버튼 배경색 */
+  /* border-radius: 40%; / */
+  background-color: rgba(255, 255, 255, 0); 
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.3s;
-  padding: 5px;
+  transition: transform 0.2s ease; /* 애니메이션 추가 */
+  /* padding: 5px; */
 }
 .create-room-button:hover {
-  background-color: #e3e3e3; /* 호버 시 색상 변경 */
+  transform: scale(1.1); /* 크기 확대 (1.1배) */
 }
 .create-room-icon {
-  width: 45px;
-  height: 45px; /* 아이콘 크기 */
+  width: 52px;
+  height: 42px; /* 아이콘 크기 */
   opacity: 80%;
 }

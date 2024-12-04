@@ -1,3 +1,44 @@
+/* .home-background {
+  position: fixed;
+  top: 0;
+  right: 0; 
+  width: 80vw;
+  height: 100vh;
+  background-image: url('/eggback.jpg'); 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  z-index: -1; 
+} */
+
+.home-background2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 13vw;
+  min-width: 230px;
+  height: 100vh;
+  min-height: 800px;
+  max-height: 800px;
+  /* max-width: 400px; */
+  background-color: #ffffff63;
+  /* 원하는 배경색으로 변경 */
+  z-index: -1;
+  /* 다른 컴포넌트들보다 뒤에 배치 */
+}
+
+.home-background3 {
+  position: fixed;
+  top: 800px;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* min-height: 550px;
+  max-height: 550px; */
+  background-color: #fffef4;
+  z-index: -1;
+}
+
 .home {
   display: flex;
   height: 100vh;

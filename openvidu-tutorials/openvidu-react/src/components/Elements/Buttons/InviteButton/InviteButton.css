@@ -13,12 +13,13 @@
     border: none;
     border-radius: 30%;
     cursor: pointer;
-    transition: background-color 0.3s;
-    
+    transition: transform 0.2s ease; /* 애니메이션 추가 */
+    /* margin-right: 10px; */
+    margin-left: 20px;
   }
   
   .Invite-button:hover {
-    background-color: #e3e3e3;
+    transform: scale(1.1); /* 크기 확대 (1.1배) */
   }
   
   .Invite-button {
@@ -29,7 +30,7 @@
   }
   
   .Invite-icon {
-    width: 35px; /* 아이콘 크기 조정 */
-    height: 35px;
+    width: 50px; /* 아이콘 크기 조정 */
+    height: 40px;
     opacity: 60%;
   }
