@@ -33,6 +33,7 @@ const InviteModal = ({ onClose }) => {
         }
     };
 
+    
     return (
         <div className="invite-modal">
             <div className="invite-modal-content">

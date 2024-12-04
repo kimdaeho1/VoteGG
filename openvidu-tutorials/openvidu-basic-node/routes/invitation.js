@@ -13,6 +13,7 @@ const invitationSchema = new mongoose.Schema({
 
 const Invitation = mongoose.model('Invitation', invitationSchema);
 
+
 // 초대 생성 API
 router.post('/invite', async (req, res) => {
   const { inviter, invitee, roomId } = req.body;
@@ -75,7 +76,7 @@ router.post('/invitations/respond', async (req, res) => {
 
     invitation.status = response;
     await invitation.save();
-    res.json({ message: `초대가 ${response}되었습니다.`, invitation });
+    res.json({ message: `초대가 ${response}되었습니다.`, invitation});
   } catch (error) {
     res.status(500).json({ message: '초대 응답 처리 중 오류가 발생했습니다.', error });
   }
