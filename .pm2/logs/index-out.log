@@ -1,0 +1,96 @@
+Application started on port:  5000
+Mongoose connected to DB Cluster
+Connected to MongoDB
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b5b70b18448f0b009245'),
+    roomNumber: '45bbe176cafcae3dacdaa7fffa31a439',
+    roomname: 'asdw',
+    createdby: 'qqq',
+    participant: Map(4) { 'qqq' => 0, 'new1234' => 0, 'qqqqqq' => 0, 'qqqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733342646995_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b7516a601364f98e44f3'),
+    roomNumber: '4b092f4f8c8b8558bfbbcd9d5f8be361',
+    roomname: '제발....',
+    createdby: 'qqqqq',
+    participant: Map(3) { 'qqqqq' => 0, 'new1234' => 0, 'qqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343056904_defaultdebate.jpeg',
+    tags: [ 'ㄴㄴㄴㄴ' ],
+    memberCount: 0,
+    participantCount: 3
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b5b70b18448f0b009245'),
+    roomNumber: '45bbe176cafcae3dacdaa7fffa31a439',
+    roomname: 'asdw',
+    createdby: 'qqq',
+    participant: Map(4) { 'qqq' => 0, 'new1234' => 0, 'qqqqqq' => 0, 'qqqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733342646995_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b7516a601364f98e44f3'),
+    roomNumber: '4b092f4f8c8b8558bfbbcd9d5f8be361',
+    roomname: '제발....',
+    createdby: 'qqqqq',
+    participant: Map(3) { 'qqqqq' => 0, 'new1234' => 0, 'qqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343056904_defaultdebate.jpeg',
+    tags: [ 'ㄴㄴㄴㄴ' ],
+    memberCount: 0,
+    participantCount: 3
+  }
+]
+req.body: [Object: null prototype] {
+  roomname: '테스트',
+  createdby: 'domvy',
+  tags: '[]'
+}
+req.file: {
+  fieldname: 'thumbnail',
+  originalname: 'defaultdebate.jpeg',
+  encoding: '7bit',
+  mimetype: 'image/jpeg',
+  buffer: <Buffer ff d8 ff e0 00 10 4a 46 49 46 00 01 01 00 00 01 00 01 00 00 ff db 00 84 00 0a 07 08 12 16 11 12 12 11 12 18 18 12 12 12 12 12 11 11 11 12 12 11 11 12 ... 5168 more bytes>,
+  size: 5218
+}

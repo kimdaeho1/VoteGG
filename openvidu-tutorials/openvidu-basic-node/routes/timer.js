@@ -22,11 +22,11 @@ function timerSocketHandler(io) {
       if (!rooms[roomId]) {
         // 타이머 초기 설정
         rooms[roomId] = {
-          durations: [3, 1], // 타이머 단계들의 지속 시간 (초)
+          durations: [5, 10], // 타이머 단계들의 지속 시간 (초)
           cycleCount: 5, // 총 사이클 수
           currentCycle: 0, // 현재 사이클
           currentIndex: 0, // 현재 단계 인덱스
-          timeLeft: 3, // 초기 남은 시간
+          timeLeft: 5, // 초기 남은 시간
           isRunning: false,
           timer: null, // 타이머 객체
           currentPhase: 1, // 초기 phase

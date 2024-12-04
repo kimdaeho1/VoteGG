@@ -1,0 +1,387 @@
+2024-12-04T18:50:22: PM2 log: ===============================================================================
+2024-12-04T18:50:22: PM2 log: --- New PM2 Daemon started ----------------------------------------------------
+2024-12-04T18:50:22: PM2 log: Time                 : Wed Dec 04 2024 18:50:22 GMT+0000 (Coordinated Universal Time)
+2024-12-04T18:50:22: PM2 log: PM2 version          : 5.4.3
+2024-12-04T18:50:22: PM2 log: Node.js version      : 18.20.4
+2024-12-04T18:50:22: PM2 log: Current arch         : x64
+2024-12-04T18:50:22: PM2 log: PM2 home             : /home/ubuntu/.pm2
+2024-12-04T18:50:22: PM2 log: PM2 PID file         : /home/ubuntu/.pm2/pm2.pid
+2024-12-04T18:50:22: PM2 log: RPC socket file      : /home/ubuntu/.pm2/rpc.sock
+2024-12-04T18:50:22: PM2 log: BUS socket file      : /home/ubuntu/.pm2/pub.sock
+2024-12-04T18:50:22: PM2 log: Application log path : /home/ubuntu/.pm2/logs
+2024-12-04T18:50:22: PM2 log: Worker Interval      : 30000
+2024-12-04T18:50:22: PM2 log: Process dump file    : /home/ubuntu/.pm2/dump.pm2
+2024-12-04T18:50:22: PM2 log: Concurrent actions   : 2
+2024-12-04T18:50:22: PM2 log: SIGTERM timeout      : 1600
+2024-12-04T18:50:22: PM2 log: ===============================================================================
+2024-12-04T18:50:22: PM2 log: App [server:0] starting in -fork mode-
+2024-12-04T18:50:22: PM2 log: App [server:0] online
+2024-12-04T18:50:31: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:50:31: PM2 log: App [client:1] online
+2024-12-04T18:50:31: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:50:31: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:50:31: PM2 log: App [client:1] online
+2024-12-04T18:50:31: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:50:31: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:50:31: PM2 log: App [client:1] online
+2024-12-04T18:50:31: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:50:31: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:50:31: PM2 log: App [client:1] online
+2024-12-04T18:50:31: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:50:31: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:50:31: PM2 log: App [client:1] online
+2024-12-04T18:50:32: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:50:32: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:50:32: PM2 log: App [client:1] online
+2024-12-04T18:50:32: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:50:32: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:50:32: PM2 log: App [client:1] online
+2024-12-04T18:50:32: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:50:32: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:50:32: PM2 log: App [client:1] online
+2024-12-04T18:50:32: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:50:32: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:50:32: PM2 log: App [client:1] online
+2024-12-04T18:50:32: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:50:32: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:50:32: PM2 log: App [client:1] online
+2024-12-04T18:50:33: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:50:33: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:50:33: PM2 log: App [client:1] online
+2024-12-04T18:50:33: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:50:33: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:50:33: PM2 log: App [client:1] online
+2024-12-04T18:50:33: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:50:33: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:50:33: PM2 log: App [client:1] online
+2024-12-04T18:50:33: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:50:33: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:50:33: PM2 log: App [client:1] online
+2024-12-04T18:50:33: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:50:33: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:50:33: PM2 log: App [client:1] online
+2024-12-04T18:50:34: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:50:34: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:50:34: PM2 log: App [client:1] online
+2024-12-04T18:50:34: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:50:34: PM2 log: Script /usr/bin/bash had too many unstable restarts (16). Stopped. "errored"
+2024-12-04T18:52:58: PM2 log: App [client:2] starting in -fork mode-
+2024-12-04T18:52:58: PM2 log: App [client:2] online
+2024-12-04T18:52:58: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:52:58: PM2 log: App [client:3] online
+2024-12-04T18:52:58: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:52:58: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:52:58: PM2 error: Error [ERR_STREAM_DESTROYED]: Cannot call write after a stream was destroyed
+2024-12-04T18:52:58: PM2 log: App [client:3] online
+2024-12-04T18:52:59: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:52:59: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:52:59: PM2 log: App [client:3] online
+2024-12-04T18:52:59: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:52:59: PM2 error: Error [ERR_STREAM_DESTROYED]: Cannot call write after a stream was destroyed
+2024-12-04T18:52:59: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:52:59: PM2 log: App [client:3] online
+2024-12-04T18:52:59: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:52:59: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:52:59: PM2 log: App [client:3] online
+2024-12-04T18:53:00: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:00: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:00: PM2 log: App [client:3] online
+2024-12-04T18:53:00: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:00: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:00: PM2 error: Error [ERR_STREAM_DESTROYED]: Cannot call write after a stream was destroyed
+2024-12-04T18:53:00: PM2 log: App [client:3] online
+2024-12-04T18:53:00: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:00: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:00: PM2 log: App [client:3] online
+2024-12-04T18:53:00: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:00: PM2 error: Error [ERR_STREAM_DESTROYED]: Cannot call write after a stream was destroyed
+2024-12-04T18:53:00: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:00: PM2 log: App [client:3] online
+2024-12-04T18:53:01: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:01: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:01: PM2 log: App [client:3] online
+2024-12-04T18:53:01: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:01: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:01: PM2 log: App [client:3] online
+2024-12-04T18:53:01: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:01: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:01: PM2 log: App [client:3] online
+2024-12-04T18:53:02: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:02: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:02: PM2 error: Error [ERR_STREAM_DESTROYED]: Cannot call write after a stream was destroyed
+2024-12-04T18:53:02: PM2 log: App [client:3] online
+2024-12-04T18:53:02: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:02: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:02: PM2 log: App [client:3] online
+2024-12-04T18:53:02: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:02: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:02: PM2 error: Error [ERR_STREAM_DESTROYED]: Cannot call write after a stream was destroyed
+2024-12-04T18:53:02: PM2 log: App [client:3] online
+2024-12-04T18:53:03: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:03: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:03: PM2 log: App [client:3] online
+2024-12-04T18:53:03: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:03: PM2 log: Script /home/ubuntu/openvidu-tutorials/openvidu-react had too many unstable restarts (16). Stopped. "errored"
+2024-12-04T18:53:03: PM2 error: Error [ERR_STREAM_DESTROYED]: Cannot call write after a stream was destroyed
+2024-12-04T18:53:03: PM2 error: Cancelling versioning data parsing
+2024-12-04T18:53:46: PM2 log: Stopping app:client id:1
+2024-12-04T18:53:46: PM2 error: app=client id=1 does not have a pid
+2024-12-04T18:53:47: PM2 log: Stopping app:client id:2
+2024-12-04T18:53:47: PM2 log: Stopping app:client id:3
+2024-12-04T18:53:47: PM2 error: app=client id=3 does not have a pid
+2024-12-04T18:53:47: PM2 log: App [client:2] exited with code [0] via signal [SIGINT]
+2024-12-04T18:53:47: PM2 log: pid=206023 msg=process killed
+2024-12-04T18:53:54: PM2 log: App [client:4] starting in -fork mode-
+2024-12-04T18:53:54: PM2 log: App [client:4] online
+2024-12-04T18:53:54: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:53:54: PM2 log: App [client:2] starting in -fork mode-
+2024-12-04T18:53:54: PM2 log: App [client:1] online
+2024-12-04T18:53:54: PM2 log: App [client:2] online
+2024-12-04T18:53:54: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:54: PM2 log: Stopping app:client id:4
+2024-12-04T18:53:54: PM2 log: App [client:3] online
+2024-12-04T18:53:54: PM2 log: App [client:4] exited with code [0] via signal [SIGINT]
+2024-12-04T18:53:54: PM2 log: pid=206405 msg=process killed
+2024-12-04T18:53:54: PM2 log: App [client:4] starting in -fork mode-
+2024-12-04T18:53:54: PM2 log: App [client:4] online
+2024-12-04T18:53:54: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:53:54: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:53:54: PM2 log: App [client:1] online
+2024-12-04T18:53:54: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:54: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:54: PM2 log: App [client:3] online
+2024-12-04T18:53:55: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:55: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:55: PM2 log: App [client:3] online
+2024-12-04T18:53:55: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:53:55: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:53:55: PM2 log: App [client:1] online
+2024-12-04T18:53:55: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:55: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:55: PM2 log: App [client:3] online
+2024-12-04T18:53:55: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:53:55: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:53:55: PM2 log: App [client:1] online
+2024-12-04T18:53:56: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:56: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:56: PM2 log: App [client:3] online
+2024-12-04T18:53:56: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:53:56: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:53:56: PM2 log: App [client:1] online
+2024-12-04T18:53:56: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:56: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:56: PM2 log: App [client:3] online
+2024-12-04T18:53:56: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:53:56: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:53:56: PM2 log: App [client:1] online
+2024-12-04T18:53:56: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:56: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:56: PM2 log: App [client:3] online
+2024-12-04T18:53:57: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:53:57: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:53:57: PM2 log: App [client:1] online
+2024-12-04T18:53:57: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:57: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:57: PM2 log: App [client:3] online
+2024-12-04T18:53:57: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:53:57: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:53:57: PM2 log: App [client:1] online
+2024-12-04T18:53:57: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:57: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:57: PM2 log: App [client:3] online
+2024-12-04T18:53:57: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:53:57: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:53:58: PM2 log: App [client:1] online
+2024-12-04T18:53:58: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:58: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:58: PM2 log: App [client:3] online
+2024-12-04T18:53:58: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:53:58: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:53:58: PM2 log: App [client:1] online
+2024-12-04T18:53:58: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:58: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:58: PM2 log: App [client:3] online
+2024-12-04T18:53:59: PM2 log: App [client:1] exited with code [254] via signal [SIGINT]
+2024-12-04T18:53:59: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T18:53:59: PM2 log: App [client:1] online
+2024-12-04T18:53:59: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:59: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:59: PM2 log: App [client:3] online
+2024-12-04T18:53:59: PM2 log: Stopping app:client id:1
+2024-12-04T18:53:59: PM2 log: Stopping app:client id:2
+2024-12-04T18:53:59: PM2 log: App [client:1] exited with code [0] via signal [SIGINT]
+2024-12-04T18:53:59: PM2 log: App [client:3] exited with code [1] via signal [SIGINT]
+2024-12-04T18:53:59: PM2 log: App [client:3] starting in -fork mode-
+2024-12-04T18:53:59: PM2 log: App [client:3] online
+2024-12-04T18:53:59: PM2 log: App [client:2] exited with code [0] via signal [SIGINT]
+2024-12-04T18:53:59: PM2 log: pid=206739 msg=process killed
+2024-12-04T18:53:59: PM2 log: Stopping app:client id:3
+2024-12-04T18:53:59: PM2 log: App [client:3] exited with code [0] via signal [SIGINT]
+2024-12-04T18:53:59: PM2 log: pid=206413 msg=process killed
+2024-12-04T18:53:59: PM2 log: Stopping app:client id:4
+2024-12-04T18:53:59: PM2 log: App [client:4] exited with code [0] via signal [SIGINT]
+2024-12-04T18:53:59: PM2 log: pid=206778 msg=process killed
+2024-12-04T18:53:59: PM2 log: pid=206434 msg=process killed
+2024-12-04T18:54:28: PM2 log: App [client:5] starting in -fork mode-
+2024-12-04T18:54:28: PM2 log: App [client:5] online
+2024-12-04T18:54:28: PM2 log: App [client:6] starting in -fork mode-
+2024-12-04T18:54:28: PM2 log: App [client:6] online
+2024-12-04T18:54:29: PM2 log: App [client:6] exited with code [1] via signal [SIGINT]
+2024-12-04T18:54:29: PM2 log: App [client:6] starting in -fork mode-
+2024-12-04T18:54:29: PM2 error: Error [ERR_STREAM_DESTROYED]: Cannot call write after a stream was destroyed
+2024-12-04T18:54:29: PM2 log: App [client:6] online
+2024-12-04T18:54:29: PM2 log: App [client:6] exited with code [1] via signal [SIGINT]
+2024-12-04T18:54:29: PM2 log: App [client:6] starting in -fork mode-
+2024-12-04T18:54:29: PM2 log: App [client:6] online
+2024-12-04T18:54:29: PM2 log: App [client:6] exited with code [1] via signal [SIGINT]
+2024-12-04T18:54:29: PM2 log: App [client:6] starting in -fork mode-
+2024-12-04T18:54:29: PM2 log: App [client:6] online
+2024-12-04T18:54:29: PM2 log: App [client:6] exited with code [1] via signal [SIGINT]
+2024-12-04T18:54:29: PM2 log: App [client:6] starting in -fork mode-
+2024-12-04T18:54:29: PM2 log: App [client:6] online
+2024-12-04T18:54:30: PM2 log: App [client:6] exited with code [1] via signal [SIGINT]
+2024-12-04T18:54:30: PM2 log: App [client:6] starting in -fork mode-
+2024-12-04T18:54:30: PM2 log: App [client:6] online
+2024-12-04T18:54:30: PM2 log: App [client:6] exited with code [1] via signal [SIGINT]
+2024-12-04T18:54:30: PM2 log: App [client:6] starting in -fork mode-
+2024-12-04T18:54:30: PM2 log: App [client:6] online
+2024-12-04T18:54:30: PM2 log: App [client:6] exited with code [1] via signal [SIGINT]
+2024-12-04T18:54:30: PM2 error: Error [ERR_STREAM_DESTROYED]: Cannot call write after a stream was destroyed
+2024-12-04T18:54:30: PM2 log: App [client:6] starting in -fork mode-
+2024-12-04T18:54:30: PM2 log: App [client:6] online
+2024-12-04T18:54:31: PM2 log: App [client:6] exited with code [1] via signal [SIGINT]
+2024-12-04T18:54:31: PM2 log: App [client:6] starting in -fork mode-
+2024-12-04T18:54:31: PM2 log: App [client:6] online
+2024-12-04T18:54:31: PM2 log: App [client:6] exited with code [1] via signal [SIGINT]
+2024-12-04T18:54:31: PM2 error: Error [ERR_STREAM_DESTROYED]: Cannot call write after a stream was destroyed
+2024-12-04T18:54:31: PM2 log: App [client:6] starting in -fork mode-
+2024-12-04T18:54:31: PM2 log: App [client:6] online
+2024-12-04T18:54:31: PM2 log: App [client:6] exited with code [1] via signal [SIGINT]
+2024-12-04T18:54:31: PM2 log: App [client:6] starting in -fork mode-
+2024-12-04T18:54:31: PM2 log: App [client:6] online
+2024-12-04T18:54:32: PM2 log: App [client:6] exited with code [1] via signal [SIGINT]
+2024-12-04T18:54:32: PM2 error: Error [ERR_STREAM_DESTROYED]: Cannot call write after a stream was destroyed
+2024-12-04T18:54:32: PM2 log: App [client:6] starting in -fork mode-
+2024-12-04T18:54:32: PM2 log: App [client:6] online
+2024-12-04T18:54:32: PM2 log: App [client:6] exited with code [1] via signal [SIGINT]
+2024-12-04T18:54:32: PM2 log: App [client:6] starting in -fork mode-
+2024-12-04T18:54:32: PM2 log: App [client:6] online
+2024-12-04T18:54:32: PM2 log: App [client:6] exited with code [1] via signal [SIGINT]
+2024-12-04T18:54:32: PM2 error: Error [ERR_STREAM_DESTROYED]: Cannot call write after a stream was destroyed
+2024-12-04T18:54:32: PM2 log: App [client:6] starting in -fork mode-
+2024-12-04T18:54:32: PM2 log: App [client:6] online
+2024-12-04T18:54:33: PM2 log: App [client:6] exited with code [1] via signal [SIGINT]
+2024-12-04T18:54:33: PM2 log: App [client:6] starting in -fork mode-
+2024-12-04T18:54:33: PM2 log: App [client:6] online
+2024-12-04T18:54:33: PM2 log: App [client:6] exited with code [1] via signal [SIGINT]
+2024-12-04T18:54:33: PM2 log: App [client:6] starting in -fork mode-
+2024-12-04T18:54:33: PM2 error: Error [ERR_STREAM_DESTROYED]: Cannot call write after a stream was destroyed
+2024-12-04T18:54:33: PM2 log: App [client:6] online
+2024-12-04T18:54:33: PM2 log: App [client:6] exited with code [1] via signal [SIGINT]
+2024-12-04T18:54:33: PM2 log: Script /home/ubuntu/openvidu-tutorials/openvidu-react had too many unstable restarts (16). Stopped. "errored"
+2024-12-04T18:55:20: PM2 log: Stopping app:client id:5
+2024-12-04T18:55:20: PM2 log: Stopping app:client id:6
+2024-12-04T18:55:20: PM2 error: app=client id=6 does not have a pid
+2024-12-04T18:55:20: PM2 log: App [client:5] exited with code [0] via signal [SIGINT]
+2024-12-04T18:55:20: PM2 log: pid=206903 msg=process killed
+2024-12-04T18:56:00: PM2 log: App [client:7] starting in -fork mode-
+2024-12-04T18:56:00: PM2 log: App [client:7] online
+2024-12-04T18:59:32: PM2 log: Process 0 in a stopped status, starting it
+2024-12-04T18:59:32: PM2 log: Stopping app:server id:0
+2024-12-04T18:59:32: PM2 log: App [server:0] exited with code [0] via signal [SIGINT]
+2024-12-04T18:59:32: PM2 log: pid=205305 msg=process killed
+2024-12-04T18:59:32: PM2 log: App [server:0] starting in -fork mode-
+2024-12-04T18:59:32: PM2 log: App [server:0] online
+2024-12-04T18:59:32: PM2 log: Process 7 in a stopped status, starting it
+2024-12-04T18:59:32: PM2 log: Stopping app:client id:7
+2024-12-04T18:59:32: PM2 log: App [client:7] exited with code [0] via signal [SIGINT]
+2024-12-04T18:59:32: PM2 log: pid=207412 msg=process killed
+2024-12-04T18:59:32: PM2 log: App [client:7] starting in -fork mode-
+2024-12-04T18:59:32: PM2 log: App [client:7] online
+2024-12-04T19:01:32: PM2 log: Process 0 in a stopped status, starting it
+2024-12-04T19:01:32: PM2 log: Stopping app:server id:0
+2024-12-04T19:01:32: PM2 log: App [server:0] exited with code [0] via signal [SIGINT]
+2024-12-04T19:01:32: PM2 log: pid=208021 msg=process killed
+2024-12-04T19:01:32: PM2 log: App [server:0] starting in -fork mode-
+2024-12-04T19:01:32: PM2 log: App [server:0] online
+2024-12-04T19:01:32: PM2 log: Process 7 in a stopped status, starting it
+2024-12-04T19:01:32: PM2 log: Stopping app:client id:7
+2024-12-04T19:01:32: PM2 log: pid=208038 msg=failed to kill - retrying in 100ms
+2024-12-04T19:01:32: PM2 log: App [client:7] exited with code [0] via signal [SIGINT]
+2024-12-04T19:01:32: PM2 log: pid=208038 msg=process killed
+2024-12-04T19:01:32: PM2 log: App [client:7] starting in -fork mode-
+2024-12-04T19:01:32: PM2 log: App [client:7] online
+2024-12-04T19:23:26: PM2 log: Process 0 in a stopped status, starting it
+2024-12-04T19:23:26: PM2 log: Stopping app:server id:0
+2024-12-04T19:23:26: PM2 log: App [server:0] exited with code [0] via signal [SIGINT]
+2024-12-04T19:23:26: PM2 log: pid=208384 msg=process killed
+2024-12-04T19:23:26: PM2 log: App [server:0] starting in -fork mode-
+2024-12-04T19:23:26: PM2 log: App [server:0] online
+2024-12-04T19:23:26: PM2 log: Process 7 in a stopped status, starting it
+2024-12-04T19:23:26: PM2 log: Stopping app:client id:7
+2024-12-04T19:23:26: PM2 log: App [client:7] exited with code [0] via signal [SIGINT]
+2024-12-04T19:23:27: PM2 log: pid=208403 msg=process killed
+2024-12-04T19:23:27: PM2 log: App [client:7] starting in -fork mode-
+2024-12-04T19:23:27: PM2 log: App [client:7] online
+2024-12-04T19:46:24: PM2 log: Process 0 in a stopped status, starting it
+2024-12-04T19:46:24: PM2 log: Stopping app:server id:0
+2024-12-04T19:46:24: PM2 log: App [server:0] exited with code [0] via signal [SIGINT]
+2024-12-04T19:46:24: PM2 log: pid=210111 msg=process killed
+2024-12-04T19:46:24: PM2 log: App [server:0] starting in -fork mode-
+2024-12-04T19:46:24: PM2 log: App [server:0] online
+2024-12-04T19:46:24: PM2 log: Process 7 in a stopped status, starting it
+2024-12-04T19:46:24: PM2 log: Stopping app:client id:7
+2024-12-04T19:46:24: PM2 log: App [client:7] exited with code [0] via signal [SIGINT]
+2024-12-04T19:46:24: PM2 log: pid=210124 msg=process killed
+2024-12-04T19:46:24: PM2 log: App [client:7] starting in -fork mode-
+2024-12-04T19:46:24: PM2 log: App [client:7] online
+2024-12-04T20:11:47: PM2 log: ===============================================================================
+2024-12-04T20:11:47: PM2 log: --- New PM2 Daemon started ----------------------------------------------------
+2024-12-04T20:11:47: PM2 log: Time                 : Wed Dec 04 2024 20:11:47 GMT+0000 (Coordinated Universal Time)
+2024-12-04T20:11:47: PM2 log: PM2 version          : 5.4.3
+2024-12-04T20:11:47: PM2 log: Node.js version      : 18.20.4
+2024-12-04T20:11:47: PM2 log: Current arch         : x64
+2024-12-04T20:11:47: PM2 log: PM2 home             : /home/ubuntu/.pm2
+2024-12-04T20:11:47: PM2 log: PM2 PID file         : /home/ubuntu/.pm2/pm2.pid
+2024-12-04T20:11:47: PM2 log: RPC socket file      : /home/ubuntu/.pm2/rpc.sock
+2024-12-04T20:11:47: PM2 log: BUS socket file      : /home/ubuntu/.pm2/pub.sock
+2024-12-04T20:11:47: PM2 log: Application log path : /home/ubuntu/.pm2/logs
+2024-12-04T20:11:47: PM2 log: Worker Interval      : 30000
+2024-12-04T20:11:47: PM2 log: Process dump file    : /home/ubuntu/.pm2/dump.pm2
+2024-12-04T20:11:47: PM2 log: Concurrent actions   : 2
+2024-12-04T20:11:47: PM2 log: SIGTERM timeout      : 1600
+2024-12-04T20:11:47: PM2 log: ===============================================================================
+2024-12-04T20:12:29: PM2 log: App [index:0] starting in -fork mode-
+2024-12-04T20:12:29: PM2 log: App [index:0] online
+2024-12-04T20:12:50: PM2 log: App [my-app:1] starting in -fork mode-
+2024-12-04T20:12:50: PM2 log: App [my-app:1] online
+2024-12-04T20:13:27: PM2 log: Stopping app:index id:0
+2024-12-04T20:13:27: PM2 log: App [index:0] exited with code [0] via signal [SIGINT]
+2024-12-04T20:13:27: PM2 log: pid=2186 msg=process killed
+2024-12-04T20:13:27: PM2 log: Stopping app:my-app id:1
+2024-12-04T20:13:27: PM2 log: App [my-app:1] exited with code [0] via signal [SIGINT]
+2024-12-04T20:13:27: PM2 log: pid=2276 msg=process killed
+2024-12-04T20:15:03: PM2 log: App [server:0] starting in -fork mode-
+2024-12-04T20:15:03: PM2 log: App [server:0] online
+2024-12-04T20:15:08: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T20:15:08: PM2 log: App [client:1] online
+2024-12-04T20:17:57: PM2 log: Stopping app:server id:0
+2024-12-04T20:17:57: PM2 log: App [server:0] exited with code [0] via signal [SIGINT]
+2024-12-04T20:17:57: PM2 log: pid=2538 msg=process killed
+2024-12-04T20:17:57: PM2 log: App [server:0] starting in -fork mode-
+2024-12-04T20:17:57: PM2 log: App [server:0] online
+2024-12-04T20:17:57: PM2 log: Stopping app:client id:1
+2024-12-04T20:17:57: PM2 log: App [client:1] exited with code [0] via signal [SIGINT]
+2024-12-04T20:17:57: PM2 log: pid=2581 msg=process killed
+2024-12-04T20:17:57: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T20:17:57: PM2 log: App [client:1] online
+2024-12-04T20:19:33: PM2 log: Stopping app:server id:0
+2024-12-04T20:19:33: PM2 log: App [server:0] exited with code [0] via signal [SIGINT]
+2024-12-04T20:19:33: PM2 log: pid=2914 msg=process killed
+2024-12-04T20:19:33: PM2 log: App [server:0] starting in -fork mode-
+2024-12-04T20:19:33: PM2 log: App [server:0] online
+2024-12-04T20:19:33: PM2 log: Stopping app:client id:1
+2024-12-04T20:19:33: PM2 log: App [client:1] exited with code [0] via signal [SIGINT]
+2024-12-04T20:19:33: PM2 log: pid=2931 msg=process killed
+2024-12-04T20:19:33: PM2 log: App [client:1] starting in -fork mode-
+2024-12-04T20:19:33: PM2 log: App [client:1] online

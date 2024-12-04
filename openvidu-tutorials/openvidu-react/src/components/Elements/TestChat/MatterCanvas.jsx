@@ -391,7 +391,7 @@ const MatterCanvas = ({ roomNumber, socket }) => {
             const distanceY = Math.abs(egg.position.y - targetY);
     
             // 목표에 도달하면
-            if (distanceX + distanceY < 50) {
+            if (distanceX + distanceY < 100) {
               console.log("egg arrival!");
               World.remove(engine.world, egg);
     

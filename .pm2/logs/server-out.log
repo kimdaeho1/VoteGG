@@ -1,0 +1,5751 @@
+Application started on port:  5000
+Mongoose connected to DB Cluster
+Connected to MongoDB
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+Application started on port:  5000
+Mongoose connected to DB Cluster
+Connected to MongoDB
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+Application started on port:  5000
+Mongoose connected to DB Cluster
+Connected to MongoDB
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+Application started on port:  5000
+Mongoose connected to DB Cluster
+Connected to MongoDB
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+방 목록 응답: []
+req.body: [Object: null prototype] {
+  roomname: '테스트',
+  createdby: 'domvy',
+  tags: '[]'
+}
+req.file: {
+  fieldname: 'thumbnail',
+  originalname: '0dda5a4c-dda6-42a0-840e-2bca2213c2e7_Ã¡__Ã¡_Â¡Ã¡_Â«Ã¡__Ã¡_Â¡Ã¡_Â¼.jpeg',
+  encoding: '7bit',
+  mimetype: 'image/jpeg',
+  buffer: <Buffer ff d8 ff e0 00 10 4a 46 49 46 00 01 01 00 00 01 00 01 00 00 ff db 00 43 00 03 02 02 03 02 02 03 03 03 03 04 03 03 04 05 08 05 05 04 04 05 0a 07 07 06 ... 37488 more bytes>,
+  size: 37538
+}
+타이머 네임스페이스에 새로운 클라이언트 연결: srDO8pvobjxU2vJTAAAB
+챗사용자 연결됨: EhS_67oj3LY7xZyyAAAC
+타이머방 srDO8pvobjxU2vJTAAAB가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 EhS_67oj3LY7xZyyAAAC가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 1
+타이머 네임스페이스에 새로운 클라이언트 연결: 9S1Ms9uwbnMgs94hAAAE
+타이머방 9S1Ms9uwbnMgs94hAAAE가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: Agpv4Jqdl3XbpkafAAAG
+챗사용자 연결됨: PvRkqBUGVLZ1DaAZAAAH
+타이머방 Agpv4Jqdl3XbpkafAAAG가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 PvRkqBUGVLZ1DaAZAAAH가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 2
+타이머 네임스페이스에 새로운 클라이언트 연결: cBAKJmKBDQ2x5QYaAAAJ
+타이머방 cBAKJmKBDQ2x5QYaAAAJ가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 2,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 2,
+    participantCount: 1
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: uYCdmm0eeUBbjVflAAAL
+챗사용자 연결됨: ZOBgPBG2pyBwwykQAAAM
+타이머방 uYCdmm0eeUBbjVflAAAL가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 ZOBgPBG2pyBwwykQAAAM가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 3
+타이머 네임스페이스에 새로운 클라이언트 연결: QxfJognAlqPPHpQPAAAO
+타이머방 QxfJognAlqPPHpQPAAAO가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+타이머 네임스페이스에 새로운 클라이언트 연결: b2tKqvXoQirGUVWkAAAQ
+챗사용자 연결됨: lJe2H6r8G4DgfzHuAAAR
+타이머방 b2tKqvXoQirGUVWkAAAQ가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 lJe2H6r8G4DgfzHuAAAR가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 4
+타이머 네임스페이스에 새로운 클라이언트 연결: RIG7l3-547n1XZJjAAAT
+타이머방 RIG7l3-547n1XZJjAAAT가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 4,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 4,
+    participantCount: 1
+  }
+]
+토큰 디코드 결과: {
+  userId: '67470f8779f6429901ec2777',
+  username: 'leejh',
+  profileImageUrl: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/profile-images/1733290485499_magic.jpg',
+  totalParticipations: 5,
+  totalWins: 4,
+  firstPlaceWins: 3,
+  iat: 1733331531,
+  exp: 1733335131
+}
+참가자 추가 완료: Map(2) { 'domvy' => 0, 'leejh' => 0 }
+타이머 네임스페이스에 새로운 클라이언트 연결: IobMGeTEBTbbnIoiAAAV
+챗사용자 연결됨: 23S74lAubiqkjyQkAAAW
+타이머방 IobMGeTEBTbbnIoiAAAV가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 23S74lAubiqkjyQkAAAW가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 5
+타이머 네임스페이스에 새로운 클라이언트 연결: V7XFMTR1zm1qTU8fAAAY
+타이머방 V7XFMTR1zm1qTU8fAAAY가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 5,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 5,
+    participantCount: 2
+  }
+]
+토큰 디코드 결과: {
+  userId: '6750739bb8cdf67423ae5a0f',
+  username: 'yoonseokyeol',
+  profileImageUrl: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/profile-images/1733328488301_1231231232.jpg',
+  totalParticipations: 4,
+  totalWins: 2,
+  firstPlaceWins: 2,
+  iat: 1733341168,
+  exp: 1733344768
+}
+참가자 추가 완료: Map(3) { 'domvy' => 0, 'leejh' => 0, 'yoonseokyeol' => 0 }
+타이머 네임스페이스에 새로운 클라이언트 연결: A_DtyCeHK5wbrOuAAAAa
+챗사용자 연결됨: Umdbjmnmiouu2tetAAAb
+타이머방 A_DtyCeHK5wbrOuAAAAa가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 Umdbjmnmiouu2tetAAAb가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 6
+타이머 네임스페이스에 새로운 클라이언트 연결: IX70YqBRG6YGmevOAAAd
+타이머방 IX70YqBRG6YGmevOAAAd가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(3) { 'domvy' => 0, 'leejh' => 0, 'yoonseokyeol' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 3
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(3) { 'domvy' => 0, 'leejh' => 0, 'yoonseokyeol' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 3
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(3) { 'domvy' => 0, 'leejh' => 0, 'yoonseokyeol' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 3
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(3) { 'domvy' => 0, 'leejh' => 0, 'yoonseokyeol' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 3
+  }
+]
+토큰 디코드 결과: {
+  userId: '674f493eb3d308d555bfd0b3',
+  username: 'qwerqwer',
+  profileImageUrl: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/profile-images/1733320958301_%C3%A1%C2%84%C2%83%C3%A1%C2%85%C2%A1%C3%A1%C2%84%C2%8B%C3%A1%C2%85%C2%AE%C3%A1%C2%86%C2%AB%C3%A1%C2%84%C2%85%C3%A1%C2%85%C2%A9%C3%A1%C2%84%C2%83%C3%A1%C2%85%C2%B3123.jpeg',
+  totalParticipations: 1,
+  totalWins: 1,
+  firstPlaceWins: 1,
+  provider: '카카오',
+  socialId: 3813885540,
+  iat: 1733341180,
+  exp: 1733344780
+}
+참가자 추가 완료: Map(4) {
+  'domvy' => 0,
+  'leejh' => 0,
+  'yoonseokyeol' => 0,
+  'qwerqwer' => 0
+}
+타이머 네임스페이스에 새로운 클라이언트 연결: BmtQbNYQYZITbLvCAAAf
+챗사용자 연결됨: U5BjOsx1VpAsKghhAAAg
+타이머방 BmtQbNYQYZITbLvCAAAf가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 U5BjOsx1VpAsKghhAAAg가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 7
+타이머 네임스페이스에 새로운 클라이언트 연결: TTwtT2GjPVcx6pG7AAAi
+타이머방 TTwtT2GjPVcx6pG7AAAi가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: yzBSRrAmAB38i1-MAAAk
+챗사용자 연결됨: wpsDNs1e2L2kmAfFAAAl
+타이머방 yzBSRrAmAB38i1-MAAAk가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 wpsDNs1e2L2kmAfFAAAl가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 8
+타이머 네임스페이스에 새로운 클라이언트 연결: h3bbu7ftJ_IY3VVYAAAn
+타이머방 h3bbu7ftJ_IY3VVYAAAn가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+타이머 네임스페이스에 새로운 클라이언트 연결: fg7EMiJxITIlRhtdAAAp
+챗사용자 연결됨: dNnM3Tg85-QS1Q7CAAAq
+타이머방 fg7EMiJxITIlRhtdAAAp가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 dNnM3Tg85-QS1Q7CAAAq가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 9
+타이머 네임스페이스에 새로운 클라이언트 연결: 7pvjrlbNBghB1zCuAAAs
+타이머방 7pvjrlbNBghB1zCuAAAs가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+타이머 네임스페이스에 새로운 클라이언트 연결: ovtJkqPtp0gCYynVAAAu
+챗사용자 연결됨: 6sTa4oZxXSQ2YM-qAAAv
+타이머방 ovtJkqPtp0gCYynVAAAu가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 6sTa4oZxXSQ2YM-qAAAv가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 10
+타이머 네임스페이스에 새로운 클라이언트 연결: TF_PFvCAHSoxissHAAAx
+타이머방 TF_PFvCAHSoxissHAAAx가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 10,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 10,
+    participantCount: 4
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: vXow7NV2XOqiMVLNAAAz
+챗사용자 연결됨: drJ3N7xF61eptsb0AAA0
+타이머방 vXow7NV2XOqiMVLNAAAz가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 drJ3N7xF61eptsb0AAA0가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 11
+타이머 네임스페이스에 새로운 클라이언트 연결: JyWNWTzQgE5ZLzqOAAA2
+타이머방 JyWNWTzQgE5ZLzqOAAA2가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 11,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 11,
+    participantCount: 4
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: tcRMJwVjuRvVt8p3AAA4
+챗사용자 연결됨: Uw01odjUWXCzNzGaAAA5
+타이머방 tcRMJwVjuRvVt8p3AAA4가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 Uw01odjUWXCzNzGaAAA5가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 12
+타이머 네임스페이스에 새로운 클라이언트 연결: 8JRXakghYhloC8R3AAA7
+타이머방 8JRXakghYhloC8R3AAA7가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+타이머방 연결 해제: tcRMJwVjuRvVt8p3AAA4
+챗사용자 연결 해제됨: Uw01odjUWXCzNzGaAAA5
+방 4ce51a33c3b5001fa909d5c452611c79의 현재 인원: 11
+타이머방 연결 해제: 8JRXakghYhloC8R3AAA7
+타이머 네임스페이스에 새로운 클라이언트 연결: jU-EXdzLwgm5xs0vAAA9
+챗사용자 연결됨: X2kCIoTBDcDykTSrAAA-
+타이머방 jU-EXdzLwgm5xs0vAAA9가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 X2kCIoTBDcDykTSrAAA-가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 12
+타이머 네임스페이스에 새로운 클라이언트 연결: AhetuP1YvEW9kOzVAABA
+타이머방 AhetuP1YvEW9kOzVAABA가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 12,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 12,
+    participantCount: 4
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: QiyjmjAXwZTGpRFIAABC
+챗사용자 연결됨: HTwlVlM0H-as4aJHAABD
+타이머방 QiyjmjAXwZTGpRFIAABC가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 HTwlVlM0H-as4aJHAABD가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 13
+타이머 네임스페이스에 새로운 클라이언트 연결: 99ocKcusHZCTMYA1AABF
+타이머방 99ocKcusHZCTMYA1AABF가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 13,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 13,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 13,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 13,
+    participantCount: 4
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: Syi5LtWImJdGZ0DjAABH
+챗사용자 연결됨: DxreYv-YJgrb7ZIQAABI
+타이머방 Syi5LtWImJdGZ0DjAABH가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 DxreYv-YJgrb7ZIQAABI가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 14
+타이머 네임스페이스에 새로운 클라이언트 연결: TUHXTApGS63n9KtQAABK
+타이머방 TUHXTApGS63n9KtQAABK가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 14,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 14,
+    participantCount: 4
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: fmFc9v5A1L1dHh3_AABM
+챗사용자 연결됨: 2obgxr6HK5BBDQN4AABN
+타이머방 fmFc9v5A1L1dHh3_AABM가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 2obgxr6HK5BBDQN4AABN가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 15
+타이머 네임스페이스에 새로운 클라이언트 연결: hgxCNBIje0_NCH5AAABP
+타이머방 hgxCNBIje0_NCH5AAABP가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+타이머방 연결 해제: AhetuP1YvEW9kOzVAABA
+타이머방 연결 해제: jU-EXdzLwgm5xs0vAAA9
+챗사용자 연결 해제됨: X2kCIoTBDcDykTSrAAA-
+방 4ce51a33c3b5001fa909d5c452611c79의 현재 인원: 14
+타이머 네임스페이스에 새로운 클라이언트 연결: af_Ft0sEqAQsg4o6AABS
+챗사용자 연결됨: aMgg28YxUKjjfE3WAABT
+타이머 네임스페이스에 새로운 클라이언트 연결: FmemCzlOq2Ii9enfAABU
+타이머방 af_Ft0sEqAQsg4o6AABS가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 aMgg28YxUKjjfE3WAABT가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 15
+타이머방 FmemCzlOq2Ii9enfAABU가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+타이머방 연결 해제: FmemCzlOq2Ii9enfAABU
+타이머방 연결 해제: af_Ft0sEqAQsg4o6AABS
+챗사용자 연결 해제됨: aMgg28YxUKjjfE3WAABT
+방 4ce51a33c3b5001fa909d5c452611c79의 현재 인원: 14
+타이머 네임스페이스에 새로운 클라이언트 연결: ApSMpM7Nx_7e2OBxAABX
+챗사용자 연결됨: i8TnSBOPc6IWxQs2AABY
+타이머 네임스페이스에 새로운 클라이언트 연결: NkjXci-2dpHFrKStAABZ
+타이머방 ApSMpM7Nx_7e2OBxAABX가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 i8TnSBOPc6IWxQs2AABY가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 15
+타이머방 NkjXci-2dpHFrKStAABZ가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+타이머방 연결 해제: NkjXci-2dpHFrKStAABZ
+타이머방 연결 해제: ApSMpM7Nx_7e2OBxAABX
+챗사용자 연결 해제됨: i8TnSBOPc6IWxQs2AABY
+방 4ce51a33c3b5001fa909d5c452611c79의 현재 인원: 14
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 14,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 14,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 14,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 14,
+    participantCount: 4
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: PVjg8Fr-8b5gfKFLAABb
+챗사용자 연결됨: ACMrv2nIXL22JfSJAABc
+타이머방 PVjg8Fr-8b5gfKFLAABb가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 ACMrv2nIXL22JfSJAABc가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 15
+타이머 네임스페이스에 새로운 클라이언트 연결: xW4TJ5KTXEEEWNRWAABe
+타이머방 xW4TJ5KTXEEEWNRWAABe가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+참가자 목록 응답 (서버): [
+  [ 'domvy', 0 ],
+  [ 'leejh', 0 ],
+  [ 'yoonseokyeol', 0 ],
+  [ 'qwerqwer', 0 ]
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: W-4lyM6DHEEhnKdUAABg
+챗사용자 연결됨: mn6pBYj9TQK5D4xOAABh
+타이머방 W-4lyM6DHEEhnKdUAABg가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 mn6pBYj9TQK5D4xOAABh가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 16
+타이머 네임스페이스에 새로운 클라이언트 연결: jaxa0bqKAWwdnlNWAABj
+타이머방 jaxa0bqKAWwdnlNWAABj가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+참가자 목록 응답 (서버): [
+  [ 'domvy', 0 ],
+  [ 'leejh', 0 ],
+  [ 'yoonseokyeol', 0 ],
+  [ 'qwerqwer', 0 ]
+]
+타이머방 연결 해제: yzBSRrAmAB38i1-MAAAk
+타이머방 연결 해제: h3bbu7ftJ_IY3VVYAAAn
+챗사용자 연결 해제됨: wpsDNs1e2L2kmAfFAAAl
+방 4ce51a33c3b5001fa909d5c452611c79의 현재 인원: 15
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: 저 2개
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: 개
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 15,
+    participantCount: 4
+  }
+]
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: 시크릿에서 2개
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: 개
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 15,
+    participantCount: 4
+  }
+]
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: dsf
+타이머 네임스페이스에 새로운 클라이언트 연결: 3Sp_7Y1Z_luNwXfAAABl
+타이머방 3Sp_7Y1Z_luNwXfAAABl가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 연결됨: Ms7zE1d3uRFDVs-bAABn
+챗사용자 Ms7zE1d3uRFDVs-bAABn가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 16
+타이머 네임스페이스에 새로운 클라이언트 연결: FuoQkI_wEiNvTl2yAABp
+타이머방 FuoQkI_wEiNvTl2yAABp가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: sd
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: sdaf
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: sdaf
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: sad
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: f
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: sadf
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: rmsep ro
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: sa
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: fsa
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: sa
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: kask
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: sa
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: ksa
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: ksa
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: ks
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: 234
+참가자 목록 응답 (서버): [
+  [ 'domvy', 0 ],
+  [ 'leejh', 0 ],
+  [ 'yoonseokyeol', 0 ],
+  [ 'qwerqwer', 0 ]
+]
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: sadfasdf
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: asdf
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: k
+참가자 목록 응답 (서버): [
+  [ 'domvy', 0 ],
+  [ 'leejh', 0 ],
+  [ 'yoonseokyeol', 0 ],
+  [ 'qwerqwer', 0 ]
+]
+참가자 목록 응답 (서버): [
+  [ 'domvy', 0 ],
+  [ 'leejh', 0 ],
+  [ 'yoonseokyeol', 0 ],
+  [ 'qwerqwer', 0 ]
+]
+챗사용자 연결 해제됨: Ms7zE1d3uRFDVs-bAABn
+방 4ce51a33c3b5001fa909d5c452611c79의 현재 인원: 15
+타이머방 연결 해제: 3Sp_7Y1Z_luNwXfAAABl
+타이머방 연결 해제: FuoQkI_wEiNvTl2yAABp
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 15,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 15,
+    participantCount: 4
+  }
+]
+타이머방 연결 해제: vXow7NV2XOqiMVLNAAAz
+타이머방 연결 해제: JyWNWTzQgE5ZLzqOAAA2
+챗사용자 연결 해제됨: drJ3N7xF61eptsb0AAA0
+방 4ce51a33c3b5001fa909d5c452611c79의 현재 인원: 14
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 14,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 14,
+    participantCount: 4
+  }
+]
+타이머방 연결 해제: ovtJkqPtp0gCYynVAAAu
+타이머방 연결 해제: TF_PFvCAHSoxissHAAAx
+챗사용자 연결 해제됨: 6sTa4oZxXSQ2YM-qAAAv
+방 4ce51a33c3b5001fa909d5c452611c79의 현재 인원: 13
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 13,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 13,
+    participantCount: 4
+  }
+]
+타이머방 연결 해제: fg7EMiJxITIlRhtdAAAp
+타이머방 연결 해제: 7pvjrlbNBghB1zCuAAAs
+챗사용자 연결 해제됨: dNnM3Tg85-QS1Q7CAAAq
+방 4ce51a33c3b5001fa909d5c452611c79의 현재 인원: 12
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 12,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 12,
+    participantCount: 4
+  }
+]
+타이머방 연결 해제: Agpv4Jqdl3XbpkafAAAG
+챗사용자 연결 해제됨: PvRkqBUGVLZ1DaAZAAAH
+방 4ce51a33c3b5001fa909d5c452611c79의 현재 인원: 11
+타이머방 연결 해제: cBAKJmKBDQ2x5QYaAAAJ
+타이머방 연결 해제: PVjg8Fr-8b5gfKFLAABb
+타이머방 연결 해제: xW4TJ5KTXEEEWNRWAABe
+챗사용자 연결 해제됨: ACMrv2nIXL22JfSJAABc
+방 4ce51a33c3b5001fa909d5c452611c79의 현재 인원: 10
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 10,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 10,
+    participantCount: 4
+  }
+]
+타이머방 연결 해제: hgxCNBIje0_NCH5AAABP
+타이머방 연결 해제: fmFc9v5A1L1dHh3_AABM
+챗사용자 연결 해제됨: 2obgxr6HK5BBDQN4AABN
+방 4ce51a33c3b5001fa909d5c452611c79의 현재 인원: 9
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 9,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 9,
+    participantCount: 4
+  }
+]
+타이머방 연결 해제: QiyjmjAXwZTGpRFIAABC
+타이머방 연결 해제: 99ocKcusHZCTMYA1AABF
+챗사용자 연결 해제됨: HTwlVlM0H-as4aJHAABD
+방 4ce51a33c3b5001fa909d5c452611c79의 현재 인원: 8
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 8,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 8,
+    participantCount: 4
+  }
+]
+타이머방 연결 해제: Syi5LtWImJdGZ0DjAABH
+타이머방 연결 해제: TUHXTApGS63n9KtQAABK
+챗사용자 연결 해제됨: DxreYv-YJgrb7ZIQAABI
+방 4ce51a33c3b5001fa909d5c452611c79의 현재 인원: 7
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  }
+]
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: ㅁㄴㅇㄹ
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: ㄹ
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: ㄴㅇㄹㄴㅇㄹ
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: ㄹ
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: ㄴㅇㄹ
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: ㄹ
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: ㅁㄴㅇㄹ
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: ㄹ
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: ㅁㄴㅇㄹ
+방 4ce51a33c3b5001fa909d5c452611c79에 메시지 전송: ㄹ
+Application started on port:  5000
+타이머 네임스페이스에 새로운 클라이언트 연결: AyjgbkREfN975s-WAAAB
+챗사용자 연결됨: TYwq5G_zCPqpqQLBAAAC
+타이머방 AyjgbkREfN975s-WAAAB가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 TYwq5G_zCPqpqQLBAAAC가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 1
+Mongoose connected to DB Cluster
+Connected to MongoDB
+타이머방 연결 해제: AyjgbkREfN975s-WAAAB
+챗사용자 연결 해제됨: TYwq5G_zCPqpqQLBAAAC
+방 4ce51a33c3b5001fa909d5c452611c79의 현재 인원: 0
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: NeYk9mS9JWm6C8STAAAE
+챗사용자 연결됨: wNROhhs6FDU1fo5tAAAF
+타이머방 NeYk9mS9JWm6C8STAAAE가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 wNROhhs6FDU1fo5tAAAF가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 1
+타이머 네임스페이스에 새로운 클라이언트 연결: joGnIK42sGshuVvNAAAH
+챗사용자 연결됨: D0Xi6kFMI6uehYe2AAAI
+타이머방 joGnIK42sGshuVvNAAAH가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 D0Xi6kFMI6uehYe2AAAI가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 2
+타이머 네임스페이스에 새로운 클라이언트 연결: rWLUjY9oQAwwYYCvAAAK
+챗사용자 연결됨: lyn_Af2A4qFN1aY0AAAL
+타이머방 rWLUjY9oQAwwYYCvAAAK가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 lyn_Af2A4qFN1aY0AAAL가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 3
+타이머 네임스페이스에 새로운 클라이언트 연결: Zg8hsqy0euUSaW63AAAN
+타이머방 Zg8hsqy0euUSaW63AAAN가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+타이머방 연결 해제: NeYk9mS9JWm6C8STAAAE
+챗사용자 연결 해제됨: wNROhhs6FDU1fo5tAAAF
+방 4ce51a33c3b5001fa909d5c452611c79의 현재 인원: 2
+타이머 네임스페이스에 새로운 클라이언트 연결: SmlcFnUwN_D5fce1AAAP
+타이머방 SmlcFnUwN_D5fce1AAAP가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+타이머 네임스페이스에 새로운 클라이언트 연결: RwVwXv0UqQHR1EcpAAAR
+챗사용자 연결됨: 6cC0jmbjfQF8g5OvAAAS
+타이머방 RwVwXv0UqQHR1EcpAAAR가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 6cC0jmbjfQF8g5OvAAAS가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 3
+타이머 네임스페이스에 새로운 클라이언트 연결: yKIDhLqjlGk2LWzzAAAU
+타이머방 yKIDhLqjlGk2LWzzAAAU가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+타이머방 연결 해제: RwVwXv0UqQHR1EcpAAAR
+챗사용자 연결 해제됨: 6cC0jmbjfQF8g5OvAAAS
+방 4ce51a33c3b5001fa909d5c452611c79의 현재 인원: 2
+타이머방 연결 해제: yKIDhLqjlGk2LWzzAAAU
+타이머방 연결 해제: joGnIK42sGshuVvNAAAH
+챗사용자 연결 해제됨: D0Xi6kFMI6uehYe2AAAI
+방 4ce51a33c3b5001fa909d5c452611c79의 현재 인원: 1
+타이머 네임스페이스에 새로운 클라이언트 연결: rolEJx8mFqklAojVAAAW
+챗사용자 연결됨: OjTFVh0tTbUI3h-rAAAX
+타이머방 rolEJx8mFqklAojVAAAW가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 OjTFVh0tTbUI3h-rAAAX가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 2
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 2,
+    participantCount: 4
+  }
+]
+타이머방 연결 해제: Zg8hsqy0euUSaW63AAAN
+타이머방 연결 해제: rWLUjY9oQAwwYYCvAAAK
+챗사용자 연결 해제됨: lyn_Af2A4qFN1aY0AAAL
+방 4ce51a33c3b5001fa909d5c452611c79의 현재 인원: 1
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 4
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: i9OCgdy36d2CECTvAAAZ
+챗사용자 연결됨: axGrritpGg8eU2IQAAAa
+타이머방 i9OCgdy36d2CECTvAAAZ가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+챗사용자 axGrritpGg8eU2IQAAAa가 방 4ce51a33c3b5001fa909d5c452611c79에 참가했습니다.
+현재 인원: 2
+타이머 네임스페이스에 새로운 클라이언트 연결: 2sFqFRXWfizvtl8NAAAc
+타이머방 2sFqFRXWfizvtl8NAAAc가 방 4ce51a33c3b5001fa909d5c452611c79에 참여했습니다.
+타이머방 연결 해제: i9OCgdy36d2CECTvAAAZ
+타이머방 연결 해제: SmlcFnUwN_D5fce1AAAP
+챗사용자 연결 해제됨: axGrritpGg8eU2IQAAAa
+방 4ce51a33c3b5001fa909d5c452611c79의 현재 인원: 1
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 4
+  }
+]
+타이머방 연결 해제: rolEJx8mFqklAojVAAAW
+챗사용자 연결 해제됨: OjTFVh0tTbUI3h-rAAAX
+방 4ce51a33c3b5001fa909d5c452611c79의 현재 인원: 0
+타이머방 연결 해제: 2sFqFRXWfizvtl8NAAAc
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750afd7dca0d7aa2d8df986'),
+    roomNumber: '4ce51a33c3b5001fa909d5c452611c79',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341143806_0dda5a4c-dda6-42a0-840e-2bca2213c2e7_%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%AB%C3%83%C2%A1__%C3%83%C2%A1_%C3%82%C2%A1%C3%83%C2%A1_%C3%82%C2%BC.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  }
+]
+방 4ce51a33c3b5001fa909d5c452611c79가 1초 딜레이 후 삭제되었습니다.
+req.body: [Object: null prototype] {
+  roomname: '테스트',
+  createdby: 'domvy',
+  tags: '[]'
+}
+req.file: {
+  fieldname: 'thumbnail',
+  originalname: 'defaultdebate.jpeg',
+  encoding: '7bit',
+  mimetype: 'image/jpeg',
+  buffer: <Buffer ff d8 ff e0 00 10 4a 46 49 46 00 01 01 00 00 01 00 01 00 00 ff db 00 84 00 0a 07 08 12 16 11 12 12 11 12 18 18 12 12 12 12 12 11 11 11 12 12 11 11 12 ... 5168 more bytes>,
+  size: 5218
+}
+타이머 네임스페이스에 새로운 클라이언트 연결: BM-7iCuPdiMCIBzrAAAe
+챗사용자 연결됨: gVQ6wxgHEDhQVifQAAAf
+타이머방 BM-7iCuPdiMCIBzrAAAe가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 gVQ6wxgHEDhQVifQAAAf가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 1
+타이머 네임스페이스에 새로운 클라이언트 연결: aPFGDdr0ws8-E5ErAAAh
+타이머방 aPFGDdr0ws8-E5ErAAAh가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: _KpxPmQ47mVLMNG2AAAj
+챗사용자 연결됨: vYMmohf76NwDLuAwAAAk
+타이머방 _KpxPmQ47mVLMNG2AAAj가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 vYMmohf76NwDLuAwAAAk가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 2
+타이머 네임스페이스에 새로운 클라이언트 연결: Al4p5cwzm9ZLpWGcAAAm
+타이머방 Al4p5cwzm9ZLpWGcAAAm가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 2,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 2,
+    participantCount: 1
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: eMjmDZeu_44fgoU6AAAo
+챗사용자 연결됨: gqcXlV3_rOfRCa1hAAAp
+타이머방 eMjmDZeu_44fgoU6AAAo가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 gqcXlV3_rOfRCa1hAAAp가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 3
+타이머 네임스페이스에 새로운 클라이언트 연결: jyGDqHwX-tbv63MDAAAr
+타이머방 jyGDqHwX-tbv63MDAAAr가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 3,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 3,
+    participantCount: 1
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: jG-kY3Lcv0qwNF5kAAAt
+챗사용자 연결됨: GAlzeTda5o8AzNC3AAAu
+타이머방 jG-kY3Lcv0qwNF5kAAAt가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 GAlzeTda5o8AzNC3AAAu가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 4
+타이머 네임스페이스에 새로운 클라이언트 연결: ewgq-UQpUJjWmnAsAAAw
+타이머방 ewgq-UQpUJjWmnAsAAAw가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+타이머방 연결 해제: jG-kY3Lcv0qwNF5kAAAt
+챗사용자 연결 해제됨: GAlzeTda5o8AzNC3AAAu
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 3
+타이머방 연결 해제: ewgq-UQpUJjWmnAsAAAw
+타이머 네임스페이스에 새로운 클라이언트 연결: Ru7T_IORr10clNaBAAAz
+챗사용자 연결됨: xSeHAxjRccQxDIrTAAA0
+타이머 네임스페이스에 새로운 클라이언트 연결: CSFKT4YHa8yJu3huAAA1
+타이머방 Ru7T_IORr10clNaBAAAz가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 xSeHAxjRccQxDIrTAAA0가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 4
+타이머방 CSFKT4YHa8yJu3huAAA1가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+토큰 디코드 결과: {
+  userId: '67470f8779f6429901ec2777',
+  username: 'leejh',
+  profileImageUrl: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/profile-images/1733290485499_magic.jpg',
+  totalParticipations: 5,
+  totalWins: 4,
+  firstPlaceWins: 3,
+  iat: 1733331531,
+  exp: 1733335131
+}
+참가자 추가 완료: Map(2) { 'domvy' => 0, 'leejh' => 0 }
+타이머 네임스페이스에 새로운 클라이언트 연결: ukM4hyv5hoZk-o-KAAA3
+챗사용자 연결됨: UzcKORt8EUKrbJDSAAA4
+타이머방 ukM4hyv5hoZk-o-KAAA3가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 UzcKORt8EUKrbJDSAAA4가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 5
+타이머 네임스페이스에 새로운 클라이언트 연결: vxqYkiquE4VwU6MIAAA6
+타이머방 vxqYkiquE4VwU6MIAAA6가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 5,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 5,
+    participantCount: 2
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: R4xnQSVd9T7NjU-1AAA8
+챗사용자 연결됨: f9frutr6HJF3AYNfAAA9
+타이머방 R4xnQSVd9T7NjU-1AAA8가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 f9frutr6HJF3AYNfAAA9가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 6
+타이머 네임스페이스에 새로운 클라이언트 연결: 8M7_ylVMJ3dFltnNAAA_
+타이머방 8M7_ylVMJ3dFltnNAAA_가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: RNQp0UkWYdrEHastAABB
+챗사용자 연결됨: e1ZgACJEP54bCCcWAABC
+타이머방 RNQp0UkWYdrEHastAABB가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 e1ZgACJEP54bCCcWAABC가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 7
+타이머 네임스페이스에 새로운 클라이언트 연결: ZB84zwiNy7kxX2qJAABE
+타이머방 ZB84zwiNy7kxX2qJAABE가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+타이머 네임스페이스에 새로운 클라이언트 연결: VvPTGIkeAkQn5cw6AABG
+챗사용자 연결됨: DluNnVzIdSRvW7EAAABH
+타이머방 VvPTGIkeAkQn5cw6AABG가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 DluNnVzIdSRvW7EAAABH가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 8
+타이머 네임스페이스에 새로운 클라이언트 연결: Co3ivFSCE1ekSUZ5AABJ
+타이머방 Co3ivFSCE1ekSUZ5AABJ가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 8,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 8,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 8,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 8,
+    participantCount: 2
+  }
+]
+타이머방 연결 해제: VvPTGIkeAkQn5cw6AABG
+챗사용자 연결 해제됨: DluNnVzIdSRvW7EAAABH
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 7
+타이머방 연결 해제: Co3ivFSCE1ekSUZ5AABJ
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 2
+  }
+]
+타이머방 연결 해제: RNQp0UkWYdrEHastAABB
+챗사용자 연결 해제됨: e1ZgACJEP54bCCcWAABC
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 6
+타이머방 연결 해제: ZB84zwiNy7kxX2qJAABE
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+타이머방 연결 해제: 8M7_ylVMJ3dFltnNAAA_
+타이머방 연결 해제: R4xnQSVd9T7NjU-1AAA8
+챗사용자 연결 해제됨: f9frutr6HJF3AYNfAAA9
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 5
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 5,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 5,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 5,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 5,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 5,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 5,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 5,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 5,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 5,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 5,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 5,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 5,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 5,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 5,
+    participantCount: 2
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: 1XVq2lC6Tnt1OVu_AABL
+챗사용자 연결됨: cdH2atD-3mc83I-aAABM
+타이머방 1XVq2lC6Tnt1OVu_AABL가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 cdH2atD-3mc83I-aAABM가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 6
+타이머 네임스페이스에 새로운 클라이언트 연결: CMwQV2Hp9556UteTAABO
+타이머방 CMwQV2Hp9556UteTAABO가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+타이머방 연결 해제: Ru7T_IORr10clNaBAAAz
+챗사용자 연결 해제됨: xSeHAxjRccQxDIrTAAA0
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 5
+타이머방 연결 해제: CSFKT4YHa8yJu3huAAA1
+타이머 네임스페이스에 새로운 클라이언트 연결: 2QxMjmiA2P83BOoSAABQ
+챗사용자 연결됨: TgEk-9Ay-qIiIJhVAABR
+타이머방 2QxMjmiA2P83BOoSAABQ가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 TgEk-9Ay-qIiIJhVAABR가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 6
+타이머 네임스페이스에 새로운 클라이언트 연결: GiWmN6BfwA9N6w3xAABT
+타이머방 GiWmN6BfwA9N6w3xAABT가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(2) { 'domvy' => 0, 'leejh' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 2
+  }
+]
+토큰 디코드 결과: {
+  userId: '6750739bb8cdf67423ae5a0f',
+  username: 'yoonseokyeol',
+  profileImageUrl: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/profile-images/1733328488301_1231231232.jpg',
+  totalParticipations: 4,
+  totalWins: 2,
+  firstPlaceWins: 2,
+  iat: 1733341168,
+  exp: 1733344768
+}
+참가자 추가 완료: Map(3) { 'domvy' => 0, 'leejh' => 0, 'yoonseokyeol' => 0 }
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(3) { 'domvy' => 0, 'leejh' => 0, 'yoonseokyeol' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 6,
+    participantCount: 3
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: YV9Xpb8Ty0bhAXTQAABV
+챗사용자 연결됨: tcTQkPZ01kdRphFQAABW
+타이머방 YV9Xpb8Ty0bhAXTQAABV가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 tcTQkPZ01kdRphFQAABW가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 7
+타이머 네임스페이스에 새로운 클라이언트 연결: VZjq9Gm69qUVQDTcAABY
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(3) { 'domvy' => 0, 'leejh' => 0, 'yoonseokyeol' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 3
+  }
+]
+타이머방 VZjq9Gm69qUVQDTcAABY가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(3) { 'domvy' => 0, 'leejh' => 0, 'yoonseokyeol' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 3
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: DVSqyVr8IpDgweewAABa
+챗사용자 연결됨: huuJXmeHvPGCnrYcAABb
+타이머방 DVSqyVr8IpDgweewAABa가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 huuJXmeHvPGCnrYcAABb가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 8
+타이머 네임스페이스에 새로운 클라이언트 연결: NGdaEZudvQ6VmIxgAABd
+타이머방 NGdaEZudvQ6VmIxgAABd가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+타이머 네임스페이스에 새로운 클라이언트 연결: hv-cl3ds7lhr8cgeAABf
+챗사용자 연결됨: JR2KXC2nfFCEBrFoAABg
+타이머방 hv-cl3ds7lhr8cgeAABf가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 JR2KXC2nfFCEBrFoAABg가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 9
+타이머 네임스페이스에 새로운 클라이언트 연결: ZE4ey1ehCMVD_gOnAABi
+타이머방 ZE4ey1ehCMVD_gOnAABi가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+타이머 네임스페이스에 새로운 클라이언트 연결: QTRe2oCr3UH26Ni_AABk
+챗사용자 연결됨: rmCQeqPIwDsAVr6XAABl
+타이머방 QTRe2oCr3UH26Ni_AABk가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 rmCQeqPIwDsAVr6XAABl가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 10
+타이머 네임스페이스에 새로운 클라이언트 연결: DgBVkSiPhBLHtFvmAABn
+타이머방 DgBVkSiPhBLHtFvmAABn가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+타이머 네임스페이스에 새로운 클라이언트 연결: vejJeMm232tCogZaAABp
+챗사용자 연결됨: -lOa0Xe13YHtEvA9AABq
+타이머방 vejJeMm232tCogZaAABp가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 -lOa0Xe13YHtEvA9AABq가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 11
+타이머 네임스페이스에 새로운 클라이언트 연결: rXhUi3HyRb8RNLNbAABs
+타이머방 rXhUi3HyRb8RNLNbAABs가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(3) { 'domvy' => 0, 'leejh' => 0, 'yoonseokyeol' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 11,
+    participantCount: 3
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(3) { 'domvy' => 0, 'leejh' => 0, 'yoonseokyeol' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 11,
+    participantCount: 3
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: 8EMDRbRJ7NWxwxVJAABu
+챗사용자 연결됨: WFOSDh-d1ZC6DSXGAABv
+타이머방 8EMDRbRJ7NWxwxVJAABu가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 WFOSDh-d1ZC6DSXGAABv가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 12
+타이머 네임스페이스에 새로운 클라이언트 연결: D0RI43EMG8vA5jvEAABx
+타이머방 D0RI43EMG8vA5jvEAABx가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+타이머 네임스페이스에 새로운 클라이언트 연결: kGgOJK7_RbF10loXAABz
+챗사용자 연결됨: RClaoD1HmKamCPdYAAB0
+타이머방 kGgOJK7_RbF10loXAABz가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 RClaoD1HmKamCPdYAAB0가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 13
+타이머 네임스페이스에 새로운 클라이언트 연결: bTPfbAIIDf5ec8NiAAB2
+타이머방 bTPfbAIIDf5ec8NiAAB2가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+타이머 네임스페이스에 새로운 클라이언트 연결: hTqYXaGK4VMhXTfuAAB5
+챗사용자 연결됨: X4SAkEjBZohVcC1oAAB6
+타이머 네임스페이스에 새로운 클라이언트 연결: M-HXuOynBgwjR7uDAAB7
+타이머방 hTqYXaGK4VMhXTfuAAB5가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 X4SAkEjBZohVcC1oAAB6가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 14
+타이머방 M-HXuOynBgwjR7uDAAB7가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+타이머 네임스페이스에 새로운 클라이언트 연결: TEgmtuxGigHTJQD8AAB9
+챗사용자 연결됨: PoWrqgb8IEi9RMoKAAB-
+타이머방 TEgmtuxGigHTJQD8AAB9가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 PoWrqgb8IEi9RMoKAAB-가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 15
+타이머 네임스페이스에 새로운 클라이언트 연결: PE6spU1YtUIxl0nJAACA
+타이머방 PE6spU1YtUIxl0nJAACA가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(3) { 'domvy' => 0, 'leejh' => 0, 'yoonseokyeol' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 15,
+    participantCount: 3
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(3) { 'domvy' => 0, 'leejh' => 0, 'yoonseokyeol' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 15,
+    participantCount: 3
+  }
+]
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: fd
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: ㄹㅇ
+토큰 디코드 결과: {
+  userId: '674f493eb3d308d555bfd0b3',
+  username: 'qwerqwer',
+  profileImageUrl: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/profile-images/1733341701713_DvrxqMuWmWUnXInzS0TDRPQr5VUKgtc4tOGxmqGIUUWIrWuuEoPBpjYz513_MC100V7kUVqo462o3-Fz5N8foQ.webp',
+  totalParticipations: 1,
+  totalWins: 1,
+  firstPlaceWins: 1,
+  iat: 1733341701,
+  exp: 1733345301
+}
+참가자 추가 완료: Map(4) {
+  'domvy' => 0,
+  'leejh' => 0,
+  'yoonseokyeol' => 0,
+  'qwerqwer' => 0
+}
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: ㄹㅇ
+타이머 네임스페이스에 새로운 클라이언트 연결: Dc7uHNBydpNjxzLIAACC
+챗사용자 연결됨: aROVzcwfF4XlOa83AACD
+타이머방 Dc7uHNBydpNjxzLIAACC가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 aROVzcwfF4XlOa83AACD가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 16
+타이머 네임스페이스에 새로운 클라이언트 연결: MfPZX1MXOwqOpIQcAACF
+타이머방 MfPZX1MXOwqOpIQcAACF가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+타이머방 연결 해제: M-HXuOynBgwjR7uDAAB7
+타이머방 연결 해제: hTqYXaGK4VMhXTfuAAB5
+챗사용자 연결 해제됨: X4SAkEjBZohVcC1oAAB6
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 15
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: werwer
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: wer
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: ew
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 15,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 15,
+    participantCount: 4
+  }
+]
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: r
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: wer
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: weq
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: r
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: wqr
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 15,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => 0,
+      'leejh' => 0,
+      'yoonseokyeol' => 0,
+      'qwerqwer' => 0
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 15,
+    participantCount: 4
+  }
+]
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: adsfsdafsFsDf
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: s
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: f
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: a
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: f
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: df
+타이머 네임스페이스에 새로운 클라이언트 연결: tq2FhMyBdNct5AoUAACH
+챗사용자 연결됨: 5OdQ6CDoLtTSWSF2AACI
+타이머방 tq2FhMyBdNct5AoUAACH가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 5OdQ6CDoLtTSWSF2AACI가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 16
+타이머 네임스페이스에 새로운 클라이언트 연결: 5HQ2Bt7VxeiYiVeRAACK
+타이머방 5HQ2Bt7VxeiYiVeRAACK가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: f
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: s
+참가자 목록 응답 (서버): [
+  [ 'domvy', 0 ],
+  [ 'leejh', 0 ],
+  [ 'yoonseokyeol', 0 ],
+  [ 'qwerqwer', 0 ]
+]
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: asdf
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: rP
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: wkstkd
+투표 완료: yoonseokyeol에게 1 투표 추가.
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: 잔상
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: 상
+투표 완료: domvy에게 1 투표 추가.
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: 한석크원
+방 4b22ce30786ee36ba380bab0f9b7ec2c에 메시지 전송: 원
+계란 던지기 이벤트 수신: {
+  startX: 100,
+  startY: 234.96266501146758,
+  targetX: 529.4935166147751,
+  targetY: 106.18579833271758
+}
+투표 완료: yoonseokyeol에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 562.396952876783,
+  startY: 100,
+  targetX: 615.5361147131003,
+  targetY: 359.4450070702801
+}
+투표 완료: domvy에게 -1 투표 추가.
+투표 완료: yoonseokyeol에게 1 투표 추가.
+투표 완료: yoonseokyeol에게 1 투표 추가.
+투표 완료: yoonseokyeol에게 1 투표 추가.
+투표 완료: yoonseokyeol에게 1 투표 추가.
+참가자 목록 응답 (서버): [
+  [ 'domvy', 0 ],
+  [ 'leejh', 0 ],
+  [ 'yoonseokyeol', 4 ],
+  [ 'qwerqwer', 0 ]
+]
+계란 던지기 이벤트 수신: {
+  startX: 100,
+  startY: 258.5132826558668,
+  targetX: 609.7387421499903,
+  targetY: 205.04119562746945
+}
+투표 완료: qwerqwer에게 -1 투표 추가.
+투표 완료: qwerqwer에게 1 투표 추가.
+투표 완료: qwerqwer에게 1 투표 추가.
+투표 완료: leejh에게 1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 100,
+  startY: 176.01014019121612,
+  targetX: 354.09804347592717,
+  targetY: 120.96169704486397
+}
+투표 완료: leejh에게 -1 투표 추가.
+투표 완료: qwerqwer에게 1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 100,
+  startY: 185.93366777095096,
+  targetX: 963.3449689482038,
+  targetY: 434.3160247757558
+}
+투표 완료: qwerqwer에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 142.8322286008306,
+  startY: 100,
+  targetX: 334.6277544978493,
+  targetY: 341.5608529742299
+}
+투표 완료: leejh에게 -1 투표 추가.
+투표 완료: qwerqwer에게 1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 103.24785670153764,
+  startY: 100,
+  targetX: 611.17873899929,
+  targetY: 152.32282863490903
+}
+투표 완료: qwerqwer에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 782.9329029312123,
+  startY: 811,
+  targetX: 1144.7075051046218,
+  targetY: 352.0482725171846
+}
+투표 완료: qwerqwer에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 375.4260583415914,
+  startY: 328,
+  targetX: 335.27383669141324,
+  targetY: 269.5200731619982
+}
+투표 완료: leejh에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 198.72189516113627,
+  startY: 100,
+  targetX: 1159.115882244421,
+  targetY: 492.7036197931948
+}
+투표 완료: qwerqwer에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 396.07283439852364,
+  startY: 832,
+  targetX: 547.89038131986,
+  targetY: 345.52247492771954
+}
+계란 던지기 이벤트 수신: {
+  startX: 100,
+  startY: 778.1536836800187,
+  targetX: 329.72257526197313,
+  targetY: 227.1202537525113
+}
+계란 던지기 이벤트 수신: {
+  startX: 578.5361824279789,
+  startY: 100,
+  targetX: 1035.7322015740694,
+  targetY: 482.44421234408685
+}
+투표 완료: qwerqwer에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 327.1023411786348,
+  startY: 100,
+  targetX: 705.4545238490076,
+  targetY: 145.92219469457467
+}
+투표 완료: qwerqwer에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 502.40897792759995,
+  startY: 100,
+  targetX: 500.37619283508354,
+  targetY: 310.91940083298783
+}
+계란 던지기 이벤트 수신: {
+  startX: 346.6933573030328,
+  startY: 328,
+  targetX: 604.4039284138016,
+  targetY: 174.59647036058027
+}
+투표 완료: qwerqwer에게 -1 투표 추가.
+투표 완료: leejh에게 1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 602.9472902013997,
+  startY: 100,
+  targetX: 386.24994235782646,
+  targetY: 313.47336297257834
+}
+계란 던지기 이벤트 수신: {
+  startX: 100,
+  startY: 471.31200221376514,
+  targetX: 694.5368333605805,
+  targetY: 310.9865828422078
+}
+투표 완료: leejh에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 100,
+  startY: 210.44059762476974,
+  targetX: 395.9950274796039,
+  targetY: 452.06286243138993
+}
+투표 완료: leejh에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 417.3870744301253,
+  startY: 100,
+  targetX: 422.4024372208102,
+  targetY: 118.10723665411496
+}
+투표 완료: leejh에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 610.054521507433,
+  startY: 931,
+  targetX: 351.39991360493127,
+  targetY: 274.7181090140768
+}
+투표 완료: leejh에게 -1 투표 추가.
+투표 완료: qwerqwer에게 1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 100,
+  startY: 449.72467532136915,
+  targetX: 575.8489044227729,
+  targetY: 275.8055990747521
+}
+투표 완료: leejh에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 100,
+  startY: 733.4614856060849,
+  targetX: 293.3260375776473,
+  targetY: 343.7644941733854
+}
+투표 완료: leejh에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 100.47033782291402,
+  startY: 100,
+  targetX: 589.3882099918213,
+  targetY: 149.46271601705934
+}
+투표 완료: qwerqwer에게 -1 투표 추가.
+투표 완료: qwerqwer에게 1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 287.0363884666142,
+  startY: 100,
+  targetX: 985.508630419544,
+  targetY: 207.24529143791779
+}
+투표 완료: leejh에게 1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 601.4185014619998,
+  startY: 931,
+  targetX: 1245.1267135431563,
+  targetY: 504.37068531823576
+}
+투표 완료: qwerqwer에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 368.45408689991444,
+  startY: 802,
+  targetX: 841.6075874007537,
+  targetY: 384.64490748642913
+}
+계란 던지기 이벤트 수신: {
+  startX: 228.53280720857774,
+  startY: 100,
+  targetX: 509.44110744576994,
+  targetY: 298.12305023625817
+}
+투표 완료: leejh에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 405.32438922022595,
+  startY: 802,
+  targetX: 1006.7600772882685,
+  targetY: 140.8027137868512
+}
+계란 던지기 이벤트 수신: {
+  startX: 100,
+  startY: 598.9603173606828,
+  targetX: 425.0974169022637,
+  targetY: 300.5776629884127
+}
+계란 던지기 이벤트 수신: {
+  startX: 100,
+  startY: 143.17800956884918,
+  targetX: 1142.445396023623,
+  targetY: 347.86548340241444
+}
+계란 던지기 이벤트 수신: {
+  startX: 100,
+  startY: 502.75917437612634,
+  targetX: 501.40448801322896,
+  targetY: 243.2783913528805
+}
+계란 던지기 이벤트 수신: {
+  startX: 129.57115954324183,
+  startY: 100,
+  targetX: 286.10464085120384,
+  targetY: 436.27673922416784
+}
+계란 던지기 이벤트 수신: {
+  startX: 100,
+  startY: 367.0369140394199,
+  targetX: 807.8704866054302,
+  targetY: 310.77786074920834
+}
+계란 던지기 이벤트 수신: {
+  startX: 533.6066652403484,
+  startY: 100,
+  targetX: 707.5098509770013,
+  targetY: 506.9304386376582
+}
+계란 던지기 이벤트 수신: {
+  startX: 100,
+  startY: 603.006409902184,
+  targetX: 502.61031880359377,
+  targetY: 129.31388206220348
+}
+투표 완료: domvy에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 288.2642785518528,
+  startY: 931,
+  targetX: 568.2545757282205,
+  targetY: 461.75310315481977
+}
+계란 던지기 이벤트 수신: {
+  startX: 100,
+  startY: 430.4518184596477,
+  targetX: 341.2732627387382,
+  targetY: 256.81093324909733
+}
+투표 완료: domvy에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 543.3045263018552,
+  startY: 832,
+  targetX: 908.4539893857676,
+  targetY: 137.2160533568136
+}
+계란 던지기 이벤트 수신: {
+  startX: 639.2154482499539,
+  startY: 100,
+  targetX: 1030.4364561456084,
+  targetY: 386.53847564592655
+}
+투표 완료: yoonseokyeol에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 100,
+  startY: 384.639972663079,
+  targetX: 806.7037226093506,
+  targetY: 293.37554197164013
+}
+투표 완료: yoonseokyeol에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 351.1767646646614,
+  startY: 811,
+  targetX: 925.4147825691008,
+  targetY: 488.288060635674
+}
+투표 완료: yoonseokyeol에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 385.5126922983793,
+  startY: 811,
+  targetX: 966.9597637330722,
+  targetY: 191.7276277927893
+}
+투표 완료: yoonseokyeol에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 271.4236502073142,
+  startY: 802,
+  targetX: 965.1106982663565,
+  targetY: 227.87987124869852
+}
+계란 던지기 이벤트 수신: {
+  startX: 100,
+  startY: 777.8361593456726,
+  targetX: 1174.4992534397868,
+  targetY: 339.72518924853523
+}
+투표 완료: yoonseokyeol에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 505.0319260369199,
+  startY: 811,
+  targetX: 1244.3241221683115,
+  targetY: 321.76979573835877
+}
+투표 완료: yoonseokyeol에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 195.33455514535888,
+  startY: 100,
+  targetX: 1077.7164944904332,
+  targetY: 315.93568910390553
+}
+계란 던지기 이벤트 수신: {
+  startX: 100,
+  startY: 768.7135915228927,
+  targetX: 1038.0362934176874,
+  targetY: 249.50858118492675
+}
+투표 완료: yoonseokyeol에게 -1 투표 추가.
+계란 던지기 이벤트 수신: {
+  startX: 774.8948803050209,
+  startY: 811,
+  targetX: 634.7113281842217,
+  targetY: 259.3144013409851
+}
+1
+12
+123
+1234
+12345
+123456
+1234567
+12345678
+투표 결과가 성공적으로 처리되었습니다.
+참가자 목록 응답 (서버): [
+  [ 'domvy', -2 ],
+  [ 'leejh', -7 ],
+  [ 'yoonseokyeol', -3 ],
+  [ 'qwerqwer', -4 ]
+]
+참가자 목록 응답 (서버): [
+  [ 'domvy', -2 ],
+  [ 'leejh', -7 ],
+  [ 'yoonseokyeol', -3 ],
+  [ 'qwerqwer', -4 ]
+]
+참가자 목록 응답 (서버): [
+  [ 'domvy', -2 ],
+  [ 'leejh', -7 ],
+  [ 'yoonseokyeol', -3 ],
+  [ 'qwerqwer', -4 ]
+]
+참가자 목록 응답 (서버): [
+  [ 'domvy', -2 ],
+  [ 'leejh', -7 ],
+  [ 'yoonseokyeol', -3 ],
+  [ 'qwerqwer', -4 ]
+]
+참가자 목록 응답 (서버): [
+  [ 'domvy', -2 ],
+  [ 'leejh', -7 ],
+  [ 'yoonseokyeol', -3 ],
+  [ 'qwerqwer', -4 ]
+]
+참가자 목록 응답 (서버): [
+  [ 'domvy', -2 ],
+  [ 'leejh', -7 ],
+  [ 'yoonseokyeol', -3 ],
+  [ 'qwerqwer', -4 ]
+]
+참가자 목록 응답 (서버): [
+  [ 'domvy', -2 ],
+  [ 'leejh', -7 ],
+  [ 'yoonseokyeol', -3 ],
+  [ 'qwerqwer', -4 ]
+]
+참가자 목록 응답 (서버): [
+  [ 'domvy', -2 ],
+  [ 'leejh', -7 ],
+  [ 'yoonseokyeol', -3 ],
+  [ 'qwerqwer', -4 ]
+]
+참가자 목록 응답 (서버): [
+  [ 'domvy', -2 ],
+  [ 'leejh', -7 ],
+  [ 'yoonseokyeol', -3 ],
+  [ 'qwerqwer', -4 ]
+]
+참가자 목록 응답 (서버): [
+  [ 'domvy', -2 ],
+  [ 'leejh', -7 ],
+  [ 'yoonseokyeol', -3 ],
+  [ 'qwerqwer', -4 ]
+]
+참가자 목록 응답 (서버): [
+  [ 'domvy', -2 ],
+  [ 'leejh', -7 ],
+  [ 'yoonseokyeol', -3 ],
+  [ 'qwerqwer', -4 ]
+]
+참가자 목록 응답 (서버): [
+  [ 'domvy', -2 ],
+  [ 'leejh', -7 ],
+  [ 'yoonseokyeol', -3 ],
+  [ 'qwerqwer', -4 ]
+]
+참가자 목록 응답 (서버): [
+  [ 'domvy', -2 ],
+  [ 'leejh', -7 ],
+  [ 'yoonseokyeol', -3 ],
+  [ 'qwerqwer', -4 ]
+]
+참가자 목록 응답 (서버): [
+  [ 'domvy', -2 ],
+  [ 'leejh', -7 ],
+  [ 'yoonseokyeol', -3 ],
+  [ 'qwerqwer', -4 ]
+]
+참가자 목록 응답 (서버): [
+  [ 'domvy', -2 ],
+  [ 'leejh', -7 ],
+  [ 'yoonseokyeol', -3 ],
+  [ 'qwerqwer', -4 ]
+]
+참가자 목록 응답 (서버): [
+  [ 'domvy', -2 ],
+  [ 'leejh', -7 ],
+  [ 'yoonseokyeol', -3 ],
+  [ 'qwerqwer', -4 ]
+]
+타이머방 연결 해제: YV9Xpb8Ty0bhAXTQAABV
+타이머방 연결 해제: VZjq9Gm69qUVQDTcAABY
+챗사용자 연결 해제됨: tcTQkPZ01kdRphFQAABW
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 15
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 15,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 15,
+    participantCount: 4
+  }
+]
+타이머방 연결 해제: DVSqyVr8IpDgweewAABa
+챗사용자 연결 해제됨: huuJXmeHvPGCnrYcAABb
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 14
+타이머방 연결 해제: NGdaEZudvQ6VmIxgAABd
+타이머 네임스페이스에 새로운 클라이언트 연결: Ny40JxGi1U1-0CIwAACN
+챗사용자 연결됨: laOGkmJFn7dlZASCAACO
+타이머 네임스페이스에 새로운 클라이언트 연결: CyXzxWeDXJVlB8cwAACP
+타이머방 Ny40JxGi1U1-0CIwAACN가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+타이머방 CyXzxWeDXJVlB8cwAACP가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 laOGkmJFn7dlZASCAACO가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 15
+타이머방 연결 해제: ZE4ey1ehCMVD_gOnAABi
+타이머방 연결 해제: hv-cl3ds7lhr8cgeAABf
+챗사용자 연결 해제됨: JR2KXC2nfFCEBrFoAABg
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 14
+타이머 네임스페이스에 새로운 클라이언트 연결: bLU2gGRkm97CFy2TAACS
+챗사용자 연결됨: UuaZsrhVPacYwSJgAACT
+타이머 네임스페이스에 새로운 클라이언트 연결: PbnQcK33Qb2BUTfYAACU
+타이머방 연결 해제: Ny40JxGi1U1-0CIwAACN
+챗사용자 연결 해제됨: laOGkmJFn7dlZASCAACO
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 13
+타이머방 연결 해제: CyXzxWeDXJVlB8cwAACP
+타이머방 bLU2gGRkm97CFy2TAACS가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 UuaZsrhVPacYwSJgAACT가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 14
+타이머방 PbnQcK33Qb2BUTfYAACU가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 14,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 14,
+    participantCount: 4
+  }
+]
+타이머방 연결 해제: bLU2gGRkm97CFy2TAACS
+타이머방 연결 해제: PbnQcK33Qb2BUTfYAACU
+챗사용자 연결 해제됨: UuaZsrhVPacYwSJgAACT
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 13
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 13,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 13,
+    participantCount: 4
+  }
+]
+타이머방 연결 해제: DgBVkSiPhBLHtFvmAABn
+타이머방 연결 해제: QTRe2oCr3UH26Ni_AABk
+챗사용자 연결 해제됨: rmCQeqPIwDsAVr6XAABl
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 12
+타이머 네임스페이스에 새로운 클라이언트 연결: IMiDNGX8QbfCP08MAACX
+챗사용자 연결됨: 5GDJjEZIYkItth1GAACY
+타이머 네임스페이스에 새로운 클라이언트 연결: KI35zWk3PWFM_dXDAACZ
+타이머방 IMiDNGX8QbfCP08MAACX가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 5GDJjEZIYkItth1GAACY가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 13
+타이머방 KI35zWk3PWFM_dXDAACZ가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+타이머방 연결 해제: IMiDNGX8QbfCP08MAACX
+챗사용자 연결 해제됨: 5GDJjEZIYkItth1GAACY
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 12
+타이머방 연결 해제: KI35zWk3PWFM_dXDAACZ
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 12,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 12,
+    participantCount: 4
+  }
+]
+타이머방 연결 해제: vejJeMm232tCogZaAABp
+챗사용자 연결 해제됨: -lOa0Xe13YHtEvA9AABq
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 11
+타이머방 연결 해제: rXhUi3HyRb8RNLNbAABs
+타이머 네임스페이스에 새로운 클라이언트 연결: Z35M4qYaOvt9rDmbAACc
+챗사용자 연결됨: tMK20affXKSAxYn7AACd
+타이머 네임스페이스에 새로운 클라이언트 연결: vBGVlIKnqS-V_rb5AACe
+타이머방 vBGVlIKnqS-V_rb5AACe가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+타이머방 Z35M4qYaOvt9rDmbAACc가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 tMK20affXKSAxYn7AACd가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 12
+타이머방 연결 해제: Z35M4qYaOvt9rDmbAACc
+챗사용자 연결 해제됨: tMK20affXKSAxYn7AACd
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 11
+타이머방 연결 해제: vBGVlIKnqS-V_rb5AACe
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 11,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 11,
+    participantCount: 4
+  }
+]
+타이머방 연결 해제: BM-7iCuPdiMCIBzrAAAe
+타이머방 연결 해제: aPFGDdr0ws8-E5ErAAAh
+챗사용자 연결 해제됨: gVQ6wxgHEDhQVifQAAAf
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 10
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 10,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 10,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 10,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 10,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 10,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 10,
+    participantCount: 4
+  }
+]
+req.body: [Object: null prototype] {
+  roomname: '테스트2',
+  createdby: 'domvy',
+  tags: '[]'
+}
+req.file: {
+  fieldname: 'thumbnail',
+  originalname: 'defaultdebate.jpeg',
+  encoding: '7bit',
+  mimetype: 'image/jpeg',
+  buffer: <Buffer ff d8 ff e0 00 10 4a 46 49 46 00 01 01 00 00 01 00 01 00 00 ff db 00 84 00 0a 07 08 12 16 11 12 12 11 12 18 18 12 12 12 12 12 11 11 11 12 12 11 11 12 ... 5168 more bytes>,
+  size: 5218
+}
+타이머 네임스페이스에 새로운 클라이언트 연결: tn6heyYNb6AzVKckAACg
+챗사용자 연결됨: XW8pSenv_M4vG77vAACh
+타이머방 tn6heyYNb6AzVKckAACg가 방 42e2cb8935861e7aab17e7547288c83b에 참여했습니다.
+챗사용자 XW8pSenv_M4vG77vAACh가 방 42e2cb8935861e7aab17e7547288c83b에 참가했습니다.
+현재 인원: 1
+타이머 네임스페이스에 새로운 클라이언트 연결: r9PcbHKx6Dl8nYq1AACj
+타이머방 r9PcbHKx6Dl8nYq1AACj가 방 42e2cb8935861e7aab17e7547288c83b에 참여했습니다.
+타이머방 연결 해제: tq2FhMyBdNct5AoUAACH
+챗사용자 연결 해제됨: 5OdQ6CDoLtTSWSF2AACI
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 9
+타이머방 연결 해제: 5HQ2Bt7VxeiYiVeRAACK
+타이머 네임스페이스에 새로운 클라이언트 연결: EEn_e8Gv6f4vSt7EAACl
+챗사용자 연결됨: RI_7f0oouT-5ZL1bAACm
+타이머방 EEn_e8Gv6f4vSt7EAACl가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 RI_7f0oouT-5ZL1bAACm가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 10
+타이머 네임스페이스에 새로운 클라이언트 연결: 4eI24QxE9l0noN4zAACo
+타이머방 4eI24QxE9l0noN4zAACo가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+타이머방 연결 해제: EEn_e8Gv6f4vSt7EAACl
+타이머방 연결 해제: 4eI24QxE9l0noN4zAACo
+챗사용자 연결 해제됨: RI_7f0oouT-5ZL1bAACm
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 9
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 9,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b2c9debf1fcc4e7d899f'),
+    roomNumber: '42e2cb8935861e7aab17e7547288c83b',
+    roomname: '테스트2',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341897008_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 9,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b2c9debf1fcc4e7d899f'),
+    roomNumber: '42e2cb8935861e7aab17e7547288c83b',
+    roomname: '테스트2',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341897008_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+타이머방 연결 해제: Dc7uHNBydpNjxzLIAACC
+챗사용자 연결 해제됨: aROVzcwfF4XlOa83AACD
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 8
+타이머방 연결 해제: MfPZX1MXOwqOpIQcAACF
+타이머 네임스페이스에 새로운 클라이언트 연결: clb4RkfYBg0-kmidAACq
+챗사용자 연결됨: ziDxUWnkor3wgPj7AACr
+타이머방 clb4RkfYBg0-kmidAACq가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 ziDxUWnkor3wgPj7AACr가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 9
+타이머 네임스페이스에 새로운 클라이언트 연결: zLHwOeXU8wS1c6I7AACt
+타이머방 zLHwOeXU8wS1c6I7AACt가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+타이머방 연결 해제: clb4RkfYBg0-kmidAACq
+챗사용자 연결 해제됨: ziDxUWnkor3wgPj7AACr
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 8
+타이머방 연결 해제: zLHwOeXU8wS1c6I7AACt
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 8,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b2c9debf1fcc4e7d899f'),
+    roomNumber: '42e2cb8935861e7aab17e7547288c83b',
+    roomname: '테스트2',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341897008_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 8,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b2c9debf1fcc4e7d899f'),
+    roomNumber: '42e2cb8935861e7aab17e7547288c83b',
+    roomname: '테스트2',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341897008_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: rY-M-OWqj6LZiCvdAACv
+타이머방 rY-M-OWqj6LZiCvdAACv가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 연결됨: 3n8bOA53Zp7_ytm-AACx
+챗사용자 3n8bOA53Zp7_ytm-AACx가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 9
+타이머 네임스페이스에 새로운 클라이언트 연결: s0MJJQl1rU9I5j8OAACz
+타이머방 s0MJJQl1rU9I5j8OAACz가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+타이머방 연결 해제: D0RI43EMG8vA5jvEAABx
+타이머방 연결 해제: 8EMDRbRJ7NWxwxVJAABu
+챗사용자 연결 해제됨: WFOSDh-d1ZC6DSXGAABv
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 8
+타이머방 연결 해제: rY-M-OWqj6LZiCvdAACv
+챗사용자 연결 해제됨: 3n8bOA53Zp7_ytm-AACx
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 7
+타이머방 연결 해제: s0MJJQl1rU9I5j8OAACz
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b2c9debf1fcc4e7d899f'),
+    roomNumber: '42e2cb8935861e7aab17e7547288c83b',
+    roomname: '테스트2',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341897008_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 7,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b2c9debf1fcc4e7d899f'),
+    roomNumber: '42e2cb8935861e7aab17e7547288c83b',
+    roomname: '테스트2',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341897008_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+타이머방 연결 해제: 1XVq2lC6Tnt1OVu_AABL
+챗사용자 연결 해제됨: cdH2atD-3mc83I-aAABM
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 6
+타이머방 연결 해제: CMwQV2Hp9556UteTAABO
+타이머방 연결 해제: bTPfbAIIDf5ec8NiAAB2
+타이머방 연결 해제: kGgOJK7_RbF10loXAABz
+챗사용자 연결 해제됨: RClaoD1HmKamCPdYAAB0
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 5
+타이머방 연결 해제: ukM4hyv5hoZk-o-KAAA3
+챗사용자 연결 해제됨: UzcKORt8EUKrbJDSAAA4
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 4
+타이머방 연결 해제: vxqYkiquE4VwU6MIAAA6
+타이머방 연결 해제: Al4p5cwzm9ZLpWGcAAAm
+챗사용자 연결 해제됨: vYMmohf76NwDLuAwAAAk
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 3
+챗사용자 연결 해제됨: XW8pSenv_M4vG77vAACh
+방 42e2cb8935861e7aab17e7547288c83b의 현재 인원: 0
+타이머방 연결 해제: r9PcbHKx6Dl8nYq1AACj
+챗사용자 연결됨: GneIiqv6y5KXn15jAAC1
+챗사용자 GneIiqv6y5KXn15jAAC1가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 4
+챗사용자 연결됨: 6lBHFFU0cvtcpCB2AAC4
+챗사용자 6lBHFFU0cvtcpCB2AAC4가 방 42e2cb8935861e7aab17e7547288c83b에 참가했습니다.
+현재 인원: 1
+타이머 네임스페이스에 새로운 클라이언트 연결: 8Ufg3LWHcd_o_i_0AAC5
+타이머방 8Ufg3LWHcd_o_i_0AAC5가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+타이머 네임스페이스에 새로운 클라이언트 연결: SXBx32venID2HAAKAAC7
+타이머방 SXBx32venID2HAAKAAC7가 방 42e2cb8935861e7aab17e7547288c83b에 참여했습니다.
+타이머방 연결 해제: PE6spU1YtUIxl0nJAACA
+챗사용자 연결 해제됨: PoWrqgb8IEi9RMoKAAB-
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 3
+챗사용자 연결됨: GgxYgsacI4pIp45rAAC9
+챗사용자 GgxYgsacI4pIp45rAAC9가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 4
+타이머 네임스페이스에 새로운 클라이언트 연결: SDzm5oKM2J1Stm4yAAC_
+타이머방 SDzm5oKM2J1Stm4yAAC_가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 연결 해제됨: gqcXlV3_rOfRCa1hAAAp
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 3
+챗사용자 연결 해제됨: TgEk-9Ay-qIiIJhVAABR
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 2
+타이머방 연결 해제: GiWmN6BfwA9N6w3xAABT
+타이머방 연결 해제: jyGDqHwX-tbv63MDAAAr
+챗사용자 연결됨: e_1SWQ_r3DwggdXlAADB
+챗사용자 e_1SWQ_r3DwggdXlAADB가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 3
+타이머 네임스페이스에 새로운 클라이언트 연결: CyJHo8eOrRmGGRdFAADD
+타이머방 CyJHo8eOrRmGGRdFAADD가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 연결됨: P57stQFbpejDXYMTAADF
+챗사용자 P57stQFbpejDXYMTAADF가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 4
+타이머 네임스페이스에 새로운 클라이언트 연결: k9iC63_kYK3F8AlpAADH
+타이머방 k9iC63_kYK3F8AlpAADH가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+타이머방 연결 해제: 8Ufg3LWHcd_o_i_0AAC5
+챗사용자 연결 해제됨: GneIiqv6y5KXn15jAAC1
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 3
+챗사용자 연결 해제됨: 6lBHFFU0cvtcpCB2AAC4
+방 42e2cb8935861e7aab17e7547288c83b의 현재 인원: 0
+타이머방 연결 해제: SXBx32venID2HAAKAAC7
+챗사용자 연결됨: a3sYYp2qf9fCywfyAADJ
+챗사용자 연결 해제됨: GgxYgsacI4pIp45rAAC9
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 2
+타이머방 연결 해제: SDzm5oKM2J1Stm4yAAC_
+챗사용자 a3sYYp2qf9fCywfyAADJ가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 3
+챗사용자 연결됨: 0tMYkGDzbHaYbjDVAADL
+챗사용자 0tMYkGDzbHaYbjDVAADL가 방 42e2cb8935861e7aab17e7547288c83b에 참가했습니다.
+현재 인원: 1
+챗사용자 연결됨: pVaL3FTKrVUmapZ1AADO
+타이머 네임스페이스에 새로운 클라이언트 연결: fIsrVJBOqDLgkVHeAADP
+챗사용자 pVaL3FTKrVUmapZ1AADO가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 4
+타이머방 fIsrVJBOqDLgkVHeAADP가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+타이머 네임스페이스에 새로운 클라이언트 연결: mnXHCBOotzl82EaEAADR
+타이머방 mnXHCBOotzl82EaEAADR가 방 42e2cb8935861e7aab17e7547288c83b에 참여했습니다.
+타이머 네임스페이스에 새로운 클라이언트 연결: r1xYHJ89XyMA6Zh9AADT
+타이머방 r1xYHJ89XyMA6Zh9AADT가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 연결 해제됨: e_1SWQ_r3DwggdXlAADB
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 3
+챗사용자 연결 해제됨: P57stQFbpejDXYMTAADF
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 2
+타이머방 연결 해제: k9iC63_kYK3F8AlpAADH
+타이머방 연결 해제: CyJHo8eOrRmGGRdFAADD
+챗사용자 연결됨: DtQLyUN0-LTlD-vSAADV
+챗사용자 DtQLyUN0-LTlD-vSAADV가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 3
+타이머 네임스페이스에 새로운 클라이언트 연결: vx6RB_mhHkK3ltAuAADX
+타이머방 vx6RB_mhHkK3ltAuAADX가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 연결됨: ImcdZ8PzTWL5JWWuAADZ
+챗사용자 ImcdZ8PzTWL5JWWuAADZ가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 4
+타이머 네임스페이스에 새로운 클라이언트 연결: rEn-QdeDbuGPll7jAADb
+타이머방 rEn-QdeDbuGPll7jAADb가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 연결 해제됨: 0tMYkGDzbHaYbjDVAADL
+방 42e2cb8935861e7aab17e7547288c83b의 현재 인원: 0
+타이머방 연결 해제: mnXHCBOotzl82EaEAADR
+챗사용자 연결 해제됨: a3sYYp2qf9fCywfyAADJ
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 3
+타이머방 연결 해제: fIsrVJBOqDLgkVHeAADP
+챗사용자 연결됨: YixI7o2jkeXrd8x5AADd
+타이머방 연결 해제: r1xYHJ89XyMA6Zh9AADT
+챗사용자 연결 해제됨: pVaL3FTKrVUmapZ1AADO
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 2
+챗사용자 YixI7o2jkeXrd8x5AADd가 방 42e2cb8935861e7aab17e7547288c83b에 참가했습니다.
+현재 인원: 1
+챗사용자 연결됨: vMTnmPdZkqKsfQRRAADg
+챗사용자 연결됨: T2_vAQ-IWbhfeBtsAADh
+타이머 네임스페이스에 새로운 클라이언트 연결: Zm5F1qqXWKnmtU43AADj
+챗사용자 vMTnmPdZkqKsfQRRAADg가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 3
+챗사용자 T2_vAQ-IWbhfeBtsAADh가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 4
+타이머방 Zm5F1qqXWKnmtU43AADj가 방 42e2cb8935861e7aab17e7547288c83b에 참여했습니다.
+타이머 네임스페이스에 새로운 클라이언트 연결: nrTw9o4T_UpRKB9GAADm
+타이머 네임스페이스에 새로운 클라이언트 연결: TvO10hC0PLnBQFeXAADn
+타이머방 nrTw9o4T_UpRKB9GAADm가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+타이머방 TvO10hC0PLnBQFeXAADn가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 연결 해제됨: ImcdZ8PzTWL5JWWuAADZ
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 3
+챗사용자 연결 해제됨: DtQLyUN0-LTlD-vSAADV
+방 4b22ce30786ee36ba380bab0f9b7ec2c의 현재 인원: 2
+타이머방 연결 해제: vx6RB_mhHkK3ltAuAADX
+타이머방 연결 해제: rEn-QdeDbuGPll7jAADb
+챗사용자 연결됨: TDRXN1e8dAnqQOLzAADp
+챗사용자 TDRXN1e8dAnqQOLzAADp가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 3
+타이머 네임스페이스에 새로운 클라이언트 연결: mEyA1EaKhv3LIZPhAADr
+타이머방 mEyA1EaKhv3LIZPhAADr가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 연결됨: V8znDDQRH6Z0MHAIAADt
+타이머 네임스페이스에 새로운 클라이언트 연결: L63zlUzH-FPcSLLnAADv
+타이머방 L63zlUzH-FPcSLLnAADv가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참여했습니다.
+챗사용자 V8znDDQRH6Z0MHAIAADt가 방 4b22ce30786ee36ba380bab0f9b7ec2c에 참가했습니다.
+현재 인원: 4
+Application started on port:  5000
+Mongoose connected to DB Cluster
+Connected to MongoDB
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b5b70b18448f0b009245'),
+    roomNumber: '45bbe176cafcae3dacdaa7fffa31a439',
+    roomname: 'asdw',
+    createdby: 'qqq',
+    participant: Map(4) { 'qqq' => 0, 'new1234' => 0, 'qqqqqq' => 0, 'qqqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733342646995_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b7516a601364f98e44f3'),
+    roomNumber: '4b092f4f8c8b8558bfbbcd9d5f8be361',
+    roomname: '제발....',
+    createdby: 'qqqqq',
+    participant: Map(4) { 'qqqqq' => 0, 'new1234' => 0, 'qqq' => 0, 'qqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343056904_defaultdebate.jpeg',
+    tags: [ 'ㄴㄴㄴㄴ' ],
+    memberCount: 0,
+    participantCount: 4
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b5b70b18448f0b009245'),
+    roomNumber: '45bbe176cafcae3dacdaa7fffa31a439',
+    roomname: 'asdw',
+    createdby: 'qqq',
+    participant: Map(4) { 'qqq' => 0, 'new1234' => 0, 'qqqqqq' => 0, 'qqqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733342646995_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b7516a601364f98e44f3'),
+    roomNumber: '4b092f4f8c8b8558bfbbcd9d5f8be361',
+    roomname: '제발....',
+    createdby: 'qqqqq',
+    participant: Map(4) { 'qqqqq' => 0, 'new1234' => 0, 'qqq' => 0, 'qqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343056904_defaultdebate.jpeg',
+    tags: [ 'ㄴㄴㄴㄴ' ],
+    memberCount: 0,
+    participantCount: 4
+  }
+]
+req.body: [Object: null prototype] {
+  roomname: '테스트',
+  createdby: 'domvy',
+  tags: '[]'
+}
+req.file: {
+  fieldname: 'thumbnail',
+  originalname: 'defaultdebate.jpeg',
+  encoding: '7bit',
+  mimetype: 'image/jpeg',
+  buffer: <Buffer ff d8 ff e0 00 10 4a 46 49 46 00 01 01 00 00 01 00 01 00 00 ff db 00 84 00 0a 07 08 12 16 11 12 12 11 12 18 18 12 12 12 12 12 11 11 11 12 12 11 11 12 ... 5168 more bytes>,
+  size: 5218
+}
+req.body: [Object: null prototype] {
+  roomname: 'ㅇㄻㄹㅇㅁㄴㄹㅇㅁㅇㄹ',
+  createdby: 'domvy',
+  tags: '[]'
+}
+req.file: {
+  fieldname: 'thumbnail',
+  originalname: 'defaultdebate.jpeg',
+  encoding: '7bit',
+  mimetype: 'image/jpeg',
+  buffer: <Buffer ff d8 ff e0 00 10 4a 46 49 46 00 01 01 00 00 01 00 01 00 00 ff db 00 84 00 0a 07 08 12 16 11 12 12 11 12 18 18 12 12 12 12 12 11 11 11 12 12 11 11 12 ... 5168 more bytes>,
+  size: 5218
+}
+Application started on port:  5000
+Mongoose connected to DB Cluster
+Connected to MongoDB
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b5b70b18448f0b009245'),
+    roomNumber: '45bbe176cafcae3dacdaa7fffa31a439',
+    roomname: 'asdw',
+    createdby: 'qqq',
+    participant: Map(4) { 'qqq' => 0, 'new1234' => 0, 'qqqqqq' => 0, 'qqqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733342646995_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b7516a601364f98e44f3'),
+    roomNumber: '4b092f4f8c8b8558bfbbcd9d5f8be361',
+    roomname: '제발....',
+    createdby: 'qqqqq',
+    participant: Map(4) { 'qqqqq' => 2, 'new1234' => 0, 'qqq' => 1, 'qqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343056904_defaultdebate.jpeg',
+    tags: [ 'ㄴㄴㄴㄴ' ],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b86dd695805016442d6b'),
+    roomNumber: '40cb62feb3ef1214a04e3e9640384b84',
+    roomname: 'ㅇㄻㄹㅇㅁㄴㄹㅇㅁㅇㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343341527_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b5b70b18448f0b009245'),
+    roomNumber: '45bbe176cafcae3dacdaa7fffa31a439',
+    roomname: 'asdw',
+    createdby: 'qqq',
+    participant: Map(4) { 'qqq' => 0, 'new1234' => 0, 'qqqqqq' => 0, 'qqqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733342646995_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b7516a601364f98e44f3'),
+    roomNumber: '4b092f4f8c8b8558bfbbcd9d5f8be361',
+    roomname: '제발....',
+    createdby: 'qqqqq',
+    participant: Map(4) { 'qqqqq' => 2, 'new1234' => 0, 'qqq' => 1, 'qqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343056904_defaultdebate.jpeg',
+    tags: [ 'ㄴㄴㄴㄴ' ],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b86dd695805016442d6b'),
+    roomNumber: '40cb62feb3ef1214a04e3e9640384b84',
+    roomname: 'ㅇㄻㄹㅇㅁㄴㄹㅇㅁㅇㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343341527_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b5b70b18448f0b009245'),
+    roomNumber: '45bbe176cafcae3dacdaa7fffa31a439',
+    roomname: 'asdw',
+    createdby: 'qqq',
+    participant: Map(4) { 'qqq' => 0, 'new1234' => 0, 'qqqqqq' => 0, 'qqqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733342646995_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b7516a601364f98e44f3'),
+    roomNumber: '4b092f4f8c8b8558bfbbcd9d5f8be361',
+    roomname: '제발....',
+    createdby: 'qqqqq',
+    participant: Map(4) { 'qqqqq' => 2, 'new1234' => 0, 'qqq' => 1, 'qqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343056904_defaultdebate.jpeg',
+    tags: [ 'ㄴㄴㄴㄴ' ],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b86dd695805016442d6b'),
+    roomNumber: '40cb62feb3ef1214a04e3e9640384b84',
+    roomname: 'ㅇㄻㄹㅇㅁㄴㄹㅇㅁㅇㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343341527_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b5b70b18448f0b009245'),
+    roomNumber: '45bbe176cafcae3dacdaa7fffa31a439',
+    roomname: 'asdw',
+    createdby: 'qqq',
+    participant: Map(4) { 'qqq' => 0, 'new1234' => 0, 'qqqqqq' => 0, 'qqqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733342646995_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b7516a601364f98e44f3'),
+    roomNumber: '4b092f4f8c8b8558bfbbcd9d5f8be361',
+    roomname: '제발....',
+    createdby: 'qqqqq',
+    participant: Map(4) { 'qqqqq' => 2, 'new1234' => 0, 'qqq' => 1, 'qqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343056904_defaultdebate.jpeg',
+    tags: [ 'ㄴㄴㄴㄴ' ],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b86dd695805016442d6b'),
+    roomNumber: '40cb62feb3ef1214a04e3e9640384b84',
+    roomname: 'ㅇㄻㄹㅇㅁㄴㄹㅇㅁㅇㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343341527_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  }
+]
+req.body: [Object: null prototype] {
+  roomname: 'ㄴ이람ㄹㄹㄴㅇㄻ',
+  createdby: 'domvy',
+  tags: '[]'
+}
+req.file: {
+  fieldname: 'thumbnail',
+  originalname: 'defaultdebate.jpeg',
+  encoding: '7bit',
+  mimetype: 'image/jpeg',
+  buffer: <Buffer ff d8 ff e0 00 10 4a 46 49 46 00 01 01 00 00 01 00 01 00 00 ff db 00 84 00 0a 07 08 12 16 11 12 12 11 12 18 18 12 12 12 12 12 11 11 11 12 12 11 11 12 ... 5168 more bytes>,
+  size: 5218
+}
+Application started on port:  5000
+Mongoose connected to DB Cluster
+Connected to MongoDB
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b5b70b18448f0b009245'),
+    roomNumber: '45bbe176cafcae3dacdaa7fffa31a439',
+    roomname: 'asdw',
+    createdby: 'qqq',
+    participant: Map(4) { 'qqq' => 0, 'new1234' => 0, 'qqqqqq' => 0, 'qqqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733342646995_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b7516a601364f98e44f3'),
+    roomNumber: '4b092f4f8c8b8558bfbbcd9d5f8be361',
+    roomname: '제발....',
+    createdby: 'qqqqq',
+    participant: Map(4) { 'qqqqq' => 2, 'new1234' => 0, 'qqq' => 1, 'qqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343056904_defaultdebate.jpeg',
+    tags: [ 'ㄴㄴㄴㄴ' ],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b86dd695805016442d6b'),
+    roomNumber: '40cb62feb3ef1214a04e3e9640384b84',
+    roomname: 'ㅇㄻㄹㅇㅁㄴㄹㅇㅁㅇㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343341527_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b90709bf26d0fe1476dc'),
+    roomNumber: '46a143ed5324f96b88401ab6772b35a2',
+    roomname: 'ㄴ이람ㄹㄹㄴㅇㄻ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343495308_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b5b70b18448f0b009245'),
+    roomNumber: '45bbe176cafcae3dacdaa7fffa31a439',
+    roomname: 'asdw',
+    createdby: 'qqq',
+    participant: Map(4) { 'qqq' => 0, 'new1234' => 0, 'qqqqqq' => 0, 'qqqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733342646995_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b7516a601364f98e44f3'),
+    roomNumber: '4b092f4f8c8b8558bfbbcd9d5f8be361',
+    roomname: '제발....',
+    createdby: 'qqqqq',
+    participant: Map(4) { 'qqqqq' => 2, 'new1234' => 0, 'qqq' => 1, 'qqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343056904_defaultdebate.jpeg',
+    tags: [ 'ㄴㄴㄴㄴ' ],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b86dd695805016442d6b'),
+    roomNumber: '40cb62feb3ef1214a04e3e9640384b84',
+    roomname: 'ㅇㄻㄹㅇㅁㄴㄹㅇㅁㅇㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343341527_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b90709bf26d0fe1476dc'),
+    roomNumber: '46a143ed5324f96b88401ab6772b35a2',
+    roomname: 'ㄴ이람ㄹㄹㄴㅇㄻ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343495308_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  }
+]
+req.body: [Object: null prototype] {
+  roomname: '테스트ㅁㄴㄹㄹㅇ',
+  createdby: 'domvy',
+  tags: '[]'
+}
+req.file: {
+  fieldname: 'thumbnail',
+  originalname: 'defaultdebate.jpeg',
+  encoding: '7bit',
+  mimetype: 'image/jpeg',
+  buffer: <Buffer ff d8 ff e0 00 10 4a 46 49 46 00 01 01 00 00 01 00 01 00 00 ff db 00 84 00 0a 07 08 12 16 11 12 12 11 12 18 18 12 12 12 12 12 11 11 11 12 12 11 11 12 ... 5168 more bytes>,
+  size: 5218
+}
+타이머 네임스페이스에 새로운 클라이언트 연결: lFrRAv_pG6wXCAbgAAAB
+챗사용자 연결됨: j3ol3q0uq56_01GDAAAC
+타이머방 lFrRAv_pG6wXCAbgAAAB가 방 454a375a796c987e915901f87c16d623에 참여했습니다.
+챗사용자 j3ol3q0uq56_01GDAAAC가 방 454a375a796c987e915901f87c16d623에 참가했습니다.
+현재 인원: 1
+타이머 네임스페이스에 새로운 클라이언트 연결: IXBoGCysdWJTNNfyAAAE
+타이머방 IXBoGCysdWJTNNfyAAAE가 방 454a375a796c987e915901f87c16d623에 참여했습니다.
+타이머방 연결 해제: lFrRAv_pG6wXCAbgAAAB
+챗사용자 연결 해제됨: j3ol3q0uq56_01GDAAAC
+방 454a375a796c987e915901f87c16d623의 현재 인원: 0
+타이머방 연결 해제: IXBoGCysdWJTNNfyAAAE
+타이머 네임스페이스에 새로운 클라이언트 연결: 5rZB19bZI_0jT5t6AAAG
+챗사용자 연결됨: zoWNHwB29XSnmDNBAAAH
+타이머방 5rZB19bZI_0jT5t6AAAG가 방 454a375a796c987e915901f87c16d623에 참여했습니다.
+챗사용자 zoWNHwB29XSnmDNBAAAH가 방 454a375a796c987e915901f87c16d623에 참가했습니다.
+현재 인원: 1
+타이머 네임스페이스에 새로운 클라이언트 연결: 3oQ2l-_svGt6FrNJAAAJ
+타이머방 3oQ2l-_svGt6FrNJAAAJ가 방 454a375a796c987e915901f87c16d623에 참여했습니다.
+타이머방 연결 해제: 5rZB19bZI_0jT5t6AAAG
+타이머방 연결 해제: 3oQ2l-_svGt6FrNJAAAJ
+챗사용자 연결 해제됨: zoWNHwB29XSnmDNBAAAH
+방 454a375a796c987e915901f87c16d623의 현재 인원: 0
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b5b70b18448f0b009245'),
+    roomNumber: '45bbe176cafcae3dacdaa7fffa31a439',
+    roomname: 'asdw',
+    createdby: 'qqq',
+    participant: Map(4) { 'qqq' => 0, 'new1234' => 0, 'qqqqqq' => 0, 'qqqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733342646995_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b7516a601364f98e44f3'),
+    roomNumber: '4b092f4f8c8b8558bfbbcd9d5f8be361',
+    roomname: '제발....',
+    createdby: 'qqqqq',
+    participant: Map(4) { 'qqqqq' => 1, 'new1234' => 0, 'qqq' => 1, 'qqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343056904_defaultdebate.jpeg',
+    tags: [ 'ㄴㄴㄴㄴ' ],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b86dd695805016442d6b'),
+    roomNumber: '40cb62feb3ef1214a04e3e9640384b84',
+    roomname: 'ㅇㄻㄹㅇㅁㄴㄹㅇㅁㅇㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343341527_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b90709bf26d0fe1476dc'),
+    roomNumber: '46a143ed5324f96b88401ab6772b35a2',
+    roomname: 'ㄴ이람ㄹㄹㄴㅇㄻ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343495308_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b964c894f97e9e402caf'),
+    roomNumber: '454a375a796c987e915901f87c16d623',
+    roomname: '테스트ㅁㄴㄹㄹㅇ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343587998_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b5b70b18448f0b009245'),
+    roomNumber: '45bbe176cafcae3dacdaa7fffa31a439',
+    roomname: 'asdw',
+    createdby: 'qqq',
+    participant: Map(4) { 'qqq' => 0, 'new1234' => 0, 'qqqqqq' => 0, 'qqqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733342646995_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b7516a601364f98e44f3'),
+    roomNumber: '4b092f4f8c8b8558bfbbcd9d5f8be361',
+    roomname: '제발....',
+    createdby: 'qqqqq',
+    participant: Map(4) { 'qqqqq' => 1, 'new1234' => 0, 'qqq' => 1, 'qqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343056904_defaultdebate.jpeg',
+    tags: [ 'ㄴㄴㄴㄴ' ],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b86dd695805016442d6b'),
+    roomNumber: '40cb62feb3ef1214a04e3e9640384b84',
+    roomname: 'ㅇㄻㄹㅇㅁㄴㄹㅇㅁㅇㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343341527_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b90709bf26d0fe1476dc'),
+    roomNumber: '46a143ed5324f96b88401ab6772b35a2',
+    roomname: 'ㄴ이람ㄹㄹㄴㅇㄻ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343495308_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b964c894f97e9e402caf'),
+    roomNumber: '454a375a796c987e915901f87c16d623',
+    roomname: '테스트ㅁㄴㄹㄹㅇ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343587998_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  }
+]
+방 454a375a796c987e915901f87c16d623가 1초 딜레이 후 삭제되었습니다.
+req.body: [Object: null prototype] {
+  roomname: '테일머ㅣㅏㄴㄻ',
+  createdby: 'domvy',
+  tags: '[]'
+}
+req.file: {
+  fieldname: 'thumbnail',
+  originalname: 'defaultdebate.jpeg',
+  encoding: '7bit',
+  mimetype: 'image/jpeg',
+  buffer: <Buffer ff d8 ff e0 00 10 4a 46 49 46 00 01 01 00 00 01 00 01 00 00 ff db 00 84 00 0a 07 08 12 16 11 12 12 11 12 18 18 12 12 12 12 12 11 11 11 12 12 11 11 12 ... 5168 more bytes>,
+  size: 5218
+}
+타이머 네임스페이스에 새로운 클라이언트 연결: ZVkqoul0caEwds67AAAL
+타이머방 ZVkqoul0caEwds67AAAL가 방 4cd35d51804838c69cd52c63dbbc95b0에 참여했습니다.
+챗사용자 연결됨: 60H3fIJHMKZUrWULAAAN
+챗사용자 60H3fIJHMKZUrWULAAAN가 방 4cd35d51804838c69cd52c63dbbc95b0에 참가했습니다.
+현재 인원: 1
+타이머 네임스페이스에 새로운 클라이언트 연결: jTXc2tAJG6ARMgGMAAAP
+타이머방 jTXc2tAJG6ARMgGMAAAP가 방 4cd35d51804838c69cd52c63dbbc95b0에 참여했습니다.
+타이머방 연결 해제: ZVkqoul0caEwds67AAAL
+타이머방 연결 해제: jTXc2tAJG6ARMgGMAAAP
+챗사용자 연결 해제됨: 60H3fIJHMKZUrWULAAAN
+방 4cd35d51804838c69cd52c63dbbc95b0의 현재 인원: 0
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b5b70b18448f0b009245'),
+    roomNumber: '45bbe176cafcae3dacdaa7fffa31a439',
+    roomname: 'asdw',
+    createdby: 'qqq',
+    participant: Map(4) { 'qqq' => 0, 'new1234' => 0, 'qqqqqq' => 0, 'qqqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733342646995_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b7516a601364f98e44f3'),
+    roomNumber: '4b092f4f8c8b8558bfbbcd9d5f8be361',
+    roomname: '제발....',
+    createdby: 'qqqqq',
+    participant: Map(4) { 'qqqqq' => 1, 'new1234' => 0, 'qqq' => 0, 'qqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343056904_defaultdebate.jpeg',
+    tags: [ 'ㄴㄴㄴㄴ' ],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b86dd695805016442d6b'),
+    roomNumber: '40cb62feb3ef1214a04e3e9640384b84',
+    roomname: 'ㅇㄻㄹㅇㅁㄴㄹㅇㅁㅇㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343341527_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b90709bf26d0fe1476dc'),
+    roomNumber: '46a143ed5324f96b88401ab6772b35a2',
+    roomname: 'ㄴ이람ㄹㄹㄴㅇㄻ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343495308_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b987c894f97e9e402d97'),
+    roomNumber: '4cd35d51804838c69cd52c63dbbc95b0',
+    roomname: '테일머ㅣㅏㄴㄻ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343623868_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b5b70b18448f0b009245'),
+    roomNumber: '45bbe176cafcae3dacdaa7fffa31a439',
+    roomname: 'asdw',
+    createdby: 'qqq',
+    participant: Map(4) { 'qqq' => 0, 'new1234' => 0, 'qqqqqq' => 0, 'qqqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733342646995_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b7516a601364f98e44f3'),
+    roomNumber: '4b092f4f8c8b8558bfbbcd9d5f8be361',
+    roomname: '제발....',
+    createdby: 'qqqqq',
+    participant: Map(4) { 'qqqqq' => 1, 'new1234' => 0, 'qqq' => 0, 'qqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343056904_defaultdebate.jpeg',
+    tags: [ 'ㄴㄴㄴㄴ' ],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b86dd695805016442d6b'),
+    roomNumber: '40cb62feb3ef1214a04e3e9640384b84',
+    roomname: 'ㅇㄻㄹㅇㅁㄴㄹㅇㅁㅇㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343341527_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b90709bf26d0fe1476dc'),
+    roomNumber: '46a143ed5324f96b88401ab6772b35a2',
+    roomname: 'ㄴ이람ㄹㄹㄴㅇㄻ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343495308_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b987c894f97e9e402d97'),
+    roomNumber: '4cd35d51804838c69cd52c63dbbc95b0',
+    roomname: '테일머ㅣㅏㄴㄻ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343623868_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  }
+]
+방 4cd35d51804838c69cd52c63dbbc95b0가 1초 딜레이 후 삭제되었습니다.
+req.body: [Object: null prototype] {
+  roomname: 'ㄹㅇㄴㄹ미ㅏㅓ리ㅏㅁㄹ',
+  createdby: 'domvy',
+  tags: '[]'
+}
+req.file: {
+  fieldname: 'thumbnail',
+  originalname: 'defaultdebate.jpeg',
+  encoding: '7bit',
+  mimetype: 'image/jpeg',
+  buffer: <Buffer ff d8 ff e0 00 10 4a 46 49 46 00 01 01 00 00 01 00 01 00 00 ff db 00 84 00 0a 07 08 12 16 11 12 12 11 12 18 18 12 12 12 12 12 11 11 11 12 12 11 11 12 ... 5168 more bytes>,
+  size: 5218
+}
+타이머 네임스페이스에 새로운 클라이언트 연결: GjydNs25CRlj17uTAAAR
+타이머방 GjydNs25CRlj17uTAAAR가 방 467140bac5bf84e6b042ca5d905536f6에 참여했습니다.
+챗사용자 연결됨: _NSoJtRDzSv5KzEKAAAT
+챗사용자 _NSoJtRDzSv5KzEKAAAT가 방 467140bac5bf84e6b042ca5d905536f6에 참가했습니다.
+현재 인원: 1
+타이머 네임스페이스에 새로운 클라이언트 연결: QK3aDc4FSeXE9hfkAAAV
+타이머방 QK3aDc4FSeXE9hfkAAAV가 방 467140bac5bf84e6b042ca5d905536f6에 참여했습니다.
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b5b70b18448f0b009245'),
+    roomNumber: '45bbe176cafcae3dacdaa7fffa31a439',
+    roomname: 'asdw',
+    createdby: 'qqq',
+    participant: Map(4) { 'qqq' => 0, 'new1234' => 0, 'qqqqqq' => 0, 'qqqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733342646995_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b7516a601364f98e44f3'),
+    roomNumber: '4b092f4f8c8b8558bfbbcd9d5f8be361',
+    roomname: '제발....',
+    createdby: 'qqqqq',
+    participant: Map(4) { 'qqqqq' => 1, 'new1234' => 0, 'qqq' => 0, 'qqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343056904_defaultdebate.jpeg',
+    tags: [ 'ㄴㄴㄴㄴ' ],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b86dd695805016442d6b'),
+    roomNumber: '40cb62feb3ef1214a04e3e9640384b84',
+    roomname: 'ㅇㄻㄹㅇㅁㄴㄹㅇㅁㅇㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343341527_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b90709bf26d0fe1476dc'),
+    roomNumber: '46a143ed5324f96b88401ab6772b35a2',
+    roomname: 'ㄴ이람ㄹㄹㄴㅇㄻ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343495308_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b99dc894f97e9e402e43'),
+    roomNumber: '467140bac5bf84e6b042ca5d905536f6',
+    roomname: 'ㄹㅇㄴㄹ미ㅏㅓ리ㅏㅁㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343645225_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b5b70b18448f0b009245'),
+    roomNumber: '45bbe176cafcae3dacdaa7fffa31a439',
+    roomname: 'asdw',
+    createdby: 'qqq',
+    participant: Map(4) { 'qqq' => 0, 'new1234' => 0, 'qqqqqq' => 0, 'qqqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733342646995_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b7516a601364f98e44f3'),
+    roomNumber: '4b092f4f8c8b8558bfbbcd9d5f8be361',
+    roomname: '제발....',
+    createdby: 'qqqqq',
+    participant: Map(4) { 'qqqqq' => 1, 'new1234' => 0, 'qqq' => 0, 'qqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343056904_defaultdebate.jpeg',
+    tags: [ 'ㄴㄴㄴㄴ' ],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b86dd695805016442d6b'),
+    roomNumber: '40cb62feb3ef1214a04e3e9640384b84',
+    roomname: 'ㅇㄻㄹㅇㅁㄴㄹㅇㅁㅇㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343341527_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b90709bf26d0fe1476dc'),
+    roomNumber: '46a143ed5324f96b88401ab6772b35a2',
+    roomname: 'ㄴ이람ㄹㄹㄴㅇㄻ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343495308_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b99dc894f97e9e402e43'),
+    roomNumber: '467140bac5bf84e6b042ca5d905536f6',
+    roomname: 'ㄹㅇㄴㄹ미ㅏㅓ리ㅏㅁㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343645225_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b5b70b18448f0b009245'),
+    roomNumber: '45bbe176cafcae3dacdaa7fffa31a439',
+    roomname: 'asdw',
+    createdby: 'qqq',
+    participant: Map(4) { 'qqq' => 0, 'new1234' => 0, 'qqqqqq' => 0, 'qqqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733342646995_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b7516a601364f98e44f3'),
+    roomNumber: '4b092f4f8c8b8558bfbbcd9d5f8be361',
+    roomname: '제발....',
+    createdby: 'qqqqq',
+    participant: Map(4) { 'qqqqq' => 1, 'new1234' => 0, 'qqq' => 0, 'qqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343056904_defaultdebate.jpeg',
+    tags: [ 'ㄴㄴㄴㄴ' ],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b86dd695805016442d6b'),
+    roomNumber: '40cb62feb3ef1214a04e3e9640384b84',
+    roomname: 'ㅇㄻㄹㅇㅁㄴㄹㅇㅁㅇㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343341527_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b90709bf26d0fe1476dc'),
+    roomNumber: '46a143ed5324f96b88401ab6772b35a2',
+    roomname: 'ㄴ이람ㄹㄹㄴㅇㄻ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343495308_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b99dc894f97e9e402e43'),
+    roomNumber: '467140bac5bf84e6b042ca5d905536f6',
+    roomname: 'ㄹㅇㄴㄹ미ㅏㅓ리ㅏㅁㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343645225_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b5b70b18448f0b009245'),
+    roomNumber: '45bbe176cafcae3dacdaa7fffa31a439',
+    roomname: 'asdw',
+    createdby: 'qqq',
+    participant: Map(4) { 'qqq' => 0, 'new1234' => 0, 'qqqqqq' => 0, 'qqqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733342646995_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b7516a601364f98e44f3'),
+    roomNumber: '4b092f4f8c8b8558bfbbcd9d5f8be361',
+    roomname: '제발....',
+    createdby: 'qqqqq',
+    participant: Map(4) { 'qqqqq' => 1, 'new1234' => 0, 'qqq' => 0, 'qqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343056904_defaultdebate.jpeg',
+    tags: [ 'ㄴㄴㄴㄴ' ],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b86dd695805016442d6b'),
+    roomNumber: '40cb62feb3ef1214a04e3e9640384b84',
+    roomname: 'ㅇㄻㄹㅇㅁㄴㄹㅇㅁㅇㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343341527_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b90709bf26d0fe1476dc'),
+    roomNumber: '46a143ed5324f96b88401ab6772b35a2',
+    roomname: 'ㄴ이람ㄹㄹㄴㅇㄻ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343495308_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b99dc894f97e9e402e43'),
+    roomNumber: '467140bac5bf84e6b042ca5d905536f6',
+    roomname: 'ㄹㅇㄴㄹ미ㅏㅓ리ㅏㅁㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343645225_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 1,
+    participantCount: 1
+  }
+]
+타이머 네임스페이스에 새로운 클라이언트 연결: jYwUNJgkblQeE4-CAAAX
+챗사용자 연결됨: JsxdFucNZ2CyrBsBAAAY
+타이머방 jYwUNJgkblQeE4-CAAAX가 방 467140bac5bf84e6b042ca5d905536f6에 참여했습니다.
+챗사용자 JsxdFucNZ2CyrBsBAAAY가 방 467140bac5bf84e6b042ca5d905536f6에 참가했습니다.
+현재 인원: 2
+타이머 네임스페이스에 새로운 클라이언트 연결: GBQkb-v9iAq_RqXVAAAa
+타이머방 GBQkb-v9iAq_RqXVAAAa가 방 467140bac5bf84e6b042ca5d905536f6에 참여했습니다.
+타이머방 연결 해제: GBQkb-v9iAq_RqXVAAAa
+타이머방 연결 해제: jYwUNJgkblQeE4-CAAAX
+챗사용자 연결 해제됨: JsxdFucNZ2CyrBsBAAAY
+방 467140bac5bf84e6b042ca5d905536f6의 현재 인원: 1
+타이머방 연결 해제: GjydNs25CRlj17uTAAAR
+타이머방 연결 해제: QK3aDc4FSeXE9hfkAAAV
+챗사용자 연결 해제됨: _NSoJtRDzSv5KzEKAAAT
+방 467140bac5bf84e6b042ca5d905536f6의 현재 인원: 0
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b5b70b18448f0b009245'),
+    roomNumber: '45bbe176cafcae3dacdaa7fffa31a439',
+    roomname: 'asdw',
+    createdby: 'qqq',
+    participant: Map(4) { 'qqq' => 0, 'new1234' => 0, 'qqqqqq' => 0, 'qqqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733342646995_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b7516a601364f98e44f3'),
+    roomNumber: '4b092f4f8c8b8558bfbbcd9d5f8be361',
+    roomname: '제발....',
+    createdby: 'qqqqq',
+    participant: Map(4) { 'qqqqq' => 1, 'new1234' => 0, 'qqq' => 0, 'qqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343056904_defaultdebate.jpeg',
+    tags: [ 'ㄴㄴㄴㄴ' ],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b86dd695805016442d6b'),
+    roomNumber: '40cb62feb3ef1214a04e3e9640384b84',
+    roomname: 'ㅇㄻㄹㅇㅁㄴㄹㅇㅁㅇㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343341527_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b90709bf26d0fe1476dc'),
+    roomNumber: '46a143ed5324f96b88401ab6772b35a2',
+    roomname: 'ㄴ이람ㄹㄹㄴㅇㄻ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343495308_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b99dc894f97e9e402e43'),
+    roomNumber: '467140bac5bf84e6b042ca5d905536f6',
+    roomname: 'ㄹㅇㄴㄹ미ㅏㅓ리ㅏㅁㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343645225_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  }
+]
+방 목록 응답: [
+  {
+    _id: new ObjectId('6750b1a2debf1fcc4e7d7545'),
+    roomNumber: '4b22ce30786ee36ba380bab0f9b7ec2c',
+    roomname: '테스트',
+    createdby: 'domvy',
+    participant: Map(4) {
+      'domvy' => -2,
+      'leejh' => -7,
+      'yoonseokyeol' => -3,
+      'qwerqwer' => -4
+    },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733341601992_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b5b70b18448f0b009245'),
+    roomNumber: '45bbe176cafcae3dacdaa7fffa31a439',
+    roomname: 'asdw',
+    createdby: 'qqq',
+    participant: Map(4) { 'qqq' => 0, 'new1234' => 0, 'qqqqqq' => 0, 'qqqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733342646995_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b7516a601364f98e44f3'),
+    roomNumber: '4b092f4f8c8b8558bfbbcd9d5f8be361',
+    roomname: '제발....',
+    createdby: 'qqqqq',
+    participant: Map(4) { 'qqqqq' => 1, 'new1234' => 0, 'qqq' => 0, 'qqqq' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343056904_defaultdebate.jpeg',
+    tags: [ 'ㄴㄴㄴㄴ' ],
+    memberCount: 0,
+    participantCount: 4
+  },
+  {
+    _id: new ObjectId('6750b86dd695805016442d6b'),
+    roomNumber: '40cb62feb3ef1214a04e3e9640384b84',
+    roomname: 'ㅇㄻㄹㅇㅁㄴㄹㅇㅁㅇㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343341527_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b90709bf26d0fe1476dc'),
+    roomNumber: '46a143ed5324f96b88401ab6772b35a2',
+    roomname: 'ㄴ이람ㄹㄹㄴㅇㄻ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343495308_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  },
+  {
+    _id: new ObjectId('6750b99dc894f97e9e402e43'),
+    roomNumber: '467140bac5bf84e6b042ca5d905536f6',
+    roomname: 'ㄹㅇㄴㄹ미ㅏㅓ리ㅏㅁㄹ',
+    createdby: 'domvy',
+    participant: Map(1) { 'domvy' => 0 },
+    thumbnail: 'https://namanmubucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733343645225_defaultdebate.jpeg',
+    tags: [],
+    memberCount: 0,
+    participantCount: 1
+  }
+]
+방 467140bac5bf84e6b042ca5d905536f6가 1초 딜레이 후 삭제되었습니다.
