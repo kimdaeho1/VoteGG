@@ -95,55 +95,11 @@ const MatterCanvas = ({ roomNumber, socket }) => {
     );
     
     var thick = 100
-    const padding = 100; // 화면에서 100px 바깥으로 떨어지도록 설정
-    // 윗쪽 박스
-    const removeBoxT = Bodies.rectangle(
-      window.innerWidth / 2, // 화면 가로의 중앙
-      -padding / 2, // 위쪽으로 100px 떨어지도록 위치 조정
-      window.innerWidth + padding * 2, // 양쪽으로 100px씩 더 넓게
-      thick, // 박스 두께
-      {
-        isStatic: true,
-        render: { fillStyle: 'rgba(255, 0, 0, 0.1)' },
-      }
-    );
-
-    // 아랫쪽 박스
-    const removeBoxB = Bodies.rectangle(
-      window.innerWidth / 2, // 화면 가로의 중앙
-      window.innerHeight + padding / 2, // 아래쪽으로 100px 떨어지도록 위치 조정
-      window.innerWidth + padding * 2, // 양쪽으로 100px씩 더 넓게
-      thick, // 박스 두께
-      {
-        isStatic: true,
-        render: { fillStyle: 'rgba(255, 0, 0, 0.1)' },
-      }
-    );
-
-    // 왼쪽 박스
-    const removeBoxL = Bodies.rectangle(
-      -padding / 2, // 왼쪽으로 100px 떨어지도록 위치 조정
-      window.innerHeight / 2, // 화면 세로의 중앙
-      thick, // 박스 두께
-      window.innerHeight + padding * 2, // 위아래로 100px씩 더 높게
-      {
-        isStatic: true,
-        render: { fillStyle: 'rgba(255, 0, 0, 0.1)' },
-      }
-    );
-
-    // 오른쪽 박스
-    const removeBoxR = Bodies.rectangle(
-      window.innerWidth + padding / 2, // 오른쪽으로 100px 떨어지도록 위치 조정
-      window.innerHeight / 2, // 화면 세로의 중앙
-      thick, // 박스 두께
-      window.innerHeight + padding * 2, // 위아래로 100px씩 더 높게
-      {
-        isStatic: true,
-        render: { fillStyle: 'rgba(255, 0, 0, 0.1)' },
-      }
-    );
-    
+    const removeBoxT = Bodies.rectangle(window.innerWidth / 2 , 0, window.innerWidth, thick, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.1)', } });
+    const removeBoxB = Bodies.rectangle(window.innerWidth / 2, window.innerHeight + (thick / 2), window.innerWidth, thick, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.1)', } });
+    const removeBoxL = Bodies.rectangle(0 - 100, window.innerHeight / 2, thick, window.innerHeight, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.1)', } });
+    const removeBoxR = Bodies.rectangle(window.innerWidth + (thick / 2), window.innerHeight / 2, thick, window.innerHeight, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.1)', } });
+  
     World.add(world, [leftWall, rightWall, roopWall]); // 채팅창
     World.add(world, [removeBoxT, removeBoxB, removeBoxL, removeBoxR]) // 화면 밖
   
@@ -170,7 +126,7 @@ const MatterCanvas = ({ roomNumber, socket }) => {
       mouse.button = 0; // 마우스 버튼 눌림 상태      
     });
 
-    document.addEventListener("mouseover", (event) => {
+    document.addEventListener("mouseover", () => {
       /* 계란 드래그 상태에서 스트리밍 화면에 아웃라인 생성 */
       if (draggedEgg.current){
         const streamComponent = event.target.closest('.streamcomponent');
@@ -211,9 +167,8 @@ const MatterCanvas = ({ roomNumber, socket }) => {
       }
     });
   
-    document.addEventListener("mouseup", (event) => {
+    document.addEventListener("mouseup", () => {
       mouse.button = -1; // 마우스 버튼 해제 상태
-      
       // 드래그가 끝난 후 계란의 크기를 원래대로 되돌리기
       if (draggedEgg.current) {
         draggedEgg.current.render.sprite.xScale = 0.3;
@@ -229,7 +184,7 @@ const MatterCanvas = ({ roomNumber, socket }) => {
           const midX = rect.left + streamWidth / 2; // 스트리밍 화면의 중간 X 좌표
           const midY = rect.top + streamHeight / 2; // 스트리밍 화면의 중간 Y 좌표
 
-          var user = findUserInformation(event); // 드래그 한 위치의 스트리밍 화면을 확인하고 유저 정보 찾아오기
+          var user = findUserInformation(); // 드래그 한 위치의 스트리밍 화면을 확인하고 유저 정보 찾아오기
           if (user)
           {
             if (clickX < midX) {
@@ -284,21 +239,30 @@ const MatterCanvas = ({ roomNumber, socket }) => {
     });
 
     // 해당 마우스 위치의 스트리밍 화면 유저 정보 가져오기
-    const findUserInformation = (event) => {
-      const streamComponent = event.target.closest('.streamcomponent');
-      if (streamComponent) {
-        const videoElement = streamComponent.querySelector('video');
+    const findUserInformation = () => {
+      if (event.target.closest('.streamcomponent')) {
+        const videoElement = event.target.closest('video'); // 누른 요소의 id 가져오기
+        console.log("Clicked on a streamcomponent element!");
         if (videoElement) {
-          const clientData = videoElement.getAttribute('data-client-data');
-          if (clientData) {
+          const videoId = videoElement.id; // id 저장
+          console.log("Clicked video element ID:", videoId);
+          const connectionId = "con_" + videoId.split("_con_")[1]; // 뒷부분 정보만 가져오기
+          console.log(connectionId);
+
+          // OpenviduFinal에서 session 가져오기          
+          const session = window.session;
+          console.log('Openvidu session:', session);
+
+          const connection = session.remoteConnections.get(connectionId); // 연결정보로 유저 찾기
+          if (connection) {
+            const clientData = JSON.parse(connection.data).clientData; // 클라이언트 Data찾기
             console.log("UserName:", clientData);
-            return clientData;
+
+            return clientData
           }
         }
       }
-      return null; // 사용자 정보를 찾지 못한 경우
-    };
-    
+    }
   
     // 계란을 생성하는 함수
     const addEgg = () => {
