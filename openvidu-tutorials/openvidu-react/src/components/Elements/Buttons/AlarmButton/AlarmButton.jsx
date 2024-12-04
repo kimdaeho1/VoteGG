@@ -86,7 +86,7 @@ const AlarmButton = () => {
     <div className="alarm-button-container">
       <button className="alarm-button" onClick={handleOpenModal}>
       <img
-          src="/bell2.png" // 이미지 경로
+           src={hasNewData ? "/hatch.png" : "/alarmegg.png"} // 알람 상태에 따라 이미지 변경
           alt="알람 버튼"
           className="alarm-icon"
         />

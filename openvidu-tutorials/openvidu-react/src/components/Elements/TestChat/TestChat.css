@@ -2,7 +2,7 @@
 
 /* 채팅창 전체 스타일 */
 .chat-window {
-  /* background-color: #f9f9f9; */
+  background-color: #fffef4b0;
   width: 100%;
   height: 100%;
   display: flex;
@@ -10,7 +10,7 @@
   /* border: 5px solid #eeee76; */
   border-left: 1px solid rgba(0, 0, 0, 0.2);
   /* border-radius: 6px; */
-  /* margin-top: 10px; */
+  margin-top: -29px;
 }
 
 /* 헤더 스타일 */
@@ -26,6 +26,7 @@
   /* border-radius: 6px; */
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   color: #333;
+  margin-top: -10px;
 }
 
 /* 채팅 메시지 영역 스타일 */
@@ -82,6 +83,7 @@
   /* margin: 7px; */
   padding: 7px;
   font-weight: lighter;
+  background-color: #ffffff;
 }
 
 .message.you .message-content {
@@ -94,7 +96,7 @@
   font-size: 0.6rem;
   color: #777;
   margin-top: 5px;
-  margin-right: 10px;
+  /* margin-right: 10px; */
 }
 
 /* 채팅 입력창 하단 스타일 */
@@ -102,7 +104,7 @@
   display: flex;
   padding: 5px;
   margin-left: 10px;
-  margin-right: 10px;
+  /* margin-right: 10px; */
   /* background-color: #ffffff; */
   /* background-color: #f9f9f9; */
   /* border-top: 1px solid #ddd; */

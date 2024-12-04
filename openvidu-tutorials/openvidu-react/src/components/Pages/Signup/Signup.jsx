@@ -38,6 +38,26 @@ const Signup = () => {
 
   return (
     <div className="signup-container">
+      <div
+        className="home-background"
+        style={{
+          backgroundImage: 'url("/eggback.jpg")', // 경로 문제 해결된 상태에서 이 방식을 사용
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          position: 'fixed',
+          top: 0,
+          right: 0,
+          width: '100vw',
+          height: '80vh',
+          zIndex: -1,
+          minHeight: '800px',
+          maxHeight: '800px',
+          // opacity: '60%',
+        }}
+      ></div>
+      <div className='home-background2' />
+      <div className='home-background3' />
       <h2>Sign Up</h2>
       <p>회원가입에 필요한 정보를 입력하세요.</p>
       <form className="signup-form" onSubmit={(e) => e.preventDefault()}>

@@ -44,6 +44,26 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      <div
+        className="home-background"
+        style={{
+          backgroundImage: 'url("/eggback.jpg")', // 경로 문제 해결된 상태에서 이 방식을 사용
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          position: 'fixed',
+          top: 0,
+          right: 0,
+          width: '100vw',
+          height: '80vh',
+          zIndex: -1,
+          minHeight: '800px',
+          maxHeight: '800px',
+          // opacity: '60%',
+        }}
+      ></div>
+      <div className='home-background2' />
+      <div className='home-background3' />
       <h2>Login</h2>
       <p>아이디와 비밀번호를 입력하세요.</p>
       <form className="login-form" onSubmit={(e) => e.preventDefault()}>
@@ -81,7 +101,7 @@ const Login = () => {
       </div>
 
       <a href="/signup" className="signup-link">
-      <h3>아이디가 없다면? 회원가입</h3>
+        <h3>아이디가 없다면? 회원가입</h3>
       </a>
     </div>
   );
