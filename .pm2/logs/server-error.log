@@ -55,3 +55,13 @@ Application server connecting to OpenVidu at http://localhost:4443/
 Please migrate your code to use AWS SDK for JavaScript (v3).
 For more information, check the blog post at https://a.co/cUPnyil
 (Use `node --trace-warnings ...` to show where the warning was created)
+roomId 4cd35d51804838c69cd52c63dbbc95b0에 해당하는 방을 찾을 수 없습니다.
+roomId 467140bac5bf84e6b042ca5d905536f6에 해당하는 방을 찾을 수 없습니다.
+방 생성 실패: E11000 duplicate key error collection: test.rooms index: roomname_1 dup key: { roomname: "테스트테스트" }
+Application server connecting to OpenVidu at http://localhost:4443/
+(node:4787) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
