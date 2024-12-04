@@ -95,9 +95,13 @@ const Login = () => {
 
       {/* 소셜 로그인 버튼 */}
       <div className="social-login-container">
-        <button className="social-login-button google">G</button>
-        <button className="social-login-button kakao" onClick={handleKakaoLogin}>K</button>
-        <button className="social-login-button naver">N</button>
+        {/* <button className="social-login-button google">G</button> */}
+        <button className="social-login-button kakao" onClick={handleKakaoLogin}>
+          <div className="kakao-content">
+            <img src="/kakao.png" alt="Kakao Icon" className="kakao-icon" />
+            <span>카카오톡으로 계속하기</span>
+          </div></button>
+        {/* <button className="social-login-button naver">N</button> */}
       </div>
 
       <a href="/signup" className="signup-link">

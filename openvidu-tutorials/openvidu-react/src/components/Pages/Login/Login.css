@@ -1,7 +1,7 @@
 /* 중앙 정렬을 위한 컨테이너 */
 .login-container {
   width: 400px;
-  height: 400px;
+  height: 450px;
   margin: 100px auto;
   padding: 40px;
   border-radius: 10px;
@@ -33,25 +33,31 @@
 /* 아이콘과 함께 사용할 입력 필드 래퍼 */
 .input-wrapper {
   position: relative;
-  width: 100%; /* 부모 컨테이너 너비에 맞춤 */
-  display: flex; /* 내부 아이콘과 입력 필드 정렬 */
-  align-items: center; /* 입력 필드 세로 중앙 정렬 */
-  justify-content: center; /* 입력 필드 가로 중앙 정렬 */
+  width: 100%;
+  /* 부모 컨테이너 너비에 맞춤 */
+  display: flex;
+  /* 내부 아이콘과 입력 필드 정렬 */
+  align-items: center;
+  /* 입력 필드 세로 중앙 정렬 */
+  justify-content: center;
+  /* 입력 필드 가로 중앙 정렬 */
 }
 
 /* 입력 필드 스타일 */
 .login-form input {
-  width: 80%; 
-  padding: 12px 40px; /* 아이콘 위치를 고려해 패딩 추가 */
+  width: 80%;
+  /* height: 100px,; */
+  padding: 20px 40px;
+  /* 아이콘 위치를 고려해 패딩 추가 */
   font-size: 16px;
   border-radius: 8px;
   border: 1px solid #ddd;
-  background-color: #f9f9f9; 
+  background-color: #f9f9f9;
 }
 
 /* 로그인 버튼 스타일 */
 .login-login-button {
-  width: 100%;
+  width: 80%;
   padding: 12px;
   border: none;
   background-color: #000000;
@@ -65,7 +71,7 @@
 }
 
 .login-login-button:hover {
-  background-color: #ff0000;
+  background-color: rgba(194, 156, 156, 0.486);
   opacity: 0.5;
 }
 
@@ -73,7 +79,7 @@
 .login-container .signup-link {
   display: block;
   margin-top: 20px;
-  color: #000000a1;
+  color: #ffb6b6;
   font-size: 14px;
   text-decoration: none;
 }
@@ -88,41 +94,85 @@
 .social-login-container {
   display: flex;
   justify-content: center;
-  gap: 20px; /* 버튼 사이의 간격 */
-  margin-top: 20px; /* 폼과 버튼 사이의 간격 */
+  gap: 20px;
+  /* 버튼 사이의 간격 */
+  margin-top: 20px;
+  /* 폼과 버튼 사이의 간격 */
 }
 
 /* 소셜 로그인 원형 버튼 기본 스타일 */
 .social-login-button {
   width: 50px;
   height: 50px;
-  border-radius: 50%; /* 원형으로 만들기 */
+  border-radius: 50%;
+  /* 원형으로 만들기 */
   font-size: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  background-color: #ccc; /* 기본 배경색 */
+  background-color: #ccc;
+  /* 기본 배경색 */
   cursor: pointer;
   border: none;
   transition: background-color 0.3s ease, opacity 0.3s ease;
 }
 
 .social-login-button:hover {
-  opacity: 0.8; /* hover 효과 */
+  opacity: 0.8;
+  /* hover 효과 */
 }
 
 /* Google 버튼 스타일 */
 .social-login-button.google {
-  background-color: #db4437; /* Google의 빨간색 */
+  background-color: #db4437;
+  /* Google의 빨간색 */
 }
 
 /* Kakao 버튼 스타일 */
 .social-login-button.kakao {
-  background-color: #ffcd00; /* Kakao의 노란색 */
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fee500;
+  /* 카카오톡 공식 컬러 */
+  color: #000000;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.social-login-button.kakao:hover {
+  background-color: #ffd600;
+  /* 밝은 톤으로 변경 */
+}
+
+.social-login-button.kakao:active {
+  transform: scale(0.98);
+  /* 클릭 시 살짝 눌리는 효과 */
+}
+
+.kakao-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* 아이콘과 텍스트 간격 */
+}
+
+.kakao-icon {
+  width: 20px;
+  /* 아이콘 크기 */
+  height: 20px;
+  object-fit: contain;
 }
 
 /* Naver 버튼 스타일 */
 .social-login-button.naver {
-  background-color: #1ec800; /* Naver의 초록색 */
+  background-color: #1ec800;
+  /* Naver의 초록색 */
 }
