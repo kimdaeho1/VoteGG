@@ -39,6 +39,14 @@
   z-index: -1;
 }
 
+/* @media (max-width: 768px) { 
+  .home-background,
+  .home-background2,
+  .home-background3 {
+    display: none; 
+  }
+} */
+
 .home {
   display: flex;
   height: 100vh;
