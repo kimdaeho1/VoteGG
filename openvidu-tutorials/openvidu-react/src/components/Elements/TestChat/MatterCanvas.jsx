@@ -95,11 +95,55 @@ const MatterCanvas = ({ roomNumber, socket }) => {
     );
     
     var thick = 100
-    const removeBoxT = Bodies.rectangle(window.innerWidth / 2 , 0, window.innerWidth, thick, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.1)', } });
-    const removeBoxB = Bodies.rectangle(window.innerWidth / 2, window.innerHeight + (thick / 2), window.innerWidth, thick, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.1)', } });
-    const removeBoxL = Bodies.rectangle(0 - 100, window.innerHeight / 2, thick, window.innerHeight, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.1)', } });
-    const removeBoxR = Bodies.rectangle(window.innerWidth + (thick / 2), window.innerHeight / 2, thick, window.innerHeight, { isStatic: true, render: { fillStyle: 'rgba(255, 0, 0, 0.1)', } });
-  
+    const padding = 100; // 화면에서 100px 바깥으로 떨어지도록 설정
+    // 윗쪽 박스
+    const removeBoxT = Bodies.rectangle(
+      window.innerWidth / 2, // 화면 가로의 중앙
+      -padding / 2, // 위쪽으로 100px 떨어지도록 위치 조정
+      window.innerWidth + padding * 2, // 양쪽으로 100px씩 더 넓게
+      thick, // 박스 두께
+      {
+        isStatic: true,
+        render: { fillStyle: 'rgba(255, 0, 0, 0.1)' },
+      }
+    );
+
+    // 아랫쪽 박스
+    const removeBoxB = Bodies.rectangle(
+      window.innerWidth / 2, // 화면 가로의 중앙
+      window.innerHeight + padding / 2, // 아래쪽으로 100px 떨어지도록 위치 조정
+      window.innerWidth + padding * 2, // 양쪽으로 100px씩 더 넓게
+      thick, // 박스 두께
+      {
+        isStatic: true,
+        render: { fillStyle: 'rgba(255, 0, 0, 0.1)' },
+      }
+    );
+
+    // 왼쪽 박스
+    const removeBoxL = Bodies.rectangle(
+      -padding / 2, // 왼쪽으로 100px 떨어지도록 위치 조정
+      window.innerHeight / 2, // 화면 세로의 중앙
+      thick, // 박스 두께
+      window.innerHeight + padding * 2, // 위아래로 100px씩 더 높게
+      {
+        isStatic: true,
+        render: { fillStyle: 'rgba(255, 0, 0, 0.1)' },
+      }
+    );
+
+    // 오른쪽 박스
+    const removeBoxR = Bodies.rectangle(
+      window.innerWidth + padding / 2, // 오른쪽으로 100px 떨어지도록 위치 조정
+      window.innerHeight / 2, // 화면 세로의 중앙
+      thick, // 박스 두께
+      window.innerHeight + padding * 2, // 위아래로 100px씩 더 높게
+      {
+        isStatic: true,
+        render: { fillStyle: 'rgba(255, 0, 0, 0.1)' },
+      }
+    );
+    
     World.add(world, [leftWall, rightWall, roopWall]); // 채팅창
     World.add(world, [removeBoxT, removeBoxB, removeBoxL, removeBoxR]) // 화면 밖
   
