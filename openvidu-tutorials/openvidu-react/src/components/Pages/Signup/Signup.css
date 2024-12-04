@@ -33,13 +33,13 @@
 /* 아이콘과 함께 사용할 입력 필드 래퍼 */
 .input-wrapper {
   position: relative;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 /* 입력 필드 스타일 */
 .signup-form input {
   width: 80%;
-  padding: 12px 40px; /* 아이콘 위치를 고려해 패딩 추가 */
+  padding: 20px 40px; /* 아이콘 위치를 고려해 패딩 추가 */
   font-size: 16px;
   border-radius: 8px;
   border: 1px solid #ddd;
@@ -66,7 +66,7 @@
 
 /* 회원가입 버튼 스타일 */
 .signup-form button {
-  width: 100%;
+  width: 80%;
   padding: 12px;
   border: none;
   background-color: #000000;
