@@ -21,25 +21,63 @@ const TestChat = () => {
 
   const isObserver = window.location.pathname.includes("/observer"); // 옵저버인지 판단
   const socket = useSocket("/chat", roomNumber); // 소켓 연결
+  const timersocket = useSocket("/timer", roomNumber); // 소켓 연결
 
   const [userColors, setUserColors] = useState({}); // 사용자별 색상
 
   useEffect(() => {
     console.log(`Current roomNumber: ${roomNumber}`);
-
+  
     const { maxVoteCount, usedVoteCount } = getVoteCount(roomNumber, username);
     console.log("Initial Vote Counts:", maxVoteCount, usedVoteCount);
 
-    const interval = setInterval(() => {
-      increaseVoteCount(roomNumber, username);
+    const voteIncrease = 2
+  
+    if (!timersocket) return;
+  
+    // "phaseChange" 이벤트를 감지하여 투표권 증가
+    const handlePhaseChange = (data) => {
+      console.log("Phase Change detected:", data);
+      try {
+        repeatIncreaseVoteCount(roomNumber, username, voteIncrease);
+      } catch (error) {
+        console.error("Error in increaseVoteCount:", error);
+      }
       const { maxVoteCount, usedVoteCount } = getVoteCount(roomNumber, username);
-      console.log("After Increasing Vote Count:", maxVoteCount, usedVoteCount);
-    }, 10000); // 10초마다 증가시키는 함수 호출
-
-    return () => {
-      clearInterval(interval); // clean up on unmount
+      console.log("After Phase Change - Vote Counts:", maxVoteCount, usedVoteCount);
     };
-  }, [roomNumber, username]);
+  
+    // 소켓 이벤트 리스너 등록
+    timersocket.on("phaseChange", handlePhaseChange);
+  
+    // 클린업
+    return () => {
+      timersocket.off("phaseChange", handlePhaseChange);
+    };
+  }, [roomNumber, username, timersocket]);
+
+  const repeatIncreaseVoteCount = (roomNumber, username, n) => {
+    for (let i = 0; i < n; i++) {
+      increaseVoteCount(roomNumber, username);
+    }
+    console.log(`increaseVoteCount called ${n} times.`);
+  };
+  // useEffect(() => {
+  //   console.log(`Current roomNumber: ${roomNumber}`);
+
+  //   const { maxVoteCount, usedVoteCount } = getVoteCount(roomNumber, username);
+  //   console.log("Initial Vote Counts:", maxVoteCount, usedVoteCount);
+
+  //   const interval = setInterval(() => {
+  //     increaseVoteCount(roomNumber, username);
+  //     const { maxVoteCount, usedVoteCount } = getVoteCount(roomNumber, username);
+  //     console.log("After Increasing Vote Count:", maxVoteCount, usedVoteCount);
+  //   }, 10000); // 10초마다 증가시키는 함수 호출
+
+  //   return () => {
+  //     clearInterval(interval); // clean up on unmount
+  //   };
+  // }, [roomNumber, username]);
 
   useEffect(() => {
     setUserColors((prevColors) => {
