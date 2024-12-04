@@ -57,7 +57,7 @@
   height: 100%;
   /* border-radius: 8px; */
   object-fit: cover;
-  object-position: left center;
+  /* object-position: left center; */
 }
 
 .room-member-count {

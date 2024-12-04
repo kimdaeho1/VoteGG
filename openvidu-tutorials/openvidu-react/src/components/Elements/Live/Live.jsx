@@ -45,7 +45,7 @@ const Live = () => {
       >
         <div className="live-image-container">
           <img
-            src={topRoom.thumbnail ? `${topRoom.thumbnail}` : "./default-thumbnail.jpg"}
+            src={topRoom.thumbnail ? `${topRoom.thumbnail}` : "./poultry.jpg"}
             alt="Live Agora Thumbnail"
             className="entry-room1"
           />
