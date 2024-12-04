@@ -126,7 +126,7 @@ const MatterCanvas = ({ roomNumber, socket }) => {
       mouse.button = 0; // 마우스 버튼 눌림 상태      
     });
 
-    document.addEventListener("mouseover", () => {
+    document.addEventListener("mouseover", (event) => {
       /* 계란 드래그 상태에서 스트리밍 화면에 아웃라인 생성 */
       if (draggedEgg.current){
         const streamComponent = event.target.closest('.streamcomponent');
@@ -167,8 +167,9 @@ const MatterCanvas = ({ roomNumber, socket }) => {
       }
     });
   
-    document.addEventListener("mouseup", () => {
+    document.addEventListener("mouseup", (event) => {
       mouse.button = -1; // 마우스 버튼 해제 상태
+      
       // 드래그가 끝난 후 계란의 크기를 원래대로 되돌리기
       if (draggedEgg.current) {
         draggedEgg.current.render.sprite.xScale = 0.3;
@@ -184,7 +185,7 @@ const MatterCanvas = ({ roomNumber, socket }) => {
           const midX = rect.left + streamWidth / 2; // 스트리밍 화면의 중간 X 좌표
           const midY = rect.top + streamHeight / 2; // 스트리밍 화면의 중간 Y 좌표
 
-          var user = findUserInformation(); // 드래그 한 위치의 스트리밍 화면을 확인하고 유저 정보 찾아오기
+          var user = findUserInformation(event); // 드래그 한 위치의 스트리밍 화면을 확인하고 유저 정보 찾아오기
           if (user)
           {
             if (clickX < midX) {
@@ -239,30 +240,21 @@ const MatterCanvas = ({ roomNumber, socket }) => {
     });
 
     // 해당 마우스 위치의 스트리밍 화면 유저 정보 가져오기
-    const findUserInformation = () => {
-      if (event.target.closest('.streamcomponent')) {
-        const videoElement = event.target.closest('video'); // 누른 요소의 id 가져오기
-        console.log("Clicked on a streamcomponent element!");
+    const findUserInformation = (event) => {
+      const streamComponent = event.target.closest('.streamcomponent');
+      if (streamComponent) {
+        const videoElement = streamComponent.querySelector('video');
         if (videoElement) {
-          const videoId = videoElement.id; // id 저장
-          console.log("Clicked video element ID:", videoId);
-          const connectionId = "con_" + videoId.split("_con_")[1]; // 뒷부분 정보만 가져오기
-          console.log(connectionId);
-
-          // OpenviduFinal에서 session 가져오기          
-          const session = window.session;
-          console.log('Openvidu session:', session);
-
-          const connection = session.remoteConnections.get(connectionId); // 연결정보로 유저 찾기
-          if (connection) {
-            const clientData = JSON.parse(connection.data).clientData; // 클라이언트 Data찾기
+          const clientData = videoElement.getAttribute('data-client-data');
+          if (clientData) {
             console.log("UserName:", clientData);
-
-            return clientData
+            return clientData;
           }
         }
       }
-    }
+      return null; // 사용자 정보를 찾지 못한 경우
+    };
+    
   
     // 계란을 생성하는 함수
     const addEgg = () => {
