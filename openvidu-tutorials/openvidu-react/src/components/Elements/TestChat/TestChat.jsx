@@ -32,7 +32,7 @@ const TestChat = () => {
     console.log("Initial Vote Counts:", maxVoteCount, usedVoteCount);
 
     const voteIncrease = 2;
-
+    const session = window.session;
     // OpenVidu "signal:phaseChange" 이벤트 핸들러
     const handleSessionPhaseChange = (event) => {
         console.log("Phase Change detected from session:", event.data);
@@ -80,7 +80,7 @@ const TestChat = () => {
             timersocket.off("phaseChange", handleSocketPhaseChange);
         }
     };
-  }, [roomNumber, username, timersocket, session]);
+  }, [roomNumber, username, timersocket]);
 
   const repeatIncreaseVoteCount = (roomNumber, username, n) => {
     for (let i = 0; i < n; i++) {
