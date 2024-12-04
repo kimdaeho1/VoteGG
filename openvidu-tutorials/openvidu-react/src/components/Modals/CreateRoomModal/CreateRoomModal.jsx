@@ -28,36 +28,43 @@ const CreateRoomModal = ({ onClose }) => {
 
   const handleCreateRoom = async () => {
     try {
-      const token = localStorage.getItem("token"); // 사용자 인증 토큰
+      const token = localStorage.getItem("token");
       if (!token) {
         addToast("로그인이 필요합니다.", "error");
         return;
       }
   
-      // FormData 생성
       const formData = new FormData();
       formData.append("roomname", roomTitle);
       formData.append("createdby", getUsernameFromToken(token));
-
-      // 썸네일이 없는 경우 기본값 처리
-      if (thumbnail) {
+  
+      // 썸네일 처리
+      if (thumbnail != null) {
         formData.append("thumbnail", thumbnail);
       } else {
-        const defaultImage = "defaultdebate.jpeg"; // 기본 이미지 파일명 (서버에 있어야 함)
+        // 기본 이미지를 fetch로 가져오기
+        const response = await fetch("/defaultdebate.jpeg");
+        if (!response.ok) {
+          throw new Error("기본 이미지를 불러올 수 없습니다.");
+        }
+        const blob = await response.blob();
+        const defaultImage = new File([blob], "defaultdebate.jpeg", { type: blob.type });
         formData.append("thumbnail", defaultImage);
       }
-
+  
+      // 태그 처리
       let parsedTags = [];
       try {
-        parsedTags = typeof tags === "string" ? JSON.parse(tags) : tags; // JSON 파싱 또는 그대로 사용
+        parsedTags = typeof tags === "string" ? JSON.parse(tags) : tags;
       } catch (error) {
         console.error("태그 파싱 오류:", error.message);
-        parsedTags = []; // 오류 발생 시 빈 배열 사용
+        parsedTags = [];
       }
-
+  
       const tagValues = Array.isArray(parsedTags) ? parsedTags.map(tag => tag.value) : [];
       formData.append("tags", JSON.stringify(tagValues));
-
+  
+      // 디버깅: FormData 출력
       console.log("FormData entries:");
       for (let [key, value] of formData.entries()) {
         console.log(key, value);
