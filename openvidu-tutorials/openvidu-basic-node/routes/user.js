@@ -10,7 +10,7 @@ require("dotenv").config(!!process.env.CONFIG ? { path: process.env.CONFIG } : {
 const router = express.Router(); // 라우터 정의
 
 const upload = multer({ storage: multer.memoryStorage() });
-const { KAKAO_CLIENT_ID, KAKAO_REDIRECT_URI, JWT_SECRET } = process.env; // 환경 변수 추출
+const { KAKAO_CLIENT_ID, KAKAO_REDIRECT_URI, JWT_SECRET, CLIENT_BASE_URL } = process.env; // 환경 변수 추출
 
 // 회원가입 API
 router.post("/users", async (req, res) => {
@@ -124,11 +124,11 @@ router.get("/auth/kakao/callback", async (req, res) => {
 
       res.cookie("token", jwtToken, { httpOnly: false, secure: true });
       res.cookie("access_token", access_token, { httpOnly: false, secure: true });
-      return res.redirect("https://recordstudio.site:8443/");
+      return res.redirect(`${CLIENT_BASE_URL}/`);
     }
 
     res.cookie("access_token", access_token, { httpOnly: false, secure: true });
-    return res.redirect(`https://recordstudio.site:8443/set-username?kakaoId=${id}&nickname=${nickname}`);
+    return res.redirect(`${CLIENT_BASE_URL}/set-username?kakaoId=${id}&nickname=${nickname}`);
   } catch (error) {
     console.error("카카오 로그인 처리 오류:", error);
     res.status(500).json({ message: "로그인 오류", error: error.message });
@@ -254,3 +254,4 @@ router.post("/profile-image", upload.single("profileImage"), async (req, res) =>
 
 
 module.exports = router;
+
