@@ -46,8 +46,7 @@ const Header = () => {
         <Search />
         <div className="right">
           <AlarmButton />
-          {/* {pathParts[1] === 'room' && <InviteButton />} */}
-          <InviteButton />
+          {pathParts[1] !== 'observer' && <InviteButton />} {/* observer가 아닐 때만 렌더링 */}
           <CreateRoomButton />
           <LoginButton />
         </div>
