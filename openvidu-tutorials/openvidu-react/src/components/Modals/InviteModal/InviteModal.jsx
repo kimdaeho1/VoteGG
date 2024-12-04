@@ -46,10 +46,10 @@ const InviteModal = ({ onClose }) => {
                 />
                 <div className="button-group">
                     <button className="accept-invite-button" onClick={handleInvite}>
-                        초대하기
+                        초대
                     </button>
                     <button className="close-invite-button" onClick={onClose}>
-                        취소
+                        닫기
                     </button>
                 </div>
             </div>

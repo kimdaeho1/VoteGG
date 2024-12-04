@@ -8,7 +8,6 @@ import Signup from './components/Pages/Signup/Signup.jsx';
 import Header from './components/Shell/Header/Header.jsx';
 import LeftSidebar from './components/Shell/LeftSidebar/LeftSidebar.jsx';
 import './Layers.css';
-import DebateRoom from './components/Pages/DebateRoom/DebateRoom.jsx';
 import SetUsername from './components/Pages/Login/SetUsername.jsx'; // 소셜로그인중 처음 로그인할 때 아이디 설정 페이지 라우팅용
 import ScrollToTop from './components/ScrollToTop.js';
 
@@ -30,11 +29,6 @@ const Layers = () => {
             <Route
               path="/room/:roomNumber"
               element={<Room role="participant" />}
-            />
-
-            <Route
-              path="/DebateRoom/:roomNumber"
-              element={<DebateRoom role="participant" />}
             />
 
             <Route

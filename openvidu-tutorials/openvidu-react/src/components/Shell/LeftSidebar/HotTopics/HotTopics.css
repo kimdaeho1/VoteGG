@@ -4,6 +4,7 @@
   width: 100%;
   height: 100%;
   min-height: 440px;
+  /* opacity: 50%; */
 }
 
 .topic-content {
@@ -14,7 +15,10 @@
   opacity: 0;
   transform: translateX(-100%);  /* 왼쪽에서 시작 */
   transition: all 0.5s ease-in-out;
-  border-radius: 15px; /* 모서리를 둥글게 */
+  /* border-radius: 15px; */
+  border-top-left-radius: 35px;
+  /* border-bottom-left-radius: 35px; */
+  /* border-bottom-left-radius: 15px; */
   padding: 10px; /* 내부 여백 추가 */
 }
 
@@ -81,51 +85,51 @@
 }
 
 /* 그라데이션 배경 색상 */
-.news-topic {
+/* .news-topic {
   background: linear-gradient(135deg, #e4e5e6 30%, #cfd9df 70%);
-  color: #2a2a2a; /* 중간 톤의 회색으로 여전히 모던한 느낌 */
+  color: #2a2a2a; 
 }
 
 .game-topic {
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  color: #2d3e50; /* 세련된 다크 블루로 가독성 강화 */
+  color: #2d3e50; 
 }
 
 .music-topic {
   background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
-  color: #1c3d57; /* 세련된 네이비 블루 */
+  color: #1c3d57;
 }
 
 
 .movie-topic {
   background: linear-gradient(135deg, #ffe29f 0%, #ffa99f 100%);
-  color: #5c2a2a; /* 클래식한 느낌의 브라운 */
-}
+  color: #5c2a2a; 
+} */
 
 
 /* ///////////////////// */
 /* 뉴스 제목 색상 */
 .news-topic-title {
-  color: #000000d3; /* 강렬한 빨간색으로 눈에 잘 띄도록 변경 */
-  font-weight: bold; /* 글자 굵기를 추가하여 강조 */
+  color: #000000d3; 
+  font-weight: bold; 
 }
 
 /* 게임 제목 색상 */
 .game-topic-title {
-  color: #4b83c0cc; /* 선명한 블루로 시각적 강조 */
-  font-weight: bold; /* 글자 굵기를 추가하여 눈에 띄게 */
+  color: #4b83c0cc; 
+  font-weight: bold; 
 }
 
 /* 음악 제목 색상 */
 .music-topic-title {
-  color: #008080; /* 밝은 청록색으로 생동감 있게 */
-  font-weight: bold; /* 글자 굵기를 추가하여 강렬하게 */
+  color: #008080; 
+  font-weight: bold;
 }
 
 /* 영화 제목 색상 */
 .movie-topic-title {
-  color: #ff8c00; /* 선명한 오렌지로 영화의 생동감을 표현 */
-  font-weight: bold; /* 글자 굵기로 강조 */
+  color: #ff8c00; 
+  font-weight: bold; 
 }
 
 
@@ -135,24 +139,24 @@
 /* 제목 배경 색상 */
 .news-topic-background {
   background: linear-gradient(135deg, #e4e5e6 30%, #cfd9df 70%);
-  color: #2a2a2a; /* 중간 톤의 회색으로 여전히 모던한 느낌 */
+  color: #2a2a2a; 
   border-radius: 8px;
 }
 
 .game-topic-background {
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  color: #2d3e50; /* 세련된 다크 블루로 가독성 강화 */
+  color: #2d3e50; 
   border-radius: 8px;
 }
 
 .music-topic-background {
   background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
-  color: #1c3d57; /* 세련된 네이비 블루 */
+  color: #1c3d57; 
   border-radius: 8px;
 }
 
 .movie-topic-background {
   background: linear-gradient(135deg, #ffe29f 0%, #ffa99f 100%);
-  color: #5c2a2a; /* 클래식한 느낌의 브라운 */
+  color: #5c2a2a; 
   border-radius: 8px;
 }

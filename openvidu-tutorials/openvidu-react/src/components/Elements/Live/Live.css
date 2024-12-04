@@ -25,7 +25,9 @@
   z-index: 0;
   /* 이미지가 가장 아래 */
   overflow: hidden;
-  border-radius: 20px;
+  /* border-radius: 20px; */
+  /* border-top-right-radius: 35px; */
+  /* border-bottom-right-radius: 20px; */
   transition: filter 0.3s ease;
 }
 
@@ -55,12 +57,10 @@
   height: 100%;
   background: linear-gradient(to right,
       rgb(0, 0, 0) 40%,
-      /* 왼쪽 검정색 */
+
       rgba(0, 0, 0, 0) 60%
-      /* 오른쪽 투명 */
     );
   z-index: 1;
-  /* 이미지 위에 표시 */
 }
 
 /* 텍스트 내용 */

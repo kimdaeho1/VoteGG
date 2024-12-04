@@ -121,7 +121,7 @@ const displayedRooms = searchQuery
   return (
     <div className="room-list-container">
       <div className="room-list-header">
-        <h1 className="room-list-title">LIVE 토론</h1>
+        {/* <h1 className="room-list-title">LIVE 토론</h1> */}
       </div>
       <div className="carousel">
         <button
