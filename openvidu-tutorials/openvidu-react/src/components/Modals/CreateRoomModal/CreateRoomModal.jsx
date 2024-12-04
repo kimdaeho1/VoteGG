@@ -38,7 +38,7 @@ const CreateRoomModal = ({ onClose }) => {
       const formData = new FormData();
       formData.append("roomname", roomTitle);
       formData.append("createdby", getUsernameFromToken(token));
-  
+
       // 썸네일이 없는 경우 기본값 처리
       if (thumbnail) {
         formData.append("thumbnail", thumbnail);
@@ -46,17 +46,21 @@ const CreateRoomModal = ({ onClose }) => {
         const defaultImage = "defaultdebate.jpeg"; // 기본 이미지 파일명 (서버에 있어야 함)
         formData.append("thumbnail", defaultImage);
       }
-  
-      // 태그 추가
+
+      let parsedTags = [];
       try {
-        const parsedTags = JSON.parse(tags);
-        if (Array.isArray(parsedTags)) {
-          parsedTags.forEach((tag, index) => {
-            formData.append(`tags[${index}]`, tag.value);
-          });
-        }
-      } catch (e) {
-        console.error("태그 파싱 오류:", e.message);
+        parsedTags = typeof tags === "string" ? JSON.parse(tags) : tags; // JSON 파싱 또는 그대로 사용
+      } catch (error) {
+        console.error("태그 파싱 오류:", error.message);
+        parsedTags = []; // 오류 발생 시 빈 배열 사용
+      }
+
+      const tagValues = Array.isArray(parsedTags) ? parsedTags.map(tag => tag.value) : [];
+      formData.append("tags", JSON.stringify(tagValues));
+
+      console.log("FormData entries:");
+      for (let [key, value] of formData.entries()) {
+        console.log(key, value);
       }
   
       // 서버로 POST 요청

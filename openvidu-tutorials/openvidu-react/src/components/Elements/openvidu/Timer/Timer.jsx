@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import useSocket from "../../../useSocket";
 import "./Timer.css";
 import VoteStatistic from "../../../Modals/VoteResultModal/VoteStatistic.jsx";
-
+import VoteStatistichard from "../../../Modals/VoteResultModal/VoteStatistichard.jsx";
 import { useRecoilState } from 'recoil';
 import { resetTimerState } from '../../../../stores/TimerAtom'; // 수정된 경로
 import { registerSetResetTimerFunc } from '../../../../stores/setTimerState'; // 수정된 경로
@@ -19,9 +19,9 @@ const Timer = ({ isObserver }) => {
   const [totalCycles, setTotalCycles] = useState(4);
   const [timerFinished, setTimerFinished] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(null); // 추가된 상태
-
+  const [resultData, setResultData] = useState(null);
   const [resetTimer, setResetTimer] = useRecoilState(resetTimerState);
-
+  const [showVoteStatistic, setShowVoteStatistic] = useState(false); // 상태로 관리
   // setResetTimer 함수를 헬퍼 함수에 등록
   useEffect(() => {
     registerSetResetTimerFunc(setResetTimer);
@@ -50,10 +50,11 @@ const Timer = ({ isObserver }) => {
     };
 
     // 타이머 종료 이벤트 받기
-    const handleTimerFinished = () => {
+    const handleTimerFinished = (data) => {
       console.log("타이머가 완료되었습니다.");
       setIsRunning(false);
       setTimerFinished(true);
+      setResultData(data);
     };
 
     // phaseChange 이벤트 받기
@@ -131,6 +132,17 @@ const Timer = ({ isObserver }) => {
     }
   };
 
+
+// ///////////////////////
+  const handleButtonClick = () => {
+    setShowVoteStatistic(true); // 버튼 클릭 시 컴포넌트 표시
+  };
+
+  const handleClose = () => {
+    setShowVoteStatistic(false); // 닫기 버튼 클릭 시 컴포넌트 숨김
+  };
+///////////////////////////////////////////////
+
   return (
     <div>
       <div className="timer-wrapper">
@@ -166,7 +178,14 @@ const Timer = ({ isObserver }) => {
       </div>
 
       {/* 타이머가 끝나면 모달을 띄움 */}
-      {timerFinished && <VoteStatistic roomNumber={roomId} onClose={() => setTimerFinished(false)} />}
+      {timerFinished && <VoteStatistic roomNumber={roomId} resultData={resultData} onClose={() => setTimerFinished(false)} />}
+     
+{/* /////////////////////// */}
+    <div>
+      <button onClick={handleButtonClick}>하드 코딩된결과 보기</button>
+      {showVoteStatistic && <VoteStatistichard onClose={handleClose} />}
+    </div>
+{/* /////////////////////// */}
     </div>
   );
 };

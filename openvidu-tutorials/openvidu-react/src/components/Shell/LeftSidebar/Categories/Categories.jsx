@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./Categories.css";
+import { useToast } from '../../../Elements/Toast/ToastContext'; // useToast import
 
 const Categories = () => {
+  const { addToast } = useToast(); // ToastContext에서 addToast 가져오기
   const [userData, setUserData] = useState(null); // 사용자 데이터 상태
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token")); // 로그인 여부 상태
 
@@ -50,7 +52,7 @@ const Categories = () => {
 
       const data = await response.json();
       if (response.ok) {
-        alert("프로필 이미지가 업데이트되었습니다!");
+        addToast("프로필 이미지가 업데이트되었습니다!", "success"); // 성공 토스트 메시지
 
         // JWT를 로컬스토리지에 저장
         localStorage.setItem("token", data.token);
@@ -58,11 +60,11 @@ const Categories = () => {
         // 사용자 데이터 업데이트
         updateUserData();
       } else {
-        alert(data.message || "업로드에 실패했습니다.");
+        addToast(data.message || "업로드에 실패했습니다.", "error"); // 실패 토스트 메시지
       }
     } catch (error) {
       console.error("파일 업로드 중 오류:", error);
-      alert("업로드 중 오류가 발생했습니다.");
+      addToast("업로드 중 오류가 발생했습니다.", "error"); // 오류 토스트 메시지
     }
   };
 

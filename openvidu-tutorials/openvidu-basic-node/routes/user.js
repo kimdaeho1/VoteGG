@@ -139,24 +139,37 @@ router.get("/auth/kakao/callback", async (req, res) => {
 router.post("/set-username", async (req, res) => {
   const { socialId, username, provider } = req.body;
 
+  // 필수 정보 확인
   if (!socialId || !username || !provider) {
     return res.status(400).json({ message: "필수 정보가 누락되었습니다." });
   }
 
+  // 닉네임 검증
+  const nicknameRegex = /^[a-zA-Z0-9]{3,}$/;
+  if (!nicknameRegex.test(username)) {
+    return res.status(400).json({
+      message: "닉네임은 최소 3자 이상이어야 하며, 알파벳과 숫자만 사용 가능합니다.",
+    });
+  }
+
   try {
+    // 중복 닉네임 확인
     if (await user.findOne({ username })) {
       return res.status(400).json({ message: "중복된 아이디입니다." });
     }
 
+    // 새 사용자 생성
     const newUser = new user({ username, socialId, provider });
     await newUser.save();
 
+    // JWT 토큰 생성
     const token = jwt.sign(
       { userId: newUser._id, username: newUser.username, provider: newUser.provider },
       JWT_SECRET,
       { expiresIn: "1h" }
     );
 
+    // 쿠키에 토큰 저장
     res.cookie("token", token, { httpOnly: false, secure: true });
     res.status(200).json({ message: "아이디 설정 완료" });
   } catch (error) {
@@ -231,6 +244,7 @@ router.post("/profile-image", upload.single("profileImage"), async (req, res) =>
       { expiresIn: "1h" }
     );
 
+    res.cookie("token", newToken, { httpOnly: false, secure: true });
     res.status(200).json({ profileImageUrl, token: newToken });
   } catch (error) {
     console.error("파일 업로드 중 오류:", error);

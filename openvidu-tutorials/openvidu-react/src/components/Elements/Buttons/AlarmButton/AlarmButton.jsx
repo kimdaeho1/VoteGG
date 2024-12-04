@@ -25,7 +25,13 @@ const AlarmButton = () => {
   const startLongPolling = async () => {
     while (isPolling) {
       try {
-        const username = token ? getUsernameFromToken(token) : '';
+        const username = token ? getUsernameFromToken(token) : '';   
+        if (!username) {
+          console.warn("Username is empty or invalid. Stopping polling.");
+          setIsPolling(false); // 폴링 중단
+          break;
+        }
+        
         const response = await axios.get(`${window.location.origin}/api/invitation/invitations/${username}`, {
           timeout: 30000, // 30초 동안 대기
         });
