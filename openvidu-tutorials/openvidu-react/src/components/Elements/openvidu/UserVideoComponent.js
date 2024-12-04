@@ -10,8 +10,8 @@ export default class UserVideoComponent extends Component {
         if (streamManager) {
             const connectionData = streamManager.stream.connection;
             return {
-                connectionId: connectionData.connectionId, // 연결 ID
-                clientData: JSON.parse(connectionData.data)?.clientData || 'Unknown', // 사용자 정의 데이터
+                connectionId: connectionData.connectionId,
+                clientData: JSON.parse(connectionData.data)?.clientData || 'Unknown',
             };
         }
         return {};
@@ -21,7 +21,7 @@ export default class UserVideoComponent extends Component {
         const { connectionId, clientData } = this.getConnectionInfo();
         const { localConnectionId } = this.props;
 
-        // 로컬 스트림인지 확인
+        // Check if it's the local stream
         const isLocalStream = connectionId === localConnectionId;
 
         console.log(`Rendering UserVideoComponent for ${clientData}, Connection ID: ${connectionId}, isLocalStream: ${isLocalStream}`);
@@ -32,9 +32,9 @@ export default class UserVideoComponent extends Component {
                     <div className="streamcomponent">
                         <OpenViduVideoComponent
                             streamManager={this.props.streamManager}
-                            muted={isLocalStream} // 로컬 스트림이면 muted
+                            muted={isLocalStream}
                         />
-                        {/* 사용자 이름 표시를 원한다면 주석을 해제하세요 */}
+                        {/* Optional: Display user name */}
                         {/* <div className="connection-info">
                             <p>User: {clientData || 'No Data'}</p>
                         </div> */}
