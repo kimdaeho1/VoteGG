@@ -235,8 +235,8 @@ async function moveToNextStage(roomId) {
         // 클라이언트에게 결과 전송
         timerNamespace.to(roomId).emit('timerFinished', {
           message: "투표 결과가 성공적으로 처리되었습니다.",
-          redScore,
-          blueScore,
+          redScore: redScore || 0,
+          blueScore: blueScore || 0,
           topScorers: topScorers.map((user) => user.username),
         });
       } catch (error) {
