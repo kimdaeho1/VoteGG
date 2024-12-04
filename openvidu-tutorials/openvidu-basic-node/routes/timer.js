@@ -93,166 +93,165 @@ function timerSocketHandler(io) {
   });
 
   // 타이머 시작 함수
-  function startTimer(roomId) {
-    const room = rooms[roomId];
-    if (!room) return;
+function startTimer(roomId) {
+  const room = rooms[roomId];
+  if (!room) return;
 
-    room.isRunning = true;
-    const currentDuration = room.durations[room.currentIndex];
-    room.timeLeft = currentDuration;
-    const endTime = Date.now() + room.timeLeft * 1000;
+  room.isRunning = true;
+  const currentDuration = room.durations[room.currentIndex];
+  room.timeLeft = currentDuration;
+  const endTime = Date.now() + room.timeLeft * 1000;
 
-    room.timer = setInterval(() => {
-      const remainingTime = Math.round((endTime - Date.now()) / 1000);
-      room.timeLeft = Math.max(remainingTime, 0);
+  room.timer = setInterval(() => {
+    const remainingTime = Math.round((endTime - Date.now()) / 1000);
+    room.timeLeft = Math.max(remainingTime, 0);
 
-      // 방에 있는 모든 클라이언트에게 타이머 업데이트 전송
-      timerNamespace.to(roomId).emit('timerUpdate', {
-        timeLeft: room.timeLeft,
-        isRunning: room.isRunning,
-        currentIndex: room.currentIndex,
-        currentCycle: room.currentCycle,
-        totalCycles: room.cycleCount,
-        currentPhase: room.currentPhase,
-        currentTurn: room.currentTurn,
-      });
+    // 방에 있는 모든 클라이언트에게 타이머 업데이트 전송
+    timerNamespace.to(roomId).emit('timerUpdate', {
+      timeLeft: room.timeLeft,
+      isRunning: room.isRunning,
+      currentIndex: room.currentIndex,
+      currentCycle: room.currentCycle,
+      totalCycles: room.cycleCount,
+      currentPhase: room.currentPhase,
+      currentTurn: room.currentTurn,
+    });
 
-      if (room.timeLeft <= 0) {
-        clearInterval(room.timer);
-        room.timer = null;
-        room.isRunning = false;
+    if (room.timeLeft <= 0) {
+      clearInterval(room.timer);
+      room.timer = null;
+      room.isRunning = false;
 
-        // 다음 단계로 이동
-        moveToNextStage(roomId);
-      }
-    }, 1000);
-  }
+      // 다음 단계로 이동
+      moveToNextStage(roomId);
+    }
+  }, 1000);
+}
 
-  // 다음 단계로 이동하는 함수
-  async function moveToNextStage(roomId) {
-    const room = rooms[roomId];
-    if (!room) return;
+// 다음 단계로 이동하는 함수
+async function moveToNextStage(roomId) {
+  const room = rooms[roomId];
+  if (!room) return;
 
-    room.currentIndex++;
+  room.currentIndex++;
 
-    // 모든 단계가 끝나면 사이클 증가 및 초기화
-    if (room.currentIndex >= room.durations.length) {
-      room.currentIndex = 0;
-      room.currentCycle++;
+  // 모든 단계가 끝나면 사이클 증가 및 초기화
+  if (room.currentIndex >= room.durations.length) {
+    room.currentIndex = 0;
+    room.currentCycle++;
 
-      // 새로운 phase와 turn 설정
-      let newPhase = room.currentPhase;
-      let newTurn = room.currentTurn;
+    // 새로운 phase와 turn 설정
+    let newPhase = room.currentPhase;
+    let newTurn = room.currentTurn;
 
-      if (room.currentTurn === 'left') {
-        newTurn = 'right';
-      } else {
-        // 양측 참가자들의 발언이 끝나면 다음 phase로 이동
-        newTurn = 'left';
-        newPhase = room.currentPhase === 1 ? 2 : 1; // Phase를 1과 2 사이에서 변경
-      }
-
-      // 방의 currentPhase와 currentTurn 업데이트
-      room.currentPhase = newPhase;
-      room.currentTurn = newTurn;
-
-      // 클라이언트에 phaseChange 이벤트 emit
-      timerNamespace.to(roomId).emit('phaseChange', {
-        newPhase,
-        newTurn,
-      });
-
-      // 모든 사이클이 끝났는지 확인
-      if (room.currentCycle >= room.cycleCount) {
-        // 타이머 종료 및 투표 결과 처리
-        try {
-          // roomId에 해당하는 Room 문서 가져오기
-          const roomDocument = await Room.findOne({ roomNumber: roomId });
-
-          if (!roomDocument) {
-            console.error(`roomId ${roomId}에 해당하는 방을 찾을 수 없습니다.`);
-            return;
-          }
-          console.log("1");
-          const participantsArray = Array.from(roomDocument.participant.entries());
-
-          if (participantsArray.length < 4) {
-            console.log("참가자가 부족합니다. 최소 4명이 필요합니다.");
-            // 클라이언트에게 에러 메시지 전송
-            timerNamespace.to(roomId).emit('timerFinished', { error: "참가자가 부족합니다. 최소 4명이 필요합니다." });
-            return;
-          }
-          console.log("12");
-          // Red팀과 Blue팀 나누기
-          const redTeam = participantsArray.slice(0, 2); // 0, 1번 참가자
-          const blueTeam = participantsArray.slice(2, 4); // 2, 3번 참가자
-          console.log("123");
-          // 점수 계산
-          const redScore = redTeam.reduce((sum, [, votes]) => sum + votes, 0);
-          const blueScore = blueTeam.reduce((sum, [, votes]) => sum + votes, 0);
-          console.log("1234");
-          // 전체 참가자 정보 가져오기
-          const participantIds = participantsArray.map(([id]) => id);
-          const users = await User.find({ username: { $in: participantIds } });
-          console.log("12345");
-          // 결과 업데이트
-          for (const user of users) {
-            user.totalParticipations += 1; // 모든 참가자의 참가 횟수 증가
-      
-            const isRedTeam = redTeam.some(([id]) => id === user.username);
-            const isBlueTeam = blueTeam.some(([id]) => id === user.username);
-      
-            if (redScore === blueScore) {
-              // 동점인 경우 모두 승리
-              user.totalWins += 1;
-            } else if (
-              (isRedTeam && redScore > blueScore) ||
-              (isBlueTeam && blueScore > redScore)
-            ) {
-              // 자신의 팀이 승리한 경우
-              user.totalWins += 1;
-            }
-          }
-          console.log("123456");
-          // 최대 득표자 계산
-          const maxVotes = Math.max(...participantsArray.map(([, votes]) => votes));
-          const topScorers = users.filter((user) =>
-            participantsArray.some(
-              ([id, votes]) => id === user.username && votes === maxVotes
-            )
-          );
-          console.log("1234567");
-          // 최대 득표자 업데이트
-          for (const topScorer of topScorers) {
-            topScorer.firstPlaceWins += 1;
-          }
-          console.log("12345678");
-          // DB 업데이트
-          await Promise.all(users.map((user) => user.save()));
-      
-          console.log("투표 결과가 성공적으로 처리되었습니다.");
-      
-          // 클라이언트에게 결과 전송
-          timerNamespace.to(roomId).emit('timerFinished', {
-            message: "투표 결과가 성공적으로 처리되었습니다.",
-            redScore,
-            blueScore,
-            topScorers: topScorers.map((user) => user.username),
-          });
-        } catch (error) {
-          console.error("투표 결과 처리 중 오류:", error);
-          // 클라이언트에게 오류 메시지 전송
-          timerNamespace.to(roomId).emit('timerFinished', { error: "투표 결과를 처리하는 중 오류가 발생했습니다." });
-        }
-      
-        return;
-      }
-      
+    if (room.currentTurn === 'left') {
+      newTurn = 'right';
+    } else {
+      // 양측 참가자들의 발언이 끝나면 다음 phase로 이동
+      newTurn = 'left';
+      newPhase = room.currentPhase === 1 ? 2 : 1; // Phase를 1과 2 사이에서 변경
     }
 
-    // 다음 단계 자동 시작
-    startTimer(roomId);
+    // 방의 currentPhase와 currentTurn 업데이트
+    room.currentPhase = newPhase;
+    room.currentTurn = newTurn;
+
+    // 클라이언트에 phaseChange 이벤트 emit
+    timerNamespace.to(roomId).emit('phaseChange', {
+      newPhase,
+      newTurn,
+    });
+
+    // 모든 사이클이 끝났는지 확인
+    if (room.currentCycle >= room.cycleCount) {
+      // 타이머 종료 및 투표 결과 처리
+      try {
+        // roomId에 해당하는 Room 문서 가져오기
+        const roomDocument = await Room.findOne({ roomNumber: roomId });
+
+        if (!roomDocument) {
+          console.error(`roomId ${roomId}에 해당하는 방을 찾을 수 없습니다.`);
+          return;
+        }
+
+        const participantsArray = Array.from(roomDocument.participant.entries());
+
+        if (participantsArray.length < 4) {
+          console.log("참가자가 부족합니다. 최소 4명이 필요합니다.");
+          // 클라이언트에게 에러 메시지 전송
+          timerNamespace.to(roomId).emit('timerFinished', { error: "참가자가 부족합니다. 최소 4명이 필요합니다." });
+          return;
+        }
+
+        // Red팀과 Blue팀 나누기
+        const redTeam = participantsArray.slice(0, 2); // 0, 1번 참가자
+        const blueTeam = participantsArray.slice(2, 4); // 2, 3번 참가자
+
+        // 점수 계산
+        const redScore = redTeam.reduce((sum, [, votes]) => sum + votes, 0);
+        const blueScore = blueTeam.reduce((sum, [, votes]) => sum + votes, 0);
+
+        // 전체 참가자 정보 가져오기
+        const participantIds = participantsArray.map(([id]) => id);
+        const users = await User.find({ username: { $in: participantIds } });
+
+        // 결과 업데이트
+        for (const user of users) {
+          user.totalParticipations += 1; // 모든 참가자의 참가 횟수 증가
+
+          const isRedTeam = redTeam.some(([id]) => id === user.username);
+          const isBlueTeam = blueTeam.some(([id]) => id === user.username);
+
+          if (redScore === blueScore) {
+            // 동점인 경우 모두 승리
+            user.totalWins += 1;
+          } else if (
+            (isRedTeam && redScore > blueScore) ||
+            (isBlueTeam && blueScore > redScore)
+          ) {
+            // 자신의 팀이 승리한 경우
+            user.totalWins += 1;
+          }
+        }
+
+        // 최대 득표자 계산
+        const maxVotes = Math.max(...participantsArray.map(([, votes]) => votes));
+        const topScorers = users.filter((user) =>
+          participantsArray.some(
+            ([id, votes]) => id === user.username && votes === maxVotes
+          )
+        );
+
+        // 최대 득표자 업데이트
+        for (const topScorer of topScorers) {
+          topScorer.firstPlaceWins += 1;
+        }
+
+        // DB 업데이트
+        await Promise.all(users.map((user) => user.save()));
+
+        console.log("투표 결과가 성공적으로 처리되었습니다.");
+
+        // 클라이언트에게 결과 전송
+        timerNamespace.to(roomId).emit('timerFinished', {
+          message: "투표 결과가 성공적으로 처리되었습니다.",
+          redScore,
+          blueScore,
+          topScorers: topScorers.map((user) => user.username),
+        });
+      } catch (error) {
+        console.error("투표 결과 처리 중 오류:", error);
+        // 클라이언트에게 오류 메시지 전송
+        timerNamespace.to(roomId).emit('timerFinished', { error: "투표 결과를 처리하는 중 오류가 발생했습니다." });
+      }
+
+      return;
+    }
   }
+
+  // 다음 단계 자동 시작
+  startTimer(roomId);
+}
 
   // 타이머 정지 함수
   function stopTimer(roomId) {
