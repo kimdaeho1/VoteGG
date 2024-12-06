@@ -27,7 +27,7 @@ const Search = () => {
     <div className="search-container">
       <input
         type="text"
-        placeholder="Search"
+        placeholder="토론제목, 태그 검색"
         className="search-input"
         value={searchInput}
         onChange={handleInputChange} // 검색창 상태 업데이트

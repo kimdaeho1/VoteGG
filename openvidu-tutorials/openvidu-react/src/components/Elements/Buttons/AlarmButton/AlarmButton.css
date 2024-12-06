@@ -1,36 +1,42 @@
 .alarm-button-container {
   position: relative;
   display: flex;
+  flex-direction: column;
+  /* 세로 정렬 */
+  align-items: center;
+  margin-right: -15px;
 }
 
 .alarm-button {
-  width: 50px;
+  width: 80px;
   height: 50px;
-  padding: 10px 20px;
+  /* padding: 10px 20px; */
+  padding: 0;
   font-size: 1rem;
   font-weight: bold;
   background-color: #ffffff;
-  align-items: center;
+  /* align-items: center; */
   border: none;
   border-radius: 30%;
   cursor: pointer;
-  transition: transform 0.2s ease; /* 애니메이션 추가 */
-  
+  transition: transform 0.2s ease;
+  position: relative;
+
 }
 
 .alarm-button:hover {
-  transform: scale(1.1); /* 크기 확대 (1.1배) */
+  transform: scale(1.1);
 }
 
 .alarm-button {
-  padding: 0; /* 기본 버튼 패딩 제거 */
-  border: none; /* 기본 버튼 테두리 제거 */
-  background: none; /* 배경 제거 */
-  cursor: pointer; /* 마우스 포인터 표시 */
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 
 .alarm-icon {
-  width: 50px; /* 아이콘 크기 조정 */
+  width: 50px;
   height: 50px;
   opacity: 60%;
 }
@@ -39,8 +45,26 @@
   position: absolute;
   top: 2px;
   right: 2px;
-  width: 8px;
+  width: 12px;
   height: 8px;
   background-color: red;
   border-radius: 50%;
+}
+
+.alarm-text {
+  position: absolute;
+  bottom: -25px;
+  font-size: 1rem;
+  padding: 4px 4px; 
+  border-radius: 5px;
+  background-color: #ff9800;
+  color: #ffffff;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  margin-left: 12px;
+  font-family: 'GmarketSans';
+}
+
+.alarm-button-container:hover .alarm-text {
+  opacity: 1; /* hover 시 글자 표시 */
 }

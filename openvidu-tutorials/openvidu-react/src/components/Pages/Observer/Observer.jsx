@@ -13,7 +13,7 @@ const Observer = () => {
       <div
         className="home-background"
         style={{
-          backgroundImage: 'url("/eggback.jpg")', // 경로 문제 해결된 상태에서 이 방식을 사용
+          backgroundImage: 'url("/eggbackground.jpg")', // 경로 문제 해결된 상태에서 이 방식을 사용
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -23,8 +23,8 @@ const Observer = () => {
           width: '100vw',
           height: '80vh',
           zIndex: -1,
-          minHeight: '800px',
-          maxHeight: '800px',
+          minHeight: '790px',
+          maxHeight: '790px',
           // opacity: '60%',
         }}
       ></div>

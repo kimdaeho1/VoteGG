@@ -32,9 +32,9 @@ const RoomList = () => {
     fetchRooms();
   }, []);
 
-// 검색어에 따라 필터링된 방 목록 생성
-const displayedRooms = searchQuery
-  ? rooms.filter((room) => {
+  // 검색어에 따라 필터링된 방 목록 생성
+  const displayedRooms = searchQuery
+    ? rooms.filter((room) => {
       // 제목 또는 태그에 검색어 포함 여부 확인
       const titleMatch = room.roomname
         .toLowerCase()
@@ -44,7 +44,7 @@ const displayedRooms = searchQuery
       );
       return (titleMatch || tagMatch) && room.memberCount > 0; // 추가 조건: room.memberCount > 0
     })
-  : rooms.filter((room) => room.memberCount > 0); // 검색어가 없으면 전체 방 목록 중 memberCount > 0인 방만 표시
+    : rooms.filter((room) => room.memberCount > 0); // 검색어가 없으면 전체 방 목록 중 memberCount > 0인 방만 표시
 
   // 총 페이지 수 계산
   const totalIndicators = Math.ceil(displayedRooms.length / cardsPerPage);
@@ -125,11 +125,19 @@ const displayedRooms = searchQuery
       </div>
       <div className="carousel">
         <button
-          className="carousel-button prev"
+          className="carousel-button"
           onClick={handlePrev}
           disabled={currentPage === 0}
         >
-          &lt;
+          <img
+            src={
+              currentPage === totalIndicators - 1
+                ? "/left.png" // 비활성 이미지 경로
+                : "/left.png" // 활성 이미지 경로
+            }
+            alt="Prev"
+            className="carousel-button-image"
+          />
         </button>
         <div className={`room-list-wrapper ${direction}`}>
           <div className="room-list align-evenly">
@@ -144,6 +152,7 @@ const displayedRooms = searchQuery
                       onClick={() => navigate(`/observer/${room.roomNumber}`)}
                       className="entry-room"
                     />
+                    {/* <h2 className="room-name">{room.roomname}</h2> */}
                     <p className="room-member-count">{room.memberCount}명</p>
                     <p className="room-live">LIVE</p>
                   </div>
@@ -166,7 +175,7 @@ const displayedRooms = searchQuery
                         <span className="tag-placeholder">태그 없음</span>
                       )}
                     </div>
-                    <div className="room-buttons">
+                    {/* <div className="room-buttons">
                       <button
                         className="room-spectate-button"
                         onClick={() => navigate(`/observer/${room.roomNumber}`)}
@@ -180,7 +189,7 @@ const displayedRooms = searchQuery
                       >
                         {room.participantCount >= 4 ? "인원 초과" : "토론하기"}
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               )
@@ -192,16 +201,30 @@ const displayedRooms = searchQuery
           onClick={handleNext}
           disabled={currentPage === totalIndicators - 1}
         >
-          &gt;
+          <img
+            src={
+              currentPage === totalIndicators - 1
+                ? "/right.png" // 비활성 이미지 경로
+                : "/right.png" // 활성 이미지 경로
+            }
+            alt="Next"
+            className="carousel-button-image"
+          />
         </button>
       </div>
       <div className="carousel-indicators">
         {Array.from({ length: totalIndicators }).map((_, index) => (
-          <span
+          <img
             key={index}
+            src={
+              index === currentPage
+                ? '/hatch.png' // 활성 상태 이미지
+                : '/alarmegg.png' // 비활성 상태 이미지
+            }
+            alt={`Indicator ${index + 1}`}
             className={`indicator ${index === currentPage ? "active" : ""}`}
             onClick={() => setCurrentPage(index)}
-          ></span>
+          />
         ))}
       </div>
     </div>

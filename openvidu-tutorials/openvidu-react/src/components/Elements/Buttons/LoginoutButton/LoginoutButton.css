@@ -1,3 +1,13 @@
+.login-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+    opacity: 0.5;
+    font-size: 1rem;
+}
+
 .login-button {
   padding: 8px 16px;
   border-radius: 20px;
@@ -17,7 +27,14 @@
   background-color: #c0c0c0;
   color: white;
   padding: 10px;
-  border:none;
+  border: none;
+}
+
+.logout-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .logout-button {
@@ -29,35 +46,53 @@
   font-size: 1.2em;
   font-weight: bold;
   width: 100px;
-  height: auto;
-  transform: translateX(-50px);
+  height: 42px;
+  transform: translateX(-40px);
   background-color: rgba(255, 255, 255, 0.651);
   margin-left: 50px;
-  transition: background-color 0.3s;
+  justify-content: center;
+  /* 세로 중앙 정렬 */
 
-  /* 글씨 크기가 자동으로 줄어들도록 설정 */
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-
-  /* 긴 텍스트 크기 조정 */
   white-space: nowrap;
-  /* 줄바꿈 방지 */
-  overflow: hidden;
-  /* 넘치는 텍스트 숨김 */
+  /* overflow: hidden; */
   text-overflow: ellipsis;
-
-  /* 글씨 크기 유동 조정 */
-  font-size: calc(100% + (10px - 0.5vw));
-  /* 적응형 글꼴 크기 */
+  font-size: 1rem;
   line-height: 1;
-  /* 텍스트 높이 조정 */
+
 }
 
 .logout-button:hover {
-  font-size: 1.1em; /* 글씨 크기를 키움 */
-  color: rgba(255, 145, 145, 0.418);
-  cursor: pointer; /* 커서를 포인터로 변경 */
-  transition: font-size 0.3s, background-color 0.3s; /* 애니메이션 부드럽게 적용 */
+  font-size: 1.1em;
+  color: rgba(255, 145, 145, 0.8);
+  /* cursor: pointer; */
+  transition: font-size 0.2s;
+}
+
+.logout-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 세로 가운데 정렬 */
+  height: 24px;
+  position: absolute;
+  bottom: -26px;
+  font-size: 1rem;
+  padding: 4px 4px;
+  border-radius: 5px;
+  background-color: #ff9800;
+  color: #ffffff;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  margin-left: 12px;
+  font-family: 'GmarketSans';
+  justify-content: center;
+}
+
+.logout-button:hover .logout-text {
+  opacity: 1;
+  /* hover 시 글자 표시 */
 }

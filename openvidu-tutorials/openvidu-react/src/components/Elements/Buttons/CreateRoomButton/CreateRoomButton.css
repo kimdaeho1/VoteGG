@@ -1,25 +1,48 @@
 .create-room-container {
   display: flex;
+  position: relative;
   justify-content: center;
+  align-items: center;
   margin: 20px 0;
-  width:  80px;
+  margin-left: -10px;
 }
+
 .create-room-button {
   border: none;
-  /* border-radius: 40%; / */
-  background-color: rgba(255, 255, 255, 0); 
+  background-color: rgba(255, 255, 255, 0);
   display: flex;
   align-items: center;
+  font-weight: bold;
   justify-content: center;
   cursor: pointer;
-  transition: transform 0.2s ease; /* 애니메이션 추가 */
-  /* padding: 5px; */
+  transition: transform 0.2s ease;
+  width: 80px;
 }
+
 .create-room-button:hover {
-  transform: scale(1.1); /* 크기 확대 (1.1배) */
+  transform: scale(1.1);
 }
+
 .create-room-icon {
   width: 52px;
-  height: 42px; /* 아이콘 크기 */
-  opacity: 80%;
+  height: 42px;
+  opacity: 60%;
+}
+
+.create-text {
+  position: absolute;
+  bottom: -25px;
+  font-size: 1rem;
+  padding: 4px 4px;
+  border-radius: 5px;
+  background-color: #ff9800;
+  color: #ffffff;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  font-family: 'GmarketSans';
+}
+
+.create-room-container:hover .create-text {
+  opacity: 1;
+  /* hover 시 글자 표시 */
 }
