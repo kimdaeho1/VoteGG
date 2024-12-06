@@ -53,16 +53,36 @@ const Live = () => {
         </div>
         <div className="live-text">
           <div className="live-count">
-            <img
-              src="/liveIcon.png" // 이미지 경로
-              alt="Live Agora"
-              className="live-icon"
-            />
-            <p>{topRoom.memberCount} 명</p>
+            <span className="live-icon">LIVE</span>
+            <span className='livecount'>{topRoom.memberCount} 명</span>
+            <h3>계란으로 토론의 흐름을 바꿔보세요!</h3>
           </div>
           <h1>{topRoom.roomname || "Untitled Room"}</h1> {/* 방 제목이 없을 경우 기본값 설정 */}
-          <p>Join discussions and connect with others.</p>
+          <div className="room-tags2">
+            {topRoom.tags && topRoom.tags.length > 0 ? (
+              topRoom.tags.map((tag, idx) => (
+                <span key={idx} className="tag-item2">
+                  #{tag}
+                </span>
+              ))
+            ) : (
+              <span className="tag-placeholder">태그 없음</span>
+            )}
+          </div>
         </div>
+        <div className="profile2-container">
+          {Array.from({ length: 2 }).map((_, idx) => (
+            <div key={idx} className="profile2-item">
+              <div className="profile2-picture"></div> {/* 프로필 사진 자리 */}
+              <p className="profile2-id">User{idx + 1}</p> {/* 유저 아이디 자리 */}
+            </div>
+          ))}
+        </div>
+        <img
+          src="./vs.png" // 임시 이미지 경로
+          alt="vsimg"
+          className="vsimg"
+        />
       </div>
     </div>
   );

@@ -21,6 +21,7 @@ const InviteButton = () => {
           alt="초대 버튼"
           className="Invite-icon"
         />
+        <div className="invite-text">초대하기</div>
       </button>
       {isModalOpen && <AlarmModal onClose={handleCloseModal} />}
     </div>

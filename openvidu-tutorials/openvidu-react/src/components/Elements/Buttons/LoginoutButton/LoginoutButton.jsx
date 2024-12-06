@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginoutModal from '../../../Modals/LoginoutModal/LoginoutModal';
+import CreateRoomButton from '../CreateRoomButton/CreateRoomButton'
+import AlarmButton from '../AlarmButton/AlarmButton';
+import InviteButton from '../InviteButton/InviteButton';
 import './LoginoutButton.css';
 import { useToast } from '../../Toast/ToastContext';
 
@@ -80,9 +83,15 @@ const LoginoutButton = () => {
   return (
     token ? (
       <>
-        <button type="button" onClick={openModal} className="logout-button">
-          {username} 님
-        </button>
+        <AlarmButton />
+        <InviteButton />
+        <CreateRoomButton />
+        <div className='logout-container'>
+          <button type="button" onClick={openModal} className="logout-button">
+            <div>{username} 님</div>
+            <div className="logout-text">로그아웃</div>
+          </button>
+        </div>
         {
           isModalOpen && (
             <LoginoutModal
@@ -94,9 +103,12 @@ const LoginoutButton = () => {
         }
       </>
     ) : (
-      <button type="button" onClick={handleLoginClick} className="login-button">
-        Login
-      </button>
+      <div className='login-button-container'>
+        <div className="login-text">로그인후 이용해주세요!</div>
+        <button type="button" onClick={handleLoginClick} className="login-button">
+          Login
+        </button>
+      </div>
     )
   );
 };

@@ -25,13 +25,13 @@ const AlarmButton = () => {
   const startLongPolling = async () => {
     while (isPolling) {
       try {
-        const username = token ? getUsernameFromToken(token) : '';   
+        const username = token ? getUsernameFromToken(token) : '';
         if (!username) {
           console.warn("Username is empty or invalid. Stopping polling.");
           setIsPolling(false); // 폴링 중단
           break;
         }
-        
+
         const response = await axios.get(`${window.location.origin}/api/invitation/invitations/${username}`, {
           timeout: 30000, // 30초 동안 대기
         });
@@ -85,12 +85,13 @@ const AlarmButton = () => {
   return (
     <div className="alarm-button-container">
       <button className="alarm-button" onClick={handleOpenModal}>
-      <img
-           src={hasNewData ? "/hatch.png" : "/alarmegg.png"} // 알람 상태에 따라 이미지 변경
+        <img
+          src={hasNewData ? "/hatch.png" : "/alarmegg.png"} // 알람 상태에 따라 이미지 변경
           alt="알람 버튼"
           className="alarm-icon"
         />
         {hasNewData && <div className="notification-dot"></div>}
+        <div className="alarm-text">메일함</div>
       </button>
       {isModalOpen && <AlarmModal onClose={handleCloseModal} />}
     </div>
@@ -106,7 +107,7 @@ const getUsernameFromToken = (token) => {
     console.error('Failed to parse token:', error);
     return 'Unknown User';
   }
-}; 
+};
 
 
 export default AlarmButton;

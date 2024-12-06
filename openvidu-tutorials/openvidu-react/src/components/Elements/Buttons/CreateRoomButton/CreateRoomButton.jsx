@@ -27,6 +27,7 @@ const CreateRoomButton = () => {
           alt="Create Room"
           className="create-room-icon"
         />
+        <div className="create-text">토론하기</div>
       </button>
       {isModalOpen && <RoomModal onClose={closeModal} />}
     </div>

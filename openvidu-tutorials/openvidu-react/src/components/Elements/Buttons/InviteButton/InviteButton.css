@@ -1,9 +1,11 @@
 .Invite-button-container {
     display: flex;
+    position: relative;
+    align-items: center;
   }
   
   .Invite-button {
-    width: 50px;
+    width: 80px;
     height: 50px;
     padding: 10px 20px;
     font-size: 1rem;
@@ -15,7 +17,7 @@
     cursor: pointer;
     transition: transform 0.2s ease; /* 애니메이션 추가 */
     /* margin-right: 10px; */
-    margin-left: 20px;
+    margin-left: 15px;
   }
   
   .Invite-button:hover {
@@ -30,7 +32,25 @@
   }
   
   .Invite-icon {
-    width: 50px; /* 아이콘 크기 조정 */
+    width: 52px; /* 아이콘 크기 조정 */
     height: 40px;
     opacity: 60%;
+  }
+
+  .invite-text {
+    position: absolute;
+    bottom: -25px;
+    font-size: 1rem;
+    font-family: 'GmarketSans';
+    padding: 4px 4px;
+    border-radius: 5px;
+    background-color: #ff9800;
+    color: #ffffff;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    margin-left: -1px;
+  }
+  
+  .Invite-button-container:hover .invite-text {
+    opacity: 1; /* hover 시 글자 표시 */
   }
