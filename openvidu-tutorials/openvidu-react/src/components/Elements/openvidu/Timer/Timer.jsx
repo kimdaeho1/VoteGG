@@ -6,8 +6,8 @@ import "./Timer.css";
 import VoteStatistic from "../../../Modals/VoteResultModal/VoteStatistic.jsx";
 import VoteStatistichard from "../../../Modals/VoteResultModal/VoteStatistichard.jsx";
 import { useRecoilState } from 'recoil';
-import { resetTimerState } from '../../../../stores/TimerAtom'; // 수정된 경로
-import { registerSetResetTimerFunc } from '../../../../stores/setTimerState'; // 수정된 경로
+import { resetTimerState } from '../../../../stores/TimerAtom';
+import { registerSetResetTimerFunc } from '../../../../stores/setTimerState';
 
 const Timer = ({ isObserver }) => {
   const { roomNumber } = useParams();
@@ -18,16 +18,18 @@ const Timer = ({ isObserver }) => {
   const [currentCycle, setCurrentCycle] = useState(0);
   const [totalCycles, setTotalCycles] = useState(4);
   const [timerFinished, setTimerFinished] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(null); // 추가된 상태
+  const [currentIndex, setCurrentIndex] = useState(null);
   const [resultData, setResultData] = useState(null);
   const [resetTimer, setResetTimer] = useRecoilState(resetTimerState);
-  const [showVoteStatistic, setShowVoteStatistic] = useState(false); // 상태로 관리
-  // setResetTimer 함수를 헬퍼 함수에 등록
+  const [showVoteStatistic, setShowVoteStatistic] = useState(false);
+  const [stopRequests, setStopRequests] = useState(0); // 종료 요청 상태 관리
+  const [isStopRequested, setIsStopRequested] = useState(false); // 사용자 버튼 상태 관리
+  const [isOpenviduActive, setIsOpenviduActive] = useState(false);
+
   useEffect(() => {
     registerSetResetTimerFunc(setResetTimer);
   }, [setResetTimer]);
 
-  // resetTimer 상태 변경 감지
   useEffect(() => {
     if (resetTimer) {
       handleReset();
@@ -38,65 +40,58 @@ const Timer = ({ isObserver }) => {
   useEffect(() => {
     if (!socket) return;
 
-    // 타이머 업데이트 받기
     const handleTimerUpdate = (data) => {
       const { timeLeft, isRunning, currentCycle, totalCycles, currentIndex } = data;
-      console.log("타이머 업데이트:", data);
       setTimeLeft(timeLeft);
       setIsRunning(isRunning);
       setCurrentCycle(currentCycle);
       setTotalCycles(totalCycles);
-      setCurrentIndex(currentIndex); // 업데이트
+      setCurrentIndex(currentIndex);
     };
 
-  // 타이머 종료 이벤트 받기
-  const handleTimerFinished = (data) => {
-    console.log("타이머가 완료되었습니다. 수신된 데이터:", data);
-    setIsRunning(false);
-    setTimerFinished(true);
-    setResultData(data || {}); // data가 없을 경우 빈 객체로 설정
-  
-    // LocalStorage에서 maxViewers 값을 가져옴
-    const maxViewers = localStorage.getItem("maxViewers");
-  
-    if (maxViewers) {
-      console.log("최고 시청자 수:", maxViewers);
-  
-      // 서버에 maxViewers를 업데이트하는 소켓 이벤트 전송
-      socket.emit("updateMaxViewers", {
-        roomId: roomNumber,
-        maxViewers: parseInt(maxViewers, 10),
-      });
-  
-      // LocalStorage 초기화
-      localStorage.removeItem("maxViewers");
-    }
-  };
+    const handleTimerFinished = (data) => {
+      setIsRunning(false);
+      setTimerFinished(true);
+      setResultData(data || {});
 
-    // phaseChange 이벤트 받기
+      const maxViewers = localStorage.getItem("maxViewers");
+      if (maxViewers) {
+        socket.emit("updateMaxViewers", {
+          roomId: roomNumber,
+          maxViewers: parseInt(maxViewers, 10),
+        });
+        localStorage.removeItem("maxViewers");
+      }
+    };
+
+    socket.on('openviduActive', (isActive) => {
+      setIsOpenviduActive(isActive);
+    });
+
     const handlePhaseChange = (data) => {
       const { newPhase, newTurn } = data;
-      console.log("Phase change detected:", data);
-
-      // OpenviduFinal.js의 handlePhaseChange 함수 호출
       if (window.handlePhaseChange) {
         window.handlePhaseChange(newPhase, newTurn);
       }
     };
 
+    const handleStopRequestUpdate = (data) => {
+      setStopRequests(data.stopRequests);
+    };
+
     socket.on('timerUpdate', handleTimerUpdate);
     socket.on('timerFinished', handleTimerFinished);
-    socket.on('phaseChange', handlePhaseChange); // 추가된 부분
+    socket.on('phaseChange', handlePhaseChange);
+    socket.on('stopRequestUpdate', handleStopRequestUpdate);
 
-    // 클린업
     return () => {
       socket.off('timerUpdate', handleTimerUpdate);
       socket.off('timerFinished', handleTimerFinished);
-      socket.off('phaseChange', handlePhaseChange); // 추가된 부분
+      socket.off('phaseChange', handlePhaseChange);
+      socket.off('stopRequestUpdate', handleStopRequestUpdate);
     };
   }, [socket]);
 
-  // 타이머 시작 버튼 클릭 핸들러
   const handleStart = () => {
     if (socket) {
       socket.emit('start_timer', roomId);
@@ -104,7 +99,6 @@ const Timer = ({ isObserver }) => {
     }
   };
 
-  // 타이머 초기화 버튼 클릭 핸들러
   const handleReset = () => {
     if (socket) {
       socket.emit('reset_timer', roomId);
@@ -112,21 +106,28 @@ const Timer = ({ isObserver }) => {
     }
   };
 
-  // 타이머 종료 버튼 클릭 핸들러
-  const handleStop = () => {
+  const handleStopToggle = () => {
     if (socket) {
-      socket.emit('stop_timer', roomId);
-      setIsRunning(false);
-      setTimeLeft(0); // 타이머 시간을 강제로 0초로 설정
+      const newStatus = !isStopRequested;
+      setIsStopRequested(newStatus);
+      socket.emit('toggle_stop_request', { roomId, requested: newStatus });
     }
   };
 
-  // 로딩 상태 처리
+  useEffect(() => {
+    if (stopRequests >= 2) {
+      if (socket) {
+        socket.emit('stop_timer', roomId);
+        setIsRunning(false);
+        setTimeLeft(0);
+      }
+    }
+  }, [stopRequests, socket]);
+
   if (timeLeft === null) {
     return <div>로딩 중...</div>;
   }
 
-  // 시간을 "분:초" 형식으로 변환하는 함수
   const formatTime = (seconds) => {
     const min = Math.floor(seconds / 60);
     const sec = seconds % 60;
@@ -135,13 +136,11 @@ const Timer = ({ isObserver }) => {
       .padStart(2, "0")}`.trim();
   };
 
-  // currentIndex 값을 변환하는 함수
   const getIndexCharacter = (index) => {
-    const indexMapping = ["발언 준비", "발언 중", "ㄷ", "ㄹ"];
-    return indexMapping[index] || "알 수 없음"; // 범위를 벗어난 경우 처리
+    const indexMapping = ["발언 중", "발언 중", "ㄷ", "ㄹ"];
+    return indexMapping[index] || "알 수 없음";
   };
 
-  // currentIndex에 따른 클래스 이름 반환 함수
   const getStatusClass = (index) => {
     switch (index) {
       case 0:
@@ -157,57 +156,44 @@ const Timer = ({ isObserver }) => {
     }
   };
 
-  // ///////////////////////
-  const handleButtonClick = () => {
-    setShowVoteStatistic(true); // 버튼 클릭 시 컴포넌트 표시
-  };
-
-  const handleClose = () => {
-    setShowVoteStatistic(false); // 닫기 버튼 클릭 시 컴포넌트 숨김
-  };
-  ///////////////////////////////////////////////
-
   return (
     <div>
       <div className="timer-wrapper">
         <div className="status-and-button">
           <span className={`current-status ${getStatusClass(currentIndex)}`}>
             {!isRunning && !timerFinished
-              ? "토론 준비" // 토론 시작 전
+              ? "토론 준비"
               : timerFinished
-                ? "토론 끝" // 토론 종료
-                : getIndexCharacter(currentIndex)} {/* 토론 진행 중 */}
+                ? "토론 끝"
+                : getIndexCharacter(currentIndex)}
           </span>
-          {!isObserver && (
+          {!isObserver && isOpenviduActive &&(
             <div>
+              {/* <div>{}</div> */}
               <button
                 className="stop-button"
-                onClick={handleStop}
-                disabled={!isRunning} // 타이머가 실행 중일 때만 가능
+                onClick={handleStopToggle}
               >
-                타이머 종료
+                {isStopRequested ? "종료 취소" : "타이머 종료"}
               </button>
             </div>
           )}
         </div>
         <div className="timer-container">
           <div className="timer-text">
-            <span>{formatTime(timeLeft).split(":")[0]}</span> {/* 분 */}
+            <span>{formatTime(timeLeft).split(":")[0]}</span>
             <span>:</span>
-            <span>{formatTime(timeLeft).split(":")[1]}</span> {/* 초 */}
+            <span>{formatTime(timeLeft).split(":")[1]}</span>
           </div>
         </div>
       </div>
 
-      {/* 타이머가 끝나면 모달을 띄움 */}
       {timerFinished && <VoteStatistic roomNumber={roomId} resultData={resultData} onClose={() => setTimerFinished(false)} />}
-     
-      {/* /////////////////////// */}
+
       <div>
-        <button onClick={handleButtonClick}>하드 코딩된결과 보기</button>
-        {showVoteStatistic && <VoteStatistichard onClose={handleClose} />}
+        <button onClick={() => setShowVoteStatistic(true)}>하드 코딩된결과 보기</button>
+        {showVoteStatistic && <VoteStatistichard onClose={() => setShowVoteStatistic(false)} />}
       </div>
-      {/* /////////////////////// */}
     </div>
   );
 };

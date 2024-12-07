@@ -304,7 +304,7 @@ const Room = () => {
       <div className='home-background3' />
       <div className="left-side">
         {isOpenviduActive ? (
-          <OpenviduFinal sessionId={roomNumber} userName={userId} />
+          <OpenviduFinal sessionId={roomNumber} userName={userId} createdBy={createdBy} />
         ) : (
           <>
             <OpenviduControl
