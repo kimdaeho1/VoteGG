@@ -42,18 +42,14 @@ const Observer = () => {
       <div className='home-background2' />
       <div className='home-background3' />
       <div className="left-side">
-        {isOpenviduActive ? (
+        
           <OpenviduFinal
             sessionId={roomNumber}
             userName="Observer"
             isObserver={true}
             subs={false}
           />
-        ) : (
-          <div className="waiting-message">
-            대기 중입니다...
-          </div>
-        )}
+
         <div className='emptyspace'>.</div>
         <RoomControl isObserver={true} />
       </div>
