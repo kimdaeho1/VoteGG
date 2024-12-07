@@ -30,7 +30,8 @@ class OpenviduFinal extends Component {
             rightUserArgument: '',
             isLeftUserEditing: false,
             isRightUserEditing: false,
-        };
+            isstart : this.props.isstart
+        }; 
 
         this.joinSession = this.joinSession.bind(this);
         this.leaveSession = this.leaveSession.bind(this);
@@ -114,18 +115,16 @@ class OpenviduFinal extends Component {
         // Handle userList signal
         session.on('signal:userList', (event) => {
             const data = JSON.parse(event.data);
-
+            console.log('Received userList signal:', data); // 디버깅용
             this.setState((prevState) => {
                 const mergedLeftUserList = mergeUserLists(prevState.leftUserList, data.leftUserList || []);
                 const mergedRightUserList = mergeUserLists(prevState.rightUserList, data.rightUserList || []);
-
-                console.log('Updated user lists:', { leftUserList: mergedLeftUserList, rightUserList: mergedRightUserList });
-
+        
                 return {
                     leftUserList: mergedLeftUserList,
                     rightUserList: mergedRightUserList,
-                    leftUserArgument: data.leftUserArgument || '',
-                    rightUserArgument: data.rightUserArgument || '',
+                    leftUserArgument: prevState.leftUserArgument || data.leftUserArgument || '',
+                    rightUserArgument: prevState.rightUserArgument || data.rightUserArgument || '',
                 };
             });
         });
@@ -627,7 +626,7 @@ class OpenviduFinal extends Component {
         const allStreamManagers = [];
         // 본인의 connectionId
         const localConnectionId = session?.connection?.connectionId;
-        const { leftUserArgument,rightUserArgument,isLeftUserEditing,isRightUserEditing,} = this.state;
+        const { leftUserArgument, rightUserArgument, isLeftUserEditing, isRightUserEditing,} = this.state;
         // 본인의 스트림 매니저 추가
         if (mainStreamManager && localConnectionId) {
             allStreamManagers.push({
@@ -703,9 +702,9 @@ class OpenviduFinal extends Component {
                                             <p>{leftUserArgument || '주장입력'}</p>
                                         )}
 
-                                        {!this.props.isObserver && localConnectionId === currentLeftUser?.connectionId && (
-                                        <button onClick={this.toggleRightUserEdit}>
-                                            {isRightUserEditing ? '저장' : '작성'}
+                                        {!this.props.isObserver && localConnectionId === currentLeftUser?.connectionId && !this.props.isstart && (
+                                        <button onClick={this.toggleLeftUserEdit}>
+                                            {isLeftUserEditing ? '저장' : '작성'}
                                         </button>
                                         )}
                                         
@@ -738,7 +737,7 @@ class OpenviduFinal extends Component {
                                             <p>{rightUserArgument || '주장입력'}</p>
                                         )}
 
-                                        {!this.props.isObserver && localConnectionId === currentRightUser?.connectionId && (
+                                        {!this.props.isObserver && localConnectionId === currentRightUser?.connectionId && !this.props.isstart && (
                                         <button onClick={this.toggleRightUserEdit}>
                                             {isRightUserEditing ? '저장' : '작성'}
                                         </button>
