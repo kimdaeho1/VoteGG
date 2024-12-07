@@ -31,9 +31,25 @@ const roomSchema = new mongoose.Schema({
     default : "",
   },
   tags: {
-    type: [String], // 태그 배열로 저장
+    type: [String], // 태그 배열로 m저장
     default: [],
   },
+
+  redScore: {
+    type: Number,
+    default: 0,
+  },
+  
+  blueScore: {
+    type: Number,
+    default: 0,
+  },
+
+  maxViewers : {
+    type: Number,
+    default: 0,
+  },
+
 });
 
 
