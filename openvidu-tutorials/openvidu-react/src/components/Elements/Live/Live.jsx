@@ -73,13 +73,14 @@ const Live = () => {
         <div className="profile2-container">
           {Array.from({ length: 2 }).map((_, idx) => (
             <div key={idx} className="profile2-item">
-              <div className="profile2-picture"></div> {/* 프로필 사진 자리 */}
+              <div className="profile2-picture">
+              </div>
               <p className="profile2-id">User{idx + 1}</p> {/* 유저 아이디 자리 */}
             </div>
           ))}
         </div>
         <img
-          src="./vs.png" // 임시 이미지 경로
+          src="./vs.png" // 임시 이미지 경로입니다
           alt="vsimg"
           className="vsimg"
         />

@@ -274,7 +274,6 @@ const Room = () => {
 
   const handleStartOpenviduAndTimer = async () => {
     try {
-      handleStartOpenvidu();
       handleStartTimer();
     } catch (error) {
       console.error('Error in handleStartOpenviduAndTimer:', error);
@@ -303,8 +302,9 @@ const Room = () => {
       <div className='home-background2' />
       <div className='home-background3' />
       <div className="left-side">
+      <OpenviduFinal sessionId={roomNumber} userName={userId} createdBy={createdBy} />
         {isOpenviduActive ? (
-          <OpenviduFinal sessionId={roomNumber} userName={userId} />
+          <div></div>
         ) : (
           <>
             <OpenviduControl

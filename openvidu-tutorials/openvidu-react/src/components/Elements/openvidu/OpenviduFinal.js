@@ -23,6 +23,7 @@ class OpenviduFinal extends Component {
             leftUserList: [],
             rightUserList: [],
             userName: this.props.userName || 'Unknown', // 사용자 이름 설정
+            createdBy : this.props.createdBy  || 'Unknown',
             currentPhase: 1,
             currentTurn: 'left',
         };
@@ -694,44 +695,48 @@ class OpenviduFinal extends Component {
     }
 
     assignUserToGroup(newUser) {
-        this.setState((prevState) => {
-            let leftUserList = [...prevState.leftUserList];
-            let rightUserList = [...prevState.rightUserList];
-
-            // 이미 리스트에 존재하는지 확인
-            const existsInLeft = leftUserList.some(user => user.connectionId === newUser.connectionId);
-            const existsInRight = rightUserList.some(user => user.connectionId === newUser.connectionId);
-
-            if (existsInLeft || existsInRight) {
-                console.log(`User already exists in a group: ${newUser.userName}, Connection ID: ${newUser.connectionId}`);
-                return null;
-            }
-
-            if (leftUserList.length < 2 && !this.props.isObserver) {
-                leftUserList.push(newUser);
-                console.log('Added to leftUserList:', newUser);
-            } else if (rightUserList.length < 2 && !this.props.isObserver) {
-                rightUserList.push(newUser);
-                console.log('Added to rightUserList:', newUser);
-            } else {
-                // alert('Observer');
-                // 옵저버로 전환하는 로직 필요 시 추가
-                return null;
-            }
-
-            // 모든 참가자에게 업데이트된 사용자 리스트 전송
-            this.state.session.signal({
-                data: JSON.stringify({ leftUserList, rightUserList }),
-                type: 'userList',
+        return new Promise((resolve) => {
+            this.setState((prevState) => {
+                let leftUserList = [...prevState.leftUserList];
+                let rightUserList = [...prevState.rightUserList];
+    
+                // 이미 리스트에 존재하는지 확인
+                const existsInLeft = leftUserList.some(user => user.connectionId === newUser.connectionId);
+                const existsInRight = rightUserList.some(user => user.connectionId === newUser.connectionId);
+    
+                if (existsInLeft || existsInRight) {
+                    console.log(`User already exists in a group: ${newUser.userName}, Connection ID: ${newUser.connectionId}`);
+                    resolve(null);
+                    return null;
+                }
+    
+                // 동기화된 그룹 할당 로직
+                if (this.props.createdBy === this.props.userName  && !this.props.isObserver) {
+                    leftUserList.push(newUser);
+                    console.log('Added to leftUserList:', newUser);
+                } else if (!this.props.isObserver) {
+                    rightUserList.push(newUser);
+                    console.log('Added to rightUserList:', newUser);
+                } else {
+                    resolve(null);
+                    return null;
+                }
+    
+                // 모든 참가자에게 업데이트된 사용자 리스트 전송
+                this.state.session.signal({
+                    data: JSON.stringify({ leftUserList, rightUserList }),
+                    type: 'userList',
+                });
+    
+                resolve({ leftUserList, rightUserList });
+                return {
+                    leftUserList,
+                    rightUserList,
+                };
+            }, () => {
+                // 상태 업데이트 후 마이크 상태 업데이트
+                this.updateAudioStatus();
             });
-
-            return {
-                leftUserList,
-                rightUserList,
-            };
-        }, () => {
-            // 상태 업데이트 후 마이크 상태 업데이트
-            this.updateAudioStatus();
         });
     }
 
@@ -745,7 +750,7 @@ class OpenviduFinal extends Component {
         } else {
             // 양측 참가자들의 발언이 끝나면 다음 phase로 이동
             newTurn = 'left';
-            newPhase = currentPhase === 1 ? 2 : 1; // Phase를 1과 2 사이에서 변경
+            newPhase = currentPhase === 1 ? 1 : 1; // Phase를 1과 2 사이에서 변경
         }
 
         // 새로운 phase와 turn을 모든 참가자에게 브로드캐스트

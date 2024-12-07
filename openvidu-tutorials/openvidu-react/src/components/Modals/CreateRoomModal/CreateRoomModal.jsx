@@ -43,12 +43,12 @@ const CreateRoomModal = ({ onClose }) => {
         formData.append("thumbnail", thumbnail);
       } else {
         // 기본 이미지를 fetch로 가져오기
-        const response = await fetch("/defaultdebate.jpeg");
+        const response = await fetch("/debate_ex.png");
         if (!response.ok) {
           throw new Error("기본 이미지를 불러올 수 없습니다.");
         }
         const blob = await response.blob();
-        const defaultImage = new File([blob], "defaultdebate.jpeg", { type: blob.type });
+        const defaultImage = new File([blob], "debate_ex.png", { type: blob.type });
         formData.append("thumbnail", defaultImage);
       }
   

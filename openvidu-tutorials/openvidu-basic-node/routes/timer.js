@@ -34,6 +34,7 @@ function timerSocketHandler(io) {
           currentPhase: 1, // 초기 phase
           currentTurn: 'left', // 초기 turn
           readyCount: 0, // 준비된 사용자 수
+          stopRequests: 0, // 종료 요청 상태 추가
         };
       }
 
@@ -64,6 +65,37 @@ function timerSocketHandler(io) {
       console.log(`방 ${roomId}의 준비된 사용자 수: ${room.readyCount}`);
     });
     
+
+    socket.on('toggle_stop_request', ({ roomId, requested }) => {
+      const room = rooms[roomId];
+      if (!room) return;
+
+      // 종료 요청 수 업데이트
+      room.stopRequests += requested ? 1 : -1;
+      room.stopRequests = Math.max(0, room.stopRequests);
+
+      console.log(`방 ${roomId}의 종료 요청 상태: ${room.stopRequests}`);
+
+      // 모든 클라이언트에게 종료 요청 수 업데이트 브로드캐스트
+      timerNamespace.to(roomId).emit('stopRequestUpdate', {
+        stopRequests: room.stopRequests,
+      });
+
+      // 종료 요청이 2명 이상인 경우 타이머 종료
+      if (room.stopRequests >= 2 && room.isRunning) {
+        stopTimer(roomId);
+        timerNamespace.to(roomId).emit('timerFinished', {
+          timeLeft: 0,
+          isRunning: false,
+          currentIndex: room.currentIndex,
+          currentCycle: room.currentCycle,
+          totalCycles: room.cycleCount,
+          currentPhase: room.currentPhase,
+          currentTurn: room.currentTurn,
+        });
+        console.log(`방 ${roomId}의 타이머가 종료되었습니다.`);
+      }
+    });
 
     // 타이머 시작 이벤트 처리
     socket.on('start_timer', (roomId) => {
@@ -210,7 +242,7 @@ function timerSocketHandler(io) {
       } else {
         // 양측 참가자들의 발언이 끝나면 다음 phase로 이동
         newTurn = 'left';
-        newPhase = room.currentPhase === 1 ? 2 : 1; // Phase를 1과 2 사이에서 변경
+        newPhase = room.currentPhase === 1 ? 1 : 1; // Phase를 1과 2 사이에서 변경
       }
 
       // 방의 currentPhase와 currentTurn 업데이트
