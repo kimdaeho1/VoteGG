@@ -51,24 +51,15 @@ const RoomInfo = () => {
           alt={`${roomData.createdby}의 프로필`}
           className="room-info__profile-img"
         />
-        <span className="room-info__live-tag">LIVE</span>
+        <h3 className="room-info__creator">{roomData.createdby}</h3>
       </div>
-      {/* 방 정보 */}
-      <div className="room-info__details">
-        <h2 className="room-info__creator">{roomData.createdby}</h2> {/* 방 생성자 ID 표시 */}
-        <p className="room-info__count">{roomData.memberCount}명이 시청중</p>
-        {/* 태그 추가 */}
-        <div className="room-info__tags">
-          {roomData.tags.length > 0 ? (
-            roomData.tags.map((tag, index) => (
-              <span key={index} className="room-info__tag">
-                #{tag}
-              </span>
-            ))
-          ) : (
-            <span className="room-info__tag--none">태그 없음</span>
-          )}
-        </div>
+      <div className="room-info__profile">
+        <img
+          src={roomData.creatorProfileImage} // 백엔드에서 받은 프로필 이미지 URL 사용
+          alt={`${roomData.createdby}의 프로필`}
+          className="room-info__profile-img"
+        />
+        <h3 className="room-info__creator">{roomData.createdby}</h3>
       </div>
     </div>
   );
