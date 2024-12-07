@@ -148,10 +148,24 @@ const RoomList = () => {
                 <div key={room.roomNumber} className="room-card">
                   <div className="room-image">
                     <img
-                      src={room.thumbnail ? `${room.thumbnail}` : "./poultry.jpg"}
+                      src={room.thumbnail}
                       onClick={() => navigate(`/observer/${room.roomNumber}`)}
                       className="entry-room"
                     />
+                    <div className="hover-buttons">
+                      <button
+                        className="hover-button1"
+                        onClick={() => navigate(`/observer/${room.roomNumber}`)}
+                      >
+                        관전 모드
+                      </button>
+                      <button
+                        className="hover-button2"
+                        onClick={() => navigate(`/room/${room.roomNumber}`)}
+                      >
+                        참여 모드
+                      </button>
+                    </div>
                     {/* <h2 className="room-name">{room.roomname}</h2> */}
                     <p className="room-member-count">{room.memberCount}명</p>
                     <p className="room-live">LIVE</p>
