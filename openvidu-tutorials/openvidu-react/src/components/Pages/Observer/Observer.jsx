@@ -1,19 +1,31 @@
-import React from 'react';
+// Observer.jsx
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './Observer.css';
 import TestChat from '../../Elements/TestChat/TestChat.jsx';
-import OpenviduFinal from '../../Elements/openvidu/OpenviduFinal.js'; // OpenviduFinal 가져오기
-import Timer from '../../Elements/openvidu/Timer/Timer';
+import OpenviduFinal from '../../Elements/openvidu/OpenviduFinal.js';
+import useSocket from '../../useSocket';
 import RoomControl from '../../Elements/RoomControl/RoomControl.jsx';
 
 const Observer = () => {
   const { roomNumber } = useParams();
+  const socket = useSocket("/timer", roomNumber);
+  const [isOpenviduActive, setIsOpenviduActive] = useState(false);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('openviduActive', (isActive) => {
+        setIsOpenviduActive(isActive);
+      });
+    }
+  }, [socket]);
+
   return (
     <div className="room">
       <div
         className="home-background"
         style={{
-          backgroundImage: 'url("/eggbackground.jpg")', // 경로 문제 해결된 상태에서 이 방식을 사용
+          backgroundImage: 'url("/eggbackground.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -25,23 +37,28 @@ const Observer = () => {
           zIndex: -1,
           minHeight: '790px',
           maxHeight: '790px',
-          // opacity: '60%',
         }}
       ></div>
       <div className='home-background2' />
       <div className='home-background3' />
       <div className="left-side">
-        <OpenviduFinal
-          sessionId={roomNumber}
-          userName="Observer"
-          isObserver={true} // 관전자 모드 활성화
-          subs={false}
-        />
+        {isOpenviduActive ? (
+          <OpenviduFinal
+            sessionId={roomNumber}
+            userName="Observer"
+            isObserver={true}
+            subs={false}
+          />
+        ) : (
+          <div className="waiting-message">
+            대기 중입니다...
+          </div>
+        )}
         <div className='emptyspace'>.</div>
         <RoomControl isObserver={true} />
       </div>
       <div className="right-side">
-        <TestChat roomId={roomNumber} isObserver={true} /> {/* 옵저버 페이지는 isObserver=true */}
+        <TestChat roomId={roomNumber} isObserver={true} />
       </div>
     </div>
   );

@@ -181,17 +181,6 @@ const Timer = ({ isObserver }) => {
           {!isObserver && (
             <div>
               <button
-                className="start-button"
-                onClick={handleStart}
-                disabled={
-                  isRunning || // 타이머 실행 중
-                  timeLeft <= 0 || // 시간이 없을 때
-                  currentCycle >= totalCycles // 모든 사이클 완료 시
-                }
-              >
-                토론 시작
-              </button>
-              <button
                 className="stop-button"
                 onClick={handleStop}
                 disabled={!isRunning} // 타이머가 실행 중일 때만 가능
