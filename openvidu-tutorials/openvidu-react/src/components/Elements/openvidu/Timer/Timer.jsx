@@ -49,13 +49,26 @@ const Timer = ({ isObserver }) => {
       setCurrentIndex(currentIndex); // 업데이트
     };
 
-    // 타이머 종료 이벤트 받기
-    const handleTimerFinished = (data) => {
-      console.log("타이머가 완료되었습니다. 수신된 데이터:", data);
-      setIsRunning(false);
-      setTimerFinished(true);
-      setResultData(data || {}); // data가 없을 경우 빈 객체로 설정
-    };
+  // 타이머 종료 이벤트 받기
+  const handleTimerFinished = (data) => {
+    console.log("타이머가 완료되었습니다. 수신된 데이터:", data);
+    setIsRunning(false);
+    setTimerFinished(true);
+    setResultData(data || {}); // data가 없을 경우 빈 객체로 설정
+
+    // LocalStorage에서 maxViewers 값을 가져옴
+    const maxViewers = localStorage.getItem("maxViewers");
+
+    // maxViewers를 서버로 전송하거나 추가 처리
+    if (maxViewers) {
+      console.log("최고 시청자 수:", maxViewers);
+      // 필요하면 resultData에 추가하여 처리
+      setResultData((prevData) => ({
+        ...prevData,
+        maxViewers: parseInt(maxViewers, 10), // 숫자로 변환
+      }));
+    }
+  };
 
     // phaseChange 이벤트 받기
     const handlePhaseChange = (data) => {

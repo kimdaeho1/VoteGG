@@ -1,53 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import './HotTopics.css'; // 커스텀 CSS 파일 추가
+import React, { useEffect, useState } from "react";
+import "./HotTopics.css"; // 커스텀 CSS 파일 추가
 
 const HotTopics = () => {
-  const [policyNews, setPolicyNews] = useState([]);
-  const [gameRankings, setGameRankings] = useState([]);
-  const [billboardChart, setBillboardChart] = useState([]);
-  const [cgvMovies, setCgvMovies] = useState([]);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [tagCounts, setTagCounts] = useState([]); // 인기 태그 저장
+  const [popularDebates, setPopularDebates] = useState({}); // 태그별 인기 토론 저장
+  const [activeIndex, setActiveIndex] = useState(0); // 현재 활성화된 태그 인덱스
   const topicsLength = 4; // 주제의 개수
   const maxTitleLength = 30; // 제목의 최대 글자 수 설정
 
   useEffect(() => {
-    // 각 API에서 데이터 가져오기
-    const fetchPolicyNews = async () => {
-      const response = await fetch('/api/news/policy-news');
-      const data = await response.json();
-      setPolicyNews(data);
+    // API에서 데이터 가져오기
+    const fetchPopularTopics = async () => {
+      try {
+        const response = await fetch("/api/debate-result/popular-topics");
+        const data = await response.json();
+        console.log("API 응답 데이터:", data); // 응답 데이터 확인
+        setTagCounts(data.popularTags); // 인기 태그 저장
+        setPopularDebates(data.popularDebates); // 태그별 인기 토론 저장
+      } catch (error) {
+        console.error("HotTopics 데이터 가져오기 실패:", error);
+      }
     };
 
-    const fetchGameRankings = async () => {
-      const response = await fetch('/api/news/game-rankings');
-      const data = await response.json();
-      setGameRankings(data);
-    };
-
-    const fetchBillboardChart = async () => {
-      const response = await fetch('/api/news/billboard-chart');
-      const data = await response.json();
-      setBillboardChart(data);
-    };
-
-    const fetchCgvMovies = async () => {
-      const response = await fetch('/api/news/cgv-movies');
-      const data = await response.json();
-      setCgvMovies(data);
-    };
-
-    // 데이터 요청
-    fetchPolicyNews();
-    fetchGameRankings();
-    fetchBillboardChart();
-    fetchCgvMovies();
+    fetchPopularTopics();
   }, []);
 
   useEffect(() => {
     // 6초마다 자동으로 주제 변경
     const interval = setInterval(() => {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % topicsLength); // 4개 주제 순환
-    }, 6000); // 6초로 변경
+      setActiveIndex((prevIndex) => (prevIndex + 1) % topicsLength); // 4개 태그 순환
+    }, 6000); // 6초로 설정
 
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 interval 제거
   }, []);
@@ -57,73 +39,39 @@ const HotTopics = () => {
     return data.map((item, index) => {
       // 제목이 최대 길이를 초과하면 자르고 말줄임표 추가
       const shortenedTitle =
-        item.title.length > maxTitleLength
-          ? item.title.substring(0, maxTitleLength) + '...'
-          : item.title;
+        item.roomName.length > maxTitleLength
+          ? item.roomName.substring(0, maxTitleLength) + "..."
+          : item.roomName;
 
       return (
-        <div className="topic-item" key={index} style={{ marginBottom: '20px' }}>
+        <div className="topic-item" key={index} style={{ marginBottom: "20px" }}>
           <div className="topic-header">
             <span className="topic-rank">{index + 1}.</span> {/* 순위 표시 */}
-            <a className="topic-title" href={item.link} target="_blank" rel="noopener noreferrer">
-              {shortenedTitle} {/* 제목 표시 */}
-            </a>
+            <span className="topic-title">{shortenedTitle}</span>
           </div>
         </div>
       );
     });
   };
 
-  const topics = [
-    {
-      title: '뉴스 토픽',
-      icon: '/newspaper.png',
-      data: policyNews,
-      className: 'news-topic', // 클래스 이름
-    },
-    {
-      title: '게임 토픽',
-      icon: '/controller.png',
-      data: gameRankings,
-      className: 'game-topic', // 클래스 이름
-    },
-    {
-      title: '음악 토픽',
-      icon: '/music.png',
-      data: billboardChart,
-      className: 'music-topic', // 클래스 이름
-    },
-    {
-      title: '영화 토픽',
-      icon: '/movie.png',
-      data: cgvMovies,
-      className: 'movie-topic', // 클래스 이름
-    },
-  ];
-
   return (
-    <div className="container mt-5 hot-topics" style={{ height: '450px' }}>
-      {/* <h3 className={`text-center ${topics[activeIndex].className}-title`}>Hot Topics</h3> */}
+    <div className="container mt-5 hot-topics" style={{ height: "450px" }}>
       <div className="topics-slider">
-        {topics.map((topic, index) => (
-          
+        {tagCounts.map((tag, index) => (
           <div
             key={index}
-            className={`topic-content ${topic.className} ${
-              index === activeIndex ? 'active' : ''
-            }`}
+            className={`topic-content ${index === activeIndex ? "active" : ""}`}
           >
             <div className="d-flex align-items-center">
-              <img
-                src={topic.icon}
-                alt={`${topic.title} Icon`}
-                style={{ width: '50px', height: '50px', borderRadius: '50%' }}
-              />
               <div className="ms-3">
-                <h3>{topic.title}</h3>
+                <h3>#{tag}</h3>
               </div>
             </div>
-            {topic.data.length > 0 ? renderRankedItems(topic.data) : <div>Loading...</div>}
+            {popularDebates[tag]?.length > 0 ? (
+              renderRankedItems(popularDebates[tag])
+            ) : (
+              <div>Loading...</div>
+            )}
           </div>
         ))}
       </div>

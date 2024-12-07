@@ -27,6 +27,7 @@ const userRouter = require('./routes/user');
 const newsRouter = require('./routes/newsRouter'); // 정책 뉴스 라우터
 const roomRouter = require('./routes/room'); // 룸생성 라우터
 const invitationRouter = require('./routes/invitation');
+const debateResultRouter = require("./routes/debateResult"); //토론 결과 라우터
 app.use(express.json());
 
 
@@ -37,6 +38,8 @@ app.use('/api/user', userRouter);
 app.use('/api/news', newsRouter);
 app.use('/api/room', roomRouter); // 정책 뉴스 라우터
 app.use('/api/invitation', invitationRouter);
+app.use("/api/debate-result", debateResultRouter); //토론 결과 가져오기
+
 ///
 
 // Enable CORS support

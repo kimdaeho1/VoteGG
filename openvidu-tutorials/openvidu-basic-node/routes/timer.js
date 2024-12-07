@@ -6,6 +6,8 @@ const rooms = {}; // 방별 타이머 정보를 저장할 객체
 const User = require("../schemas/user");
 const Room = require("../schemas/room");
 
+const DebateResult = require("../schemas/debateResult");
+
 function timerSocketHandler(io) {
   // Namespace 혹은 Path 설정
   const timerNamespace = io.of('/timer');
@@ -201,6 +203,7 @@ function timerSocketHandler(io) {
     if (!room) return;
 
     try {
+
       // roomId에 해당하는 Room 문서 가져오기
       const roomDocument = await Room.findOne({ roomNumber: roomId });
 
@@ -211,7 +214,7 @@ function timerSocketHandler(io) {
 
       const participantsArray = Array.from(roomDocument.participant.entries());
 
-      if (participantsArray.length < 4) {
+      if (participantsArray.length < 2) {
         console.log("참가자가 부족합니다. 최소 4명이 필요합니다.");
         // 클라이언트에게 에러 메시지 전송
         timerNamespace.to(roomId).emit('timerFinished', { error: "참가자가 부족합니다. 최소 4명이 필요합니다." });
@@ -261,10 +264,21 @@ function timerSocketHandler(io) {
       for (const topScorer of topScorers) {
         topScorer.firstPlaceWins += 1;
       }
-
+      
       // DB 업데이트
       await Promise.all(users.map((user) => user.save()));
 
+      
+      // 토론 결과 저장
+      const debateResult = new DebateResult({
+        roomName: roomDocument.roomname,
+        tags: roomDocument.tags,
+        maxViewers,
+        participantsArray: Array.from(roomDocument.participant.entries()), // Map을 배열로 저장
+      });
+      
+      await debateResult.save();
+      console.log("토론 결과가 성공적으로 저장되었습니다.");
 
       console.log("투표 결과가 성공적으로 처리되었습니다.");
 // =======
