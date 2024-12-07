@@ -123,7 +123,7 @@ const Room = () => {
       <div className='home-background2' />
       <div className='home-background3' />
       <div className="left-side">
-      <OpenviduFinal sessionId={roomNumber} userName={userId} createdBy={createdBy} />
+      <OpenviduFinal sessionId={roomNumber} userName={userId} createdBy={createdBy} isstart={isOpenviduActive}/>
         {isOpenviduActive ? (
           <div></div>
         ) : (
