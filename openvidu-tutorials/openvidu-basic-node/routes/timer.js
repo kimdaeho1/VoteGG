@@ -6,6 +6,8 @@ const rooms = {}; // 방별 타이머 정보를 저장할 객체
 const User = require("../schemas/user");
 const Room = require("../schemas/room");
 
+const DebateResult = require("../schemas/debateResult");
+
 function timerSocketHandler(io) {
   // Namespace 혹은 Path 설정
   const timerNamespace = io.of('/timer');
@@ -22,15 +24,16 @@ function timerSocketHandler(io) {
       if (!rooms[roomId]) {
         // 타이머 초기 설정
         rooms[roomId] = {
-          durations: [5, 180], // 타이머 단계들의 지속 시간 (초)
-          cycleCount: 5, // 총 사이클 수
+          durations: [300], // 타이머 단계들의 지속 시간 (초)
+          cycleCount: 1, // 총 사이클 수
           currentCycle: 0, // 현재 사이클
           currentIndex: 0, // 현재 단계 인덱스
-          timeLeft: 5, // 초기 남은 시간
+          timeLeft: 300, // 초기 남은 시간
           isRunning: false,
           timer: null, // 타이머 객체
           currentPhase: 1, // 초기 phase
           currentTurn: 'left', // 초기 turn
+          readyCount: 0, // 준비된 사용자 수
         };
       }
 
@@ -47,11 +50,28 @@ function timerSocketHandler(io) {
       });
     });
 
+    socket.on('toggle_ready', ({ roomId, isReady }) => {
+      const room = rooms[roomId];
+      if (!room) return;
+    
+      // 준비 상태 업데이트
+      room.readyCount += isReady ? 1 : -1;
+      room.readyCount = Math.max(0, room.readyCount); // 음수로 가지 않도록 보장
+    
+      // 모든 클라이언트에게 준비 상태 업데이트 전송
+      timerNamespace.to(roomId).emit('update_ready_count', room.readyCount);
+    
+      console.log(`방 ${roomId}의 준비된 사용자 수: ${room.readyCount}`);
+    });
+    
+
     // 타이머 시작 이벤트 처리
     socket.on('start_timer', (roomId) => {
       const room = rooms[roomId];
       if (room && !room.isRunning && room.currentCycle < room.cycleCount) {
         startTimer(roomId);
+        // 모든 클라이언트에게 Openvidu 활성화 알림
+        timerNamespace.to(roomId).emit('openviduActive', true);
       }
     });
 
@@ -83,6 +103,26 @@ function timerSocketHandler(io) {
         handleVotingAndResults(roomId);
       }
     });
+
+    // 타이머 시간 설정 이벤트 처리
+    socket.on('set_timer_duration', ({ roomId, duration }) => {
+      const room = rooms[roomId];
+      if (room) {
+        room.durations[0] = duration; // 첫 번째 단계의 지속 시간을 설정
+        room.timeLeft = duration; // 남은 시간도 업데이트
+        console.log(`방 ${roomId}의 타이머가 ${duration}초로 설정되었습니다.`);
+
+        // 모든 클라이언트에게 업데이트된 타이머 정보 전송
+        timerNamespace.to(roomId).emit('timerUpdate', {
+          timeLeft: room.timeLeft,
+          isRunning: room.isRunning,
+          currentIndex: room.currentIndex,
+          currentCycle: room.currentCycle,
+          totalCycles: room.cycleCount,
+        });
+      }
+    });
+
 
     // 클라이언트 연결 해제 시 처리
     socket.on('disconnect', () => {
@@ -201,6 +241,7 @@ function timerSocketHandler(io) {
     if (!room) return;
 
     try {
+
       // roomId에 해당하는 Room 문서 가져오기
       const roomDocument = await Room.findOne({ roomNumber: roomId });
 
@@ -211,7 +252,7 @@ function timerSocketHandler(io) {
 
       const participantsArray = Array.from(roomDocument.participant.entries());
 
-      if (participantsArray.length < 4) {
+      if (participantsArray.length < 1) {
         console.log("참가자가 부족합니다. 최소 4명이 필요합니다.");
         // 클라이언트에게 에러 메시지 전송
         timerNamespace.to(roomId).emit('timerFinished', { error: "참가자가 부족합니다. 최소 4명이 필요합니다." });
@@ -261,10 +302,21 @@ function timerSocketHandler(io) {
       for (const topScorer of topScorers) {
         topScorer.firstPlaceWins += 1;
       }
-
+      
       // DB 업데이트
       await Promise.all(users.map((user) => user.save()));
 
+      
+      // 토론 결과 저장
+      const debateResult = new DebateResult({
+        roomName: roomDocument.roomname,
+        tags: roomDocument.tags,
+        maxViewers : roomDocument.maxViewers,
+        participantsArray: Array.from(roomDocument.participant.entries()), // Map을 배열로 저장
+      });
+      
+      await debateResult.save();
+      console.log("토론 결과가 성공적으로 저장되었습니다.");
 
       console.log("투표 결과가 성공적으로 처리되었습니다.");
 // =======

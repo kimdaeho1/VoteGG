@@ -25,7 +25,7 @@ const RoomInfo = () => {
         console.error("방 정보 가져오기 오류:", error);
         setRoomData({
           roomname: "Unknown Room",
-          memberCount: 9999,
+          memberCount: 0,
           createdby: "Unknown Creator",
           creatorProfileImage: "/default-profile.png",
           tags: [],
@@ -35,6 +35,12 @@ const RoomInfo = () => {
 
     fetchRoomData();
   }, [roomNumber]);
+
+  useEffect(() => {
+    if (roomData.memberCount > (localStorage.getItem("maxViewers") || 0)) {
+      localStorage.setItem("maxViewers", roomData.memberCount);
+    }
+  }, [roomData.memberCount]);
 
   return (
     <div className="room-naming">

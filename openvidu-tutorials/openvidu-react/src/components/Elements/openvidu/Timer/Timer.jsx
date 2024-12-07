@@ -49,13 +49,29 @@ const Timer = ({ isObserver }) => {
       setCurrentIndex(currentIndex); // 업데이트
     };
 
-    // 타이머 종료 이벤트 받기
-    const handleTimerFinished = (data) => {
-      console.log("타이머가 완료되었습니다. 수신된 데이터:", data);
-      setIsRunning(false);
-      setTimerFinished(true);
-      setResultData(data || {}); // data가 없을 경우 빈 객체로 설정
-    };
+  // 타이머 종료 이벤트 받기
+  const handleTimerFinished = (data) => {
+    console.log("타이머가 완료되었습니다. 수신된 데이터:", data);
+    setIsRunning(false);
+    setTimerFinished(true);
+    setResultData(data || {}); // data가 없을 경우 빈 객체로 설정
+  
+    // LocalStorage에서 maxViewers 값을 가져옴
+    const maxViewers = localStorage.getItem("maxViewers");
+  
+    if (maxViewers) {
+      console.log("최고 시청자 수:", maxViewers);
+  
+      // 서버에 maxViewers를 업데이트하는 소켓 이벤트 전송
+      socket.emit("updateMaxViewers", {
+        roomId: roomNumber,
+        maxViewers: parseInt(maxViewers, 10),
+      });
+  
+      // LocalStorage 초기화
+      localStorage.removeItem("maxViewers");
+    }
+  };
 
     // phaseChange 이벤트 받기
     const handlePhaseChange = (data) => {
@@ -164,17 +180,6 @@ const Timer = ({ isObserver }) => {
           </span>
           {!isObserver && (
             <div>
-              <button
-                className="start-button"
-                onClick={handleStart}
-                disabled={
-                  isRunning || // 타이머 실행 중
-                  timeLeft <= 0 || // 시간이 없을 때
-                  currentCycle >= totalCycles // 모든 사이클 완료 시
-                }
-              >
-                토론 시작
-              </button>
               <button
                 className="stop-button"
                 onClick={handleStop}
