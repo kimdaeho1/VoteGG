@@ -376,7 +376,7 @@ class OpenviduFinal extends Component {
                     throw error;
                 }
             }
-            
+  
             // 캔버스 드래그 앤 드롭 이벤트 처리
             eventCanvas.addEventListener('dragover', (e) => {
                 e.preventDefault();
@@ -393,6 +393,17 @@ class OpenviduFinal extends Component {
                     try {
                         // 이미지 파일을 S3에 업로드
                         const imageUrl = await uploadImageToS3(file);
+
+                        // 마우스 좌표를 스트리밍 화면의 좌표로 변환
+                        const rect = eventCanvas.getBoundingClientRect();
+                        const mouseX = e.clientX - rect.left; // 캔버스 내부 X 좌표
+                        const mouseY = e.clientY - rect.top;  // 캔버스 내부 Y 좌표
+
+                        const scaleX = hiddenCanvas.width / eventCanvas.width;
+                        const scaleY = hiddenCanvas.height / eventCanvas.height;
+
+                        overlayX = mouseX * scaleX; // 스트리밍 해상도 기준 X 좌표
+                        overlayY = mouseY * scaleY; // 스트리밍 해상도 기준 Y 좌표
                         
                         // 업로드된 이미지 URL로 overlayImage를 변경
                         overlayImage.crossOrigin = 'Anonymous'; // 크로스오리진 설정
