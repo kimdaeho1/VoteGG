@@ -45,7 +45,7 @@ const roomSchema = new mongoose.Schema({
     default: 0,
   },
 
-  highestViewers: {
+  maxViewers : {
     type: Number,
     default: 0,
   },

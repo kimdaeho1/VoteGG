@@ -55,18 +55,21 @@ const Timer = ({ isObserver }) => {
     setIsRunning(false);
     setTimerFinished(true);
     setResultData(data || {}); // data가 없을 경우 빈 객체로 설정
-
+  
     // LocalStorage에서 maxViewers 값을 가져옴
     const maxViewers = localStorage.getItem("maxViewers");
-
-    // maxViewers를 서버로 전송하거나 추가 처리
+  
     if (maxViewers) {
       console.log("최고 시청자 수:", maxViewers);
-      // 필요하면 resultData에 추가하여 처리
-      setResultData((prevData) => ({
-        ...prevData,
-        maxViewers: parseInt(maxViewers, 10), // 숫자로 변환
-      }));
+  
+      // 서버에 maxViewers를 업데이트하는 소켓 이벤트 전송
+      socket.emit("updateMaxViewers", {
+        roomId: roomNumber,
+        maxViewers: parseInt(maxViewers, 10),
+      });
+  
+      // LocalStorage 초기화
+      localStorage.removeItem("maxViewers");
     }
   };
 

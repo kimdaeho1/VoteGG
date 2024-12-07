@@ -214,7 +214,7 @@ function timerSocketHandler(io) {
 
       const participantsArray = Array.from(roomDocument.participant.entries());
 
-      if (participantsArray.length < 2) {
+      if (participantsArray.length < 1) {
         console.log("참가자가 부족합니다. 최소 4명이 필요합니다.");
         // 클라이언트에게 에러 메시지 전송
         timerNamespace.to(roomId).emit('timerFinished', { error: "참가자가 부족합니다. 최소 4명이 필요합니다." });
@@ -273,7 +273,7 @@ function timerSocketHandler(io) {
       const debateResult = new DebateResult({
         roomName: roomDocument.roomname,
         tags: roomDocument.tags,
-        maxViewers,
+        maxViewers : roomDocument.maxViewers,
         participantsArray: Array.from(roomDocument.participant.entries()), // Map을 배열로 저장
       });
       
