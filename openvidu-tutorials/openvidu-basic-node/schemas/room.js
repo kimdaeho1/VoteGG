@@ -15,6 +15,10 @@ const roomSchema = new mongoose.Schema({
     type: String,
     required: true },
 
+  other: {
+    type: String,
+  },
+
   invitees: {
     type: [String],
     default: [] },

@@ -26,12 +26,20 @@ class OpenviduFinal extends Component {
             createdBy : this.props.createdBy  || 'Unknown',
             currentPhase: 1,
             currentTurn: 'left',
+            leftUserArgument: '',
+            rightUserArgument: '',
+            isLeftUserEditing: false,
+            isRightUserEditing: false,
         };
 
         this.joinSession = this.joinSession.bind(this);
         this.leaveSession = this.leaveSession.bind(this);
         this.startScreenShare = this.startScreenShare.bind(this);
         this.stopScreenShare = this.stopScreenShare.bind(this);
+        this.toggleLeftUserEdit = this.toggleLeftUserEdit.bind(this);
+        this.toggleRightUserEdit = this.toggleRightUserEdit.bind(this);
+        this.handleArgumentChange = this.handleArgumentChange.bind(this);
+        this.sendArgumentSignal = this.sendArgumentSignal.bind(this);
     }
 
     componentDidMount() {
@@ -68,6 +76,28 @@ class OpenviduFinal extends Component {
 
         window.session = session;
 
+        // 기존 주장 데이터를 새로운 사용자가 받도록 처리 추가
+        session.on('connectionCreated', (event) => {
+            if (event.connection.connectionId !== session.connection.connectionId) {
+                session.signal({
+                    data: JSON.stringify({
+                        leftUserList: this.state.leftUserList,
+                        rightUserList: this.state.rightUserList,
+                        leftUserArgument: this.state.leftUserArgument,
+                        rightUserArgument: this.state.rightUserArgument,
+                    }),
+                    to: [event.connection],
+                    type: 'userList',
+                });
+                console.log(`Sent user list to newly connected user: ${event.connection.connectionId}`);
+            }
+        });
+
+        session.on('signal:argumentUpdate', (event) => {
+            const data = JSON.parse(event.data);
+            const { argumentKey, argumentValue } = data;
+            this.setState({ [argumentKey]: argumentValue });
+        });
 
         session.on("signal:phaseChange", (event) => {
             const data = JSON.parse(event.data);
@@ -94,17 +124,21 @@ class OpenviduFinal extends Component {
                 return {
                     leftUserList: mergedLeftUserList,
                     rightUserList: mergedRightUserList,
+                    leftUserArgument: data.leftUserArgument || '',
+                    rightUserArgument: data.rightUserArgument || '',
                 };
             });
         });
 
         // Handle requestUserList signal
         session.on('signal:requestUserList', (event) => {
-            // 자신의 사용자 리스트를 요청한 참가자에게 전송
+            // 자신의 사용자 리스트와 주장 텍스트를 요청한 참가자에게 전송
             session.signal({
                 data: JSON.stringify({
                     leftUserList: this.state.leftUserList,
                     rightUserList: this.state.rightUserList,
+                    leftUserArgument: this.state.leftUserArgument,
+                    rightUserArgument: this.state.rightUserArgument,
                 }),
                 to: [event.from],
                 type: 'userList',
@@ -541,6 +575,51 @@ class OpenviduFinal extends Component {
         }
     }
 
+    // Left 사용자 편집 모드 토글
+    toggleLeftUserEdit() {
+        this.setState(
+            { isLeftUserEditing: !this.state.isLeftUserEditing },
+            () => {
+                // 편집 모드 종료 시 다른 클라이언트에 주장 전송
+                if (!this.state.isLeftUserEditing) {
+                    this.sendArgumentSignal('leftUserArgument', this.state.leftUserArgument);
+                }
+            }
+        );
+    }
+
+    // Right 사용자 편집 모드 토글
+    toggleRightUserEdit() {
+        this.setState(
+            { isRightUserEditing: !this.state.isRightUserEditing },
+            () => {
+                // 편집 모드 종료 시 다른 클라이언트에 주장 전송
+                if (!this.state.isRightUserEditing) {
+                    this.sendArgumentSignal('rightUserArgument', this.state.rightUserArgument);
+                }
+            }
+        );
+    }
+
+    // 주장 입력 변경 처리
+    handleArgumentChange(event, userSide) {
+        this.setState({ [userSide]: event.target.value });
+    }
+
+    // 주장 변경 시그널 전송
+    sendArgumentSignal(argumentKey, argumentValue) {
+        const { session } = this.state;
+        if (session) {
+            session.signal({
+                data: JSON.stringify({ argumentKey, argumentValue }),
+                type: 'argumentUpdate',
+            });
+        }
+    }
+    
+
+
+
     render() {
         const { mainStreamManager, subscribers, isSharingScreen, leftUserList, rightUserList, currentPhase, currentTurn, session } = this.state;
 
@@ -548,7 +627,7 @@ class OpenviduFinal extends Component {
         const allStreamManagers = [];
         // 본인의 connectionId
         const localConnectionId = session?.connection?.connectionId;
-
+        const { leftUserArgument,rightUserArgument,isLeftUserEditing,isRightUserEditing,} = this.state;
         // 본인의 스트림 매니저 추가
         if (mainStreamManager && localConnectionId) {
             allStreamManagers.push({
@@ -598,79 +677,81 @@ class OpenviduFinal extends Component {
         // 현재 사용자가 발언자인지 확인
         const isCurrentUserSpeaker = localConnectionId === currentSpeakerConnectionId;
 
-
         return (
             <div>
                 <div className="openvidu-final">
                     <div className="video-container">
-                        {/* 왼쪽 참가자 */}
+                        {/* Left User Video */}
                         <div className={`left-video ${currentTurn === 'left' && currentLeftUser ? 'active-speaker' : 'none-active-speaker'}`}>
                             {currentLeftUser ? (
                                 <div className="user-video">
                                     <UserVideoComponent
                                         streamManager={currentLeftUser.streamManager}
-                                        localConnectionId={localConnectionId} // 로컬 connectionId 전달
+                                        localConnectionId={localConnectionId}
                                     />
                                     <p className="user-name">{currentLeftUser.userName} 님</p>
                                     {currentTurn === 'left' && <img className="active-speaker-image" src="/resources/images/radio.png" alt="Active Speaker" />}
+                                    {/* LeftUser의 주장 표시/입력 공간 */}
+                                    <div className="argument-section-bottom">
+                                        {isLeftUserEditing ? (
+                                            <textarea
+                                                placeholder="주장을 입력하세요"
+                                                value={leftUserArgument}
+                                                onChange={(e) => this.handleArgumentChange(e, 'leftUserArgument')}
+                                            />
+                                        ) : (
+                                            <p>{leftUserArgument || '주장입력'}</p>
+                                        )}
+
+                                        {!this.props.isObserver && localConnectionId === currentLeftUser?.connectionId && (
+                                        <button onClick={this.toggleRightUserEdit}>
+                                            {isRightUserEditing ? '저장' : '작성'}
+                                        </button>
+                                        )}
+                                        
+                                    </div>
                                 </div>
                             ) : (
                                 <img className="empty-slot" src="/unknown.png" />
                             )}
                         </div>
-
-                        {/* 오른쪽 참가자 */}
+    
+                        {/* Right User Video */}
                         <div className={`right-video ${currentTurn === 'right' && currentRightUser ? 'active-speaker' : 'none-active-speaker'}`}>
                             {currentRightUser ? (
                                 <div className="user-video">
                                     <UserVideoComponent
                                         streamManager={currentRightUser.streamManager}
-                                        localConnectionId={localConnectionId} // 로컬 connectionId 전달
+                                        localConnectionId={localConnectionId}
                                     />
                                     <p className="user-name">{currentRightUser.userName} 님</p>
                                     {currentTurn === 'right' && <img className="active-speaker-image" src="/resources/images/radio.png" alt="Active Speaker" />}
+                                    {/* RightUser의 주장 표시/입력 공간 */}
+                                    <div className="argument-section-bottom">
+                                        {isRightUserEditing ? (
+                                            <textarea
+                                                placeholder="주장을 입력하세요"
+                                                value={rightUserArgument}
+                                                onChange={(e) => this.handleArgumentChange(e, 'rightUserArgument')}
+                                            />
+                                        ) : (
+                                            <p>{rightUserArgument || '주장입력'}</p>
+                                        )}
+
+                                        {!this.props.isObserver && localConnectionId === currentRightUser?.connectionId && (
+                                        <button onClick={this.toggleRightUserEdit}>
+                                            {isRightUserEditing ? '저장' : '작성'}
+                                        </button>
+                                        )}
+
+
+                                    </div>
                                 </div>
                             ) : (
                                 <img className="empty-slot" src="/unknown.png" />
                             )}
                         </div>
                     </div>
-                </div>
-                <div>
-                    {/* 화면 공유 및 방 나가기 버튼 */}
-                    {!this.props.isObserver && (
-                        <div className="button-container">
-                            <button
-                                className="screen-share-button"
-                                onClick={isSharingScreen ? this.stopScreenShare : this.startScreenShare}
-                                style={{ background: "none", border: "none", padding: 0 }}
-                            >
-                                <img
-                                    src={isSharingScreen ? "/Buttonimg/stopshare.png" : "/Buttonimg/share.png"}
-                                    alt={isSharingScreen ? "Stop Screen Sharing" : "Start Screen Sharing"}
-                                    style={{ width: "50px", height: "50px" }}
-                                />
-                            </button>
-                            {isCurrentUserSpeaker ? (
-                                <div className="phase-controls">
-                                    <img
-                                        src="/Buttonimg/leaveroom.png" // 발언자일 때 보일 이미지 경로
-                                        alt="다음 차례"
-                                        onClick={this.handleTurnChange} // 클릭 시 handleTurnChange 호출
-                                        className="phase-controls__button phase-controls__button--active" // 스타일 추가
-                                    />
-                                </div>
-                            ) : (
-                                <div className="phase-controls">
-                                    <img
-                                        src="/Buttonimg/leaveroom.png" // 발언자가 아닐 때 보일 이미지 경로
-                                        alt="기다리는 중."
-                                        className="phase-controls__button phase-controls__button--inactive" // 스타일 추가
-                                    />
-                                </div>
-                            )}
-                        </div>
-                    )}
                 </div>
             </div>
         );
