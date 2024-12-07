@@ -80,7 +80,7 @@ const Live = () => {
           ))}
         </div>
         <img
-          src="./vs.png" // 임시 이미지 경로
+          src="./vs.png" // 임시 이미지 경로입니다
           alt="vsimg"
           className="vsimg"
         />
