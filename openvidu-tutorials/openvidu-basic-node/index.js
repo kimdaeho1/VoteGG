@@ -1,10 +1,19 @@
-require("dotenv").config(!!process.env.CONFIG ? { path: process.env.CONFIG } : {});
+require("dotenv").config();
 var express = require("express");
 var bodyParser = require("body-parser");
 var http = require("http");
 var OpenVidu = require("openvidu-node-client").OpenVidu;
 var cors = require("cors");
 var app = express();
+
+const AWS = require('aws-sdk');
+const s3 = new AWS.S3();
+
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
+});
 
 const { Server } = require('socket.io');
 const mongoose = require('mongoose');
@@ -43,6 +52,7 @@ app.use('/api/invitation', invitationRouter);
 app.use(
   cors({
     origin: "*",
+    methods: ['GET', 'POST', 'PUT'], // 허용할 HTTP 메서드
   })
 );
 
@@ -128,6 +138,33 @@ app.post("/api/sessions/:sessionId/connections", async (req, res) => {
     var connection = await session.createConnection(req.body);
     res.send(connection.token);
   }
+});
+
+app.post('/api/generate-presigned-url', (req, res) => {
+  const { filename, contentType } = req.body;
+
+  if (!filename || !contentType) {
+      return res.status(400).json({ error: 'Filename and content type are required' });
+  }
+
+  console.log('AWS_BUCKET_NAME:', process.env.AWS_BUCKET_NAME);
+  const params = {
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Key: `uploads/images/${Date.now()}-${req.body.filename}`,
+      Expires: 60, // URL 유효 시간 (초)
+      ContentType: req.body.contentType,
+      ACL: 'public-read'
+  };
+
+  s3.getSignedUrl('putObject', params, (err, url) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      res.set('Access-Control-Allow-Origin', '*');
+      res.set('Access-Control-Allow-Methods', 'GET, POST, PUT');
+      res.set('Access-Control-Allow-Headers', 'Content-Type');
+      res.json({ url, key: params.Key });
+  });
 });
 
 process.on('uncaughtException', err => console.error(err));
