@@ -1,7 +1,8 @@
 .control-wrap{
   /* background-color: #f8f8f8;  */
-  height: 90%;
-  margin-right: 10px;
+  position: absolute; /* or relative */
+  /* height: 90%; */
+  left: 0;
 }
 
 .roomcontrol {
@@ -13,22 +14,27 @@
   /* border-radius: 20px; */
 }
 
-.aa {
-  width: 60%;
-  /* background-color: #ffffff; */
-  height: 100%;
-}
-
-.bb {
-  width: 40%;
-  /* background-color: #ffffff; */
-  /* height: 100%; */
-  margin: 0 auto;
-}
-
 .room-title{
   margin-top: 10px;
   margin-bottom: -20px;
   margin-left: 10px;
 }
 
+.roomcontrol-container {
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 (필요하면 추가) */
+  width: 100%; /* 부모 요소의 전체 너비 */
+  height: 100vh; 
+  position: relative; /* 다른 요소에 영향을 받지 않도록 */
+}
+
+.room-timer {
+  position: absolute; /* 독립적으로 배치 */
+  left: 50%; /* 가로 중앙 기준 */
+  transform: translateX(-50%); /* 중앙 정렬 보정 */
+  background-color: #f0f0f0; /* 배경색 (필요 시 변경) */
+  padding: 10px 20px;
+  border-radius: 5px; /* 모서리 둥글게 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+}

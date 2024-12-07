@@ -55,14 +55,15 @@
 .room-info__count {
   font-size: 14px;
   color: #555;
-  margin: 4px 0;
+  margin: 12px 12px;
 }
 
 /* 태그 스타일 */
 .room-info__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  /* gap: 8px; */
+  margin: 15px 12px;
 }
 
 .room-info__tag {

@@ -5,7 +5,7 @@ import './TimerButtons.css'
 const TimerButtons = ({ handleSetTimerDuration }) => {
   return (
     <div className="timer-buttons">
-      <button onClick={() => handleSetTimerDuration(5 * 60)}>5분</button>
+      <button onClick={() => handleSetTimerDuration(1 * 60)}>5분</button>
       <button onClick={() => handleSetTimerDuration(10 * 60)}>10분</button>
       <button onClick={() => handleSetTimerDuration(15 * 60)}>15분</button>
       <button onClick={() => handleSetTimerDuration(30 * 60)}>30분</button>
