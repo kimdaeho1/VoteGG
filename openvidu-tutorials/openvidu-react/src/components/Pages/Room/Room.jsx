@@ -12,8 +12,10 @@ import OpenviduControl from '../../Elements/Buttons/Openviducontrol/OpenviduCont
 import TimerButtons from '../../Elements/Buttons/TimerButton/TimerButtons';
 import ReadyButton from '../../Elements/Buttons/ReadyButton/ReadyButton';
 import ReadyStatus from '../../Elements/Buttons/ReadyStatus/ReadyStatus';
+import Timer from '../../Elements/openvidu/Timer/Timer.jsx';
+import RoomInfo from '../../Elements/Buttons/EndButton/RoomInfo.jsx';
 
-const Room = () => {
+const Room = ({ isObserver }) => {
   const { roomNumber } = useParams();
   const location = useLocation();
   const socket = useSocket("/timer", roomNumber);
@@ -123,7 +125,8 @@ const Room = () => {
       <div className='home-background2' />
       <div className='home-background3' />
       <div className="left-side">
-      <OpenviduFinal sessionId={roomNumber} userName={userId} createdBy={createdBy} />
+        <RoomControl />
+        <OpenviduFinal sessionId={roomNumber} userName={userId} createdBy={createdBy} />
         {isOpenviduActive ? (
           <div></div>
         ) : (
@@ -144,8 +147,8 @@ const Room = () => {
             <ReadyStatus readyUsers={readyUsers} />
           </>
         )}
+        <RoomInfo />
       </div>
-      <RoomControl />
       <div className="right-side">
         <TestChat roomId={roomNumber} isObserver={false} />
       </div>
