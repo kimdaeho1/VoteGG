@@ -98,3 +98,19 @@
   font-weight: bold;
   color: #2980b9;
 }
+
+.history-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.history-button:hover {
+  background-color: #45a049;
+}
