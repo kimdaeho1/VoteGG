@@ -691,7 +691,10 @@ class OpenviduFinal extends Component {
                                     {/* LeftUser의 주장 표시/입력 공간 */}
                                     <div className="argument-section-bottom">
                                         <div
-                                            className={`speech-bubble ${isLeftUserEditing ? 'editing' : localConnectionId === currentLeftUser?.connectionId ? '' : 'disabled'
+                                            className={`speech-bubble ${
+                                                this.props.isstart ? 'disabled' : 
+                                                isLeftUserEditing ? 'editing' : 
+                                                localConnectionId === currentLeftUser?.connectionId ? '' : 'disabled'
                                                 }`}
                                             onClick={() => {
                                                 if (!isLeftUserEditing && localConnectionId === currentLeftUser?.connectionId) {
