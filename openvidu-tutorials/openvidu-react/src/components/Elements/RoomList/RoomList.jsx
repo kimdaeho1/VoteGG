@@ -189,21 +189,6 @@ const RoomList = () => {
                         <span className="tag-placeholder">태그 없음</span>
                       )}
                     </div>
-                    {/* <div className="room-buttons">
-                      <button
-                        className="room-spectate-button"
-                        onClick={() => navigate(`/observer/${room.roomNumber}`)}
-                      >
-                        참관하기
-                      </button>
-                      <button
-                        className="room-discuss-button"
-                        onClick={() => joinRoom(room.roomNumber)} // 참가 함수 호출
-                        disabled={room.participantCount >= 4}
-                      >
-                        {room.participantCount >= 4 ? "인원 초과" : "토론하기"}
-                      </button>
-                    </div> */}
                   </div>
                 </div>
               )
