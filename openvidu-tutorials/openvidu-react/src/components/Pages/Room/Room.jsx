@@ -126,6 +126,13 @@ const Room = ({ isObserver }) => {
       <div className='home-background3' />
       <div className="left-side">
         <RoomControl />
+        {userId === createdBy && (
+          <TimerButtons handleSetTimerDuration={handleSetTimerDuration} />
+        )}
+        <ReadyButton
+          isReady={isReady}
+          handleToggleReady={handleToggleReady}
+        />
         <OpenviduFinal sessionId={roomNumber} userName={userId} createdBy={createdBy} />
         {isOpenviduActive ? (
           <div></div>
@@ -137,14 +144,7 @@ const Room = ({ isObserver }) => {
               readyUsers={readyUsers}
               handleStartOpenviduAndTimer={handleStartOpenviduAndTimer}
             />
-            {userId === createdBy && (
-              <TimerButtons handleSetTimerDuration={handleSetTimerDuration} />
-            )}
-            <ReadyButton
-              isReady={isReady}
-              handleToggleReady={handleToggleReady}
-            />
-            <ReadyStatus readyUsers={readyUsers} />
+            {/* <ReadyStatus readyUsers={readyUsers} /> */}
           </>
         )}
         <RoomInfo />
