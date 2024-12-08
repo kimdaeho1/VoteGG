@@ -26,31 +26,31 @@ const TestChat = () => {
   const [userColors, setUserColors] = useState({}); // 사용자별 색상
 
   useEffect(() => {
-    console.log(`Current roomNumber: ${roomNumber}`);
+    //console.log(`Current roomNumber: ${roomNumber}`);
 
     const { maxVoteCount, usedVoteCount } = getVoteCount(roomNumber, username);
-    console.log("Initial Vote Counts:", maxVoteCount, usedVoteCount);
+    //console.log("Initial Vote Counts:", maxVoteCount, usedVoteCount);
 
     const voteIncrease = 2;
     const session = window.session;
     // OpenVidu "signal:phaseChange" 이벤트 핸들러
     const handleSessionPhaseChange = (event) => {
-        console.log("Phase Change detected from session:", event.data);
+        //console.log("Phase Change detected from session:", event.data);
         try {
             const data = JSON.parse(event.data); // 데이터 파싱
-            console.log("Parsed phaseChange data from session:", data);
+            //console.log("Parsed phaseChange data from session:", data);
             repeatIncreaseVoteCount(roomNumber, username, voteIncrease);
         } catch (error) {
             console.error("Error in increaseVoteCount from session:", error);
         }
 
         const { maxVoteCount, usedVoteCount } = getVoteCount(roomNumber, username);
-        console.log("After Phase Change (session) - Vote Counts:", maxVoteCount, usedVoteCount);
+        //console.log("After Phase Change (session) - Vote Counts:", maxVoteCount, usedVoteCount);
     };
 
     // Socket.io "phaseChange" 이벤트 핸들러
     const handleSocketPhaseChange = (data) => {
-        console.log("Phase Change detected from timersocket:", data);
+        //console.log("Phase Change detected from timersocket:", data);
         try {
             repeatIncreaseVoteCount(roomNumber, username, voteIncrease);
         } catch (error) {
@@ -58,7 +58,7 @@ const TestChat = () => {
         }
 
         const { maxVoteCount, usedVoteCount } = getVoteCount(roomNumber, username);
-        console.log("After Phase Change (timersocket) - Vote Counts:", maxVoteCount, usedVoteCount);
+        //console.log("After Phase Change (timersocket) - Vote Counts:", maxVoteCount, usedVoteCount);
     };
 
     // OpenVidu "signal:phaseChange" 이벤트 등록
@@ -86,18 +86,18 @@ const TestChat = () => {
     for (let i = 0; i < n; i++) {
       increaseVoteCount(roomNumber, username);
     }
-    console.log(`increaseVoteCount called ${n} times.`);
+    //console.log(`increaseVoteCount called ${n} times.`);
   };
   // useEffect(() => {
-  //   console.log(`Current roomNumber: ${roomNumber}`);
+  //   //console.log(`Current roomNumber: ${roomNumber}`);
 
   //   const { maxVoteCount, usedVoteCount } = getVoteCount(roomNumber, username);
-  //   console.log("Initial Vote Counts:", maxVoteCount, usedVoteCount);
+  //   //console.log("Initial Vote Counts:", maxVoteCount, usedVoteCount);
 
   //   const interval = setInterval(() => {
   //     increaseVoteCount(roomNumber, username);
   //     const { maxVoteCount, usedVoteCount } = getVoteCount(roomNumber, username);
-  //     console.log("After Increasing Vote Count:", maxVoteCount, usedVoteCount);
+  //     //console.log("After Increasing Vote Count:", maxVoteCount, usedVoteCount);
   //   }, 10000); // 10초마다 증가시키는 함수 호출
 
   //   return () => {

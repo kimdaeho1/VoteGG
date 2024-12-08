@@ -65,9 +65,9 @@ const CreateRoomModal = ({ onClose }) => {
       formData.append("tags", JSON.stringify(tagValues));
   
       // 디버깅: FormData 출력
-      console.log("FormData entries:");
+      //console.log("FormData entries:");
       for (let [key, value] of formData.entries()) {
-        console.log(key, value);
+        //console.log(key, value);
       }
   
       // 서버로 POST 요청
@@ -83,7 +83,7 @@ const CreateRoomModal = ({ onClose }) => {
   
       if (response.status === 201) {
         const { roomNumber } = response.data;
-        console.log("방 생성 성공, 방 번호:", roomNumber);
+        //console.log("방 생성 성공, 방 번호:", roomNumber);
         navigate(`/room/${roomNumber}`);
         onClose();
       }

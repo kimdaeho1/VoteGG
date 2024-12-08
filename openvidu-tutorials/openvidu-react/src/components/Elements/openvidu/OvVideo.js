@@ -14,12 +14,12 @@ export default class OpenViduVideoComponent extends Component {
             try {
                 streamManager.addVideoElement(this.videoRef.current);
                 const connectionId = streamManager?.stream?.connection?.connectionId || 'unknown';
-                console.log(`Added video element for streamManager: ${connectionId}`);
+                //console.log(`Added video element for streamManager: ${connectionId}`);
             } catch (error) {
                 console.error('Error adding video element:', error);
             }
         } else {
-            console.warn('No streamManager found in componentDidMount');
+            //console.warn('No streamManager found in componentDidMount');
         }
     }
 
@@ -33,12 +33,12 @@ export default class OpenViduVideoComponent extends Component {
                 try {
                     prevStreamManager.removeVideoElement(this.videoRef.current);
                     const connectionId = prevStreamManager?.stream?.connection?.connectionId || 'unknown';
-                    console.log(`Removed video element for prevStreamManager: ${connectionId}`);
+                    //console.log(`Removed video element for prevStreamManager: ${connectionId}`);
                 } catch (error) {
                     console.error('Error removing video element:', error);
                 }
             } else if (prevStreamManager) {
-                console.warn(`prevStreamManager does not have removeVideoElement method:`, prevStreamManager);
+                //console.warn(`prevStreamManager does not have removeVideoElement method:`, prevStreamManager);
             }
 
             // Add video element to new streamManager
@@ -46,12 +46,12 @@ export default class OpenViduVideoComponent extends Component {
                 try {
                     streamManager.addVideoElement(this.videoRef.current);
                     const connectionId = streamManager?.stream?.connection?.connectionId || 'unknown';
-                    console.log(`Added video element for new streamManager: ${connectionId}`);
+                    //console.log(`Added video element for new streamManager: ${connectionId}`);
                 } catch (error) {
                     console.error('Error adding video element:', error);
                 }
             } else {
-                console.warn('No streamManager found in componentDidUpdate');
+                //console.warn('No streamManager found in componentDidUpdate');
             }
         }
     }
@@ -62,12 +62,12 @@ export default class OpenViduVideoComponent extends Component {
             try {
                 streamManager.removeVideoElement(this.videoRef.current);
                 const connectionId = streamManager?.stream?.connection?.connectionId || 'unknown';
-                console.log(`Removed video element on unmount for streamManager: ${connectionId}`);
+                //console.log(`Removed video element on unmount for streamManager: ${connectionId}`);
             } catch (error) {
                 console.error('Error removing video element on unmount:', error);
             }
         } else if (streamManager) {
-            console.warn(`streamManager does not have removeVideoElement method on unmount:`, streamManager);
+            //console.warn(`streamManager does not have removeVideoElement method on unmount:`, streamManager);
         }
     }
 

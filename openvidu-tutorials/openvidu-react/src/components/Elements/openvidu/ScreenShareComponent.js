@@ -27,7 +27,7 @@ const ScreenShareComponent = ({ session }) => {
                 session.publish(publisher);
                 setScreenPublisher(publisher);
                 setIsSharing(true);
-                console.log("Screen sharing started");
+                //console.log("Screen sharing started");
             });
 
             publisher.once("accessDenied", () => {
