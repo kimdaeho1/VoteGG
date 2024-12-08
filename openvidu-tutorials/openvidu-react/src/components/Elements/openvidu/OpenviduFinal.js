@@ -33,6 +33,9 @@ class OpenviduFinal extends Component {
             isstart: this.props.isstart
         };
 
+        // 인스턴스 변수로 eventCanvas 선언
+        this.eventCanvas = null;
+
         this.joinSession = this.joinSession.bind(this);
         this.leaveSession = this.leaveSession.bind(this);
         this.startScreenShare = this.startScreenShare.bind(this);
@@ -103,7 +106,7 @@ class OpenviduFinal extends Component {
         session.on("signal:phaseChange", (event) => {
             const data = JSON.parse(event.data);
 
-            // 수신한 phase 값을 업데이트
+            // 수신�� phase 값을 업데이트
             this.setState({
                 currentPhase: data.currentPhase,
                 currentTurn: data.currentTurn,
@@ -270,7 +273,7 @@ class OpenviduFinal extends Component {
                 return;
             }
 
-            const deviceId = videoDevices[0]?.deviceId; // 첫 번째 카메라 사용
+            const deviceId = videoDevices[0]?.deviceId; // 첫 ��째 카메라 사용
             console.log('Using video device:', deviceId);
 
             // hiddenVideo 설정
@@ -316,10 +319,9 @@ class OpenviduFinal extends Component {
             overlayImage.src = '/resources/images/egg.png'; 
             await overlayImage.decode();
 
-            // 숨겨진 캔버스(hiddenCanvas) 생성: 스트림 생성용
             const hiddenCanvas = document.createElement('canvas');
-            hiddenCanvas.width = streamWidth;
-            hiddenCanvas.height = streamHeight;
+            hiddenCanvas.width = streamWidth * 0.8851;
+            hiddenCanvas.height = streamHeight * 0.8851;
             const hiddenCtx = hiddenCanvas.getContext('2d');
 
             function drawFrame() {
@@ -351,16 +353,16 @@ class OpenviduFinal extends Component {
             const canvasStream = hiddenCanvas.captureStream(30);
 
             // 이벤트 전용 캔버스(eventCanvas) 생성: 마우스 이벤트만 처리 (투명)
-            const eventCanvas = document.createElement('canvas');
-            eventCanvas.width = streamWidth;
-            eventCanvas.height = streamHeight;
-            eventCanvas.style.position = 'absolute';
-            eventCanvas.style.top = '0';
-            eventCanvas.style.left = '0';
-            eventCanvas.style.zIndex = 10000; // 다른 요소 위로
-            eventCanvas.style.pointerEvents = 'auto';
-            eventCanvas.style.background = 'transparent';
-
+            this.eventCanvas = document.createElement('canvas');
+            this.eventCanvas.width = hiddenCanvas.width;
+            this.eventCanvas.height = hiddenCanvas.height;
+            this.eventCanvas.style.position = 'absolute';
+            this.eventCanvas.style.top = '0';
+            this.eventCanvas.style.left = '0';
+            this.eventCanvas.style.zIndex = 10000; // 다른 요소 위로
+            this.eventCanvas.style.pointerEvents = 'auto';
+            this.eventCanvas.style.background = 'transparent';
+            
             // 비디오 컨테이너를 찾아 상대 위치 지정
             const videoContainer = document.querySelector('.video-container');
             if (!videoContainer) {
@@ -368,16 +370,8 @@ class OpenviduFinal extends Component {
                 return;
             }
             videoContainer.style.position = 'relative';
-            videoContainer.appendChild(eventCanvas);
+            videoContainer.appendChild(this.eventCanvas);
 
-            // 좌표 변환 함수: container -> streaming coords
-            function toStreamCoords(mouseX, mouseY) {
-                const scaleX = streamWidth / eventCanvas.width;
-                const scaleY = streamHeight / eventCanvas.height;
-                const streamingMouseX = mouseX * scaleX;
-                const streamingMouseY = mouseY * scaleY;
-                return { streamingMouseX, streamingMouseY };
-            }
 
             // S3 업로드 함수 추가
             async function uploadImageToS3(file) {
@@ -412,12 +406,12 @@ class OpenviduFinal extends Component {
             }
   
             // 캔버스 드래그 앤 드롭 이벤트 처리
-            eventCanvas.addEventListener('dragover', (e) => {
+            this.eventCanvas.addEventListener('dragover', (e) => {
                 e.preventDefault();
                 e.dataTransfer.dropEffect = 'copy'; // 드롭 효과 설정
             });
             
-            eventCanvas.addEventListener('drop', async (e) => {
+            this.eventCanvas.addEventListener('drop', async (e) => {
                 e.preventDefault();
                 const file = e.dataTransfer.files[0];
             
@@ -429,12 +423,12 @@ class OpenviduFinal extends Component {
                         const imageUrl = await uploadImageToS3(file);
 
                         // 마우스 좌표를 스트리밍 화면의 좌표로 변환
-                        const rect = eventCanvas.getBoundingClientRect();
+                        const rect = this.eventCanvas.getBoundingClientRect();
                         const mouseX = e.clientX - rect.left; // 캔버스 내부 X 좌표
                         const mouseY = e.clientY - rect.top;  // 캔버스 내부 Y 좌표
 
-                        const scaleX = hiddenCanvas.width / eventCanvas.width;
-                        const scaleY = hiddenCanvas.height / eventCanvas.height;
+                        const scaleX = hiddenCanvas.width / this.eventCanvas.width;
+                        const scaleY = hiddenCanvas.height / this.eventCanvas.height;
 
                         overlayX = mouseX * scaleX; // 스트리밍 해상도 기준 X 좌표
                         overlayY = mouseY * scaleY; // 스트리밍 해상도 기준 Y 좌표
@@ -514,9 +508,9 @@ class OpenviduFinal extends Component {
             const overlayHeightInput = document.getElementById('overlayHeight');
 
             // 마우스 우클릭 이벤트 처리
-            eventCanvas.addEventListener('contextmenu', (e) => {
+            this.eventCanvas.addEventListener('contextmenu', (e) => {
                 // 마우스 좌표를 캔버스 좌표로 변환
-                const rect = eventCanvas.getBoundingClientRect();
+                const rect = this.eventCanvas.getBoundingClientRect();
                 const mouseX = e.clientX - rect.left;
                 const mouseY = e.clientY - rect.top;
             
@@ -641,14 +635,14 @@ class OpenviduFinal extends Component {
             });
 
             // 이벤트 핸들러
-            eventCanvas.addEventListener('mousedown', (e) => {
+            this.eventCanvas.addEventListener('mousedown', (e) => {
                 console.log("mousedown!!");
-                const rect = eventCanvas.getBoundingClientRect();
+                const rect = this.eventCanvas.getBoundingClientRect();
                 const mouseX = e.clientX - rect.left;
                 const mouseY = e.clientY - rect.top;
 
                 // 마우스 좌표를 스트리밍 해상도 좌표로 변환
-                const { streamingMouseX, streamingMouseY } = toStreamCoords(mouseX, mouseY);
+                const { streamingMouseX, streamingMouseY } = {streamingMouseX: mouseX, streamingMouseY: mouseY};
 
                 if (
                     streamingMouseX >= overlayX && streamingMouseX <= overlayX + overlayImage.width &&
@@ -660,24 +654,24 @@ class OpenviduFinal extends Component {
                 }
             });
 
-            eventCanvas.addEventListener('mousemove', (e) => {
+            this.eventCanvas.addEventListener('mousemove', (e) => {
                 if (isDragging) {
-                    const rect = eventCanvas.getBoundingClientRect();
+                    const rect = this.eventCanvas.getBoundingClientRect();
                     const mouseX = e.clientX - rect.left;
                     const mouseY = e.clientY - rect.top;
 
-                    const { streamingMouseX, streamingMouseY } = toStreamCoords(mouseX, mouseY);
+                    const { streamingMouseX, streamingMouseY } = {streamingMouseX: mouseX, streamingMouseY: mouseY};
                     overlayX = streamingMouseX - dragOffsetX;
                     overlayY = streamingMouseY - dragOffsetY;
                 }
             });
 
-            eventCanvas.addEventListener('mouseup', () => {
+            this.eventCanvas.addEventListener('mouseup', () => {
                 console.log("mouseup!!");
                 isDragging = false;
             });
 
-            eventCanvas.addEventListener('mouseleave', () => {
+            this.eventCanvas.addEventListener('mouseleave', () => {
                 isDragging = false;
             });
 
@@ -753,6 +747,21 @@ class OpenviduFinal extends Component {
                 } else {
                     resolve(null);
                     return null;
+                }
+
+                console.log("this is rightUserList : " ,this.state.rightUserList);
+                console.log("this is userName : " ,this.state.userName);
+                const leftVideoContainer = document.querySelector('.left-video');
+                const rightVideoContainer = document.querySelector('.right-video');
+                const isUserInRightList = this.state.rightUserList.some(user => user.userName === this.state.userName);
+                if (isUserInRightList) {
+                    console.log("right");
+                    if (this.eventCanvas) {
+                        this.eventCanvas.style.left = `${1280*0.8851 - 640 * 0.8851 + 20}px`; // 위치 조정
+                        rightVideoContainer.appendChild(this.eventCanvas);
+                    }
+                } else {
+                    leftVideoContainer.appendChild(this.eventCanvas);
                 }
 
                 // 모든 참가자에게 업데이트된 사용자 리스트 전송
