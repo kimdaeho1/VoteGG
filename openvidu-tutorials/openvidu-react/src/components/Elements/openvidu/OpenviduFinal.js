@@ -67,7 +67,54 @@ class OpenviduFinal extends Component {
         window.handlePhaseChange = null;
         this.leaveSession();
     }
+//////////////////////////////
+    componentDidUpdate(prevProps) {
+        // isstart가 false -> true로 변경될 때 서버로 데이터 전송
+        if (!prevProps.isstart && this.props.isstart) {
+            this.saveArgumentsToServer();
+        }
+    }
 
+
+    async saveArgumentsToServer() {
+        const { leftUserArgument, rightUserArgument, currentLeftUser, currentRightUser, leftUserList, rightUserList, userName} = this.state;
+
+        // userName과 createdBy가 같을 때만 요청 전송
+        console.log(userName,"-----------",this.props.createdBy)
+        if (userName === this.props.createdBy) {
+            const payload = {
+                leftUserArgument,
+                rightUserArgument,
+                leftUserId: currentLeftUser?.userId || null,
+                rightUserId: currentRightUser?.userId || null,
+                leftUserList,
+                rightUserList,
+                roomNumber : this.props.sessionId,
+            };
+            console.log("Payload being sent:", payload); // 추가된 디버깅 코드
+            try {
+                const response = await fetch('/api/room/saveargument', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload),
+                });
+
+                if (!response.ok) {
+                    console.error('Failed to save arguments:', response.statusText);
+                } else {
+                    console.log('Arguments saved successfully');
+                }
+            } catch (error) {
+                console.error('Error while saving arguments:', error);
+            }
+        } else {
+            console.log('Request not sent: userName and createdBy do not match.');
+        }
+    }
+
+//////////////////////////////
     async joinSession() {
         const OV = new OpenVidu();
         const session = OV.initSession();

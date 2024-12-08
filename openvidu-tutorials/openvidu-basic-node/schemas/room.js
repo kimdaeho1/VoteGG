@@ -55,6 +55,18 @@ const roomSchema = new mongoose.Schema({
     default: 0,
   },
 
+  leftUserArgument : {
+    type: Map,
+    of: String, // 딕셔너리 형태의 value는 숫자 (기본값: 0)
+    default: {}, // 초기값은 빈 딕셔너리
+  },
+
+  rightUserArgument : {
+    type: Map,
+    of: String, // 딕셔너리 형태의 value는 숫자 (기본값: 0)
+    default: {}, // 초기값은 빈 딕셔너리
+  },
+
 });
 
 
