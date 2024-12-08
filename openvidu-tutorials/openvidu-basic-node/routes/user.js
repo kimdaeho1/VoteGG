@@ -68,7 +68,7 @@ router.post("/login", async (req, res) => {
     { expiresIn: "1h" }
   );
 
-  res.cookie("token", `Bearer ${token}`);
+  res.cookie("Authorization", `Bearer ${token}`);
   res.json({ message: "로그인 성공", token });
 });
 
