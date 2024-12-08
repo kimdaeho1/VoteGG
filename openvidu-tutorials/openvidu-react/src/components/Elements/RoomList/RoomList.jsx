@@ -73,8 +73,8 @@ const RoomList = () => {
       // 해당 방의 participantCount를 확인
       const roomResponse = await axios.get(`${window.location.origin}/api/room/rooms/${roomNumber}`);
       const participantCount = roomResponse.data.participantCount;
-
-      if (participantCount >= 4) {
+      console.log(participantCount)
+      if (participantCount >= 2) {
         addToast("인원 초과로 참가할 수 없습니다.", "error");
         return;
       }
@@ -161,7 +161,7 @@ const RoomList = () => {
                       </button>
                       <button
                         className="hover-button2"
-                        onClick={() => navigate(`/room/${room.roomNumber}`)}
+                        onClick={() => joinRoom(room.roomNumber)}
                       >
                         참여 모드
                       </button>
