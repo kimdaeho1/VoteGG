@@ -145,10 +145,13 @@ router.get("/roomList", async (req, res) => {
       const currentUserCount = usersNumber[roomId] || 0; // usersNumber에서 현재 사용자 수 가져오기
       const participantCount = room.participant ? room.participant.size : 0; // 참가자 수 계산 (participant의 키 개수)
 
+      // console.log("----------------------Participant Data:", room.participant); // 디버깅용 로그 추가
+
       return {
         ...room.toObject(), // 기존 Room 객체의 데이터를 그대로 복사
         memberCount: currentUserCount, // memberCount를 usersNumber의 값으로 대체
         participantCount, // 참가자 수
+        participant: room.participant,
       };
     });
 
@@ -283,7 +286,7 @@ router.get("/rooms/:roomId", async (req, res) => {
     // 방 생성자의 프로필 이미지 가져오기
     const creator = await user.findOne({ username: room.createdby }).select("profileImageUrl"); // `user`로 변경
     const creatorProfileImage = creator?.profileImageUrl || "/default-profile.png"; // 기본 프로필 이미지
-
+    const participantCount = room.participant ? room.participant.size : 0; // 참가자 수 계산 (participant의 키 개수)
     // 응답 데이터 조합
     const roomWithDetails = {
       roomname: room.roomname,
@@ -291,6 +294,7 @@ router.get("/rooms/:roomId", async (req, res) => {
       createdby: room.createdby, // 생성자 이름
       creatorProfileImage, // 생성자의 프로필 이미지
       tags: room.tags || [], // 태그
+      participantCount,
     };
 
     res.status(200).json(roomWithDetails);

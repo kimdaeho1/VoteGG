@@ -17,6 +17,7 @@ const roomSchema = new mongoose.Schema({
 
   other: {
     type: String,
+    default: "", // 기본값 빈 문자열
   },
 
   invitees: {
