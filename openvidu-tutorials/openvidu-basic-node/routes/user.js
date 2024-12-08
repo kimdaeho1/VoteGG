@@ -62,14 +62,16 @@ router.post("/login", async (req, res) => {
       totalParticipations: existingUser.totalParticipations || 0,
       totalWins: existingUser.totalWins || 0,
       firstPlaceWins: existingUser.firstPlaceWins || 0,
+      myHistory: existingUser.myHistory || [], // myHistory 추가
     },
-    JWT_SECRET,
+    process.env.JWT_SECRET,
     { expiresIn: "1h" }
   );
 
-  res.cookie("authorization", `Bearer ${token}`);
+  res.cookie("Authorization", `Bearer ${token}`);
   res.json({ message: "로그인 성공", token });
 });
+
 
 // 카카오 로그인 요청을 카카오 인증 페이지로 리디렉션
 router.get("/auth/kakao", (req, res) => {
@@ -117,8 +119,9 @@ router.get("/auth/kakao/callback", async (req, res) => {
           firstPlaceWins: existingUser.firstPlaceWins || 0,
           provider: existingUser.provider,
           socialId: id,
+          myHistory: existingUser.myHistory || [],
         },
-        JWT_SECRET,
+        process.env.JWT_SECRET,
         { expiresIn: "1h" }
       );
 
@@ -165,7 +168,7 @@ router.post("/set-username", async (req, res) => {
     // JWT 토큰 생성
     const token = jwt.sign(
       { userId: newUser._id, username: newUser.username, provider: newUser.provider },
-      JWT_SECRET,
+      process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
 
@@ -270,6 +273,7 @@ router.post("/profile-image", upload.single("profileImage"), async (req, res) =>
         totalParticipations: currentUser.totalParticipations,
         totalWins: currentUser.totalWins,
         firstPlaceWins: currentUser.firstPlaceWins,
+        myHistory: currentUser.myHistory || [], 
       },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
@@ -285,4 +289,5 @@ router.post("/profile-image", upload.single("profileImage"), async (req, res) =>
 
 
 module.exports = router;
+
 

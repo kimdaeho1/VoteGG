@@ -1,88 +1,33 @@
-/* src/components/Modals/VoteResultModal/VoteStatistic.css */
+/* VoteStatistichard.css */
 
-/* 모달 오버레이 */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* 더 어두운 오버레이 */
+  background: rgba(240, 248, 255, 0.8); /* 연한 파란색 배경 투명도 */
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   z-index: 1000;
-  pointer-events: auto;
 }
 
-/* 모달 콘텐츠 */
 .modal-content1 {
-  background: linear-gradient(135deg, #ffffff, #f0f0f0); /* 그라디언트 배경 */
-  padding: 40px;
-  border-radius: 16px;
-  width: 1000px;
-  max-width: 700px;
-  text-align: center;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* 더 진한 그림자 효과 */
-  animation: fadeIn 0.3s ease-in-out;
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif; /* 깔끔한 폰트 */
+  background: #f8f9fa; /* 밝은 회색 배경 */
+  border: 2px solid #adb5bd; /* 중간 밝기의 회색 테두리 */
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 600px;
+  padding: 20px;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
-/* 모달 제목 */
-.modal-title {
-  font-size: 36px;
-  font-weight: bold;
-  color: #222222; /* 진한 텍스트 색상 */
-  margin-bottom: 20px;
-}
-
-/* 모달 부제목 */
-.modal-subtitle {
-  font-size: 22px;
-  color: #555555; /* 중간 정도의 텍스트 색상 */
-  margin-bottom: 30px;
-}
-
-/* 닫기 버튼 */
-.close-button1 {
-  background-color: #ff4757; /* 강렬한 레드 컬러 */
-  color: #fff;
-  border: none;
-  padding: 16px 32px;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-top: 30px;
-}
-
-.close-button:hover {
-  background-color: #e84118; /* 호버 시 진한 레드 */
-  transform: translateY(-2px);
-}
-
-/* 로딩 메시지 */
-.loading-message {
-  font-size: 20px;
-  color: #333333;
-  text-align: center;
-  margin-top: 40px;
-}
-
-/* 에러 메시지 */
-.error-message {
-  font-size: 20px;
-  color: #e74c3c; /* 에러 색상 */
-  text-align: center;
-  margin-top: 40px;
-}
-
-/* 애니메이션 */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-30px); /* 살짝 위에서 등장 */
+    transform: translateY(-10px);
   }
   to {
     opacity: 1;
@@ -90,38 +35,54 @@
   }
 }
 
-/* 반응형 디자인 */
-@media (max-width: 600px) {
-  .modal-content {
-    width: 95%;
-    padding: 30px;
-  }
-
-  .modal-title {
-    font-size: 28px;
-  }
-
-  .modal-subtitle {
-    font-size: 18px;
-  }
-
-  .close-button {
-    font-size: 16px;
-    padding: 14px 28px;
-  }
+.modal-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #495057; /* 중간 밝기의 회색 */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Highcharts 커스텀 스타일링 */
-.highcharts-container {
+.winner-banner {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  background: #e9ecef; /* 밝은 회색 배경 */
+  color: #343a40; /* 어두운 회색 텍스트 */
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.close-button1 {
+  display: block;
   margin: 0 auto;
-}
-
-.highcharts-title {
+  padding: 12px 24px;
   font-size: 18px;
-  color: #333333;
+  color: #fff;
+  background: #6c757d; /* 어두운 회색 배경 */
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-.highcharts-legend-item text {
-  font-size: 16px;
-  color: #333333;
+.close-button1:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+.close-button1:active {
+  transform: scale(0.95);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }

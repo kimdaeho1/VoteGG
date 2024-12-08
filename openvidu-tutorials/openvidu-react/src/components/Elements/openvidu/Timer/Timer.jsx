@@ -190,10 +190,7 @@ const Timer = ({ isObserver }) => {
 
       {timerFinished && <VoteStatistic roomNumber={roomId} resultData={resultData} onClose={() => setTimerFinished(false)} />}
 
-      {/* <div>
-        <button onClick={() => setShowVoteStatistic(true)}>하드 코딩된결과 보기</button>
-        {showVoteStatistic && <VoteStatistichard onClose={() => setShowVoteStatistic(false)} />}
-      </div> */}
+
     </div>
   );
 };

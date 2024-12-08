@@ -1,184 +1,88 @@
-/*src/components/Modals/VoteResultModal/VoteStatistic.css */
+/* VoteStatistichard.css */
 
-/* 모달 오버레이 */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* 더 어두운 오버레이 */
+  background: rgba(240, 248, 255, 0.8); /* 연한 파란색 배경 투명도 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content1 {
+  background: #f8f9fa; /* 밝은 회색 배경 */
+  border: 2px solid #adb5bd; /* 중간 밝기의 회색 테두리 */
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 600px;
+  padding: 20px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #495057; /* 중간 밝기의 회색 */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.winner-banner {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  background: #e9ecef; /* 밝은 회색 배경 */
+  color: #343a40; /* 어두운 회색 텍스트 */
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.chart-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
-  pointer-events: auto;
+  margin: 20px 0;
 }
 
-/* 모달 콘텐츠 */
-.modal-content1 {
-  background: linear-gradient(135deg, #ffffff, #f0f0f0); /* 그라디언트 배경 */
-  padding: 40px;
-  border-radius: 16px;
-  width: 1000px;
-  max-width: 700px;
-  text-align: center;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* 더 진한 그림자 효과 */
-  animation: modalFadeIn 0.8s ease-in-out forwards;
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif; /* 깔끔한 폰트 */
-}
-
-/* 모달 제목 */
-.modal-title {
-  font-size: 36px;
-  font-weight: bold;
-  color: #222222; /* 진한 텍스트 색상 */
-  margin-bottom: 20px;
-}
-
-/* 이긴 팀 스타일 */
-.winning-team {
-  margin-bottom: 20px;
-  position: relative;
-}
-
-.winning-team-title {
-  font-size: 32px;
-  font-weight: bold;
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-/* 글자가 커졌다 작아지는 효과 */
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-/* 불꽃놀이 효과 */
-.winning-team::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 150px;
-  height: 150px;
-  background: radial-gradient(circle, currentColor 10%, transparent 70%);
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0);
-  animation: fireworks 1s ease-out forwards;
-}
-
-@keyframes fireworks {
-  0% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(1);
-  }
-}
-
-/* 모달 부제목 */
-.modal-subtitle {
-  font-size: 22px;
-  color: #555555; /* 중간 정도의 텍스트 색상 */
-  margin-bottom: 30px;
-}
-
-/* 닫기 버튼 */
 .close-button1 {
-  background-color: #ff4757; /* 강렬한 레드 컬러 */
-  color: #fff;
-  border: none;
-  padding: 16px 32px;
-  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+  padding: 12px 24px;
   font-size: 18px;
-  font-weight: bold;
+  color: #fff;
+  background: #6c757d; /* 어두운 회색 배경 */
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-top: 30px;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .close-button1:hover {
-  background-color: #e84118; /* 호버 시 진한 레드 */
-  transform: translateY(-2px);
+  transform: scale(1.1);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
 }
 
-/* 로딩 메시지 */
-.loading-message {
-  font-size: 20px;
-  color: #333333;
-  text-align: center;
-  margin-top: 40px;
-}
-
-/* 에러 메시지 */
-.error-message {
-  font-size: 20px;
-  color: #e74c3c; /* 에러 색상 */
-  text-align: center;
-  margin-top: 40px;
-}
-
-/* 모달 등장 효과 */
-@keyframes modalFadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(-50px) scale(0.9);
-  }
-  70% {
-    opacity: 1;
-    transform: translateY(10px) scale(1.02);
-  }
-  100% {
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* 반응형 디자인 */
-@media (max-width: 600px) {
-  .modal-content1 {
-    width: 95%;
-    padding: 30px;
-  }
-
-  .modal-title {
-    font-size: 28px;
-  }
-
-  .modal-subtitle {
-    font-size: 18px;
-  }
-
-  .close-button1 {
-    font-size: 16px;
-    padding: 14px 28px;
-  }
-}
-
-/* Highcharts 커스텀 스타일링 */
-.chart-container {
-  margin-bottom: 30px;
-}
-
-.highcharts-container {
-  margin: 0 auto;
-}
-
-.highcharts-title {
-  font-size: 18px;
-  color: #333333;
-}
-
-.highcharts-legend-item text {
-  font-size: 16px;
-  color: #333333;
+.close-button1:active {
+  transform: scale(0.95);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }

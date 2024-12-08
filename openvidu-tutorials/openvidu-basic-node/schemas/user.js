@@ -46,6 +46,14 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+
+    // 토론 기록 필드 추가
+    myHistory: [
+      {
+        roomName: { type: String, required: true }, // 방 이름
+        date: { type: Date, required: true },       // 기록 저장 날짜
+      },
+    ],
 });
 
 module.exports = mongoose.model("user", userSchema);
