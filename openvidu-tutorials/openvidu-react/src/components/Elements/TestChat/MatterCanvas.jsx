@@ -235,7 +235,7 @@ const MatterCanvas = ({ roomNumber, socket }) => {
               // 왼쪽 절반 클릭 시 추천
               const voteLeft = streamComponent.querySelector('.vote-left');
               if (voteLeft) {
-                  console.log("왼쪽 클릭 - 투표하기");                
+                  //console.log("왼쪽 클릭 - 투표하기");                
                   // 투표 처리
                   const { maxVoteCount, usedVoteCount} = getVoteCount( roomNumber, username );
                   handleVote(roomNumber, username, user, 1, maxVoteCount - usedVoteCount, addToast); // 1은 사용된 투표권 수
@@ -260,7 +260,7 @@ const MatterCanvas = ({ roomNumber, socket }) => {
                 const targetheight = Math.max(rect.top, Math.min(randomY, rect.bottom)); // 위와 아래 범위 제한
                 
                 throwEgg(targetwidth, targetheight);            
-                console.log("오른쪽 클릭 - 던지기");
+                //console.log("오른쪽 클릭 - 던지기");
                 const { maxVoteCount, usedVoteCount} = getVoteCount( roomNumber, username );
                 handleVote(roomNumber, username, user, -1, maxVoteCount - usedVoteCount, addToast);
               }
@@ -290,7 +290,7 @@ const MatterCanvas = ({ roomNumber, socket }) => {
         if (videoElement) {
           const clientData = videoElement.getAttribute('data-client-data');
           if (clientData) {
-            console.log("UserName:", clientData);
+            //console.log("UserName:", clientData);
             return clientData;
           }
         }
@@ -345,19 +345,19 @@ const MatterCanvas = ({ roomNumber, socket }) => {
 
     // 계란을 한 번에 n개 제거하는 함수
     const removeEggs = (n) => {
-      console.log(n + ' egg removed');
+      //console.log(n + ' egg removed');
       const eggsToRemove = eggs.slice(0, n); // 배열에서 첫 n개의 계란을 선택
       eggsToRemove.forEach(egg => {
         World.remove(world, egg);  // Matter.js에서 해당 계란 제거
-        console.log("Egg removed");
+        //console.log("Egg removed");
       });
       eggs = eggs.filter(egg => !eggsToRemove.includes(egg));  // 제거된 계란을 배열에서 삭제
       eggCount -= eggsToRemove.length; // 계란 개수 감소
-      console.log(`Egg count after removal: ${eggCount}`);
+      //console.log(`Egg count after removal: ${eggCount}`);
     };
 
     const throwEgg = (targetX, targetY, callback) => {
-      console.log("throwEgg!");
+      //console.log("throwEgg!");
       // 화면 크기
       const screenWidth = window.innerWidth;
       const screenHeight = window.innerHeight;
@@ -433,7 +433,7 @@ const MatterCanvas = ({ roomNumber, socket }) => {
             // 일정 시간이 지나도 도달하지 못하면 계란 제거
             if (engine.world.bodies.includes(egg)) {
               World.remove(engine.world, egg);
-              console.log("egg removed due to timeout");
+              //console.log("egg removed due to timeout");
               Matter.Events.off(engine, "afterUpdate");
             }
           }, 1000); // 1초 뒤 계란 제거
@@ -444,7 +444,7 @@ const MatterCanvas = ({ roomNumber, socket }) => {
     
             // 목표에 도달하면
             if (distanceX + distanceY < 100) {
-              console.log("egg arrival!");
+              //console.log("egg arrival!");
               World.remove(engine.world, egg);
     
               const newEgg = Bodies.circle(egg.position.x, egg.position.y, 20, {
@@ -460,11 +460,11 @@ const MatterCanvas = ({ roomNumber, socket }) => {
               });
     
               World.add(engine.world, newEgg);
-              console.log("egg broken!");
+              //console.log("egg broken!");
 
               // 3초 후 계란 제거
               setTimeout(() => {
-                console.log('egg hit!');
+                //console.log('egg hit!');
                 // 목표 위치에서 streamcomponent 요소 찾기
                 const streamComponent = document.elementFromPoint(targetX, targetY).closest('.streamcomponent');
                 if (streamComponent) {
@@ -480,7 +480,7 @@ const MatterCanvas = ({ roomNumber, socket }) => {
               // 3초 후 계란 제거
               setTimeout(() => {
                 World.remove(engine.world, newEgg);
-                console.log("egg disappeared!");
+                //console.log("egg disappeared!");
               }, 3000);
     
               Matter.Events.off(engine, "afterUpdate");
@@ -510,8 +510,8 @@ const MatterCanvas = ({ roomNumber, socket }) => {
     
         if (eggCount < nowVoteCount) {
           addEgg(); // 계란 개수가 nowVoteCount보다 적으면 계란 생성
-          console.log(nowVoteCount)
-          console.log(eggCount);
+          //console.log(nowVoteCount)
+          //console.log(eggCount);
         }
         else if (eggCount > nowVoteCount) {
           removeEggs(nowVoteCount - eggCount); // 추가로 계란 제거
@@ -540,7 +540,7 @@ const MatterCanvas = ({ roomNumber, socket }) => {
           eggs = eggs.filter(item => item !== egg);
           World.remove(world, egg);
           eggCount -= 1;
-          console.log("Destroy egg!");
+          //console.log("Destroy egg!");
           // 새로운 계란 추가
           addEgg();
         }
@@ -555,10 +555,10 @@ const MatterCanvas = ({ roomNumber, socket }) => {
           return;
         }
     
-        console.log('Egg throw received:', data);
+        //console.log('Egg throw received:', data);
         const { startX, startY, targetX, targetY, callback } = data;
         executeThrowAnimation(startX, startY, targetX, targetY, callback, () => {
-          console.log("Throw animation complete");          
+          //console.log("Throw animation complete");          
         });
       };
 

@@ -191,24 +191,24 @@ router.get("/get-profile-image", async (req, res) => {
   try {
     const { username } = req.query; // GET 요청에서 쿼리 매개변수 사용
 
-    console.log("Received Query Parameters:", req.query);
+    //console.log("Received Query Parameters:", req.query);
 
     if (!username) {
-      console.warn("Username is missing in the query parameters");
+      //console.warn("Username is missing in the query parameters");
       return res.status(400).json({ message: "Username is required" });
     }
 
-    console.log(`Searching for user with username: ${username}`);
+    //console.log(`Searching for user with username: ${username}`);
 
     // 여기에서 user를 선언하고 초기화
     const useridname = await user.findOne({ username });
 
     if (!useridname) {
-      console.warn(`User not found for username: ${username}`);
+      //console.warn(`User not found for username: ${username}`);
       return res.status(404).json({ message: "User not found" });
     }
 
-    console.log("User Found:", useridname);
+    //console.log("User Found:", useridname);
     return res.status(200).json({ profileImageUrl: useridname.profileImageUrl });
   } catch (error) {
     console.error("Error fetching profile image:", error);

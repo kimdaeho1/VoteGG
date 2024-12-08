@@ -61,7 +61,7 @@ const getUsernameFromToken = (token) => {
     const payload = JSON.parse(
       Buffer.from(token.split(".")[1], "base64").toString()
     );
-    console.log("토큰 디코드 결과:", payload);
+    //console.log("토큰 디코드 결과:", payload);
     return payload.username;
   } catch (error) {
     console.error("토큰 파싱 실패:", error.message);
@@ -72,8 +72,8 @@ const getUsernameFromToken = (token) => {
 // 방 생성 API
 router.post("/roomCreate", upload.single("thumbnail"), async (req, res) => {
   try {
-    console.log("req.body:", req.body);
-    console.log("req.file:", req.file);
+    //console.log("req.body:", req.body);
+    //console.log("req.file:", req.file);
     const { roomname, createdby, thumbnail, tags } = req.body;
 
     // 태그 처리
@@ -81,7 +81,7 @@ router.post("/roomCreate", upload.single("thumbnail"), async (req, res) => {
     try {
       parsedTags = JSON.parse(req.body.tags);
     } catch (error) {
-      console.warn("태그 파싱 오류:", error.message);
+      //console.warn("태그 파싱 오류:", error.message);
     }
     
     // S3에 썸네일 업로드
@@ -145,7 +145,7 @@ router.get("/roomList", async (req, res) => {
       const currentUserCount = usersNumber[roomId] || 0; // usersNumber에서 현재 사용자 수 가져오기
       const participantCount = room.participant ? room.participant.size : 0; // 참가자 수 계산 (participant의 키 개수)
 
-      // console.log("----------------------Participant Data:", room.participant); // 디버깅용 로그 추가
+      //console.log("----------------------Participant Data:", room.participant); // 디버깅용 로그 추가
 
       return {
         ...room.toObject(), // 기존 Room 객체의 데이터를 그대로 복사
@@ -155,7 +155,7 @@ router.get("/roomList", async (req, res) => {
       };
     });
 
-    console.log("방 목록 응답:", updatedRooms);
+    //console.log("방 목록 응답:", updatedRooms);
     res.status(200).json(updatedRooms); // 태그 포함된 방 목록 응답
   } catch (error) {
     console.error("방 목록 가져오기 실패:", error.message);
@@ -186,9 +186,9 @@ router.post("/participant", async (req, res) => {
     if (!room.participant.has(userId)) {
       room.participant.set(userId, 0);
       await room.save();
-      console.log("참가자 추가 완료:", room.participant);
+      //console.log("참가자 추가 완료:", room.participant);
     } else {
-      console.log("참가자는 이미 존재합니다:", userId);
+      //console.log("참가자는 이미 존재합니다:", userId);
     }
 
     res.status(200).json({ message: "참가자가 추가되었습니다.", participant: room.participant });
@@ -210,7 +210,7 @@ router.get("/:roomId/participants", async (req, res) => {
     }
 
     const participantsArray = Array.from(room.participant.entries());
-    console.log("참가자 목록 응답 (서버):", participantsArray);
+    //console.log("참가자 목록 응답 (서버):", participantsArray);
     res.status(200).json(participantsArray);
   } catch (error) {
     console.error("참가자 목록 가져오기 실패:", error.message);
@@ -228,7 +228,7 @@ router.get("/:roomId/debugParticipants", async (req, res) => {
       return res.status(404).json({ error: "방을 찾을 수 없습니다." });
     }
 
-    console.log("참가자 디버그 목록:", Array.from(room.participant.entries()));
+    //console.log("참가자 디버그 목록:", Array.from(room.participant.entries()));
     res.status(200).json({ participant: Array.from(room.participant.entries()) });
   } catch (error) {
     console.error("디버그 실패:", error.message);
@@ -258,7 +258,7 @@ router.post("/vote", async (req, res) => {
     room.participant.set(participant, currentVotes + votes);
 
     await room.save();
-    console.log(`투표 완료: ${participant}에게 ${votes} 투표 추가.`);
+    //console.log(`투표 완료: ${participant}에게 ${votes} 투표 추가.`);
     res.status(200).json({
       message: "투표 완료",
       participant: Array.from(room.participant.entries()),
@@ -287,6 +287,7 @@ router.get("/rooms/:roomId", async (req, res) => {
     const creator = await user.findOne({ username: room.createdby }).select("profileImageUrl"); // `user`로 변경
     const creatorProfileImage = creator?.profileImageUrl || "/default-profile.png"; // 기본 프로필 이미지
     const participantCount = room.participant ? room.participant.size : 0; // 참가자 수 계산 (participant의 키 개수)
+    const participant1 = room.participant;
     // 응답 데이터 조합
     const roomWithDetails = {
       roomname: room.roomname,
@@ -295,6 +296,7 @@ router.get("/rooms/:roomId", async (req, res) => {
       creatorProfileImage, // 생성자의 프로필 이미지
       tags: room.tags || [], // 태그
       participantCount,
+      participant1,
     };
 
     res.status(200).json(roomWithDetails);

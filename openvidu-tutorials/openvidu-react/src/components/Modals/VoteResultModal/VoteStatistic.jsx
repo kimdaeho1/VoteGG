@@ -19,7 +19,7 @@ const VoteStatistic = ({ onClose, resultData }) => {
 
   // resultData를 기반으로 팀별 차트 데이터 설정
   useEffect(() => {
-    console.log("VoteStatistic에서 수신한 resultData:", resultData);
+    //console.log("VoteStatistic에서 수신한 resultData:", resultData);
     if (resultData) {
       const teamData = [
         { name: 'Red 팀', y: resultData.redScore || 0 },

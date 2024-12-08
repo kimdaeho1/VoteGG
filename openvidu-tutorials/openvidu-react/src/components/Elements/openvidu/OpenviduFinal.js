@@ -90,7 +90,7 @@ class OpenviduFinal extends Component {
                     to: [event.connection],
                     type: 'userList',
                 });
-                console.log(`Sent user list to newly connected user: ${event.connection.connectionId}`);
+                //console.log(`Sent user list to newly connected user: ${event.connection.connectionId}`);
             }
         });
 
@@ -115,7 +115,7 @@ class OpenviduFinal extends Component {
         // Handle userList signal
         session.on('signal:userList', (event) => {
             const data = JSON.parse(event.data);
-            console.log('Received userList signal:', data); // 디버깅용
+            //console.log('Received userList signal:', data); // 디버깅용
             this.setState((prevState) => {
                 const mergedLeftUserList = mergeUserLists(prevState.leftUserList, data.leftUserList || []);
                 const mergedRightUserList = mergeUserLists(prevState.rightUserList, data.rightUserList || []);
@@ -156,7 +156,7 @@ class OpenviduFinal extends Component {
                 const parsedData = JSON.parse(data);
                 userName = parsedData.clientData || 'Unknown';
             } catch (error) {
-                console.warn('Error parsing connection data:', error);
+                //console.warn('Error parsing connection data:', error);
             }
 
             const newSubscriber = {
@@ -165,8 +165,8 @@ class OpenviduFinal extends Component {
                 connectionId: event.stream.connection.connectionId,
             };
 
-            console.log(`New subscriber added: ${userName}, Connection ID: ${newSubscriber.connectionId}`);
-            console.log('Subscriber object:', subscriber);
+            //console.log(`New subscriber added: ${userName}, Connection ID: ${newSubscriber.connectionId}`);
+            //console.log('Subscriber object:', subscriber);
 
             this.setState((prevState) => ({
                 subscribers: [...prevState.subscribers, newSubscriber],
@@ -179,13 +179,13 @@ class OpenviduFinal extends Component {
             const shouldEnableAudio = data.enableAudio;
             const targetConnectionId = data.connectionId; // 특정 사용자에게만 적용
 
-            console.log(`Received toggleAudio signal for connectionId: ${targetConnectionId}, enableAudio: ${shouldEnableAudio}`);
+            //console.log(`Received toggleAudio signal for connectionId: ${targetConnectionId}, enableAudio: ${shouldEnableAudio}`);
 
             // 로컬 사용자의 connectionId와 비교
             if (this.state.session && this.state.session.connection.connectionId === targetConnectionId) {
                 if (this.state.publisher) {
                     this.state.publisher.publishAudio(shouldEnableAudio);
-                    console.log(`Audio for user ${this.state.userName} set to ${shouldEnableAudio}`);
+                    //console.log(`Audio for user ${this.state.userName} set to ${shouldEnableAudio}`);
                 }
             }
         });
@@ -194,7 +194,7 @@ class OpenviduFinal extends Component {
         session.on('streamDestroyed', (event) => {
             const connectionId = event.stream.connection.connectionId;
 
-            console.log(`Stream destroyed for Connection ID: ${connectionId}`);
+            //console.log(`Stream destroyed for Connection ID: ${connectionId}`);
 
             this.setState((prevState) => {
                 const subscribers = prevState.subscribers.filter(
@@ -224,7 +224,7 @@ class OpenviduFinal extends Component {
 
         // Handle exceptions
         session.on("exception", (exception) => {
-            console.warn(exception);
+            //console.warn(exception);
         });
 
         const sessionId = this.props.sessionId; // 세션 ID
@@ -233,7 +233,7 @@ class OpenviduFinal extends Component {
         try {
             const token = await this.getToken(sessionId);
             await session.connect(token, { clientData: userName });
-            console.log('Connected to session:', sessionId);
+            //console.log('Connected to session:', sessionId);
         } catch (error) {
             console.error('Error connecting to session:', error);
             return;
@@ -252,7 +252,7 @@ class OpenviduFinal extends Component {
                 // 카메라와 마이크 권한 요청
                 try {
                     await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-                    console.log('Camera and microphone permissions granted.');
+                    //console.log('Camera and microphone permissions granted.');
                 } catch (error) {
                     console.error('Camera and microphone permission denied:', error);
                     return;
@@ -261,7 +261,7 @@ class OpenviduFinal extends Component {
                 // 장치 목록 가져오기
                 const devices = await navigator.mediaDevices.enumerateDevices();
                 const videoDevices = devices.filter(device => device.kind === 'videoinput');
-                console.log('Available video devices:', videoDevices);
+                //console.log('Available video devices:', videoDevices);
 
                 // 비디오 장치 유효성 검증
                 if (videoDevices.length === 0) {
@@ -270,7 +270,7 @@ class OpenviduFinal extends Component {
                 }
 
                 const deviceId = videoDevices[0]?.deviceId; // 첫 번째 카메라 사용
-                console.log('Using video device:', deviceId);
+                //console.log('Using video device:', deviceId);
                 publisher = await OV.initPublisherAsync(undefined, {
                     audioSource: undefined,
                     videoSource: deviceId,
@@ -288,7 +288,7 @@ class OpenviduFinal extends Component {
 
                 publisher.publishAudio(false); // 초기에는 오디오 비활성화
                 session.publish(publisher);
-                console.log(`Published stream for user: ${userName}`);
+                //console.log(`Published stream for user: ${userName}`);
             } catch (error) {
                 console.error('Error initializing publisher:', error);
             }
@@ -325,7 +325,7 @@ class OpenviduFinal extends Component {
                 const existsInRight = rightUserList.some(user => user.connectionId === newUser.connectionId);
 
                 if (existsInLeft || existsInRight) {
-                    console.log(`User already exists in a group: ${newUser.userName}, Connection ID: ${newUser.connectionId}`);
+                    //console.log(`User already exists in a group: ${newUser.userName}, Connection ID: ${newUser.connectionId}`);
                     resolve(null);
                     return null;
                 }
@@ -333,10 +333,10 @@ class OpenviduFinal extends Component {
                 // 동기화된 그룹 할당 로직
                 if (this.props.createdBy === this.props.userName && !this.props.isObserver) {
                     leftUserList.push(newUser);
-                    console.log('Added to leftUserList:', newUser);
+                    //console.log('Added to leftUserList:', newUser);
                 } else if (!this.props.isObserver) {
                     rightUserList.push(newUser);
-                    console.log('Added to rightUserList:', newUser);
+                    //console.log('Added to rightUserList:', newUser);
                 } else {
                     resolve(null);
                     return null;
@@ -379,7 +379,7 @@ class OpenviduFinal extends Component {
                 type: 'phaseChange',
                 data: JSON.stringify({ currentPhase: newPhase, currentTurn: newTurn }),
             });
-            console.log(`Broadcasted phaseChange signal: Phase ${newPhase}, Turn ${newTurn}`);
+            //console.log(`Broadcasted phaseChange signal: Phase ${newPhase}, Turn ${newTurn}`);
         }
 
         // 타이머 초기화 등 필요한 작업 수행 (필요한 경우)
@@ -398,7 +398,7 @@ class OpenviduFinal extends Component {
         const { session } = this.state;
         if (session) {
             session.disconnect();
-            console.log('Disconnected from session');
+            //console.log('Disconnected from session');
         }
 
         // OpenVidu 객체 해제
@@ -427,7 +427,7 @@ class OpenviduFinal extends Component {
 
         // 기존 퍼블리셔 unpublish
         session.unpublish(publisher);
-        console.log('Unpublished existing publisher for screen sharing');
+        //console.log('Unpublished existing publisher for screen sharing');
 
         const OV = new OpenVidu();
         let screenPublisher = null;
@@ -439,12 +439,12 @@ class OpenviduFinal extends Component {
                 publishAudio: false,
                 publishVideo: true,
             });
-            console.log('Initialized screen publisher');
+            //console.log('Initialized screen publisher');
         } catch (error) {
             console.error('Error initializing screen publisher:', error);
             // 기존 퍼블리셔 복원
             session.publish(publisher);
-            console.log('Restored original publisher after screen share initialization failure');
+            //console.log('Restored original publisher after screen share initialization failure');
             return;
         }
 
@@ -455,12 +455,12 @@ class OpenviduFinal extends Component {
                 mainStreamManager: screenPublisher,
                 isSharingScreen: true,
             });
-            console.log('Published screen share stream');
+            //console.log('Published screen share stream');
         } catch (error) {
             console.error('Error publishing screen share:', error);
             // 기존 퍼블리셔 복원
             session.publish(publisher);
-            console.log('Restored original publisher after screen share publishing failure');
+            //console.log('Restored original publisher after screen share publishing failure');
         }
     }
 
@@ -474,11 +474,11 @@ class OpenviduFinal extends Component {
 
         // 화면 공유 퍼블리셔 unpublish
         session.unpublish(publisher);
-        console.log('Unpublished screen share publisher');
+        //console.log('Unpublished screen share publisher');
 
         // 화면 공유 퍼블리셔의 트랙 중지
         publisher.stream.getMediaStream().getTracks().forEach((track) => track.stop());
-        console.log('Stopped all tracks of screen share publisher');
+        //console.log('Stopped all tracks of screen share publisher');
 
         const OV = new OpenVidu();
         let cameraPublisher = null;
@@ -499,7 +499,7 @@ class OpenviduFinal extends Component {
         }).then((pub) => {
             cameraPublisher = pub;
             session.publish(cameraPublisher);
-            console.log('Published camera stream after stopping screen share');
+            //console.log('Published camera stream after stopping screen share');
 
             this.setState({
                 publisher: cameraPublisher,
@@ -535,7 +535,7 @@ class OpenviduFinal extends Component {
         // 로컬 사용자의 오디오 상태만 변경
         if (this.state.publisher) {
             this.state.publisher.publishAudio(shouldEnableAudio);
-            console.log(`User ${this.state.userName} audio set to ${shouldEnableAudio}`);
+            //console.log(`User ${this.state.userName} audio set to ${shouldEnableAudio}`);
         }
     };
 
@@ -551,7 +551,7 @@ class OpenviduFinal extends Component {
                 { customSessionId: sessionId },
                 { headers: { "Content-Type": "application/json" } }
             );
-            console.log('Created session:', response.data);
+            //console.log('Created session:', response.data);
             return response.data;
         } catch (error) {
             console.error('Error creating session:', error);
@@ -566,7 +566,7 @@ class OpenviduFinal extends Component {
                 {},
                 { headers: { "Content-Type": "application/json" } }
             );
-            console.log('Created token:', response.data);
+            //console.log('Created token:', response.data);
             return response.data;
         } catch (error) {
             console.error('Error creating token:', error);
@@ -634,7 +634,7 @@ class OpenviduFinal extends Component {
                 streamManager: mainStreamManager,
                 userName: this.state.userName,
             });
-            console.log(`Added mainStreamManager: ${localConnectionId}`);
+            //console.log(`Added mainStreamManager: ${localConnectionId}`);
         }
 
         // 구독자 스트림 추가
@@ -644,14 +644,14 @@ class OpenviduFinal extends Component {
                 streamManager: sub.subscriber,
                 userName: sub.userName,
             });
-            console.log(`Added subscriber: ${sub.userName}, Connection ID: ${sub.connectionId}`);
+            //console.log(`Added subscriber: ${sub.userName}, Connection ID: ${sub.connectionId}`);
         });
 
         // 좌측 및 우측 사용자 스트림 매니저 매핑
         const leftStreamManagers = leftUserList.map((user) => {
             const manager = allStreamManagers.find((manager) => manager.connectionId === user.connectionId);
             if (!manager) {
-                console.warn(`No streamManager found for Connection ID: ${user.connectionId}`);
+                //console.warn(`No streamManager found for Connection ID: ${user.connectionId}`);
             }
             return manager;
         }).filter(Boolean);
@@ -659,7 +659,7 @@ class OpenviduFinal extends Component {
         const rightStreamManagers = rightUserList.map((user) => {
             const manager = allStreamManagers.find((manager) => manager.connectionId === user.connectionId);
             if (!manager) {
-                console.warn(`No streamManager found for Connection ID: ${user.connectionId}`);
+                //console.warn(`No streamManager found for Connection ID: ${user.connectionId}`);
             }
             return manager;
         }).filter(Boolean);

@@ -124,13 +124,17 @@ const Room = ({ isObserver }) => {
       <div className='home-background3' />
       <div className="left-side">
         <RoomControl />
-        {userId === createdBy && (
+        {userId === createdBy && !isOpenviduActive && (
           <TimerButtons handleSetTimerDuration={handleSetTimerDuration} />
         )}
+
+        {!isOpenviduActive && (
         <ReadyButton
           isReady={isReady}
           handleToggleReady={handleToggleReady}
         />
+        )}
+
         <OpenviduFinal sessionId={roomNumber} userName={userId} createdBy={createdBy} isstart={isOpenviduActive} />
         {isOpenviduActive ? (
           <div></div>

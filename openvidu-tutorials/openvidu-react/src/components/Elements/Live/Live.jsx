@@ -19,7 +19,7 @@ const Live = () => {
           `${window.location.origin}/api/room/roomList`
         );
 
-        console.log("Room List Response:", response.data); // 서버에서 반환된 전체 방 목록 출력
+        //console.log("Room List Response:", response.data); // 서버에서 반환된 전체 방 목록 출력
 
         const rooms = response.data;
         if (rooms && rooms.length > 0) {
@@ -27,10 +27,7 @@ const Live = () => {
             prev.memberCount > current.memberCount ? prev : current
           );
 
-          console.log(
-            "Highest Member Count Room:",
-            highestMemberCountRoom
-          ); // 가장 높은 멤버 수를 가진 방 정보 출력
+          //console.log("Highest Member Count Room:",highestMemberCountRoom); // 가장 높은 멤버 수를 가진 방 정보 출력
 
           // participant 데이터가 null이 아닌 경우만 처리
           if (
@@ -41,16 +38,14 @@ const Live = () => {
               Object.keys(highestMemberCountRoom.participant).map(
                 async (username) => {
                   try {
-                    console.log(
-                      `Fetching profile image for participant: ${username}`
-                    ); // 요청 전 참가자 ID 출력
+                    // console.log(`Fetching profile image for participant: ${username}`); // 요청 전 참가자 ID 출력
 
                     const res = await axios.get(
                       `${window.location.origin}/api/user/get-profile-image`,
                       { params: { username } } // 쿼리 매개변수로 전달
                     );
             
-                    console.log(`Profile Image Response for ${username}:`, res.data); // 서버에서 받은 응답 데이터 출력
+                    //console.log(`Profile Image Response for ${username}:`, res.data); // 서버에서 받은 응답 데이터 출력
             
                     return {
                       username,
@@ -73,17 +68,17 @@ const Live = () => {
                 })
               );
 
-            console.log("Participant Images:", participantImages); // 생성된 참가자 이미지 데이터 출력
+            //console.log("Participant Images:", participantImages); // 생성된 참가자 이미지 데이터 출력
 
             // 상태 업데이트
             setParticipants(participantImages); // 이미지 포함된 참가자 데이터 저장
           } else {
-            console.warn("No participants found for the room."); // 참가자 데이터가 없는 경우 경고 출력
+            //console.warn("No participants found for the room."); // 참가자 데이터가 없는 경우 경고 출력
           }
 
           setTopRoom(highestMemberCountRoom); // 방 정보 저장
         } else {
-          console.warn("No rooms found."); // 방 목록이 비어있는 경우 경고 출력
+          //console.warn("No rooms found."); // 방 목록이 비어있는 경우 경고 출력
         }
       } catch (error) {
         console.error(
@@ -102,7 +97,7 @@ const Live = () => {
     return <div>Loading...</div>; // 로딩 중 메시지
   }
 
-  console.log("Participant Data:", topRoom.participant); // 디버깅용 로그 추가
+  //console.log("Participant Data:", topRoom.participant); // 디버깅용 로그 추가
 
   return (
     <div className="live-container">

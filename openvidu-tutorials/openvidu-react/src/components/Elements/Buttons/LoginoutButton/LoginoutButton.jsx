@@ -42,14 +42,14 @@ const LoginoutButton = () => {
           });
 
           if (response.ok) {
-            console.log("카카오 REST API 로그아웃 성공");
+            //console.log("카카오 REST API 로그아웃 성공");
             window.Kakao.Auth.setAccessToken(null); // Reset Kakao SDK session
           } else {
             console.error("카카오 REST API 로그아웃 실패:", await response.json());
             throw new Error("카카오 REST API 로그아웃 실패");
           }
         } else {
-          console.warn("유효한 액세스 토큰이 없습니다. 이미 로그아웃되었을 수 있습니다.");
+          //console.warn("유효한 액세스 토큰이 없습니다. 이미 로그아웃되었을 수 있습니다.");
         }
       }
 

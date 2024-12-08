@@ -24,7 +24,7 @@ const InviteModal = ({ onClose }) => {
             invitee,
             roomId,
         });
-        console.log('초대 성공:', response.data);
+        //console.log('초대 성공:', response.data);
         addToast("초대 성공", "success");
         onClose();
         } catch (error) {

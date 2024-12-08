@@ -75,13 +75,13 @@ mongoose.connect(mongoUri, {
   serverSelectionTimeoutMS: 10000, // 서버 선택 타임아웃 10초
   socketTimeoutMS: 45000, // 소켓 타임아웃 45초
 }).then(() => {
-  console.log('Connected to MongoDB');
+  //console.log('Connected to MongoDB');
 }).catch((err) => {
   console.error('Failed to connect to MongoDB:', err);
 });
 
 mongoose.connection.on('connected', () => {
-  console.log('Mongoose connected to DB Cluster');
+  //console.log('Mongoose connected to DB Cluster');
 });
 
 mongoose.connection.on('error', (err) => {
@@ -89,7 +89,7 @@ mongoose.connection.on('error', (err) => {
 });
 
 mongoose.connection.on('disconnected', () => {
-  console.log('Mongoose disconnected');
+  //console.log('Mongoose disconnected');
 });
 
 // JWT Secret
@@ -112,8 +112,8 @@ app.use(express.static(__dirname + '/public'));
 
 // Serve application
 server.listen(SERVER_PORT, () => {
-  console.log("Application started on port: ", SERVER_PORT);
-  console.warn('Application server connecting to OpenVidu at ' + OPENVIDU_URL);
+  //console.log("Application started on port: ", SERVER_PORT);
+  //console.warn('Application server connecting to OpenVidu at ' + OPENVIDU_URL);
 });
 
 app.post("/api/sessions", async (req, res) => {
