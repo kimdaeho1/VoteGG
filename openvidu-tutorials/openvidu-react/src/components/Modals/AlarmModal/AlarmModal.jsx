@@ -29,9 +29,9 @@ const AlarmModal = ({ onClose, username }) => {
   const respondToInvitation = async (id, response, roomId) => {
     try {
       const res = await axios.post(`${window.location.origin}/api/invitation/invitations/respond`, { id, response });
-      console.log('응답 성공:', res.data);
+      //console.log('응답 성공:', res.data);
       const roomId = res.data.invitation.roomId;
-      console.log(roomId);
+      //console.log(roomId);
       if (response === 'accepted') {
         navigate(`/room/${roomId}`); // roomId로 페이지 이동
         addToast("토론방에 입장했습니다.", "success");

@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react";
-import "./HotTopics.css"; // 커스텀 CSS 파일 추가
+import "./HotTopics.css";
+import TagHistoryModal from "../../../Modals/TagHistoryModal/TagHistoryModal.jsx";
 
 const HotTopics = () => {
-  const [tagCounts, setTagCounts] = useState([]); // 인기 태그 저장
-  const [popularDebates, setPopularDebates] = useState({}); // 태그별 인기 토론 저장
-  const [activeIndex, setActiveIndex] = useState(0); // 현재 활성화된 태그 인덱스
-  const topicsLength = 4; // 주제의 개수
-  const maxTitleLength = 30; // 제목의 최대 글자 수 설정
+  const [tagCounts, setTagCounts] = useState([]); // 태그 데이터
+  const [popularDebates, setPopularDebates] = useState({}); // 태그별 인기 토론 데이터
+  const [activeIndex, setActiveIndex] = useState(0); // 슬라이더 인덱스
+  const [selectedRoom, setSelectedRoom] = useState(null); // 선택된 방 데이터
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
+  const topicsLength = 4; // 태그 슬라이더의 길이
 
+  // 최초 데이터 가져오기
   useEffect(() => {
-    // API에서 데이터 가져오기
     const fetchPopularTopics = async () => {
       try {
         const response = await fetch("/api/debate-result/popular-topics");
         const data = await response.json();
-        console.log("API 응답 데이터:", data); // 응답 데이터 확인
-        setTagCounts(data.popularTags); // 인기 태그 저장
-        setPopularDebates(data.popularDebates); // 태그별 인기 토론 저장
+        setTagCounts(data.popularTags);
+        setPopularDebates(data.popularDebates); // participantsArray 포함
       } catch (error) {
         console.error("HotTopics 데이터 가져오기 실패:", error);
       }
@@ -25,33 +26,42 @@ const HotTopics = () => {
     fetchPopularTopics();
   }, []);
 
+  // 슬라이더 자동 전환
   useEffect(() => {
-    // 6초마다 자동으로 주제 변경
     const interval = setInterval(() => {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % topicsLength); // 4개 태그 순환
-    }, 6000); // 6초로 설정
+      setActiveIndex((prevIndex) => (prevIndex + 1) % topicsLength);
+    }, 6000);
 
-    return () => clearInterval(interval); // 컴포넌트 언마운트 시 interval 제거
+    return () => clearInterval(interval);
   }, []);
 
-  // 순위와 함께 아이템 렌더링
-  const renderRankedItems = (data) => {
-    return data.map((item, index) => {
-      // 제목이 최대 길이를 초과하면 자르고 말줄임표 추가
-      const shortenedTitle =
-        item.roomName.length > maxTitleLength
-          ? item.roomName.substring(0, maxTitleLength) + "..."
-          : item.roomName;
+  // 방 클릭 핸들러
+  const handleRoomClick = (roomId) => {
+    const roomData = Object.values(popularDebates).flat().find((room) => room._id === roomId);
+    setSelectedRoom(roomData); // 방 데이터 저장
+    setIsModalOpen(true); // 모달 열기
+  };
 
-      return (
-        <div className="topic-item" key={index} style={{ marginBottom: "20px" }}>
-          <div className="topic-header">
-            <span className="topic-rank">{index + 1}.</span> {/* 순위 표시 */}
-            <span className="topic-title">{shortenedTitle}</span>
-          </div>
+  // 모달 닫기 핸들러
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  // 태그별 인기 토론 목록 렌더링
+  const renderRankedItems = (data) => {
+    return data.map((item, index) => (
+      <div
+        className="topic-item"
+        key={item._id}
+        style={{ marginBottom: "20px" }}
+        onClick={() => handleRoomClick(item._id)}
+      >
+        <div className="topic-header">
+          <span className="topic-rank">{index + 1}.</span>
+          <span className="topic-title">{item.roomName}</span>
         </div>
-      );
-    });
+      </div>
+    ));
   };
 
   return (
@@ -75,6 +85,13 @@ const HotTopics = () => {
           </div>
         ))}
       </div>
+
+      {/* 모달 */}
+      <TagHistoryModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        roomData={selectedRoom}
+      />
     </div>
   );
 };

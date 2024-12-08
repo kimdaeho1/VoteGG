@@ -93,7 +93,7 @@ class OpenviduFinal extends Component {
                     to: [event.connection],
                     type: 'userList',
                 });
-                console.log(`Sent user list to newly connected user: ${event.connection.connectionId}`);
+                //console.log(`Sent user list to newly connected user: ${event.connection.connectionId}`);
             }
         });
 
@@ -118,7 +118,7 @@ class OpenviduFinal extends Component {
         // Handle userList signal
         session.on('signal:userList', (event) => {
             const data = JSON.parse(event.data);
-            console.log('Received userList signal:', data); // 디버깅용
+            //console.log('Received userList signal:', data); // 디버깅용
             this.setState((prevState) => {
                 const mergedLeftUserList = mergeUserLists(prevState.leftUserList, data.leftUserList || []);
                 const mergedRightUserList = mergeUserLists(prevState.rightUserList, data.rightUserList || []);
@@ -159,7 +159,7 @@ class OpenviduFinal extends Component {
                 const parsedData = JSON.parse(data);
                 userName = parsedData.clientData || 'Unknown';
             } catch (error) {
-                console.warn('Error parsing connection data:', error);
+                //console.warn('Error parsing connection data:', error);
             }
 
             const newSubscriber = {
@@ -168,8 +168,8 @@ class OpenviduFinal extends Component {
                 connectionId: event.stream.connection.connectionId,
             };
 
-            console.log(`New subscriber added: ${userName}, Connection ID: ${newSubscriber.connectionId}`);
-            console.log('Subscriber object:', subscriber);
+            //console.log(`New subscriber added: ${userName}, Connection ID: ${newSubscriber.connectionId}`);
+            //console.log('Subscriber object:', subscriber);
 
             this.setState((prevState) => ({
                 subscribers: [...prevState.subscribers, newSubscriber],
@@ -182,13 +182,13 @@ class OpenviduFinal extends Component {
             const shouldEnableAudio = data.enableAudio;
             const targetConnectionId = data.connectionId; // 특정 사용자에게만 적용
 
-            console.log(`Received toggleAudio signal for connectionId: ${targetConnectionId}, enableAudio: ${shouldEnableAudio}`);
+            //console.log(`Received toggleAudio signal for connectionId: ${targetConnectionId}, enableAudio: ${shouldEnableAudio}`);
 
             // 로컬 사용자의 connectionId와 비교
             if (this.state.session && this.state.session.connection.connectionId === targetConnectionId) {
                 if (this.state.publisher) {
                     this.state.publisher.publishAudio(shouldEnableAudio);
-                    console.log(`Audio for user ${this.state.userName} set to ${shouldEnableAudio}`);
+                    //console.log(`Audio for user ${this.state.userName} set to ${shouldEnableAudio}`);
                 }
             }
         });
@@ -197,7 +197,7 @@ class OpenviduFinal extends Component {
         session.on('streamDestroyed', (event) => {
             const connectionId = event.stream.connection.connectionId;
 
-            console.log(`Stream destroyed for Connection ID: ${connectionId}`);
+            //console.log(`Stream destroyed for Connection ID: ${connectionId}`);
 
             this.setState((prevState) => {
                 const subscribers = prevState.subscribers.filter(
@@ -227,7 +227,7 @@ class OpenviduFinal extends Component {
 
         // Handle exceptions
         session.on("exception", (exception) => {
-            console.warn(exception);
+            //console.warn(exception);
         });
 
         const sessionId = this.props.sessionId; // 세션 ID
@@ -236,7 +236,7 @@ class OpenviduFinal extends Component {
         try {
             const token = await this.getToken(sessionId);
             await session.connect(token, { clientData: userName });
-            console.log('Connected to session:', sessionId);
+            //console.log('Connected to session:', sessionId);
         } catch (error) {
             console.error('Error connecting to session:', error);
             return;
@@ -252,20 +252,21 @@ class OpenviduFinal extends Component {
                 return;
             }
 
-            // 카메라와 마이크 권한 요청
-            let cameraStream;
-            try {
-                cameraStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-                console.log('Camera and microphone permissions granted.');
-            } catch (error) {
-                console.error('Camera and microphone permission denied:', error);
-                return;
-            }
+                // 카메라와 마이크 권한 요청
+                try {
+                    await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                    console.log('Camera and microphone permissions granted.');
+                } catch (error) {
+                    console.error('Camera and microphone permission denied:', error);
+                    return;
+                }
+                
 
-            // 장치 목록 가져오기
-            const devices = await navigator.mediaDevices.enumerateDevices();
-            const videoDevices = devices.filter(device => device.kind === 'videoinput');
-            console.log('Available video devices:', videoDevices);
+                // 장치 목록 가져오기
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                const videoDevices = devices.filter(device => device.kind === 'videoinput');
+                console.log('Available video devices:', videoDevices);
+                
 
             // 비디오 장치 유효성 검증
             if (videoDevices.length === 0) {
@@ -273,433 +274,32 @@ class OpenviduFinal extends Component {
                 return;
             }
 
-            const deviceId = videoDevices[0]?.deviceId; // 첫 ��째 카메라 사용
-            console.log('Using video device:', deviceId);
-
-            // hiddenVideo 설정
-            const hiddenVideo = document.createElement('video');
-            hiddenVideo.style.position = 'absolute';
-            hiddenVideo.style.top = '-9999px';
-            hiddenVideo.style.left = '-9999px';
-            document.body.appendChild(hiddenVideo);
-            hiddenVideo.srcObject = cameraStream;
-            hiddenVideo.muted = true; 
-            hiddenVideo.playsInline = true;
-            try {
-                await hiddenVideo.play();
-                console.log('hiddenVideo play started');
-            } catch (err) {
-                console.error('Error playing video:', err);
-            }
-
-            console.log('Camera tracks:', cameraStream.getVideoTracks());
-
-            // 비디오가 로드되어 videoWidth, videoHeight를 얻을 수 있을 때까지 대기
-            await new Promise((resolve) => {
-                if (hiddenVideo.readyState >= hiddenVideo.HAVE_CURRENT_DATA) {
-                    resolve();
-                } else {
-                    hiddenVideo.addEventListener('loadeddata', () => resolve(), { once: true });
-                }
-            });
-
-            const streamWidth = hiddenVideo.videoWidth;
-            const streamHeight = hiddenVideo.videoHeight;
-            console.log(`Stream resolution: ${streamWidth}x${streamHeight}`);
-
-            // 오버레이 이미지 위치 상태 (스트리밍 해상도 기준)
-            let overlayX = 50;
-            let overlayY = 50;
-            let isDragging = false;
-            let dragOffsetX = 0;
-            let dragOffsetY = 0;
-
-            // 오버레이 이미지 로드
-            const overlayImage = new Image();
-            overlayImage.src = '/resources/images/egg.png'; 
-            await overlayImage.decode();
-
-            const hiddenCanvas = document.createElement('canvas');
-            hiddenCanvas.width = streamWidth * 0.8851;
-            hiddenCanvas.height = streamHeight * 0.8851;
-            const hiddenCtx = hiddenCanvas.getContext('2d');
-
-            function drawFrame() {
-                hiddenCtx.clearRect(0, 0, hiddenCanvas.width, hiddenCanvas.height);
-    
-                // 기존 비디오와 오버레이 이미지 그리기
-                if (hiddenVideo.readyState >= hiddenVideo.HAVE_CURRENT_DATA) {
-                    hiddenCtx.drawImage(hiddenVideo, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
-                }
-
-                // 오버레이 이미지 그리기
-                if (overlayImage.complete && overlayImage.naturalWidth > 0) {
-                    hiddenCtx.drawImage(
-                        overlayImage,
-                        overlayX,
-                        overlayY,
-                        overlayImage._drawWidth || overlayImage.naturalWidth,
-                        overlayImage._drawHeight || overlayImage.naturalHeight
-                    );
-                } else {
-                    console.warn("Overlay image not ready to draw.");
-                }
-
-                requestAnimationFrame(drawFrame);
-            }
-            requestAnimationFrame(drawFrame);
-
-            // hiddenCanvas로부터 스트림 확보
-            const canvasStream = hiddenCanvas.captureStream(30);
-
-            // 이벤트 전용 캔버스(eventCanvas) 생성: 마우스 이벤트만 처리 (투명)
-            this.eventCanvas = document.createElement('canvas');
-            this.eventCanvas.width = hiddenCanvas.width;
-            this.eventCanvas.height = hiddenCanvas.height;
-            this.eventCanvas.style.position = 'absolute';
-            this.eventCanvas.style.top = '0';
-            this.eventCanvas.style.left = '0';
-            this.eventCanvas.style.zIndex = 10000; // 다른 요소 위로
-            this.eventCanvas.style.pointerEvents = 'auto';
-            this.eventCanvas.style.background = 'transparent';
-            
-            // 비디오 컨테이너를 찾아 상대 위치 지정
-            const videoContainer = document.querySelector('.video-container');
-            if (!videoContainer) {
-                console.error('No .video-container element found!');
-                return;
-            }
-            videoContainer.style.position = 'relative';
-            videoContainer.appendChild(this.eventCanvas);
-
-
-            // S3 업로드 함수 추가
-            async function uploadImageToS3(file) {
-                try {
-                    // 프리사인드 URL 생성 요청
-                    const presignedResponse = await axios.post(`${window.location.origin}/api/generate-presigned-url`, {
-                        filename: file.name,
-                        contentType: file.type,
-                    }, {
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    });
-            
-                    const { url: presignedUrl, key } = presignedResponse.data;
-            
-                    // S3로 이미지 업로드
-                    const uploadResponse = await axios.put(presignedUrl, file, {
-                        headers: { 'Content-Type': file.type },
-                    });
-            
-                    if (uploadResponse.status === 200) {
-                        const imageUrl = `https://${process.env.REACT_APP_AWS_BUCKET_NAME}.s3.amazonaws.com/${key}`;
-                        console.log('Image uploaded to S3:', imageUrl);
-                        console.log('S3 Key:', key);
-                        return imageUrl; // S3에 저장된 이미지 URL 반환
+                const deviceId = videoDevices[0]?.deviceId; // 첫 번째 카메라 사용
+                console.log('Using video device:', deviceId);
+                publisher = await OV.initPublisherAsync(undefined, {
+                    audioSource: undefined,
+                    videoSource: deviceId,
+                    publishAudio: true,
+                    publishVideo: true,
+                    resolution: '640x640',
+                    frameRate: 30,
+                    mirror: false,
+                    audioProcessing: {
+                        echoCancellation: true,
+                        noiseSuppression: true,
+                        autoGainControl: true,
                     }
-                } catch (error) {
-                    console.error('Error uploading image to S3:', error);
-                    throw error;
-                }
+                });
+
+
+                publisher.publishAudio(false); // 초기에는 오디오 비활성화
+                session.publish(publisher);
+                console.log(`Published stream for user: ${userName}`);
+            } catch (error) {
+                console.error('Error initializing publisher:', error);
             }
-  
-            // 캔버스 드래그 앤 드롭 이벤트 처리
-            this.eventCanvas.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                e.dataTransfer.dropEffect = 'copy'; // 드롭 효과 설정
-            });
-            
-            this.eventCanvas.addEventListener('drop', async (e) => {
-                e.preventDefault();
-                const file = e.dataTransfer.files[0];
-            
-                if (file && file.type.startsWith('image/')) {
-                    console.log('File dropped:', file);
-            
-                    try {
-                        // 이미지 파일을 S3에 업로드
-                        const imageUrl = await uploadImageToS3(file);
-
-                        // 마우스 좌표를 스트리밍 화면의 좌표로 변환
-                        const rect = this.eventCanvas.getBoundingClientRect();
-                        const mouseX = e.clientX - rect.left; // 캔버스 내부 X 좌표
-                        const mouseY = e.clientY - rect.top;  // 캔버스 내부 Y 좌표
-
-                        const scaleX = hiddenCanvas.width / this.eventCanvas.width;
-                        const scaleY = hiddenCanvas.height / this.eventCanvas.height;
-
-                        overlayX = mouseX * scaleX; // 스트리밍 해상도 기준 X 좌표
-                        overlayY = mouseY * scaleY; // 스트리밍 해상도 기준 Y 좌표
-                        
-                        // 업로드된 이미지 URL로 overlayImage를 변경
-                        overlayImage.crossOrigin = 'Anonymous'; // 크로스오리진 설정
-                        overlayImage.src = `${imageUrl}?t=${Date.now()}`; // 캐싱 방지
-                        overlayImage.onload = () => {
-                            console.log('Overlay image updated to:', overlayImage.src);
-                        
-                            // 캔버스 초기화 및 재그리기
-                            hiddenCtx.clearRect(0, 0, hiddenCanvas.width, hiddenCanvas.height);
-                            hiddenCtx.drawImage(hiddenVideo, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
-                            hiddenCtx.drawImage(overlayImage, overlayX, overlayY);
-                        
-                            // 캔버스 스트림 재설정
-                            const newCanvasStream = hiddenCanvas.captureStream(30);
-                            publisher.replaceTrack(newCanvasStream.getVideoTracks()[0]).then(() => {
-                                console.log('Stream updated with new overlay image.');
-                            }).catch((error) => {
-                                console.error('Failed to update stream:', error);
-                            });
-                        };
-                        
-                        overlayImage.onerror = () => {
-                            console.error('Failed to load overlay image:', overlayImage.src);
-                        };
-                    } catch (error) {
-                        console.error('Error handling dropped file:', error);
-                    }
-                } else {
-                    console.warn('Dropped file is not a valid image');
-                }
-            });
-
-            // 팝업 메뉴 생성
-            const contextMenu = document.createElement('div');
-            contextMenu.style.position = 'absolute';
-            contextMenu.style.display = 'none';
-            contextMenu.style.backgroundColor = '#fff';
-            contextMenu.style.border = '1px solid #ccc';
-            contextMenu.style.padding = '8px';
-            contextMenu.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.2)';
-            contextMenu.style.cursor = 'pointer';
-            contextMenu.innerText = '삭제';
-            contextMenu.style.zIndex = '10000';
-            document.body.appendChild(contextMenu);
-
-            // 팝업 메뉴 내용 초기화
-            contextMenu.innerHTML = `
-            <div style="margin-bottom: 10px;">
-                <div style="margin-bottom: 5px;">
-                    <label>
-                        가로:
-                        <input type="number" id="overlayWidth" style="width: 60px;" />
-                    </label>
-                </div>
-                <div style="margin-bottom: 5px;">
-                    <label>
-                        세로:
-                        <input type="number" id="overlayHeight" style="width: 60px;" />
-                    </label>
-                </div>
-                <div style="margin-bottom: 10px;">
-                    <button id="resizeButton" style="display: block; width: 100%;">변경하기</button>
-                </div>
-                <div>
-                    <button id="deleteButton" style="display: block; width: 100%; color: red;">삭제하기</button>
-                </div>
-            </div>
-            `;
-
-            // 팝업 메뉴 이벤트 추가
-            const resizeButton = document.getElementById('resizeButton');
-            const deleteButton = document.getElementById('deleteButton');
-            const overlayWidthInput = document.getElementById('overlayWidth');
-            const overlayHeightInput = document.getElementById('overlayHeight');
-
-            // 마우스 우클릭 이벤트 처리
-            this.eventCanvas.addEventListener('contextmenu', (e) => {
-                // 마우스 좌표를 캔버스 좌표로 변환
-                const rect = this.eventCanvas.getBoundingClientRect();
-                const mouseX = e.clientX - rect.left;
-                const mouseY = e.clientY - rect.top;
-            
-                // 마우스 위치가 오버레이 이미지 영역 내에 있는지 확인
-                const isInsideOverlay =
-                    overlayImage.src &&
-                    overlayImage.src !== '' &&
-                    mouseX >= overlayX &&
-                    mouseX <= overlayX + overlayImage.width &&
-                    mouseY >= overlayY &&
-                    mouseY <= overlayY + overlayImage.height;
-            
-                if (isInsideOverlay) {
-                    e.preventDefault(); // 기본 브라우저 우클릭 메뉴 막기
-            
-                    console.log('Showing custom context menu');
-            
-                    // 팝업 메뉴 위치 설정
-                    const menuX = e.clientX;
-                    const menuY = e.clientY;
-            
-                    contextMenu.style.top = `${menuY}px`;
-                    contextMenu.style.left = `${menuX}px`;
-                    contextMenu.style.display = 'block';
-
-                    // 현재 오버레이 크기를 입력 필드에 표시
-                    overlayWidthInput.value = overlayImage._drawWidth || overlayImage.naturalWidth;
-                    overlayHeightInput.value = overlayImage._drawHeight || overlayImage.naturalHeight;
-                } else {
-                    console.log('Outside overlay image. Showing default context menu');
-                    contextMenu.style.display = 'none'; // 커스텀 팝업 숨기기
-                    // 기본 브라우저 우클릭 메뉴 허용 (아무것도 하지 않음)
-                }
-            });
-
-            // 크기 조절 버튼 클릭 이벤트
-            resizeButton.addEventListener('click', () => {
-                const newWidth = parseInt(overlayWidthInput.value, 10);
-                const newHeight = parseInt(overlayHeightInput.value, 10);
-
-                console.log('Input Values:', { newWidth, newHeight });
-
-                if (!isNaN(newWidth) && newWidth > 0 && !isNaN(newHeight) && newHeight > 0) {
-                    overlayImage._drawWidth = newWidth;
-                    overlayImage._drawHeight = newHeight;
-
-                    console.log('Overlay dimensions set to:', {
-                        width: overlayImage._drawWidth,
-                        height: overlayImage._drawHeight,
-                    });
-
-                    redrawCanvas();
-                } else {
-                    console.warn('Invalid size inputs');
-                }
-
-                contextMenu.style.display = 'none'; // 팝업 닫기
-            });
-
-            // 캔버스 다시 그리기 함수
-            function redrawCanvas() {
-                // 캔버스 초기화
-                hiddenCtx.clearRect(0, 0, hiddenCanvas.width, hiddenCanvas.height);
-
-                // 비디오 스트림을 먼저 그리기
-                if (hiddenVideo.readyState >= hiddenVideo.HAVE_CURRENT_DATA) {
-                    hiddenCtx.drawImage(hiddenVideo, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
-                }
-
-                // 오버레이 이미지가 있으면 크기와 위치에 맞게 그리기
-                if (overlayImage.src && overlayImage.src !== '') {
-                    if (!overlayImage._drawWidth || !overlayImage._drawHeight) {
-                        overlayImage._drawWidth = overlayImage.naturalWidth;
-                        overlayImage._drawHeight = overlayImage.naturalHeight;
-                    }
-
-                    console.log('Redrawing overlay image with dimensions:', {
-                        width: overlayImage._drawWidth,
-                        height: overlayImage._drawHeight,
-                        x: overlayX,
-                        y: overlayY,
-                    });
-
-                    hiddenCtx.drawImage(
-                        overlayImage,
-                        overlayX,
-                        overlayY,
-                        overlayImage._drawWidth,
-                        overlayImage._drawHeight
-                    );
-
-                    // 디버깅용 캔버스 데이터를 출력
-                    const imageData = hiddenCtx.getImageData(0, 0, hiddenCanvas.width, hiddenCanvas.height);
-                    console.log('Canvas imageData after drawImage:', imageData);
-                }
-            }
-
-            // 삭제 버튼 클릭 이벤트
-            deleteButton.addEventListener('click', () => {
-                console.log('Removing overlay image');
-                overlayImage.src = ''; // 이미지 제거
-                overlayX = 0;
-                overlayY = 0;
-
-                // 캔버스 초기화
-                hiddenCtx.clearRect(0, 0, hiddenCanvas.width, hiddenCanvas.height);
-                hiddenCtx.drawImage(hiddenVideo, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
-
-                contextMenu.style.display = 'none'; // 팝업 닫기
-            });
-
-            // 팝업 내부 클릭 시 이벤트 전파 방지
-            contextMenu.addEventListener('click', (e) => {
-                e.stopPropagation();
-            });
-
-            // 팝업 외부 클릭 시 닫기
-            document.addEventListener('click', (e) => {
-                if (!contextMenu.contains(e.target)) {
-                    contextMenu.style.display = 'none';
-                }
-            });
-
-            // 이벤트 핸들러
-            this.eventCanvas.addEventListener('mousedown', (e) => {
-                console.log("mousedown!!");
-                const rect = this.eventCanvas.getBoundingClientRect();
-                const mouseX = e.clientX - rect.left;
-                const mouseY = e.clientY - rect.top;
-
-                // 마우스 좌표를 스트리밍 해상도 좌표로 변환
-                const { streamingMouseX, streamingMouseY } = {streamingMouseX: mouseX, streamingMouseY: mouseY};
-
-                if (
-                    streamingMouseX >= overlayX && streamingMouseX <= overlayX + overlayImage.width &&
-                    streamingMouseY >= overlayY && streamingMouseY <= overlayY + overlayImage.height
-                ) {
-                    isDragging = true;
-                    dragOffsetX = streamingMouseX - overlayX;
-                    dragOffsetY = streamingMouseY - overlayY;
-                }
-            });
-
-            this.eventCanvas.addEventListener('mousemove', (e) => {
-                if (isDragging) {
-                    const rect = this.eventCanvas.getBoundingClientRect();
-                    const mouseX = e.clientX - rect.left;
-                    const mouseY = e.clientY - rect.top;
-
-                    const { streamingMouseX, streamingMouseY } = {streamingMouseX: mouseX, streamingMouseY: mouseY};
-                    overlayX = streamingMouseX - dragOffsetX;
-                    overlayY = streamingMouseY - dragOffsetY;
-                }
-            });
-
-            this.eventCanvas.addEventListener('mouseup', () => {
-                console.log("mouseup!!");
-                isDragging = false;
-            });
-
-            this.eventCanvas.addEventListener('mouseleave', () => {
-                isDragging = false;
-            });
-
-            // 퍼블리셔 생성 시 hiddenCanvas 스트림을 비디오 소스로 사용 (원본 해상도 유지)
-            publisher = await OV.initPublisherAsync(undefined, {
-                audioSource: cameraStream.getAudioTracks()[0],
-                videoSource: canvasStream.getVideoTracks()[0],
-                publishAudio: true,
-                publishVideo: true,
-                resolution: `${streamWidth}x${streamHeight}`, 
-                frameRate: 30,
-                mirror: false,
-                audioProcessing: {
-                    echoCancellation: true,
-                    noiseSuppression: true,
-                    autoGainControl: true,
-                }
-            });
-
-            // 초기 오디오 비활성화
-            publisher.publishAudio(false); 
-            session.publish(publisher);
-            console.log(`Published composite (camera+overlay) stream for user: ${this.state.userName}`);
-
-        } catch (error) {
-            console.error('Error initializing publisher:', error);
         }
-    }
+
 
         this.setState({
             session: session,
@@ -732,7 +332,7 @@ class OpenviduFinal extends Component {
                 const existsInRight = rightUserList.some(user => user.connectionId === newUser.connectionId);
 
                 if (existsInLeft || existsInRight) {
-                    console.log(`User already exists in a group: ${newUser.userName}, Connection ID: ${newUser.connectionId}`);
+                    //console.log(`User already exists in a group: ${newUser.userName}, Connection ID: ${newUser.connectionId}`);
                     resolve(null);
                     return null;
                 }
@@ -740,10 +340,10 @@ class OpenviduFinal extends Component {
                 // 동기화된 그룹 할당 로직
                 if (this.props.createdBy === this.props.userName && !this.props.isObserver) {
                     leftUserList.push(newUser);
-                    console.log('Added to leftUserList:', newUser);
+                    //console.log('Added to leftUserList:', newUser);
                 } else if (!this.props.isObserver) {
                     rightUserList.push(newUser);
-                    console.log('Added to rightUserList:', newUser);
+                    //console.log('Added to rightUserList:', newUser);
                 } else {
                     resolve(null);
                     return null;
@@ -801,7 +401,7 @@ class OpenviduFinal extends Component {
                 type: 'phaseChange',
                 data: JSON.stringify({ currentPhase: newPhase, currentTurn: newTurn }),
             });
-            console.log(`Broadcasted phaseChange signal: Phase ${newPhase}, Turn ${newTurn}`);
+            //console.log(`Broadcasted phaseChange signal: Phase ${newPhase}, Turn ${newTurn}`);
         }
 
         // 타이머 초기화 등 필요한 작업 수행 (필요한 경우)
@@ -820,7 +420,7 @@ class OpenviduFinal extends Component {
         const { session } = this.state;
         if (session) {
             session.disconnect();
-            console.log('Disconnected from session');
+            //console.log('Disconnected from session');
         }
 
         // OpenVidu 객체 해제
@@ -849,7 +449,7 @@ class OpenviduFinal extends Component {
 
         // 기존 퍼블리셔 unpublish
         session.unpublish(publisher);
-        console.log('Unpublished existing publisher for screen sharing');
+        //console.log('Unpublished existing publisher for screen sharing');
 
         const OV = new OpenVidu();
         let screenPublisher = null;
@@ -861,12 +461,12 @@ class OpenviduFinal extends Component {
                 publishAudio: false,
                 publishVideo: true,
             });
-            console.log('Initialized screen publisher');
+            //console.log('Initialized screen publisher');
         } catch (error) {
             console.error('Error initializing screen publisher:', error);
             // 기존 퍼블리셔 복원
             session.publish(publisher);
-            console.log('Restored original publisher after screen share initialization failure');
+            //console.log('Restored original publisher after screen share initialization failure');
             return;
         }
 
@@ -877,12 +477,12 @@ class OpenviduFinal extends Component {
                 mainStreamManager: screenPublisher,
                 isSharingScreen: true,
             });
-            console.log('Published screen share stream');
+            //console.log('Published screen share stream');
         } catch (error) {
             console.error('Error publishing screen share:', error);
             // 기존 퍼블리셔 복원
             session.publish(publisher);
-            console.log('Restored original publisher after screen share publishing failure');
+            //console.log('Restored original publisher after screen share publishing failure');
         }
     }
 
@@ -896,11 +496,11 @@ class OpenviduFinal extends Component {
 
         // 화면 공유 퍼블리셔 unpublish
         session.unpublish(publisher);
-        console.log('Unpublished screen share publisher');
+        //console.log('Unpublished screen share publisher');
 
         // 화면 공유 퍼블리셔의 트랙 중지
         publisher.stream.getMediaStream().getTracks().forEach((track) => track.stop());
-        console.log('Stopped all tracks of screen share publisher');
+        //console.log('Stopped all tracks of screen share publisher');
 
         const OV = new OpenVidu();
         let cameraPublisher = null;
@@ -921,7 +521,7 @@ class OpenviduFinal extends Component {
         }).then((pub) => {
             cameraPublisher = pub;
             session.publish(cameraPublisher);
-            console.log('Published camera stream after stopping screen share');
+            //console.log('Published camera stream after stopping screen share');
 
             this.setState({
                 publisher: cameraPublisher,
@@ -957,7 +557,7 @@ class OpenviduFinal extends Component {
         // 로컬 사용자의 오디오 상태만 변경
         if (this.state.publisher) {
             this.state.publisher.publishAudio(shouldEnableAudio);
-            console.log(`User ${this.state.userName} audio set to ${shouldEnableAudio}`);
+            //console.log(`User ${this.state.userName} audio set to ${shouldEnableAudio}`);
         }
     };
 
@@ -973,7 +573,7 @@ class OpenviduFinal extends Component {
                 { customSessionId: sessionId },
                 { headers: { "Content-Type": "application/json" } }
             );
-            console.log('Created session:', response.data);
+            //console.log('Created session:', response.data);
             return response.data;
         } catch (error) {
             console.error('Error creating session:', error);
@@ -988,7 +588,7 @@ class OpenviduFinal extends Component {
                 {},
                 { headers: { "Content-Type": "application/json" } }
             );
-            console.log('Created token:', response.data);
+            //console.log('Created token:', response.data);
             return response.data;
         } catch (error) {
             console.error('Error creating token:', error);
@@ -1056,7 +656,7 @@ class OpenviduFinal extends Component {
                 streamManager: mainStreamManager,
                 userName: this.state.userName,
             });
-            console.log(`Added mainStreamManager: ${localConnectionId}`);
+            //console.log(`Added mainStreamManager: ${localConnectionId}`);
         }
 
         // 구독자 스트림 추가
@@ -1066,14 +666,14 @@ class OpenviduFinal extends Component {
                 streamManager: sub.subscriber,
                 userName: sub.userName,
             });
-            console.log(`Added subscriber: ${sub.userName}, Connection ID: ${sub.connectionId}`);
+            //console.log(`Added subscriber: ${sub.userName}, Connection ID: ${sub.connectionId}`);
         });
 
         // 좌측 및 우측 사용자 스트림 매니저 매핑
         const leftStreamManagers = leftUserList.map((user) => {
             const manager = allStreamManagers.find((manager) => manager.connectionId === user.connectionId);
             if (!manager) {
-                console.warn(`No streamManager found for Connection ID: ${user.connectionId}`);
+                //console.warn(`No streamManager found for Connection ID: ${user.connectionId}`);
             }
             return manager;
         }).filter(Boolean);
@@ -1081,7 +681,7 @@ class OpenviduFinal extends Component {
         const rightStreamManagers = rightUserList.map((user) => {
             const manager = allStreamManagers.find((manager) => manager.connectionId === user.connectionId);
             if (!manager) {
-                console.warn(`No streamManager found for Connection ID: ${user.connectionId}`);
+                //console.warn(`No streamManager found for Connection ID: ${user.connectionId}`);
             }
             return manager;
         }).filter(Boolean);

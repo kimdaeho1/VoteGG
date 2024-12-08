@@ -11,11 +11,11 @@ const Search = () => {
     setIsMagnifier((prevState) => !prevState); // 돋보기/X 상태 토글
     if (isMagnifier) {
       setSearchQuery(searchInput); // 검색 실행
-      console.log(`${searchInput} 검색 실행`);
+      //console.log(`${searchInput} 검색 실행`);
     } else {
       setSearchQuery(''); // 검색어 초기화
       setSearchInput(''); // 검색창 초기화
-      console.log('검색어 초기화');
+      //console.log('검색어 초기화');
     }
   };
 
