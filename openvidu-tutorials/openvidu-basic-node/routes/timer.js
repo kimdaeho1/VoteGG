@@ -287,7 +287,7 @@ function timerSocketHandler(io) {
       if (participantsArray.length < 1) {
         //console.log("참가자가 부족합니다. 최소 4명이 필요합니다.");
         // 클라이언트에게 에러 메시지 전송
-        timerNamespace.to(roomId).emit('timerFinished', { error: "참가자가 부족합니다. 최소 4명이 필요합니다." });
+        timerNamespace.to(roomId).emit('timerFinished', { error: "참가자가 부족합니다. 최소 2명이 필요합니다." });
         return;
       }
 
@@ -344,7 +344,9 @@ function timerSocketHandler(io) {
         roomName: roomDocument.roomname,
         tags: roomDocument.tags,
         maxViewers : roomDocument.maxViewers,
-        participantsArray: Array.from(roomDocument.participant.entries()), // Map을 배열로 저장
+        participantsArray: Array.from(roomDocument.participant.entries()), // Map을 배열로 저장]
+        leftArgument : Array.from(roomDocument.leftUserArgument.entries()), // Map을 배열로 저장
+        rightArgument : Array.from(roomDocument.rightUserArgument.entries()), // Map을 배열로 저장
       });
       
       await debateResult.save();

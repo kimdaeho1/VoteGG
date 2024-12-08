@@ -29,6 +29,14 @@ const debateResultSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  leftArgument: { 
+    type: [[String, String]], // [key, value] 쌍의 배열
+    default: [],
+  },
+  rightArgument: { 
+    type: [[String, String]], // [key, value] 쌍의 배열
+    default: [],
+  },
 });
 
 module.exports = mongoose.model("DebateResult", debateResultSchema);
