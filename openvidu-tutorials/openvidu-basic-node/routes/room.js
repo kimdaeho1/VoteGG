@@ -236,6 +236,54 @@ router.get("/:roomId/debugParticipants", async (req, res) => {
   }
 });
 
+// // 방의 사용자 토론 내용을 저장하는 API
+// router.post("/saveargument", async (req, res) => {
+//   try {
+//       const {
+//           leftUserArgument,
+//           rightUserArgument,
+//           leftUserId,
+//           rightUserId,
+//           leftUserList,
+//           rightUserList,
+//           roomNumber,
+//       } = req.body;
+
+//       if (!leftUserArgument && !rightUserArgument) {
+//           return res.status(400).json({ error: "Arguments cannot be empty." });
+//       }
+
+//       if (!roomNumber) {
+//           return res.status(400).json({ error: "Room number is required." });
+//       }
+
+//       // 방 찾기
+//       const room = await Room.findOne({
+//           roomNumber,
+//       });
+
+//       if (!room) {
+//           return res.status(404).json({ error: "Room not found." });
+//       }
+
+//       // 방에 사용자 토론 내용을 저장
+//         room.leftUserArgument.set(String(leftUserList[0]), leftUserArgument);
+//         room.rightUserArgument.set(String(rightUserList[0]), rightUserArgument);
+
+//       // 사용자 리스트 업데이트 (선택 사항)
+//       room.leftUserList = leftUserList || [];
+//       room.rightUserList = rightUserList || [];
+
+//       await room.save();
+
+//       res.status(200).json({ message: "Arguments saved successfully." });
+//   } catch (error) {
+//       console.error("Error saving arguments:", error.message);
+//       res.status(500).json({ error: "Failed to save arguments." });
+//   }
+// });
+
+
 
 
 // 투표 POST 요청 처리

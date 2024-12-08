@@ -161,6 +161,10 @@ const Timer = ({ isObserver }) => {
       <div className="timer-wrapper">
         <div className="status-and-button">
           <span className={`current-status ${getStatusClass(currentIndex)}`}>
+          <div>
+        <button onClick={() => setShowVoteStatistic(true)}>하드 코딩된결과 보기</button>
+        {showVoteStatistic && <VoteStatistichard onClose={() => setShowVoteStatistic(false)} />}
+      </div>
             {!isRunning && !timerFinished
               ? "토론 준비"
               : timerFinished
@@ -190,10 +194,7 @@ const Timer = ({ isObserver }) => {
 
       {timerFinished && <VoteStatistic roomNumber={roomId} resultData={resultData} onClose={() => setTimerFinished(false)} />}
 
-      {/* <div>
-        <button onClick={() => setShowVoteStatistic(true)}>하드 코딩된결과 보기</button>
-        {showVoteStatistic && <VoteStatistichard onClose={() => setShowVoteStatistic(false)} />}
-      </div> */}
+
     </div>
   );
 };
