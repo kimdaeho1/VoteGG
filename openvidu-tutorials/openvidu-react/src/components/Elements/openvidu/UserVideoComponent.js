@@ -24,7 +24,7 @@ export default class UserVideoComponent extends Component {
         // Check if it's the local stream
         const isLocalStream = connectionId === localConnectionId;
 
-        console.log(`Rendering UserVideoComponent for ${clientData}, Connection ID: ${connectionId}, isLocalStream: ${isLocalStream}`);
+        //console.log(`Rendering UserVideoComponent for ${clientData}, Connection ID: ${connectionId}, isLocalStream: ${isLocalStream}`);
 
         return (
             <div>
@@ -40,7 +40,8 @@ export default class UserVideoComponent extends Component {
                         </div> */}
                     </div>
                 ) : (
-                    console.warn(`No streamManager found for user: ${clientData}, Connection ID: ${connectionId}`)
+                    // console.warn(`No streamManager found for user: ${clientData}, Connection ID: ${connectionId}`)
+                    console.warn(`No streamManager found for user:, Connection ID: `)
                 )}
             </div>
         );

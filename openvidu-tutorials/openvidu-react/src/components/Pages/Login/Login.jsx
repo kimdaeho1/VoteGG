@@ -38,7 +38,7 @@ const Login = () => {
   };
 
   const handleKakaoLogin = () => {
-    console.log('Redirecting to Kakao login...'); // 디버깅용
+    //console.log('Redirecting to Kakao login...'); // 디버깅용
     window.location.href = '/api/user/auth/kakao'; // 서버에서 리디렉션 처리
   };
 

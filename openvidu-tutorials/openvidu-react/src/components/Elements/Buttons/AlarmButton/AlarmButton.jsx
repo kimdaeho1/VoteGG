@@ -27,7 +27,7 @@ const AlarmButton = () => {
       try {
         const username = token ? getUsernameFromToken(token) : '';
         if (!username) {
-          console.warn("Username is empty or invalid. Stopping polling.");
+          //console.warn("Username is empty or invalid. Stopping polling.");
           setIsPolling(false); // 폴링 중단
           break;
         }

@@ -35,7 +35,7 @@ const Home = () => {
 
   // 상태 확인용 디버깅 (개발 중 확인용)
   useEffect(() => {
-    console.log('Token updated:', token);
+    //console.log('Token updated:', token);
   }, [token]);
 
   return (

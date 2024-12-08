@@ -14,7 +14,7 @@ const HotTopics = () => {
       try {
         const response = await fetch("/api/debate-result/popular-topics");
         const data = await response.json();
-        console.log("API 응답 데이터:", data); // 응답 데이터 확인
+        //console.log("API 응답 데이터:", data); // 응답 데이터 확인
         setTagCounts(data.popularTags); // 인기 태그 저장
         setPopularDebates(data.popularDebates); // 태그별 인기 토론 저장
       } catch (error) {

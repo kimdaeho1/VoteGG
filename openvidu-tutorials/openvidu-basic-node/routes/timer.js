@@ -13,12 +13,12 @@ function timerSocketHandler(io) {
   const timerNamespace = io.of('/timer');
 
   timerNamespace.on('connection', (socket) => {
-    console.log(`타이머 네임스페이스에 새로운 클라이언트 연결: ${socket.id}`);
+    //console.log(`타이머 네임스페이스에 새로운 클라이언트 연결: ${socket.id}`);
 
     // 방에 조인하는 이벤트 처리
     socket.on('join_room', (roomId) => {
       socket.join(roomId);
-      console.log(`타이머방 ${socket.id}가 방 ${roomId}에 참여했습니다.`);
+      //console.log(`타이머방 ${socket.id}가 방 ${roomId}에 참여했습니다.`);
 
       // 해당 방의 타이머가 없으면 생성
       if (!rooms[roomId]) {
@@ -62,7 +62,7 @@ function timerSocketHandler(io) {
       // 모든 클라이언트에게 준비 상태 업데이트 전송
       timerNamespace.to(roomId).emit('update_ready_count', room.readyCount);
     
-      console.log(`방 ${roomId}의 준비된 사용자 수: ${room.readyCount}`);
+      //console.log(`방 ${roomId}의 준비된 사용자 수: ${room.readyCount}`);
     });
     
 
@@ -74,7 +74,7 @@ function timerSocketHandler(io) {
       room.stopRequests += requested ? 1 : -1;
       room.stopRequests = Math.max(0, room.stopRequests);
 
-      console.log(`방 ${roomId}의 종료 요청 상태: ${room.stopRequests}`);
+      //console.log(`방 ${roomId}의 종료 요청 상태: ${room.stopRequests}`);
 
       // 모든 클라이언트에게 종료 요청 수 업데이트 브로드캐스트
       timerNamespace.to(roomId).emit('stopRequestUpdate', {
@@ -93,7 +93,7 @@ function timerSocketHandler(io) {
           currentPhase: room.currentPhase,
           currentTurn: room.currentTurn,
         });
-        console.log(`방 ${roomId}의 타이머가 종료되었습니다.`);
+        //console.log(`방 ${roomId}의 타이머가 종료되었습니다.`);
       }
     });
 
@@ -142,7 +142,7 @@ function timerSocketHandler(io) {
       if (room) {
         room.durations[0] = duration; // 첫 번째 단계의 지속 시간을 설정
         room.timeLeft = duration; // 남은 시간도 업데이트
-        console.log(`방 ${roomId}의 타이머가 ${duration}초로 설정되었습니다.`);
+        //console.log(`방 ${roomId}의 타이머가 ${duration}초로 설정되었습니다.`);
 
         // 모든 클라이언트에게 업데이트된 타이머 정보 전송
         timerNamespace.to(roomId).emit('timerUpdate', {
@@ -158,7 +158,7 @@ function timerSocketHandler(io) {
 
     // 클라이언트 연결 해제 시 처리
     socket.on('disconnect', () => {
-      console.log('타이머방 연결 해제:', socket.id);
+      //console.log('타이머방 연결 해제:', socket.id);
 
       // 사용자가 속한 방들에 대해 처리
       const roomsJoined = socket.rooms;
@@ -178,7 +178,7 @@ function timerSocketHandler(io) {
           if (rooms[roomId]) {
             stopTimer(roomId);
             delete rooms[roomId];
-            console.log(`타이머방 ${roomId}의 타이머가 정리되었습니다.`);
+            //console.log(`타이머방 ${roomId}의 타이머가 정리되었습니다.`);
           }
         }
       });
@@ -285,7 +285,7 @@ function timerSocketHandler(io) {
       const participantsArray = Array.from(roomDocument.participant.entries());
 
       if (participantsArray.length < 1) {
-        console.log("참가자가 부족합니다. 최소 4명이 필요합니다.");
+        //console.log("참가자가 부족합니다. 최소 4명이 필요합니다.");
         // 클라이언트에게 에러 메시지 전송
         timerNamespace.to(roomId).emit('timerFinished', { error: "참가자가 부족합니다. 최소 4명이 필요합니다." });
         return;
@@ -348,9 +348,9 @@ function timerSocketHandler(io) {
       });
       
       await debateResult.save();
-      console.log("토론 결과가 성공적으로 저장되었습니다.");
+      //console.log("토론 결과가 성공적으로 저장되었습니다.");
 
-      console.log("투표 결과가 성공적으로 처리되었습니다.");
+      //console.log("투표 결과가 성공적으로 처리되었습니다.");
 // =======
 //         // 클라이언트에게 결과 전송
 //         timerNamespace.to(roomId).emit('timerFinished', {
