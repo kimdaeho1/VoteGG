@@ -294,12 +294,13 @@ function timerSocketHandler(io) {
             return;
         }
 
-      if (participantsArray.length < 1) {
-        //console.log("참가자가 부족합니다. 최소 4명이 필요합니다.");
-        // 클라이언트에게 에러 메시지 전송
-        timerNamespace.to(roomId).emit('timerFinished', { error: "참가자가 부족합니다. 최소 2명이 필요합니다." });
-        return;
-      }
+        // Red팀과 Blue팀 나누기
+        const redTeam = participantsArray.slice(0, 2); // 0, 1번 참가자
+        const blueTeam = participantsArray.slice(2, 4); // 2, 3번 참가자
+
+        // 점수 계산
+        const redScore = redTeam.reduce((sum, [, votes]) => sum + votes, 0);
+        const blueScore = blueTeam.reduce((sum, [, votes]) => sum + votes, 0);
 
         // 전체 참가자 정보 가져오기
         const participantIds = participantsArray.map(([id]) => id);
@@ -317,6 +318,7 @@ function timerSocketHandler(io) {
             // myHistory에 기록 추가
             user.myHistory.push(historyEntry);
         }
+
 
       // 최대 득표자 계산
       const maxVotes = Math.max(...participantsArray.map(([, votes]) => votes));
@@ -354,11 +356,32 @@ function timerSocketHandler(io) {
         topScorers: topScorers.map((user) => user.username),
       });
 
+        // DB 업데이트
+        await Promise.all(users.map((user) => user.save()));
+
+        // 토론 결과 저장
+        const debateResult = new DebateResult({
+            roomName: roomDocument.roomname,
+            tags: roomDocument.tags,
+            maxViewers: roomDocument.maxViewers,
+            participantsArray: Array.from(roomDocument.participant.entries()), // Map을 배열로 저장
+        });
+
+        await debateResult.save();
+
+        // 클라이언트에게 결과 전송
+        timerNamespace.to(roomId).emit('timerFinished', {
+            message: "투표 결과가 성공적으로 처리되었습니다.",
+            redScore,
+            blueScore,
+            topScorers: topScorers.map((user) => user.username),
+        });
     } catch (error) {
         console.error("투표 결과 처리 중 오류:", error);
         timerNamespace.to(roomId).emit('timerFinished', { error: "투표 결과를 처리하는 중 오류가 발생했습니다." });
     }
 }
+
 
   // 타이머 정지 함수
   function stopTimer(roomId) {
