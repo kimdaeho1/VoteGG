@@ -23,15 +23,15 @@ class OpenviduFinal extends Component {
             leftUserList: [],
             rightUserList: [],
             userName: this.props.userName || 'Unknown', // 사용자 이름 설정
-            createdBy : this.props.createdBy  || 'Unknown',
+            createdBy: this.props.createdBy || 'Unknown',
             currentPhase: 1,
             currentTurn: 'left',
             leftUserArgument: '',
             rightUserArgument: '',
             isLeftUserEditing: false,
             isRightUserEditing: false,
-            isstart : this.props.isstart
-        }; 
+            isstart: this.props.isstart
+        };
 
         this.joinSession = this.joinSession.bind(this);
         this.leaveSession = this.leaveSession.bind(this);
@@ -119,7 +119,7 @@ class OpenviduFinal extends Component {
             this.setState((prevState) => {
                 const mergedLeftUserList = mergeUserLists(prevState.leftUserList, data.leftUserList || []);
                 const mergedRightUserList = mergeUserLists(prevState.rightUserList, data.rightUserList || []);
-        
+
                 return {
                     leftUserList: mergedLeftUserList,
                     rightUserList: mergedRightUserList,
@@ -732,19 +732,19 @@ class OpenviduFinal extends Component {
             this.setState((prevState) => {
                 let leftUserList = [...prevState.leftUserList];
                 let rightUserList = [...prevState.rightUserList];
-    
+
                 // 이미 리스트에 존재하는지 확인
                 const existsInLeft = leftUserList.some(user => user.connectionId === newUser.connectionId);
                 const existsInRight = rightUserList.some(user => user.connectionId === newUser.connectionId);
-    
+
                 if (existsInLeft || existsInRight) {
                     console.log(`User already exists in a group: ${newUser.userName}, Connection ID: ${newUser.connectionId}`);
                     resolve(null);
                     return null;
                 }
-    
+
                 // 동기화된 그룹 할당 로직
-                if (this.props.createdBy === this.props.userName  && !this.props.isObserver) {
+                if (this.props.createdBy === this.props.userName && !this.props.isObserver) {
                     leftUserList.push(newUser);
                     console.log('Added to leftUserList:', newUser);
                 } else if (!this.props.isObserver) {
@@ -754,13 +754,13 @@ class OpenviduFinal extends Component {
                     resolve(null);
                     return null;
                 }
-    
+
                 // 모든 참가자에게 업데이트된 사용자 리스트 전송
                 this.state.session.signal({
                     data: JSON.stringify({ leftUserList, rightUserList }),
                     type: 'userList',
                 });
-    
+
                 resolve({ leftUserList, rightUserList });
                 return {
                     leftUserList,
@@ -1028,7 +1028,7 @@ class OpenviduFinal extends Component {
             });
         }
     }
-    
+
 
 
 
@@ -1039,7 +1039,7 @@ class OpenviduFinal extends Component {
         const allStreamManagers = [];
         // 본인의 connectionId
         const localConnectionId = session?.connection?.connectionId;
-        const { leftUserArgument, rightUserArgument, isLeftUserEditing, isRightUserEditing,} = this.state;
+        const { leftUserArgument, rightUserArgument, isLeftUserEditing, isRightUserEditing, } = this.state;
         // 본인의 스트림 매니저 추가
         if (mainStreamManager && localConnectionId) {
             allStreamManagers.push({
@@ -1094,78 +1094,123 @@ class OpenviduFinal extends Component {
                 <div className="openvidu-final">
                     <div className="video-container">
                         {/* Left User Video */}
-                        <div className={`left-video ${currentTurn === 'left' && currentLeftUser ? 'active-speaker' : 'none-active-speaker'}`}>
+                        <div className='left-video '>
                             {currentLeftUser ? (
                                 <div className="user-video">
                                     <UserVideoComponent
                                         streamManager={currentLeftUser.streamManager}
                                         localConnectionId={localConnectionId}
                                     />
-                                    <p className="user-name">{currentLeftUser.userName} 님</p>
-                                    {currentTurn === 'left' && <img className="active-speaker-image" src="/resources/images/radio.png" alt="Active Speaker" />}
                                     {/* LeftUser의 주장 표시/입력 공간 */}
                                     <div className="argument-section-bottom">
-                                        {isLeftUserEditing ? (
-                                            <textarea
-                                                placeholder="주장을 입력하세요"
-                                                value={leftUserArgument}
-                                                onChange={(e) => this.handleArgumentChange(e, 'leftUserArgument')}
-                                            />
-                                        ) : (
-                                            <p>{leftUserArgument || '주장입력'}</p>
+                                        <div
+                                            className={`speech-bubble ${
+                                                this.props.isstart ? 'disabled' : 
+                                                isLeftUserEditing ? 'editing' : 
+                                                localConnectionId === currentLeftUser?.connectionId ? '' : 'disabled'
+                                                }`}
+                                            onClick={() => {
+                                                if (!isLeftUserEditing && localConnectionId === currentLeftUser?.connectionId) {
+                                                    this.toggleLeftUserEdit();
+                                                }
+                                            }}
+                                        >
+                                            {isLeftUserEditing ? (
+                                                <input
+                                                    type="text"
+                                                    placeholder="주장을 입력하세요"
+                                                    value={leftUserArgument}
+                                                    maxLength={20} // 글자 제한
+                                                    onChange={(e) => this.handleArgumentChange(e, 'leftUserArgument')}
+                                                    onClick={(e) => e.stopPropagation()} // input 클릭 시 부모의 클릭 이벤트 방지
+                                                />
+                                            ) : (
+                                                <p>{leftUserArgument || '주장입력'}</p>
+                                            )}
+                                        </div>
+                                        {isLeftUserEditing && (
+                                            <button
+                                                className="save-button"
+                                                onClick={(e) => {
+                                                    e.stopPropagation(); // 버튼 클릭 시 부모의 클릭 이벤트 방지
+                                                    this.toggleLeftUserEdit();
+                                                }}
+                                            >
+                                                저장
+                                            </button>
                                         )}
-
-                                        {!this.props.isObserver && localConnectionId === currentLeftUser?.connectionId && !this.props.isstart && (
-                                        <button onClick={this.toggleLeftUserEdit}>
-                                            {isLeftUserEditing ? '저장' : '작성'}
-                                        </button>
-                                        )}
-                                        
                                     </div>
+
+
+
+
+
+
                                 </div>
                             ) : (
                                 <img className="empty-slot" src="/unknown.png" />
                             )}
                         </div>
-    
+
                         {/* Right User Video */}
-                        <div className={`right-video ${currentTurn === 'right' && currentRightUser ? 'active-speaker' : 'none-active-speaker'}`}>
+                        <div className='right-video'>
                             {currentRightUser ? (
                                 <div className="user-video">
                                     <UserVideoComponent
                                         streamManager={currentRightUser.streamManager}
                                         localConnectionId={localConnectionId}
                                     />
-                                    <p className="user-name">{currentRightUser.userName} 님</p>
-                                    {currentTurn === 'right' && <img className="active-speaker-image" src="/resources/images/radio.png" alt="Active Speaker" />}
                                     {/* RightUser의 주장 표시/입력 공간 */}
                                     <div className="argument-section-bottom">
-                                        {isRightUserEditing ? (
-                                            <textarea
-                                                placeholder="주장을 입력하세요"
-                                                value={rightUserArgument}
-                                                onChange={(e) => this.handleArgumentChange(e, 'rightUserArgument')}
-                                            />
-                                        ) : (
-                                            <p>{rightUserArgument || '주장입력'}</p>
+                                        <div
+                                            className={`speech-bubble ${
+                                                this.props.isstart ? 'disabled' :
+                                                isRightUserEditing ? 'editing' : 
+                                                localConnectionId === currentRightUser?.connectionId ? '' : 'disabled'
+                                                }`}
+                                            onClick={() => {
+                                                if (!isRightUserEditing && localConnectionId === currentRightUser?.connectionId) {
+                                                    this.toggleRightUserEdit();
+                                                }
+                                            }}
+                                        >
+                                            {isRightUserEditing ? (
+                                                <input
+                                                    type="text"
+                                                    placeholder="주장을 입력하세요"
+                                                    value={rightUserArgument}
+                                                    maxLength={20} // 글자 제한
+                                                    onChange={(e) => this.handleArgumentChange(e, 'rightUserArgument')}
+                                                    onClick={(e) => e.stopPropagation()} // input 클릭 시 부모의 클릭 이벤트 방지
+                                                />
+                                            ) : (
+                                                <p>{rightUserArgument || '주장입력'}</p>
+                                            )}
+                                        </div>
+                                        {isRightUserEditing && (
+                                            <button
+                                                className="save-button"
+                                                onClick={(e) => {
+                                                    e.stopPropagation(); // 버튼 클릭 시 부모의 클릭 이벤트 방지
+                                                    this.toggleRightUserEdit();
+                                                }}
+                                            >
+                                                저장
+                                            </button>
                                         )}
-
-                                        {!this.props.isObserver && localConnectionId === currentRightUser?.connectionId && !this.props.isstart && (
-                                        <button onClick={this.toggleRightUserEdit}>
-                                            {isRightUserEditing ? '저장' : '작성'}
-                                        </button>
-                                        )}
-
-
                                     </div>
+
+
+
                                 </div>
+
                             ) : (
                                 <img className="empty-slot" src="/unknown.png" />
                             )}
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         );
     }
 }

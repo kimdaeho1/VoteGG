@@ -187,6 +187,37 @@ const s3 = new AWS.S3({
   region: "ap-northeast-2", // S3 리전
 });
 
+router.get("/get-profile-image", async (req, res) => {
+  try {
+    const { username } = req.query; // GET 요청에서 쿼리 매개변수 사용
+
+    console.log("Received Query Parameters:", req.query);
+
+    if (!username) {
+      console.warn("Username is missing in the query parameters");
+      return res.status(400).json({ message: "Username is required" });
+    }
+
+    console.log(`Searching for user with username: ${username}`);
+
+    // 여기에서 user를 선언하고 초기화
+    const useridname = await user.findOne({ username });
+
+    if (!useridname) {
+      console.warn(`User not found for username: ${username}`);
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    console.log("User Found:", useridname);
+    return res.status(200).json({ profileImageUrl: useridname.profileImageUrl });
+  } catch (error) {
+    console.error("Error fetching profile image:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+});
+
+
+
 // 프로필 이미지 업로드 API
 router.post("/profile-image", upload.single("profileImage"), async (req, res) => {
   try {

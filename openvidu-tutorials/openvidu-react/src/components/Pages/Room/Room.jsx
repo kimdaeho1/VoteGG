@@ -1,5 +1,3 @@
-
-
 // Room.jsx
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
@@ -126,7 +124,14 @@ const Room = ({ isObserver }) => {
       <div className='home-background3' />
       <div className="left-side">
         <RoomControl />
-        <OpenviduFinal sessionId={roomNumber} userName={userId} createdBy={createdBy} />
+        {userId === createdBy && (
+          <TimerButtons handleSetTimerDuration={handleSetTimerDuration} />
+        )}
+        <ReadyButton
+          isReady={isReady}
+          handleToggleReady={handleToggleReady}
+        />
+        <OpenviduFinal sessionId={roomNumber} userName={userId} createdBy={createdBy} isstart={isOpenviduActive} />
         {isOpenviduActive ? (
           <div></div>
         ) : (
@@ -137,14 +142,7 @@ const Room = ({ isObserver }) => {
               readyUsers={readyUsers}
               handleStartOpenviduAndTimer={handleStartOpenviduAndTimer}
             />
-            {userId === createdBy && (
-              <TimerButtons handleSetTimerDuration={handleSetTimerDuration} />
-            )}
-            <ReadyButton
-              isReady={isReady}
-              handleToggleReady={handleToggleReady}
-            />
-            <ReadyStatus readyUsers={readyUsers} />
+            {/* <ReadyStatus readyUsers={readyUsers} /> */}
           </>
         )}
         <RoomInfo />
