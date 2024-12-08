@@ -1,7 +1,7 @@
 .control-wrap{
   /* background-color: #f8f8f8;  */
   position: absolute; /* or relative */
-  /* height: 90%; */
+  height: 90%;
   left: 0;
 }
 
@@ -18,15 +18,18 @@
   margin-top: 10px;
   margin-bottom: -20px;
   margin-left: 10px;
+  font-size: 2.4rem;
 }
 
 .roomcontrol-container {
   display: flex;
   justify-content: center; /* 가로 중앙 정렬 */
   align-items: center; /* 세로 중앙 정렬 (필요하면 추가) */
-  width: 100%; /* 부모 요소의 전체 너비 */
+  margin: 10px auto;
+  width: 96%; /* 부모 요소의 전체 너비 */
   height: 100vh; 
   position: relative; /* 다른 요소에 영향을 받지 않도록 */
+  /* background-color: red; */
 }
 
 .room-timer {

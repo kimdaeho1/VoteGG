@@ -1,0 +1,24 @@
+.toggle-ready-button {
+  padding: 8px 20px;
+  width: 280px;
+  margin-top: 10px;
+  background: linear-gradient(135deg, #ffefbc, #fffaed); /* 노란빛 준비 버튼 배경 */
+  color: #000000; /* 텍스트 검정색 */
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-ready-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(255, 193, 7, 0.3);
+}
+
+.toggle-ready-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 6px rgba(255, 193, 7, 0.3);
+}

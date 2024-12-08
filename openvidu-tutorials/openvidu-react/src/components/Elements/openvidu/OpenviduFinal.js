@@ -766,7 +766,7 @@ class OpenviduFinal extends Component {
                                                     type="text"
                                                     placeholder="주장을 입력하세요"
                                                     value={rightUserArgument}
-                                                    maxLength={20} // 글자 제한
+                                                    maxLength={15} // 글자 제한
                                                     onChange={(e) => this.handleArgumentChange(e, 'rightUserArgument')}
                                                     onClick={(e) => e.stopPropagation()} // input 클릭 시 부모의 클릭 이벤트 방지
                                                 />

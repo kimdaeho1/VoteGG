@@ -124,9 +124,9 @@ const Room = ({ isObserver }) => {
       <div className='home-background3' />
       <div className="left-side">
         <RoomControl />
-        {userId === createdBy && (
+        {/* {userId === createdBy && (
           <TimerButtons handleSetTimerDuration={handleSetTimerDuration} />
-        )}
+        )} */}
         <ReadyButton
           isReady={isReady}
           handleToggleReady={handleToggleReady}

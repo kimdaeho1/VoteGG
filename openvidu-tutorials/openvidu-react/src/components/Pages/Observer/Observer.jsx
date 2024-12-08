@@ -11,6 +11,9 @@ const Observer = () => {
   const { roomNumber } = useParams();
   const socket = useSocket("/timer", roomNumber);
   const [isOpenviduActive, setIsOpenviduActive] = useState(false);
+  const [isReady, setIsReady] = useState(false);
+
+
 
   useEffect(() => {
     if (socket) {
@@ -42,16 +45,13 @@ const Observer = () => {
       <div className='home-background2' />
       <div className='home-background3' />
       <div className="left-side">
-        
-          <OpenviduFinal
-            sessionId={roomNumber}
-            userName="Observer"
-            isObserver={true}
-            subs={false}
-          />
-
-        <div className='emptyspace'>.</div>
         <RoomControl isObserver={true} />
+        <OpenviduFinal
+          sessionId={roomNumber}
+          userName="Observer"
+          isObserver={true}
+          subs={false}
+        />
       </div>
       <div className="right-side">
         <TestChat roomId={roomNumber} isObserver={true} />

@@ -1,0 +1,30 @@
+.timer-buttons {
+  margin-top: 10px; /* 여유 공간 추가 */
+  display: flex;
+  gap: 10px; /* 버튼 간격 */
+  justify-content: center;
+}
+
+/* 타이머 버튼 스타일 */
+.timer-buttons button {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #ffefbc, #fffaed); /* 노란빛 버튼 배경 */
+  color: #000000; /* 버튼 텍스트 검정색 */
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.timer-buttons button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 10px rgba(255, 193, 7, 0.3);
+}
+
+.timer-buttons button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 4px rgba(255, 193, 7, 0.3);
+}

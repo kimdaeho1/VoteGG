@@ -1,0 +1,29 @@
+.start-openvidu-button {
+  position: fixed; /* 다른 요소의 영향을 받지 않음 */
+  top: 8%;
+  /* left: 50%; */
+  padding: 10px 25px;
+  height: 156px;
+  width: 340px;
+  background: linear-gradient(135deg, #ffefbc, #fffaed);
+  /* background: linear-gradient(90deg, #fff59d, #ffeb3b); */
+  color: #000000; /* 텍스트 검정색 */
+  border: none;
+  border-radius: 12px;
+  font-size: 2.6rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* 항상 위에 표시 */
+}
+
+.start-openvidu-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(255, 235, 59, 0.4);
+}
+
+.start-openvidu-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 6px rgba(255, 235, 59, 0.2);
+}

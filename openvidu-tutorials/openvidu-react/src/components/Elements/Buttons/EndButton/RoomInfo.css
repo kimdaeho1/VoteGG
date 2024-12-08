@@ -63,7 +63,7 @@
   display: flex;
   flex-wrap: wrap;
   /* gap: 8px; */
-  margin: 15px 12px;
+  margin: 25px 12px;
 }
 
 .room-info__tag {
