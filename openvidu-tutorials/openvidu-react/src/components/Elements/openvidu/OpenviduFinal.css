@@ -1,22 +1,12 @@
 /* 전체 레이아웃 */
 .openvidu-final {
     display: grid;
-    /* background-color: rgba(255, 244, 193, 0.85); */
-    /* background-color: rgba(0, 0, 0, 0.5); */
-    /* grid-template-rows: auto 70px; */
-    /* 첫 번째 행: 비디오, 두 번째 행: 버튼 */
     grid-template-columns: 1fr;
-    /* 한 열만 사용 */
-    /* gap: 20px; */
-    /* 비디오와 버튼 간격 */
     width: 100%;
     height: auto;
-    /* 전체 화면 높이를 사용 */
-    /* padding: 10px; */
     box-sizing: border-box;
-    /* padding-bottom : 60px; */
-    margin-top: -8px;
-    /* margin-bottom: 30px; */
+    /* margin-top: -7.5px; */
+    margin-top: 30px;
 }
 
 /* 비디오 컨테이너 */
@@ -215,7 +205,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 20px auto;
+    margin: -20px auto;
 }
 
 /* 말풍선 */
@@ -225,16 +215,12 @@
     border-radius: 10px;
     padding: 10px 10px;
     width: 300px;
-    /* 고정 너비 */
-    height: 70px;
-    /* 고정 높이 */
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    /* 클릭 가능한 표시 */
     transition: background 0.3s ease;
     overflow: hidden;
-    /* 내용이 넘치지 않도록 숨김 */
+    margin-top: 50px;
 }
 
 .speech-bubble:hover {

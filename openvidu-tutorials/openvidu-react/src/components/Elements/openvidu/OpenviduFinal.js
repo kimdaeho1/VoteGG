@@ -1275,10 +1275,9 @@ class OpenviduFinal extends Component {
                                     {/* LeftUser의 주장 표시/입력 공간 */}
                                     <div className="argument-section-bottom">
                                         <div
-                                            className={`speech-bubble ${
-                                                this.props.isstart ? 'disabled' : 
-                                                isLeftUserEditing ? 'editing' : 
-                                                localConnectionId === currentLeftUser?.connectionId ? '' : 'disabled'
+                                            className={`speech-bubble ${this.props.isstart ? 'disabled' :
+                                                    isLeftUserEditing ? 'editing' :
+                                                        localConnectionId === currentLeftUser?.connectionId ? '' : 'disabled'
                                                 }`}
                                             onClick={() => {
                                                 if (!isLeftUserEditing && localConnectionId === currentLeftUser?.connectionId) {
@@ -1291,25 +1290,19 @@ class OpenviduFinal extends Component {
                                                     type="text"
                                                     placeholder="주장을 입력하세요"
                                                     value={leftUserArgument}
-                                                    maxLength={20} // 글자 제한
+                                                    maxLength={15} // 글자 제한
                                                     onChange={(e) => this.handleArgumentChange(e, 'leftUserArgument')}
                                                     onClick={(e) => e.stopPropagation()} // input 클릭 시 부모의 클릭 이벤트 방지
+                                                    onKeyDown={(e) => {
+                                                        if (e.key === 'Enter') {
+                                                            this.toggleLeftUserEdit(); // Enter 키 입력 시 편집 모드 종료
+                                                        }
+                                                    }}
                                                 />
                                             ) : (
                                                 <p>{leftUserArgument || '주장입력'}</p>
                                             )}
                                         </div>
-                                        {isLeftUserEditing && (
-                                            <button
-                                                className="save-button"
-                                                onClick={(e) => {
-                                                    e.stopPropagation(); // 버튼 클릭 시 부모의 클릭 이벤트 방지
-                                                    this.toggleLeftUserEdit();
-                                                }}
-                                            >
-                                                저장
-                                            </button>
-                                        )}
                                     </div>
 
 
@@ -1334,10 +1327,9 @@ class OpenviduFinal extends Component {
                                     {/* RightUser의 주장 표시/입력 공간 */}
                                     <div className="argument-section-bottom">
                                         <div
-                                            className={`speech-bubble ${
-                                                this.props.isstart ? 'disabled' :
-                                                isRightUserEditing ? 'editing' : 
-                                                localConnectionId === currentRightUser?.connectionId ? '' : 'disabled'
+                                            className={`speech-bubble ${this.props.isstart ? 'disabled' :
+                                                isRightUserEditing ? 'editing' :
+                                                    localConnectionId === currentRightUser?.connectionId ? '' : 'disabled'
                                                 }`}
                                             onClick={() => {
                                                 if (!isRightUserEditing && localConnectionId === currentRightUser?.connectionId) {
@@ -1350,25 +1342,19 @@ class OpenviduFinal extends Component {
                                                     type="text"
                                                     placeholder="주장을 입력하세요"
                                                     value={rightUserArgument}
-                                                    maxLength={20} // 글자 제한
+                                                    maxLength={15} // 글자 제한
                                                     onChange={(e) => this.handleArgumentChange(e, 'rightUserArgument')}
                                                     onClick={(e) => e.stopPropagation()} // input 클릭 시 부모의 클릭 이벤트 방지
+                                                    onKeyDown={(e) => {
+                                                        if (e.key === 'Enter') {
+                                                            this.toggleRightUserEdit(); // Enter 키 입력 시 편집 모드 종료
+                                                        }
+                                                    }}
                                                 />
                                             ) : (
                                                 <p>{rightUserArgument || '주장입력'}</p>
                                             )}
                                         </div>
-                                        {isRightUserEditing && (
-                                            <button
-                                                className="save-button"
-                                                onClick={(e) => {
-                                                    e.stopPropagation(); // 버튼 클릭 시 부모의 클릭 이벤트 방지
-                                                    this.toggleRightUserEdit();
-                                                }}
-                                            >
-                                                저장
-                                            </button>
-                                        )}
                                     </div>
 
 

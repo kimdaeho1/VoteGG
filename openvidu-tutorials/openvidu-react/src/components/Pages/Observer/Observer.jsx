@@ -6,11 +6,15 @@ import TestChat from '../../Elements/TestChat/TestChat.jsx';
 import OpenviduFinal from '../../Elements/openvidu/OpenviduFinal.js';
 import useSocket from '../../useSocket';
 import RoomControl from '../../Elements/RoomControl/RoomControl.jsx';
+import RoomInfo from '../../Elements/Buttons/EndButton/RoomInfo.jsx';
 
 const Observer = () => {
   const { roomNumber } = useParams();
   const socket = useSocket("/timer", roomNumber);
   const [isOpenviduActive, setIsOpenviduActive] = useState(false);
+  const [isReady, setIsReady] = useState(false);
+
+
 
   useEffect(() => {
     if (socket) {
@@ -39,19 +43,35 @@ const Observer = () => {
           maxHeight: '790px',
         }}
       ></div>
+      <div
+        className="home-background"
+        style={{
+          backgroundImage: 'url("/nest_egg2.png")',
+          backgroundSize: '25% 50%',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          position: 'fixed',
+          top: '76vh',
+          left: '3%',
+          width: '80vw',
+          height: '20vh',
+          zIndex: -1,
+          minHeight: '300px',
+          maxHeight: '300px',
+          // opacity: '60%',
+        }}
+      ></div>
       <div className='home-background2' />
-      <div className='home-background3' />
+      {/* <div className='home-background3' /> */}
       <div className="left-side">
-        
-          <OpenviduFinal
-            sessionId={roomNumber}
-            userName="Observer"
-            isObserver={true}
-            subs={false}
-          />
-
-        <div className='emptyspace'>.</div>
         <RoomControl isObserver={true} />
+        <OpenviduFinal
+          sessionId={roomNumber}
+          userName="Observer"
+          isObserver={true}
+          subs={false}
+        />
+        <RoomInfo />
       </div>
       <div className="right-side">
         <TestChat roomId={roomNumber} isObserver={true} />

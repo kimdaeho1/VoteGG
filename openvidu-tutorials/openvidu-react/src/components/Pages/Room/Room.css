@@ -3,32 +3,34 @@
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  height: calc(100vh - 100px); /* 화면 전체 높이 */
+  height: calc(100vh - 80px);
+  /* height: 100vh; */
   /* gap: 20px; */
   padding: 0;
   margin: 0;
-  /* margin-left: 240px; */
+  margin-left: 5px;
   box-sizing: border-box;
 }
 
 .left-side {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 10px;
-  width: 70%; 
+  width: 70%;
   height: 70%;
-  /* padding: 10px; */
   box-sizing: border-box;
-  /* background-color: red; */
 }
 
 .right-side {
   display: flex;
   flex-direction: column;
-  flex: 3; /* 비율로 설정 (30%) */
+  flex: 3;
+  /* 비율로 설정 (30%) */
   height: 100%;
   /* padding: 10px; 내부 여백 */
-  margin: 0; /* 외부 여백 제거 */
+  margin: 0;
+  /* 외부 여백 제거 */
   box-sizing: border-box;
   /* background-color: #f9f9f9; */
   /* border-left: 1px solid rgba(0, 0, 0, 0.4); */

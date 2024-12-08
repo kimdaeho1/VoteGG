@@ -95,7 +95,15 @@ const RoomInfo = () => {
       {/* 프로필 이미지와 LIVE 태그 추가 */}
       {participants.length > 0 ? (
         participants.map((participant, idx) => (
-          <div key={idx} className="room-info__profile">
+          <div
+            key={idx}
+            className="room-info__profile"
+            style={
+              idx !== 0
+                ? { left: `${idx * 20}px` }
+                : {}
+            }
+          >
             <img
               src={participant.profileImageUrl}
               alt={`${participant.username}의 프로필`}

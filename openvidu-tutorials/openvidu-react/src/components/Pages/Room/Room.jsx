@@ -129,10 +129,10 @@ const Room = ({ isObserver }) => {
         )}
 
         {!isOpenviduActive && (
-        <ReadyButton
-          isReady={isReady}
-          handleToggleReady={handleToggleReady}
-        />
+          <ReadyButton
+            isReady={isReady}
+            handleToggleReady={handleToggleReady}
+          />
         )}
 
         <OpenviduFinal sessionId={roomNumber} userName={userId} createdBy={createdBy} isstart={isOpenviduActive} />

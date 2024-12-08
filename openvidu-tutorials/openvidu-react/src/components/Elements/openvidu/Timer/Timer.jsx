@@ -159,31 +159,27 @@ const Timer = ({ isObserver }) => {
   return (
     <div>
       <div className="timer-wrapper">
-        <div className="status-and-button">
-          <span className={`current-status ${getStatusClass(currentIndex)}`}>
-          <div>
-        <button onClick={() => setShowVoteStatistic(true)}>하드 코딩된결과 보기</button>
-        {showVoteStatistic && <VoteStatistichard onClose={() => setShowVoteStatistic(false)} />}
-      </div>
-            {!isRunning && !timerFinished
-              ? "토론 준비"
-              : timerFinished
-                ? "토론 끝"
-                : getIndexCharacter(currentIndex)}
-          </span>
-          {!isObserver && isOpenviduActive &&(
-            <div>
-              {/* <div>{}</div> */}
-              <button
-                className="stop-button"
-                onClick={handleStopToggle}
-              >
-                {isStopRequested ? "종료 취소" : "타이머 종료"}
-              </button>
-            </div>
-          )}
-        </div>
         <div className="timer-container">
+          <div className="status-and-button">
+            {/* <span className={`current-status ${getStatusClass(currentIndex)}`}>
+              {!isRunning && !timerFinished
+                ? "토론 준비"
+                : timerFinished
+                  ? "토론 끝"
+                  : getIndexCharacter(currentIndex)}
+            </span> */}
+            {!isObserver && isOpenviduActive && (
+              <div>
+                {/* <div>{}</div> */}
+                <button
+                  className="stop-button"
+                  onClick={handleStopToggle}
+                >
+                  {isStopRequested ? "종료 취소" : "토론 종료"}
+                </button>
+              </div>
+            )}
+          </div>
           <div className="timer-text">
             <span>{formatTime(timeLeft).split(":")[0]}</span>
             <span>:</span>

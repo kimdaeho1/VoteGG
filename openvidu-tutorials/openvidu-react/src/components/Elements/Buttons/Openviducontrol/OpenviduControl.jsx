@@ -6,7 +6,7 @@ const OpenviduControl = ({ userId, createdBy, readyUsers, handleStartOpenviduAnd
     <>
       {userId === createdBy && readyUsers === 2 && (
         <button onClick={handleStartOpenviduAndTimer} className="start-openvidu-button">
-          Start Openvidu Session
+          토론 시작하기!
         </button>
       )}
     </>
