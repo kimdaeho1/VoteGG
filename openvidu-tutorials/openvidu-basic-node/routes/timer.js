@@ -273,112 +273,98 @@ function timerSocketHandler(io) {
     if (!room) return;
 
     try {
+        // roomId에 해당하는 Room 문서 가져오기
+        const roomDocument = await Room.findOne({ roomNumber: roomId });
 
-      // roomId에 해당하는 Room 문서 가져오기
-      const roomDocument = await Room.findOne({ roomNumber: roomId });
-
-      if (!roomDocument) {
-        console.error(`roomId ${roomId}에 해당하는 방을 찾을 수 없습니다.`);
-        return;
-      }
-
-      const participantsArray = Array.from(roomDocument.participant.entries());
-
-      if (participantsArray.length < 1) {
-        //console.log("참가자가 부족합니다. 최소 4명이 필요합니다.");
-        // 클라이언트에게 에러 메시지 전송
-        timerNamespace.to(roomId).emit('timerFinished', { error: "참가자가 부족합니다. 최소 4명이 필요합니다." });
-        return;
-      }
-
-      // Red팀과 Blue팀 나누기
-      const redTeam = participantsArray.slice(0, 2); // 0, 1번 참가자
-      const blueTeam = participantsArray.slice(2, 4); // 2, 3번 참가자
-
-      // 점수 계산
-      const redScore = redTeam.reduce((sum, [, votes]) => sum + votes, 0);
-      const blueScore = blueTeam.reduce((sum, [, votes]) => sum + votes, 0);
-
-      // 전체 참가자 정보 가져오기
-      const participantIds = participantsArray.map(([id]) => id);
-      const users = await User.find({ username: { $in: participantIds } });
-
-      // 결과 업데이트
-      for (const user of users) {
-        user.totalParticipations += 1; // 모든 참가자의 참가 횟수 증가
-
-        const isRedTeam = redTeam.some(([id]) => id === user.username);
-        const isBlueTeam = blueTeam.some(([id]) => id === user.username);
-
-        if (redScore === blueScore) {
-          // 동점인 경우 모두 승리
-          user.totalWins += 1;
-        } else if (
-          (isRedTeam && redScore > blueScore) ||
-          (isBlueTeam && blueScore > redScore)
-        ) {
-          // 자신의 팀이 승리한 경우
-          user.totalWins += 1;
+        if (!roomDocument) {
+            console.error(`roomId ${roomId}에 해당하는 방을 찾을 수 없습니다.`);
+            return;
         }
-      }
 
-      // 최대 득표자 계산
-      const maxVotes = Math.max(...participantsArray.map(([, votes]) => votes));
-      const topScorers = users.filter((user) =>
-        participantsArray.some(
-          ([id, votes]) => id === user.username && votes === maxVotes
-        )
-      );
+        const participantsArray = Array.from(roomDocument.participant.entries());
 
-      // 최대 득표자 업데이트
-      for (const topScorer of topScorers) {
-        topScorer.firstPlaceWins += 1;
-      }
-      
-      // DB 업데이트
-      await Promise.all(users.map((user) => user.save()));
+        if (participantsArray.length < 1) {
+            timerNamespace.to(roomId).emit('timerFinished', { error: "참가자가 부족합니다. 최소 4명이 필요합니다." });
+            return;
+        }
 
-      
-      // 토론 결과 저장
-      const debateResult = new DebateResult({
-        roomName: roomDocument.roomname,
-        tags: roomDocument.tags,
-        maxViewers : roomDocument.maxViewers,
-        participantsArray: Array.from(roomDocument.participant.entries()), // Map을 배열로 저장
-      });
-      
-      await debateResult.save();
-      //console.log("토론 결과가 성공적으로 저장되었습니다.");
+        // Red팀과 Blue팀 나누기
+        const redTeam = participantsArray.slice(0, 2); // 0, 1번 참가자
+        const blueTeam = participantsArray.slice(2, 4); // 2, 3번 참가자
 
-      //console.log("투표 결과가 성공적으로 처리되었습니다.");
-// =======
-//         // 클라이언트에게 결과 전송
-//         timerNamespace.to(roomId).emit('timerFinished', {
-//           message: "투표 결과가 성공적으로 처리되었습니다.",
-//           redScore: redScore || 0,
-//           blueScore: blueScore || 0,
-//           topScorers: topScorers.map((user) => user.username),
-//         });
-//       } catch (error) {
-//         console.error("투표 결과 처리 중 오류:", error);
-//         // 클라이언트에게 오류 메시지 전송
-//         timerNamespace.to(roomId).emit('timerFinished', { error: "투표 결과를 처리하는 중 오류가 발생했습니다." });
-//       }
-// >>>>>>> main
+        // 점수 계산
+        const redScore = redTeam.reduce((sum, [, votes]) => sum + votes, 0);
+        const blueScore = blueTeam.reduce((sum, [, votes]) => sum + votes, 0);
 
-      // 클라이언트에게 결과 전송
-      timerNamespace.to(roomId).emit('timerFinished', {
-        message: "투표 결과가 성공적으로 처리되었습니다.",
-        redScore,
-        blueScore,
-        topScorers: topScorers.map((user) => user.username),
-      });
+        // 전체 참가자 정보 가져오기
+        const participantIds = participantsArray.map(([id]) => id);
+        const users = await User.find({ username: { $in: participantIds } });
+
+        // 결과 업데이트 및 myHistory에 기록 추가
+        const historyEntry = {
+            roomName: roomDocument.roomname,
+            date: new Date(),
+        };
+
+        for (const user of users) {
+            user.totalParticipations += 1; // 모든 참가자의 참가 횟수 증가
+
+            const isRedTeam = redTeam.some(([id]) => id === user.username);
+            const isBlueTeam = blueTeam.some(([id]) => id === user.username);
+
+            if (redScore === blueScore) {
+                // 동점인 경우 모두 승리
+                user.totalWins += 1;
+            } else if (
+                (isRedTeam && redScore > blueScore) ||
+                (isBlueTeam && blueScore > redScore)
+            ) {
+                // 자신의 팀이 승리한 경우
+                user.totalWins += 1;
+            }
+
+            // myHistory에 기록 추가
+            user.myHistory.push(historyEntry);
+        }
+
+        // 최대 득표자 계산
+        const maxVotes = Math.max(...participantsArray.map(([, votes]) => votes));
+        const topScorers = users.filter((user) =>
+            participantsArray.some(
+                ([id, votes]) => id === user.username && votes === maxVotes
+            )
+        );
+
+        // 최대 득표자 업데이트
+        for (const topScorer of topScorers) {
+            topScorer.firstPlaceWins += 1;
+        }
+
+        // DB 업데이트
+        await Promise.all(users.map((user) => user.save()));
+
+        // 토론 결과 저장
+        const debateResult = new DebateResult({
+            roomName: roomDocument.roomname,
+            tags: roomDocument.tags,
+            maxViewers: roomDocument.maxViewers,
+            participantsArray: Array.from(roomDocument.participant.entries()), // Map을 배열로 저장
+        });
+
+        await debateResult.save();
+
+        // 클라이언트에게 결과 전송
+        timerNamespace.to(roomId).emit('timerFinished', {
+            message: "투표 결과가 성공적으로 처리되었습니다.",
+            redScore,
+            blueScore,
+            topScorers: topScorers.map((user) => user.username),
+        });
     } catch (error) {
-      console.error("투표 결과 처리 중 오류:", error);
-      // 클라이언트에게 오류 메시지 전송
-      timerNamespace.to(roomId).emit('timerFinished', { error: "투표 결과를 처리하는 중 오류가 발생했습니다." });
+        console.error("투표 결과 처리 중 오류:", error);
+        timerNamespace.to(roomId).emit('timerFinished', { error: "투표 결과를 처리하는 중 오류가 발생했습니다." });
     }
-  }
+}
 
   // 타이머 정지 함수
   function stopTimer(roomId) {
@@ -414,3 +400,4 @@ function timerSocketHandler(io) {
 }
 
 module.exports = { router, timerSocketHandler };
+

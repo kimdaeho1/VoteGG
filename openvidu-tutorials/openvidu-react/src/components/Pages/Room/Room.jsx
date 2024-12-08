@@ -140,6 +140,9 @@ const Room = ({ isObserver }) => {
           <div></div>
         ) : (
           <>
+          <div></div>
+          <div></div>
+          <div></div>
             <OpenviduControl
               userId={userId}
               createdBy={createdBy}
