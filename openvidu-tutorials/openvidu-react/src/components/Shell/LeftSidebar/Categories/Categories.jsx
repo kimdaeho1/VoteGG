@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Categories.css";
 import { useToast } from '../../../Elements/Toast/ToastContext'; // useToast import
+import PersonalHistory from "../../../Modals/PersonalHistoryModal/PersonalHistoryModal.jsx"; // PersonalHistory 컴포넌트 import
 
 const Categories = () => {
   const { addToast } = useToast(); // ToastContext에서 addToast 가져오기
   const [userData, setUserData] = useState(null); // 사용자 데이터 상태
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token")); // 로그인 여부 상태
+  const [showModal, setShowModal] = useState(false); // 모달 표시 상태
 
   const updateUserData = () => {
     const token = localStorage.getItem("token");
@@ -94,7 +96,7 @@ const Categories = () => {
   return (
     <div className="profile-container">
       <div className="profile-header">
-        <h2 className='profile-hello'>Hello!</h2>
+        <h2 className="profile-hello">Hello!</h2>
         <div className="profile-img">
           <img
             src={userData?.profileImageUrl || "/defaultportrait.jpg"}
@@ -103,12 +105,6 @@ const Categories = () => {
             className="profile-image"
           />
         </div>
-        {/* <button
-          className="edit-button"
-          onClick={() => document.getElementById("fileInput").click()}
-        >
-          수정
-        </button> */}
         <input
           id="fileInput"
           type="file"
@@ -121,9 +117,14 @@ const Categories = () => {
         <p className="username">{userData?.username || "정보 없음"} 님</p>
         <p>토론승률: {userData?.winRate || 0} %</p>
         <p>토론우승: {userData?.firstPlaceWins || 0} 회</p>
+        <button className="history-button" onClick={() => setShowModal(true)}>
+          결과 기록
+        </button>
       </div>
+      {showModal && <PersonalHistory onClose={() => setShowModal(false)} />}
     </div>
   );
 };
 
 export default Categories;
+
