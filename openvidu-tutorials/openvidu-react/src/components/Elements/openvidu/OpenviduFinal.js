@@ -749,12 +749,9 @@ class OpenviduFinal extends Component {
                     return null;
                 }
 
-                console.log("this is rightUserList : " ,this.state.rightUserList);
-                console.log("this is userName : " ,this.state.userName);
                 const leftVideoContainer = document.querySelector('.left-video');
                 const rightVideoContainer = document.querySelector('.right-video');
-                const isUserInRightList = this.state.rightUserList.some(user => user.userName === this.state.userName);
-                if (isUserInRightList) {
+                if (this.state.userName != this.props.createdBy) {
                     console.log("right");
                     if (this.eventCanvas) {
                         this.eventCanvas.style.left = `${1280*0.8851 - 640 * 0.8851 + 20}px`; // 위치 조정
