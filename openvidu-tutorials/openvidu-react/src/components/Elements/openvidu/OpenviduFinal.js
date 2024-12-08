@@ -178,7 +178,7 @@ class OpenviduFinal extends Component {
 
         // Handle requestUserList signal
         session.on('signal:requestUserList', (event) => {
-            // 자신의 ��용자 리스트와 주장 텍스트를 요청한 참가자에게 전송
+            // 자신의 용자 리스트와 주장 텍스트를 요청한 참가자에게 전송
             session.signal({
                 data: JSON.stringify({
                     leftUserList: this.state.leftUserList,
@@ -456,7 +456,7 @@ class OpenviduFinal extends Component {
             });
             
             let activeOverlay = null; // 현재 활성화된 오버레이를 추적
-            let videoElement = null; // videoElement�� 전역 변수로 선언
+            let videoElement = null; // videoElement를 전역 변수로 선언
 
             this.eventCanvas.addEventListener('drop', async (e) => {
                 e.preventDefault();
@@ -530,12 +530,14 @@ class OpenviduFinal extends Component {
 
                                 // 비디오 프레임을 지속적으로 그리기
                                 function drawVideoFrame() {
-                                    if (activeOverlay === 'video' && videoElement.readyState >= videoElement.HAVE_CURRENT_DATA) {
+                                    if (activeOverlay === 'video' && videoElement && videoElement.readyState >= videoElement.HAVE_CURRENT_DATA) {
                                         hiddenCtx.clearRect(0, 0, hiddenCanvas.width, hiddenCanvas.height);
                                         hiddenCtx.drawImage(hiddenVideo, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
                                         hiddenCtx.drawImage(videoElement, overlayX, overlayY, videoElement.width, videoElement.height);
                                     }
-                                    requestAnimationFrame(drawVideoFrame);
+                                    if (activeOverlay === 'video') {
+                                        requestAnimationFrame(drawVideoFrame);
+                                    }
                                 }
                                 requestAnimationFrame(drawVideoFrame);
                             };
@@ -546,13 +548,15 @@ class OpenviduFinal extends Component {
                                 const mouseX = e.clientX - rect.left;
                                 const mouseY = e.clientY - rect.top;
 
-                                if (
-                                    mouseX >= overlayX && mouseX <= overlayX + videoElement.videoWidth &&
-                                    mouseY >= overlayY && mouseY <= overlayY + videoElement.videoHeight
-                                ) {
-                                    isDragging = true;
-                                    dragOffsetX = mouseX - overlayX;
-                                    dragOffsetY = mouseY - overlayY;
+                                if (videoElement && videoElement.readyState >= videoElement.HAVE_CURRENT_DATA) { // videoElement가 존재하는지 확인
+                                    if (
+                                        mouseX >= overlayX && mouseX <= overlayX + videoElement.videoWidth &&
+                                        mouseY >= overlayY && mouseY <= overlayY + videoElement.videoHeight
+                                    ) {
+                                        isDragging = true;
+                                        dragOffsetX = mouseX - overlayX;
+                                        dragOffsetY = mouseY - overlayY;
+                                    }
                                 }
                             });
 
@@ -581,54 +585,27 @@ class OpenviduFinal extends Component {
                                 const mouseX = e.clientX - rect.left;
                                 const mouseY = e.clientY - rect.top;
 
-                                const isInsideVideo =
+                                const isInsideVideo = videoElement && // videoElement가 존재하는지 확인
                                     mouseX >= overlayX &&
                                     mouseX <= overlayX + videoElement.videoWidth &&
                                     mouseY >= overlayY &&
                                     mouseY <= overlayY + videoElement.videoHeight;
 
-                                if (isInsideVideo) {
-                                    e.preventDefault();
+                                const isInsideImage = overlayImage.src && // overlayImage가 존재하는지 확인
+                                    mouseX >= overlayX &&
+                                    mouseX <= overlayX + (overlayImage._drawWidth || overlayImage.naturalWidth) &&
+                                    mouseY >= overlayY &&
+                                    mouseY <= overlayY + (overlayImage._drawHeight || overlayImage.naturalHeight);
 
+                                if (isInsideVideo || isInsideImage) {
+                                    e.preventDefault();
+                                    // 팝업 메뉴 표시 로직
                                     contextMenu.style.top = `${e.clientY}px`;
                                     contextMenu.style.left = `${e.clientX}px`;
                                     contextMenu.style.display = 'block';
-
-                                    // 현재 비디오 크기를 입력 필드에 반영
-                                    overlayWidthInput.value = videoElement.width;
-                                    overlayHeightInput.value = videoElement.height;
                                 } else {
                                     contextMenu.style.display = 'none';
                                 }
-                            });
-
-                            resizeButton.addEventListener('click', () => {
-                                const newWidth = parseInt(overlayWidthInput.value, 10);
-                                const newHeight = parseInt(overlayHeightInput.value, 10);
-
-                                if (!isNaN(newWidth) && newWidth > 0 && !isNaN(newHeight) && newHeight > 0) {
-                                    videoElement.style.width = `${newWidth}px`;
-                                    videoElement.style.height = `${newHeight}px`;
-                                    videoElement.width = newWidth; // 비디오 요소의 width 속성 설정
-                                    videoElement.height = newHeight; // 비디오 요소의 height 속성 설정
-                                    redrawCanvas();
-                                } else {
-                                    console.warn('Invalid size inputs');
-                                }
-
-                                contextMenu.style.display = 'none';
-                            });
-
-                            deleteButton.addEventListener('click', () => {
-                                videoElement.src = ''; // 비디오 제거
-                                overlayX = 0;
-                                overlayY = 0;
-                                activeOverlay = null; // 오버레이 비활성화
-
-                                hiddenCtx.clearRect(0, 0, hiddenCanvas.width, hiddenCanvas.height);
-                                hiddenCtx.drawImage(hiddenVideo, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
-
-                                contextMenu.style.display = 'none';
                             });
 
                         } catch (error) {
@@ -686,40 +663,46 @@ class OpenviduFinal extends Component {
 
             // 마우스 우클릭 이벤트 처리
             this.eventCanvas.addEventListener('contextmenu', (e) => {
-                // 마우스 좌표를 캔버스 좌표로 변환
                 const rect = this.eventCanvas.getBoundingClientRect();
                 const mouseX = e.clientX - rect.left;
                 const mouseY = e.clientY - rect.top;
-            
-                // 마우스 위치가 오버레이 이미지 영역 내에 있는지 확인
-                const isInsideOverlay =
-                    overlayImage.src &&
-                    overlayImage.src !== '' &&
+
+                const isInsideVideo = videoElement && // videoElement가 존재하는지 확인
                     mouseX >= overlayX &&
-                    mouseX <= overlayX + overlayImage.width &&
+                    mouseX <= overlayX + videoElement.videoWidth &&
                     mouseY >= overlayY &&
-                    mouseY <= overlayY + overlayImage.height;
-            
-                if (isInsideOverlay) {
+                    mouseY <= overlayY + videoElement.videoHeight;
+
+                const isInsideImage = overlayImage.src && // overlayImage가 존재하는지 확인
+                    mouseX >= overlayX &&
+                    mouseX <= overlayX + (overlayImage._drawWidth || overlayImage.naturalWidth) &&
+                    mouseY >= overlayY &&
+                    mouseY <= overlayY + (overlayImage._drawHeight || overlayImage.naturalHeight);
+
+                if (isInsideVideo || isInsideImage) {
                     e.preventDefault(); // 기본 브라우저 우클릭 메뉴 막기
-            
+
                     console.log('Showing custom context menu');
-            
+
                     // 팝업 메뉴 위치 설정
                     const menuX = e.clientX;
                     const menuY = e.clientY;
-            
+
                     contextMenu.style.top = `${menuY}px`;
                     contextMenu.style.left = `${menuX}px`;
                     contextMenu.style.display = 'block';
 
                     // 현재 오버레이 크기를 입력 필드에 표시
-                    overlayWidthInput.value = overlayImage._drawWidth || overlayImage.naturalWidth;
-                    overlayHeightInput.value = overlayImage._drawHeight || overlayImage.naturalHeight;
+                    if (isInsideImage) {
+                        overlayWidthInput.value = overlayImage._drawWidth || overlayImage.naturalWidth;
+                        overlayHeightInput.value = overlayImage._drawHeight || overlayImage.naturalHeight;
+                    } else if (isInsideVideo && videoElement) {
+                        overlayWidthInput.value = videoElement.width;
+                        overlayHeightInput.value = videoElement.height;
+                    }
                 } else {
-                    console.log('Outside overlay image. Showing default context menu');
+                    console.log('Outside overlay. Showing default context menu');
                     contextMenu.style.display = 'none'; // 커스텀 팝업 숨기기
-                    // 기본 브라우저 우클릭 메뉴 허용 (아무것도 하지 않음)
                 }
             });
 
@@ -731,12 +714,17 @@ class OpenviduFinal extends Component {
                 console.log('Input Values:', { newWidth, newHeight });
 
                 if (!isNaN(newWidth) && newWidth > 0 && !isNaN(newHeight) && newHeight > 0) {
-                    overlayImage._drawWidth = newWidth;
-                    overlayImage._drawHeight = newHeight;
+                    if (activeOverlay === 'image') {
+                        overlayImage._drawWidth = newWidth;
+                        overlayImage._drawHeight = newHeight;
+                    } else if (activeOverlay === 'video' && videoElement) {
+                        videoElement.width = newWidth;
+                        videoElement.height = newHeight;
+                    }
 
                     console.log('Overlay dimensions set to:', {
-                        width: overlayImage._drawWidth,
-                        height: overlayImage._drawHeight,
+                        width: newWidth,
+                        height: newHeight,
                     });
 
                     redrawCanvas();
@@ -779,6 +767,15 @@ class OpenviduFinal extends Component {
                 overlayImage.src = ''; // 이미지 제거
                 overlayX = 0;
                 overlayY = 0;
+
+                // 비디오 오버레이 제거
+                if (videoElement) {
+                    videoElement.pause(); // 비디오 재생 중지
+                    videoElement.src = ''; // 비디오 소스 제거
+                    videoElement.remove(); // 비디오 요소 제거
+                    videoElement = null; // 비디오 요소 참조 초기화
+                    activeOverlay = null;
+                }
 
                 // 캔버스 초기화
                 hiddenCtx.clearRect(0, 0, hiddenCanvas.width, hiddenCanvas.height);
@@ -1171,7 +1168,7 @@ class OpenviduFinal extends Component {
         );
     }
 
-    // Right 사용자 편집 모드 토글
+    // Right 사용자 편집 ��드 토글
     toggleRightUserEdit() {
         this.setState(
             { isRightUserEditing: !this.state.isRightUserEditing },
