@@ -130,9 +130,15 @@ function timerSocketHandler(io) {
           currentPhase: room.currentPhase,
           currentTurn: room.currentTurn,
         });
+    
         // 강제로 모든 사이클을 완료로 설정하여 종료 조건을 만족시킴
         room.currentCycle = room.cycleCount;
-        handleVotingAndResults(roomId);
+    
+        // 이미 처리되었는지 확인
+        if (!room.isVotingHandled) {
+          room.isVotingHandled = true; // 플래그 설정
+          handleVotingAndResults(roomId);
+        }
       }
     });
 
@@ -309,36 +315,46 @@ function timerSocketHandler(io) {
         for (const user of users) {
             user.totalParticipations += 1; // 모든 참가자의 참가 횟수 증가
 
-            const isRedTeam = redTeam.some(([id]) => id === user.username);
-            const isBlueTeam = blueTeam.some(([id]) => id === user.username);
-
-            if (redScore === blueScore) {
-                // 동점인 경우 모두 승리
-                user.totalWins += 1;
-            } else if (
-                (isRedTeam && redScore > blueScore) ||
-                (isBlueTeam && blueScore > redScore)
-            ) {
-                // 자신의 팀이 승리한 경우
-                user.totalWins += 1;
-            }
-
             // myHistory에 기록 추가
             user.myHistory.push(historyEntry);
         }
 
-        // 최대 득표자 계산
-        const maxVotes = Math.max(...participantsArray.map(([, votes]) => votes));
-        const topScorers = users.filter((user) =>
-            participantsArray.some(
-                ([id, votes]) => id === user.username && votes === maxVotes
-            )
-        );
 
-        // 최대 득표자 업데이트
-        for (const topScorer of topScorers) {
-            topScorer.firstPlaceWins += 1;
-        }
+      // 최대 득표자 계산
+      const maxVotes = Math.max(...participantsArray.map(([, votes]) => votes));
+      const topScorers = users.filter((user) =>
+        participantsArray.some(
+          ([id, votes]) => id === user.username && votes === maxVotes
+        )
+      );
+
+      // 최대 득표자 업데이트
+      for (const topScorer of topScorers) {
+        topScorer.firstPlaceWins += 1;
+      }
+      
+      // DB 업데이트
+      await Promise.all(users.map((user) => user.save()));
+
+      
+      // 토론 결과 저장
+      const debateResult = new DebateResult({
+        roomName: roomDocument.roomname,
+        tags: roomDocument.tags,
+        maxViewers : roomDocument.maxViewers,
+        participantsArray: Array.from(roomDocument.participant.entries()), // Map을 배열로 저장]
+        leftArgument : Array.from(roomDocument.leftUserArgument.entries()), // Map을 배열로 저장
+        rightArgument : Array.from(roomDocument.rightUserArgument.entries()), // Map을 배열로 저장
+      });
+      
+      await debateResult.save();
+      //console.log("토론 결과가 성공적으로 저장되었습니다.");
+
+      // 클라이언트에게 결과 전송
+      timerNamespace.to(roomId).emit('timerFinished', {
+        message: "투표 결과가 성공적으로 처리되었습니다.",
+        topScorers: topScorers.map((user) => user.username),
+      });
 
         // DB 업데이트
         await Promise.all(users.map((user) => user.save()));
@@ -365,19 +381,6 @@ function timerSocketHandler(io) {
         timerNamespace.to(roomId).emit('timerFinished', { error: "투표 결과를 처리하는 중 오류가 발생했습니다." });
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   // 타이머 정지 함수
