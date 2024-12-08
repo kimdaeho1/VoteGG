@@ -46,36 +46,40 @@ const VoteStatistic = ({ onClose }) => {
       backgroundColor: 'transparent',
     },
     title: {
-      text: maxParticipant.name ? `<div class='winner-title'>🏆 최다 득표: ${maxParticipant.name} 🏆</div>` : null,
-      useHTML: true,
-      verticalAlign: 'middle',
-      floating: true,
-      style: {
-        fontSize: '24px',
-        color: '#FFD700',
-        textOutline: 'none',
-        fontWeight: 'bold',
-      },
+      text: null, // 중앙 타이틀 제거
     },
     colors: ['#FFD700', '#4D96FF', '#FFC75F', '#F9F871', '#FF8C42', '#845EC2'],
     credits: {
       enabled: false,
     },
     tooltip: {
-      pointFormat: '{series.name}: <b>{point.y}</b>',
+      pointFormat: '<span style="font-size: 16px; font-weight: bold; color: #000000;">{series.name}</span>: <b>{point.y}</b>', // 글자색을 검은색으로 변경
     },
     plotOptions: {
       pie: {
-        allowPointSelect: true,
-        cursor: 'pointer',
+        allowPointSelect: false, // 클릭 반응 제거
         innerSize: '50%',
         dataLabels: {
           enabled: true,
           format: '<b>{point.name}</b>: {point.y}',
-          style: { fontSize: '16px', color: '#FFFFFF', textOutline: 'none' },
+          style: { 
+            fontSize: '16px', 
+            color: '#1a237e', // 진한 파란색으로 변경
+            textOutline: 'none', 
+            textShadow: '1px 1px 3px rgba(0, 0, 0, 0.3)' 
+          },
         },
         showInLegend: true,
       },
+    },
+    legend: {
+      itemStyle: {
+        fontSize: '20px', // 글씨 크기를 키우기
+        color: '#1a237e', // 진한 파란색
+        fontWeight: 'bold',
+      },
+      symbolHeight: 14, // 아이콘 크기 조정
+      symbolRadius: 6, // 아이콘 둥글게
     },
     series: [
       {
@@ -85,14 +89,6 @@ const VoteStatistic = ({ onClose }) => {
       },
     ],
   };
-
-  if (isLoading) {
-    return <div className="loading-message">로딩 중......</div>;
-  }
-
-  if (error) {
-    return <div className="error-message">{error}</div>;
-  }
 
   const handleClose = () => {
     navigate('/');

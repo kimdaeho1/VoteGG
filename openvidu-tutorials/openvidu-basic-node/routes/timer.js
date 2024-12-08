@@ -130,9 +130,15 @@ function timerSocketHandler(io) {
           currentPhase: room.currentPhase,
           currentTurn: room.currentTurn,
         });
+    
         // 강제로 모든 사이클을 완료로 설정하여 종료 조건을 만족시킴
         room.currentCycle = room.cycleCount;
-        handleVotingAndResults(roomId);
+    
+        // 이미 처리되었는지 확인
+        if (!room.isVotingHandled) {
+          room.isVotingHandled = true; // 플래그 설정
+          handleVotingAndResults(roomId);
+        }
       }
     });
 
@@ -308,20 +314,6 @@ function timerSocketHandler(io) {
         for (const user of users) {
             user.totalParticipations += 1; // 모든 참가자의 참가 횟수 증가
 
-            const isRedTeam = redTeam.some(([id]) => id === user.username);
-            const isBlueTeam = blueTeam.some(([id]) => id === user.username);
-
-            if (redScore === blueScore) {
-                // 동점인 경우 모두 승리
-                user.totalWins += 1;
-            } else if (
-                (isRedTeam && redScore > blueScore) ||
-                (isBlueTeam && blueScore > redScore)
-            ) {
-                // 자신의 팀이 승리한 경우
-                user.totalWins += 1;
-            }
-
             // myHistory에 기록 추가
             user.myHistory.push(historyEntry);
         }
@@ -359,8 +351,6 @@ function timerSocketHandler(io) {
       // 클라이언트에게 결과 전송
       timerNamespace.to(roomId).emit('timerFinished', {
         message: "투표 결과가 성공적으로 처리되었습니다.",
-        redScore,
-        blueScore,
         topScorers: topScorers.map((user) => user.username),
       });
 
