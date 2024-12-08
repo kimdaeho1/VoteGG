@@ -64,7 +64,7 @@ router.post("/login", async (req, res) => {
       firstPlaceWins: existingUser.firstPlaceWins || 0,
       myHistory: existingUser.myHistory || [], // myHistory 추가
     },
-    JWT_SECRET,
+    process.env.JWT_SECRET,
     { expiresIn: "1h" }
   );
 
@@ -121,7 +121,7 @@ router.get("/auth/kakao/callback", async (req, res) => {
           socialId: id,
           myHistory: existingUser.myHistory || [],
         },
-        JWT_SECRET,
+        process.env.JWT_SECRET,
         { expiresIn: "1h" }
       );
 
@@ -168,7 +168,7 @@ router.post("/set-username", async (req, res) => {
     // JWT 토큰 생성
     const token = jwt.sign(
       { userId: newUser._id, username: newUser.username, provider: newUser.provider },
-      JWT_SECRET,
+      process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
 
