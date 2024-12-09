@@ -39,7 +39,8 @@ const invitationRouter = require('./routes/invitation');
 const debateResultRouter = require("./routes/debateResult"); //토론 결과 라우터
 app.use(express.json());
 
-
+const transcriptionRouter = require('./routes/transcription');
+app.use('/api/transcription', transcriptionRouter);
 
 // HTTP 라우터 추가
 // app.use('/chat', chatRouter);
