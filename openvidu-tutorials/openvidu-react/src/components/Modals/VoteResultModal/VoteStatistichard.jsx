@@ -5,17 +5,39 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './VoteStatistichard.css';
+import './VoteStatistic.css';
 
 const VoteStatistichard = ({ onClose }) => {
 
 
   const chartDataParticipants = [
-    { name: '키보드워리어', y: 24 },
-    { name: '고구마킬러', y: 35 },
-  
+    { name: '키보드워리어', y: 334 },
+    { name: '고구마킬러', y: 333 },
   ];
 
+  const LeftArgu = '테스트 주제 1'; // 하드코딩된 왼쪽 주장
+  const RightArgu = '테스트 주제 2'; // 하드코딩된 오른쪽 주장
+  let WinningArgument = ""
+    
+  const totalVotesLeft = chartDataParticipants
+  .filter(({ name }) => name === '키보드워리어') // 이름 기준으로 필터링
+  .reduce((sum, { y }) => sum + y, 0);
+
+  const totalVotesRight = chartDataParticipants
+    .filter(({ name }) => name === '고구마킬러') // 이름 기준으로 필터링
+    .reduce((sum, { y }) => sum + y, 0);
+
+  if (totalVotesLeft > totalVotesRight) {
+    WinningArgument=`${LeftArgu}`;
+
+  } else if (totalVotesRight > totalVotesLeft) {
+    WinningArgument=`${RightArgu}`;
+
+  } else {
+    WinningArgument='양쪽 주장이 동점입니다.';
+
+  }
+  
   const maxParticipant = chartDataParticipants.reduce((max, participant) => {
     return participant && participant.y > (max?.y || 0) ? participant : max;
   }, {});
@@ -81,10 +103,22 @@ const VoteStatistichard = ({ onClose }) => {
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
       <div className="modal-content1 animated-modal" onClick={(e) => e.stopPropagation()}>
-        <h2 className="modal-title">참가자 득표 결과</h2>
-        {maxParticipant.name && (
-          <div className="winner-banner">이긴 사람: <strong>{maxParticipant.name}</strong></div>
-        )}
+      <h2 className="modal-title">
+        {totalVotesLeft === totalVotesRight ? '동점!!' : '승자!!'}
+      </h2>
+      {maxParticipant.name && WinningArgument && (
+        <div className="winner-banner">
+          {totalVotesLeft === totalVotesRight ? (
+            <strong className="tie-text">
+              <span className="animated-text">{LeftArgu}</span> vs <span className="animated-text">{RightArgu}</span>
+            </strong>
+          ) : (
+            <strong>
+              <span className="animated-text winner-text">{maxParticipant.name}의 주장 {WinningArgument}!!</span>
+            </strong>
+          )}
+        </div>
+      )}
         <div className="chart-container">
           <HighchartsReact highcharts={Highcharts} options={participantChartOptions} />
         </div>
@@ -93,5 +127,6 @@ const VoteStatistichard = ({ onClose }) => {
     </div>
   );
 };
+
 
 export default VoteStatistichard;
