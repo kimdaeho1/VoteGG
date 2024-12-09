@@ -560,6 +560,28 @@ class OpenviduFinal extends Component {
                                 }
                             });
 
+                            // 비디오 클릭 시 재생/멈춤 토글
+                            this.eventCanvas.addEventListener('click', (e) => {
+                                const rect = this.eventCanvas.getBoundingClientRect();
+                                const mouseX = e.clientX - rect.left;
+                                const mouseY = e.clientY - rect.top;
+
+                                if (videoElement && videoElement.readyState >= videoElement.HAVE_CURRENT_DATA) {
+                                    if (
+                                        mouseX >= overlayX && mouseX <= overlayX + videoElement.width &&
+                                        mouseY >= overlayY && mouseY <= overlayY + videoElement.height
+                                    ) {
+                                        console.log("videoElement click!!");
+                                        e.preventDefault();
+                                        if (videoElement.paused) {
+                                            videoElement.play();
+                                        } else {
+                                            videoElement.pause();
+                                        }
+                                    }
+                                }
+                            });
+
                             this.eventCanvas.addEventListener('mousemove', (e) => {
                                 if (isDragging) {
                                     const rect = this.eventCanvas.getBoundingClientRect();
