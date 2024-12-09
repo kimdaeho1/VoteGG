@@ -6,8 +6,8 @@ const ToastList = ({ toasts }) => {
     <div
       style={{
         position: "fixed",
-        top: "20px",
-        right: "15%",
+        top: "10%",
+        right: "40%",
         zIndex: 1000,
         maxWidth: "1000px",
         width: "20%",

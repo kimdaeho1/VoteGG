@@ -14,7 +14,7 @@ const Toast = ({ type, children }) => {
         padding: "15px 30px",
         marginBottom: "15px",
         borderRadius: "8px",
-        fontSize: "16px",
+        fontSize: "30px",
         fontWeight: "bold",
         backgroundColor: backgroundColors[type] || "#333",
         color: "#fff",
