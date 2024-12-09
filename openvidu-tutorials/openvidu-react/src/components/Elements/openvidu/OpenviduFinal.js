@@ -360,12 +360,27 @@ class OpenviduFinal extends Component {
 
             // 오버레이 이미지 로드
             const overlayImage = new Image();
-            overlayImage.src = '/resources/images/egg.png'; 
-            await overlayImage.decode();
+            //overlayImage.src = '/resources/images/egg.png';
+            //await overlayImage.decode();
 
+            function calculateSyncRatio(baseWidth, baseHeight, baseRatio) {
+                const currentWidth = window.innerWidth; // 현재 화면의 너비
+                const currentHeight = window.innerHeight; // 현재 화면의 높이
+                const syncRatioWidth = (currentWidth / baseWidth) * baseRatio;
+                const syncRatioHeight = (currentHeight / baseHeight) * baseRatio;
+                return {syncRatioWidth, syncRatioHeight};
+            }
+            
+            // 기준 해상도 및 비율
+            const baseWidth = 1920;
+            const baseHeight = 1080;
+            const baseRatio = 0.8851;
+            
+            // 동기화 비율 계산
+            const {syncRatioWidth, syncRatioHeight} = calculateSyncRatio(baseWidth, baseHeight, baseRatio);
             const hiddenCanvas = document.createElement('canvas');
-            hiddenCanvas.width = streamWidth * 0.8851;
-            hiddenCanvas.height = streamHeight * 0.8851;
+            hiddenCanvas.width = streamWidth * syncRatioWidth;
+            hiddenCanvas.height = streamHeight * syncRatioHeight;
             const hiddenCtx = hiddenCanvas.getContext('2d');
 
             function drawFrame() {
@@ -560,6 +575,28 @@ class OpenviduFinal extends Component {
                                 }
                             });
 
+                            // 비디오 클릭 시 재생/멈춤 토글
+                            this.eventCanvas.addEventListener('click', (e) => {
+                                const rect = this.eventCanvas.getBoundingClientRect();
+                                const mouseX = e.clientX - rect.left;
+                                const mouseY = e.clientY - rect.top;
+
+                                if (videoElement && videoElement.readyState >= videoElement.HAVE_CURRENT_DATA) {
+                                    if (
+                                        mouseX >= overlayX && mouseX <= overlayX + videoElement.width &&
+                                        mouseY >= overlayY && mouseY <= overlayY + videoElement.height
+                                    ) {
+                                        console.log("videoElement click!!");
+                                        e.preventDefault();
+                                        if (videoElement.paused) {
+                                            videoElement.play();
+                                        } else {
+                                            videoElement.pause();
+                                        }
+                                    }
+                                }
+                            });
+
                             this.eventCanvas.addEventListener('mousemove', (e) => {
                                 if (isDragging) {
                                     const rect = this.eventCanvas.getBoundingClientRect();
@@ -577,36 +614,7 @@ class OpenviduFinal extends Component {
 
                             this.eventCanvas.addEventListener('mouseleave', () => {
                                 isDragging = false;
-                            });
-
-                            // 팝업 메뉴 이벤트 추가
-                            this.eventCanvas.addEventListener('contextmenu', (e) => {
-                                const rect = this.eventCanvas.getBoundingClientRect();
-                                const mouseX = e.clientX - rect.left;
-                                const mouseY = e.clientY - rect.top;
-
-                                const isInsideVideo = videoElement && // videoElement가 존재하는지 확인
-                                    mouseX >= overlayX &&
-                                    mouseX <= overlayX + videoElement.videoWidth &&
-                                    mouseY >= overlayY &&
-                                    mouseY <= overlayY + videoElement.videoHeight;
-
-                                const isInsideImage = overlayImage.src && // overlayImage가 존재하는지 확인
-                                    mouseX >= overlayX &&
-                                    mouseX <= overlayX + (overlayImage._drawWidth || overlayImage.naturalWidth) &&
-                                    mouseY >= overlayY &&
-                                    mouseY <= overlayY + (overlayImage._drawHeight || overlayImage.naturalHeight);
-
-                                if (isInsideVideo || isInsideImage) {
-                                    e.preventDefault();
-                                    // 팝업 메뉴 표시 로직
-                                    contextMenu.style.top = `${e.clientY}px`;
-                                    contextMenu.style.left = `${e.clientX}px`;
-                                    contextMenu.style.display = 'block';
-                                } else {
-                                    contextMenu.style.display = 'none';
-                                }
-                            });
+                            });                            
 
                         } catch (error) {
                             console.error('Error handling dropped video file:', error);
@@ -707,33 +715,35 @@ class OpenviduFinal extends Component {
             });
 
             // 크기 조절 버튼 클릭 이벤트
-            resizeButton.addEventListener('click', () => {
-                const newWidth = parseInt(overlayWidthInput.value, 10);
-                const newHeight = parseInt(overlayHeightInput.value, 10);
+            if (resizeButton) {
+                resizeButton.addEventListener('click', () => {
+                    const newWidth = parseInt(overlayWidthInput.value, 10);
+                    const newHeight = parseInt(overlayHeightInput.value, 10);
 
-                console.log('Input Values:', { newWidth, newHeight });
+                    console.log('Input Values:', { newWidth, newHeight });
 
-                if (!isNaN(newWidth) && newWidth > 0 && !isNaN(newHeight) && newHeight > 0) {
-                    if (activeOverlay === 'image') {
-                        overlayImage._drawWidth = newWidth;
-                        overlayImage._drawHeight = newHeight;
-                    } else if (activeOverlay === 'video' && videoElement) {
-                        videoElement.width = newWidth;
-                        videoElement.height = newHeight;
+                    if (!isNaN(newWidth) && newWidth > 0 && !isNaN(newHeight) && newHeight > 0) {
+                        if (activeOverlay === 'image') {
+                            overlayImage._drawWidth = newWidth;
+                            overlayImage._drawHeight = newHeight;
+                        } else if (activeOverlay === 'video' && videoElement) {
+                            videoElement.width = newWidth;
+                            videoElement.height = newHeight;
+                        }
+
+                        console.log('Overlay dimensions set to:', {
+                            width: newWidth,
+                            height: newHeight,
+                        });
+
+                        redrawCanvas();
+                    } else {
+                        console.warn('Invalid size inputs');
                     }
 
-                    console.log('Overlay dimensions set to:', {
-                        width: newWidth,
-                        height: newHeight,
-                    });
-
-                    redrawCanvas();
-                } else {
-                    console.warn('Invalid size inputs');
-                }
-
-                contextMenu.style.display = 'none'; // 팝업 닫기
-            });
+                    contextMenu.style.display = 'none'; // 팝업 닫기
+                });
+            }
 
             // 캔버스 다시 그리기 함수
             function redrawCanvas() {
@@ -762,27 +772,29 @@ class OpenviduFinal extends Component {
             }
 
             // 삭제 버튼 클릭 이벤트
-            deleteButton.addEventListener('click', () => {
-                console.log('Removing overlay image');
-                overlayImage.src = ''; // 이미지 제거
-                overlayX = 0;
-                overlayY = 0;
+            if (deleteButton) {
+                deleteButton.addEventListener('click', () => {
+                    console.log('Removing overlay image');
+                    overlayImage.src = ''; // 이미지 제거
+                    overlayX = 0;
+                    overlayY = 0;
 
-                // 비디오 오버레이 제거
-                if (videoElement) {
-                    videoElement.pause(); // 비디오 재생 중지
-                    videoElement.src = ''; // 비디오 소스 제거
-                    videoElement.remove(); // 비디오 요소 제거
-                    videoElement = null; // 비디오 요소 참조 초기화
-                    activeOverlay = null;
-                }
+                    // 비디오 오버레이 제거
+                    if (videoElement) {
+                        videoElement.pause(); // 비디오 재생 중지
+                        videoElement.src = ''; // 비디오 소스 제거
+                        videoElement.remove(); // 비디오 요소 제거
+                        videoElement = null; // 비디오 요소 참조 초기화
+                        activeOverlay = null;
+                    }
 
-                // 캔버스 초기화
-                hiddenCtx.clearRect(0, 0, hiddenCanvas.width, hiddenCanvas.height);
-                hiddenCtx.drawImage(hiddenVideo, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
+                    // 캔버스 초기화
+                    hiddenCtx.clearRect(0, 0, hiddenCanvas.width, hiddenCanvas.height);
+                    hiddenCtx.drawImage(hiddenVideo, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
 
-                contextMenu.style.display = 'none'; // 팝업 닫기
-            });
+                    contextMenu.style.display = 'none'; // 팝업 닫기
+                });
+            }
 
             // 팝업 내부 클릭 시 이벤트 전파 방지
             contextMenu.addEventListener('click', (e) => {
@@ -911,6 +923,7 @@ class OpenviduFinal extends Component {
                     return null;
                 }
 
+                /*
                 const leftVideoContainer = document.querySelector('.left-video');
                 const rightVideoContainer = document.querySelector('.right-video');
                 if (this.state.userName != this.props.createdBy) {
@@ -922,6 +935,30 @@ class OpenviduFinal extends Component {
                 } else {
                     leftVideoContainer.appendChild(this.eventCanvas);
                 }
+                */
+
+                // MutationObserver로 DOM 변화를 감지
+                const observer = new MutationObserver(() => {
+                    const leftVideoContainer = document.querySelector('.left-video .user-video .streamcomponent');
+                    const rightVideoContainer = document.querySelector('.right-video .user-video .streamcomponent');
+
+                    if (this.state.userName !== this.props.createdBy) {
+                        if (rightVideoContainer && this.eventCanvas) {
+                            rightVideoContainer.appendChild(this.eventCanvas);
+                            observer.disconnect();
+                        }
+                    } else {
+                        if (leftVideoContainer && this.eventCanvas) {
+                            leftVideoContainer.appendChild(this.eventCanvas);
+                            observer.disconnect();
+                        }
+                    }
+                });
+
+                observer.observe(document.body, {
+                    childList: true,
+                    subtree: true,
+                });
 
                 // 모든 참가자에게 업데이트된 사용자 리스트 전송
                 this.state.session.signal({

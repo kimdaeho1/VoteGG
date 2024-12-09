@@ -28157,3 +28157,5 @@ req.file: {
   }
 ]
 방 4c272c8adc324690ae6f44772fe27dfb가 1초 딜레이 후 삭제되었습니다.
+AWS_BUCKET_NAME: projectagorabucket
+AWS_BUCKET_NAME: projectagorabucket
