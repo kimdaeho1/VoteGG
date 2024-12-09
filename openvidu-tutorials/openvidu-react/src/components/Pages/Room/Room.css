@@ -27,7 +27,7 @@
   flex-direction: column;
   flex: 3;
   /* 비율로 설정 (30%) */
-  height: 100%;
+  height: 101%;
   /* padding: 10px; 내부 여백 */
   margin: 0;
   /* 외부 여백 제거 */

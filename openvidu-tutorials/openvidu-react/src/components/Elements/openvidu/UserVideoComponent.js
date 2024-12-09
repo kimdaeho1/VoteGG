@@ -35,9 +35,9 @@ export default class UserVideoComponent extends Component {
                             muted={isLocalStream}
                         />
                         {/* Optional: Display user name */}
-                        {/* <div className="connection-info">
-                            <p>User: {clientData || 'No Data'}</p>
-                        </div> */}
+                        <div className="connection-info">
+                            <p className="user-name">{clientData || 'User not found'}</p>
+                        </div>
                     </div>
                 ) : (
                     // console.warn(`No streamManager found for user: ${clientData}, Connection ID: ${connectionId}`)

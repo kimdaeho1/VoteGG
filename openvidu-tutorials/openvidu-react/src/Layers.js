@@ -26,7 +26,7 @@ const MobileFallback = () => (
     <h1 className="mobile-title">모바일은 지원되지 않습니다</h1>
     <p className="mobile-text">데스크톱 환경에서 접속해주세요.</p>
     <img
-      src="/eggbackground.jpg" 
+      src="/eggbackground.jpg"
       alt="Background"
       className="mobile-background"
     />

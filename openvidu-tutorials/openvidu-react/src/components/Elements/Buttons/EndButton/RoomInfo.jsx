@@ -109,7 +109,7 @@ const RoomInfo = () => {
               alt={`${participant.username}의 프로필`}
               className="room-info__profile-img"
             />
-            <h3 className="room-info__creator">{participant.username}</h3>
+            {/* <h3 className="room-info__creator">{participant.username}</h3> */}
           </div>
         ))
       ) : (

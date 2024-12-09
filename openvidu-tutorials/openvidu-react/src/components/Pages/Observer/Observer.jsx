@@ -46,21 +46,25 @@ const Observer = () => {
       <div
         className="home-background"
         style={{
-          backgroundImage: 'url("/nest_egg2.png")',
-          backgroundSize: '25% 50%',
+          backgroundImage: 'url("/footer9.png")',
+          backgroundSize: '100% 70%',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           position: 'fixed',
           top: '76vh',
-          left: '3%',
-          width: '80vw',
+          right: 0,
+          width: '100vw',
           height: '20vh',
           zIndex: -1,
           minHeight: '300px',
           maxHeight: '300px',
-          // opacity: '60%',
+          opacity: '1',
         }}
-      ></div>
+      >
+        {/* <div className="hover-area">
+          <span className="hover-text">계란으로 투표하기!</span>
+        </div> */}
+      </div>
       <div className='home-background2' />
       {/* <div className='home-background3' /> */}
       <div className="left-side">

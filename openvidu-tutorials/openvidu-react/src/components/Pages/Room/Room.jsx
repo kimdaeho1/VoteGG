@@ -121,8 +121,26 @@ const Room = ({ isObserver }) => {
           maxHeight: '790px',
         }}
       ></div>
+      <div
+        className="home-background"
+        style={{
+          backgroundImage: 'url("/footer9.png")',
+          backgroundSize: '100% 70%',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          position: 'fixed',
+          top: '76vh',
+          right: 0,
+          width: '100vw',
+          height: '20vh',
+          zIndex: -1,
+          minHeight: '300px',
+          maxHeight: '300px',
+          opacity: '1',
+        }}
+      ></div>
       <div className='home-background2' />
-      <div className='home-background3' />
+      {/* <div className='home-background3' /> */}
       <div className="left-side">
         <RoomControl />
         {userId === createdBy && !isOpenviduActive && (
