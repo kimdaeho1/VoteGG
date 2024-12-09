@@ -7,6 +7,13 @@ import './VoteStatistic.css';
 
 const VoteStatistic = ({ onClose }) => {
   const [chartDataParticipants, setChartDataParticipants] = useState([]);
+  const [winningArgument, setWinningArgument] = useState('');
+  const [totalVotesLeft, setTotalVotesLeft] = useState(0);
+  const [totalVotesRight, setTotalVotesRight] = useState(0);
+  const [leftArgument, setLeftArgument] = useState('');
+  const [rightArgument, setRightArgument] = useState('');
+  const [leftUserId, setLeftUserId] = useState('');
+  const [rightUserId, setRightUserId] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -17,24 +24,57 @@ const VoteStatistic = ({ onClose }) => {
     const fetchParticipants = async () => {
       try {
         const response = await axios.get(`/api/room/${roomNumber}/participants`);
-        const participants = response.data;
+        const participants = response.data.participants;
+        const LeftArgu = response.data.LeftArguMent[0][1];
+        const RightArgu = response.data.RightArguMent[0][1];
+        const LeftUserId = response.data.LeftArguMent[0][0];
+        const RightUserId = response.data.RightArguMent[0][0];
+
+        setLeftArgument(LeftArgu);
+        setRightArgument(RightArgu);
+        setLeftUserId(LeftUserId);
+        setRightUserId(RightUserId);
 
         const participantData = participants.map(([id, votes]) => ({
           name: id,
           y: votes,
         }));
-
         setChartDataParticipants(participantData);
-        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching participants:', error);
         setError('참가자 목록을 가져오는 중 오류가 발생했습니다.');
+      } finally {
         setIsLoading(false);
       }
     };
 
     fetchParticipants();
   }, [roomNumber]);
+
+  useEffect(() => {
+    console.log('Participants:', chartDataParticipants);
+    if (chartDataParticipants.length > 0 && leftUserId && rightUserId) {
+      const totalVotesLeftCalc = chartDataParticipants
+        .filter((participant) => participant.name === leftUserId)
+        .reduce((sum, participant) => sum + participant.y, 0);
+
+      const totalVotesRightCalc = chartDataParticipants
+        .filter((participant) => participant.name === rightUserId)
+        .reduce((sum, participant) => sum + participant.y, 0);
+
+      setTotalVotesLeft(totalVotesLeftCalc);
+      setTotalVotesRight(totalVotesRightCalc);
+
+      if (totalVotesLeftCalc > totalVotesRightCalc) {
+        setWinningArgument(leftArgument);
+      } else if (totalVotesRightCalc > totalVotesLeftCalc) {
+        setWinningArgument(rightArgument);
+      } else {
+        setWinningArgument('양쪽 주장이 동점입니다.');
+      }
+    }
+  }, [chartDataParticipants, leftUserId, rightUserId, leftArgument, rightArgument]);
+
 
   const maxParticipant = chartDataParticipants.reduce((max, participant) => {
     return participant && participant.y > (max?.y || 0) ? participant : max;
@@ -103,9 +143,23 @@ const VoteStatistic = ({ onClose }) => {
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
       <div className="modal-content1 animated-modal" onClick={(e) => e.stopPropagation()}>
-        <h2 className="modal-title">참가자 득표 결과</h2>
-        {maxParticipant.name && (
-          <div className="winner-banner">이긴 사람: <strong>{maxParticipant.name}</strong></div>
+        <h2 className="modal-title">
+          {totalVotesLeft === totalVotesRight ? '동점!!' : '승자!!'}
+        </h2>
+        {maxParticipant.name && winningArgument && (
+          <div className="winner-banner">
+            {totalVotesLeft === totalVotesRight ? (
+              <strong className="tie-text">
+                <span className="animated-text">{leftArgument}</span> vs <span className="animated-text">{rightArgument}</span>
+              </strong>
+            ) : (
+              <strong>
+                <span className="animated-text winner-text">
+                  {maxParticipant.name}의 주장 {winningArgument}!!
+                </span>
+              </strong>
+            )}
+          </div>
         )}
         <div className="chart-container">
           <HighchartsReact highcharts={Highcharts} options={participantChartOptions} />
