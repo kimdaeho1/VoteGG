@@ -80,10 +80,10 @@ class OpenviduFinal extends Component {
 
 
     async saveArgumentsToServer() {
-        const { leftUserArgument, rightUserArgument, currentLeftUser, currentRightUser, leftUserList, rightUserList, userName} = this.state;
+        const { leftUserArgument, rightUserArgument, currentLeftUser, currentRightUser, leftUserList, rightUserList, userName } = this.state;
 
         // userName과 createdBy가 같을 때만 요청 전송
-        console.log(userName,"-----------",this.props.createdBy)
+        console.log(userName, "-----------", this.props.createdBy)
         if (userName === this.props.createdBy) {
             const payload = {
                 leftUserArgument,
@@ -92,7 +92,7 @@ class OpenviduFinal extends Component {
                 rightUserId: currentRightUser?.userId || null,
                 leftUserList,
                 rightUserList,
-                roomNumber : this.props.sessionId,
+                roomNumber: this.props.sessionId,
             };
             console.log("Payload being sent:", payload); // 추가된 디버깅 코드
             try {
@@ -289,350 +289,350 @@ class OpenviduFinal extends Component {
         let publisher = null;
 
         if (!this.props.isObserver) {
-        try {
-            // 브라우저 호환성 확인
-            if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
-                console.error('Media devices API is not supported in this browser.');
-                return;
-            }
-
-            // 카메라와 마이크 권한 요청
-            let cameraStream;
             try {
-                cameraStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-                console.log('Camera and microphone permissions granted.');
-            } catch (error) {
-                console.error('Camera and microphone permission denied:', error);
-                return;
-            }
-
-            // 장치 목록 가져오기
-            const devices = await navigator.mediaDevices.enumerateDevices();
-            const videoDevices = devices.filter(device => device.kind === 'videoinput');
-            console.log('Available video devices:', videoDevices);
-
-            // 비디오 장치 유효성 검증
-            if (videoDevices.length === 0) {
-                console.error('No video input devices found');
-                return;
-            }
-
-            const deviceId = videoDevices[0]?.deviceId; // 첫 번째 카메라 사용
-            console.log('Using video device:', deviceId);
-
-            // hiddenVideo 설정
-            const hiddenVideo = document.createElement('video');
-            hiddenVideo.style.position = 'absolute';
-            hiddenVideo.style.top = '-9999px';
-            hiddenVideo.style.left = '-9999px';
-            document.body.appendChild(hiddenVideo);
-            hiddenVideo.srcObject = cameraStream;
-            hiddenVideo.muted = true; 
-            hiddenVideo.playsInline = true;
-            try {
-                await hiddenVideo.play();
-                console.log('hiddenVideo play started');
-            } catch (err) {
-                console.error('Error playing video:', err);
-            }
-
-            console.log('Camera tracks:', cameraStream.getVideoTracks());
-
-            // 비디오가 로드되어 videoWidth, videoHeight를 얻을 수 있을 때까지 대기
-            await new Promise((resolve) => {
-                if (hiddenVideo.readyState >= hiddenVideo.HAVE_CURRENT_DATA) {
-                    resolve();
-                } else {
-                    hiddenVideo.addEventListener('loadeddata', () => resolve(), { once: true });
-                }
-            });
-
-            const streamWidth = hiddenVideo.videoWidth;
-            const streamHeight = hiddenVideo.videoHeight;
-            console.log(`Stream resolution: ${streamWidth}x${streamHeight}`);
-
-            // 오버레이 이미지 위치 상태 (스트리밍 해상도 기준)
-            let overlayX = 50;
-            let overlayY = 50;
-            let isDragging = false;
-            let dragOffsetX = 0;
-            let dragOffsetY = 0;
-
-            // 오버레이 이미지 로드
-            const overlayImage = new Image();
-            overlayImage.src = '/resources/images/egg.png'; 
-            await overlayImage.decode();
-
-            const hiddenCanvas = document.createElement('canvas');
-            hiddenCanvas.width = streamWidth * 0.8851;
-            hiddenCanvas.height = streamHeight * 0.8851;
-            const hiddenCtx = hiddenCanvas.getContext('2d');
-
-            function drawFrame() {
-                hiddenCtx.clearRect(0, 0, hiddenCanvas.width, hiddenCanvas.height);
-    
-                // 기존 비디오와 오버레이 이미지 그리기
-                if (hiddenVideo.readyState >= hiddenVideo.HAVE_CURRENT_DATA) {
-                    hiddenCtx.drawImage(hiddenVideo, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
+                // 브라우저 호환성 확인
+                if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+                    console.error('Media devices API is not supported in this browser.');
+                    return;
                 }
 
-                // 오버레이 이미지 그리기
-                if (overlayImage.complete && overlayImage.naturalWidth > 0) {
-                    hiddenCtx.drawImage(
-                        overlayImage,
-                        overlayX,
-                        overlayY,
-                        overlayImage._drawWidth || overlayImage.naturalWidth,
-                        overlayImage._drawHeight || overlayImage.naturalHeight
-                    );
-                } else {
-                    console.warn("Overlay image not ready to draw.");
-                }
-
-                requestAnimationFrame(drawFrame);
-            }
-            requestAnimationFrame(drawFrame);
-
-            // hiddenCanvas로부터 스트림 확보
-            const canvasStream = hiddenCanvas.captureStream(30);
-
-            // 이벤트 전용 캔버스(eventCanvas) 생성: 마우스 이벤트만 처리 (투명)
-            this.eventCanvas = document.createElement('canvas');
-            this.eventCanvas.width = hiddenCanvas.width;
-            this.eventCanvas.height = hiddenCanvas.height;
-            this.eventCanvas.style.position = 'absolute';
-            this.eventCanvas.style.top = '0';
-            this.eventCanvas.style.left = '0';
-            this.eventCanvas.style.zIndex = 10000; // 다른 요소 위로
-            this.eventCanvas.style.pointerEvents = 'auto';
-            this.eventCanvas.style.background = 'transparent';
-            
-            // 비디오 컨테이너를 찾아 상대 위치 지정
-            const videoContainer = document.querySelector('.video-container');
-            if (!videoContainer) {
-                console.error('No .video-container element found!');
-                return;
-            }
-            videoContainer.style.position = 'relative';
-            videoContainer.appendChild(this.eventCanvas);
-
-
-            // S3 업로드 함수 추가
-            async function uploadImageToS3(file) {
+                // 카메라와 마이크 권한 요청
+                let cameraStream;
                 try {
-                    // 프리사인드 URL 생성 요청
-                    const presignedResponse = await axios.post(`${window.location.origin}/api/generate-presigned-url`, {
-                        filename: file.name,
-                        contentType: file.type,
-                    }, {
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    });
-            
-                    const { url: presignedUrl, key } = presignedResponse.data;
-            
-                    // S3로 이미지 업로드
-                    const uploadResponse = await axios.put(presignedUrl, file, {
-                        headers: { 'Content-Type': file.type },
-                    });
-            
-                    if (uploadResponse.status === 200) {
-                        const imageUrl = `https://${process.env.REACT_APP_AWS_BUCKET_NAME}.s3.amazonaws.com/${key}`;
-                        console.log('Image uploaded to S3:', imageUrl);
-                        console.log('S3 Key:', key);
-                        return imageUrl; // S3에 저장된 이미지 URL 반환
-                    }
+                    cameraStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                    console.log('Camera and microphone permissions granted.');
                 } catch (error) {
-                    console.error('Error uploading image to S3:', error);
-                    throw error;
+                    console.error('Camera and microphone permission denied:', error);
+                    return;
                 }
-            }
-  
-            // 캔버스 드래그 앤 드롭 이벤트 처리
-            this.eventCanvas.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                e.dataTransfer.dropEffect = 'copy'; // 드롭 효과 설정
-            });
-            
-            let activeOverlay = null; // 현재 활성화된 오버레이를 추적
-            let videoElement = null; // videoElement를 전역 변수로 선언
 
-            this.eventCanvas.addEventListener('drop', async (e) => {
-                e.preventDefault();
-                const file = e.dataTransfer.files[0];
-            
-                if (file) {
-                    if (file.type.startsWith('image/')) {
-                        console.log('Image file dropped:', file);
+                // 장치 목록 가져오기
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                const videoDevices = devices.filter(device => device.kind === 'videoinput');
+                console.log('Available video devices:', videoDevices);
 
-                        try {
-                            const imageUrl = await uploadImageToS3(file);
+                // 비디오 장치 유효성 검증
+                if (videoDevices.length === 0) {
+                    console.error('No video input devices found');
+                    return;
+                }
 
-                            const rect = this.eventCanvas.getBoundingClientRect();
-                            const mouseX = e.clientX - rect.left;
-                            const mouseY = e.clientY - rect.top;
+                const deviceId = videoDevices[0]?.deviceId; // 첫 번째 카메라 사용
+                console.log('Using video device:', deviceId);
 
-                            const scaleX = hiddenCanvas.width / this.eventCanvas.width;
-                            const scaleY = hiddenCanvas.height / this.eventCanvas.height;
+                // hiddenVideo 설정
+                const hiddenVideo = document.createElement('video');
+                hiddenVideo.style.position = 'absolute';
+                hiddenVideo.style.top = '-9999px';
+                hiddenVideo.style.left = '-9999px';
+                document.body.appendChild(hiddenVideo);
+                hiddenVideo.srcObject = cameraStream;
+                hiddenVideo.muted = true;
+                hiddenVideo.playsInline = true;
+                try {
+                    await hiddenVideo.play();
+                    console.log('hiddenVideo play started');
+                } catch (err) {
+                    console.error('Error playing video:', err);
+                }
 
-                            overlayX = mouseX * scaleX;
-                            overlayY = mouseY * scaleY;
+                console.log('Camera tracks:', cameraStream.getVideoTracks());
 
-                            overlayImage.crossOrigin = 'Anonymous';
-                            overlayImage.src = `${imageUrl}?t=${Date.now()}`;
-                            overlayImage.onload = () => {
-                                console.log('Overlay image updated to:', overlayImage.src);
-                                activeOverlay = 'image'; // 이미지가 활성화됨
-                                redrawCanvas();
-                            };
-                            overlayImage.onerror = () => {
-                                console.error('Failed to load overlay image:', overlayImage.src);
-                            };
-                        } catch (error) {
-                            console.error('Error handling dropped image file:', error);
+                // 비디오가 로드되어 videoWidth, videoHeight를 얻을 수 있을 때까지 대기
+                await new Promise((resolve) => {
+                    if (hiddenVideo.readyState >= hiddenVideo.HAVE_CURRENT_DATA) {
+                        resolve();
+                    } else {
+                        hiddenVideo.addEventListener('loadeddata', () => resolve(), { once: true });
+                    }
+                });
+
+                const streamWidth = hiddenVideo.videoWidth;
+                const streamHeight = hiddenVideo.videoHeight;
+                console.log(`Stream resolution: ${streamWidth}x${streamHeight}`);
+
+                // 오버레이 이미지 위치 상태 (스트리밍 해상도 기준)
+                let overlayX = 50;
+                let overlayY = 50;
+                let isDragging = false;
+                let dragOffsetX = 0;
+                let dragOffsetY = 0;
+
+                // 오버레이 이미지 로드
+                const overlayImage = new Image();
+                overlayImage.src = '/resources/images/egg.png';
+                await overlayImage.decode();
+
+                const hiddenCanvas = document.createElement('canvas');
+                hiddenCanvas.width = streamWidth * 0.8851;
+                hiddenCanvas.height = streamHeight * 0.8851;
+                const hiddenCtx = hiddenCanvas.getContext('2d');
+
+                function drawFrame() {
+                    hiddenCtx.clearRect(0, 0, hiddenCanvas.width, hiddenCanvas.height);
+
+                    // 기존 비디오와 오버레이 이미지 그리기
+                    if (hiddenVideo.readyState >= hiddenVideo.HAVE_CURRENT_DATA) {
+                        hiddenCtx.drawImage(hiddenVideo, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
+                    }
+
+                    // 오버레이 이미지 그리기
+                    if (overlayImage.complete && overlayImage.naturalWidth > 0) {
+                        hiddenCtx.drawImage(
+                            overlayImage,
+                            overlayX,
+                            overlayY,
+                            overlayImage._drawWidth || overlayImage.naturalWidth,
+                            overlayImage._drawHeight || overlayImage.naturalHeight
+                        );
+                    } else {
+                        console.warn("Overlay image not ready to draw.");
+                    }
+
+                    requestAnimationFrame(drawFrame);
+                }
+                requestAnimationFrame(drawFrame);
+
+                // hiddenCanvas로부터 스트림 확보
+                const canvasStream = hiddenCanvas.captureStream(30);
+
+                // 이벤트 전용 캔버스(eventCanvas) 생성: 마우스 이벤트만 처리 (투명)
+                this.eventCanvas = document.createElement('canvas');
+                this.eventCanvas.width = hiddenCanvas.width;
+                this.eventCanvas.height = hiddenCanvas.height;
+                this.eventCanvas.style.position = 'absolute';
+                this.eventCanvas.style.top = '0';
+                this.eventCanvas.style.left = '0';
+                this.eventCanvas.style.zIndex = 10000; // 다른 요소 위로
+                this.eventCanvas.style.pointerEvents = 'auto';
+                this.eventCanvas.style.background = 'transparent';
+
+                // 비디오 컨테이너를 찾아 상대 위치 지정
+                const videoContainer = document.querySelector('.video-container');
+                if (!videoContainer) {
+                    console.error('No .video-container element found!');
+                    return;
+                }
+                videoContainer.style.position = 'relative';
+                videoContainer.appendChild(this.eventCanvas);
+
+
+                // S3 업로드 함수 추가
+                async function uploadImageToS3(file) {
+                    try {
+                        // 프리사인드 URL 생성 요청
+                        const presignedResponse = await axios.post(`${window.location.origin}/api/generate-presigned-url`, {
+                            filename: file.name,
+                            contentType: file.type,
+                        }, {
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                        });
+
+                        const { url: presignedUrl, key } = presignedResponse.data;
+
+                        // S3로 이미지 업로드
+                        const uploadResponse = await axios.put(presignedUrl, file, {
+                            headers: { 'Content-Type': file.type },
+                        });
+
+                        if (uploadResponse.status === 200) {
+                            const imageUrl = `https://${process.env.REACT_APP_AWS_BUCKET_NAME}.s3.amazonaws.com/${key}`;
+                            console.log('Image uploaded to S3:', imageUrl);
+                            console.log('S3 Key:', key);
+                            return imageUrl; // S3에 저장된 이미지 URL 반환
                         }
-                    } else if (file.type.startsWith('video/')) {
-                        console.log('Video file dropped:', file);
+                    } catch (error) {
+                        console.error('Error uploading image to S3:', error);
+                        throw error;
+                    }
+                }
 
-                        try {
-                            videoElement = document.createElement('video'); // videoElement를 전역 변수로 설정
-                            const videoUrl = await uploadImageToS3(file);
+                // 캔버스 드래그 앤 드롭 이벤트 처리
+                this.eventCanvas.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'copy'; // 드롭 효과 설정
+                });
 
-                            videoElement.src = `${videoUrl}?t=${Date.now()}`;
-                            videoElement.crossOrigin = 'Anonymous';
-                            videoElement.loop = true;
-                            videoElement.muted = true;
-                            videoElement.style.position = 'absolute';
-                            videoElement.style.top = '0';
-                            videoElement.style.left = '0';
-                            videoElement.style.width = '200px'; // 초기 크기 설정
-                            videoElement.style.height = '150px'; // 초기 크기 설정
-                            videoElement.style.zIndex = 10001;
-                            videoElement.style.pointerEvents = 'none';
+                let activeOverlay = null; // 현재 활성화된 오버레이를 추적
+                let videoElement = null; // videoElement를 전역 변수로 선언
 
-                            // 초기 크기 설정
-                            videoElement.width = 200; // 비디오 요소의 width 속성 설정
-                            videoElement.height = 150; // 비디오 요소의 height 속성 설정
+                this.eventCanvas.addEventListener('drop', async (e) => {
+                    e.preventDefault();
+                    const file = e.dataTransfer.files[0];
 
-                            // 비디오가 로드될 때까지 대기
-                            videoElement.onloadeddata = () => {
-                                console.log('Video loaded:', videoElement.src);
-                                activeOverlay = 'video'; // 비디오가 활성화됨
-                                redrawCanvas();
+                    if (file) {
+                        if (file.type.startsWith('image/')) {
+                            console.log('Image file dropped:', file);
 
-                                // 비디오 재생 시작
-                                videoElement.play().then(() => {
-                                    console.log('Video is playing');
-                                }).catch((error) => {
-                                    console.error('Error playing video:', error);
-                                });
+                            try {
+                                const imageUrl = await uploadImageToS3(file);
 
-                                // 비디오 프레임을 지속적으로 그리기
-                                function drawVideoFrame() {
-                                    if (activeOverlay === 'video' && videoElement && videoElement.readyState >= videoElement.HAVE_CURRENT_DATA) {
-                                        hiddenCtx.clearRect(0, 0, hiddenCanvas.width, hiddenCanvas.height);
-                                        hiddenCtx.drawImage(hiddenVideo, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
-                                        hiddenCtx.drawImage(videoElement, overlayX, overlayY, videoElement.width, videoElement.height);
-                                    }
-                                    if (activeOverlay === 'video') {
-                                        requestAnimationFrame(drawVideoFrame);
-                                    }
-                                }
-                                requestAnimationFrame(drawVideoFrame);
-                            };
-
-                            // 비디오 드래그 앤 드롭 기능 추가
-                            this.eventCanvas.addEventListener('mousedown', (e) => {
                                 const rect = this.eventCanvas.getBoundingClientRect();
                                 const mouseX = e.clientX - rect.left;
                                 const mouseY = e.clientY - rect.top;
 
-                                if (videoElement && videoElement.readyState >= videoElement.HAVE_CURRENT_DATA) { // videoElement가 존재하는지 확인
-                                    if (
-                                        mouseX >= overlayX && mouseX <= overlayX + videoElement.videoWidth &&
-                                        mouseY >= overlayY && mouseY <= overlayY + videoElement.videoHeight
-                                    ) {
-                                        isDragging = true;
-                                        dragOffsetX = mouseX - overlayX;
-                                        dragOffsetY = mouseY - overlayY;
-                                    }
-                                }
-                            });
+                                const scaleX = hiddenCanvas.width / this.eventCanvas.width;
+                                const scaleY = hiddenCanvas.height / this.eventCanvas.height;
 
-                            this.eventCanvas.addEventListener('mousemove', (e) => {
-                                if (isDragging) {
+                                overlayX = mouseX * scaleX;
+                                overlayY = mouseY * scaleY;
+
+                                overlayImage.crossOrigin = 'Anonymous';
+                                overlayImage.src = `${imageUrl}?t=${Date.now()}`;
+                                overlayImage.onload = () => {
+                                    console.log('Overlay image updated to:', overlayImage.src);
+                                    activeOverlay = 'image'; // 이미지가 활성화됨
+                                    redrawCanvas();
+                                };
+                                overlayImage.onerror = () => {
+                                    console.error('Failed to load overlay image:', overlayImage.src);
+                                };
+                            } catch (error) {
+                                console.error('Error handling dropped image file:', error);
+                            }
+                        } else if (file.type.startsWith('video/')) {
+                            console.log('Video file dropped:', file);
+
+                            try {
+                                videoElement = document.createElement('video'); // videoElement를 전역 변수로 설정
+                                const videoUrl = await uploadImageToS3(file);
+
+                                videoElement.src = `${videoUrl}?t=${Date.now()}`;
+                                videoElement.crossOrigin = 'Anonymous';
+                                videoElement.loop = true;
+                                videoElement.muted = true;
+                                videoElement.style.position = 'absolute';
+                                videoElement.style.top = '0';
+                                videoElement.style.left = '0';
+                                videoElement.style.width = '200px'; // 초기 크기 설정
+                                videoElement.style.height = '150px'; // 초기 크기 설정
+                                videoElement.style.zIndex = 10001;
+                                videoElement.style.pointerEvents = 'none';
+
+                                // 초기 크기 설정
+                                videoElement.width = 200; // 비디오 요소의 width 속성 설정
+                                videoElement.height = 150; // 비디오 요소의 height 속성 설정
+
+                                // 비디오가 로드될 때까지 대기
+                                videoElement.onloadeddata = () => {
+                                    console.log('Video loaded:', videoElement.src);
+                                    activeOverlay = 'video'; // 비디오가 활성화됨
+                                    redrawCanvas();
+
+                                    // 비디오 재생 시작
+                                    videoElement.play().then(() => {
+                                        console.log('Video is playing');
+                                    }).catch((error) => {
+                                        console.error('Error playing video:', error);
+                                    });
+
+                                    // 비디오 프레임을 지속적으로 그리기
+                                    function drawVideoFrame() {
+                                        if (activeOverlay === 'video' && videoElement && videoElement.readyState >= videoElement.HAVE_CURRENT_DATA) {
+                                            hiddenCtx.clearRect(0, 0, hiddenCanvas.width, hiddenCanvas.height);
+                                            hiddenCtx.drawImage(hiddenVideo, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
+                                            hiddenCtx.drawImage(videoElement, overlayX, overlayY, videoElement.width, videoElement.height);
+                                        }
+                                        if (activeOverlay === 'video') {
+                                            requestAnimationFrame(drawVideoFrame);
+                                        }
+                                    }
+                                    requestAnimationFrame(drawVideoFrame);
+                                };
+
+                                // 비디오 드래그 앤 드롭 기능 추가
+                                this.eventCanvas.addEventListener('mousedown', (e) => {
                                     const rect = this.eventCanvas.getBoundingClientRect();
                                     const mouseX = e.clientX - rect.left;
                                     const mouseY = e.clientY - rect.top;
 
-                                    overlayX = mouseX - dragOffsetX;
-                                    overlayY = mouseY - dragOffsetY;
-                                }
-                            });
+                                    if (videoElement && videoElement.readyState >= videoElement.HAVE_CURRENT_DATA) { // videoElement가 존재하는지 확인
+                                        if (
+                                            mouseX >= overlayX && mouseX <= overlayX + videoElement.videoWidth &&
+                                            mouseY >= overlayY && mouseY <= overlayY + videoElement.videoHeight
+                                        ) {
+                                            isDragging = true;
+                                            dragOffsetX = mouseX - overlayX;
+                                            dragOffsetY = mouseY - overlayY;
+                                        }
+                                    }
+                                });
 
-                            this.eventCanvas.addEventListener('mouseup', () => {
-                                isDragging = false;
-                            });
+                                this.eventCanvas.addEventListener('mousemove', (e) => {
+                                    if (isDragging) {
+                                        const rect = this.eventCanvas.getBoundingClientRect();
+                                        const mouseX = e.clientX - rect.left;
+                                        const mouseY = e.clientY - rect.top;
 
-                            this.eventCanvas.addEventListener('mouseleave', () => {
-                                isDragging = false;
-                            });
+                                        overlayX = mouseX - dragOffsetX;
+                                        overlayY = mouseY - dragOffsetY;
+                                    }
+                                });
 
-                            // 팝업 메뉴 이벤트 추가
-                            this.eventCanvas.addEventListener('contextmenu', (e) => {
-                                const rect = this.eventCanvas.getBoundingClientRect();
-                                const mouseX = e.clientX - rect.left;
-                                const mouseY = e.clientY - rect.top;
+                                this.eventCanvas.addEventListener('mouseup', () => {
+                                    isDragging = false;
+                                });
 
-                                const isInsideVideo = videoElement && // videoElement가 존재하는지 확인
-                                    mouseX >= overlayX &&
-                                    mouseX <= overlayX + videoElement.videoWidth &&
-                                    mouseY >= overlayY &&
-                                    mouseY <= overlayY + videoElement.videoHeight;
+                                this.eventCanvas.addEventListener('mouseleave', () => {
+                                    isDragging = false;
+                                });
 
-                                const isInsideImage = overlayImage.src && // overlayImage가 존재하는지 확인
-                                    mouseX >= overlayX &&
-                                    mouseX <= overlayX + (overlayImage._drawWidth || overlayImage.naturalWidth) &&
-                                    mouseY >= overlayY &&
-                                    mouseY <= overlayY + (overlayImage._drawHeight || overlayImage.naturalHeight);
+                                // 팝업 메뉴 이벤트 추가
+                                this.eventCanvas.addEventListener('contextmenu', (e) => {
+                                    const rect = this.eventCanvas.getBoundingClientRect();
+                                    const mouseX = e.clientX - rect.left;
+                                    const mouseY = e.clientY - rect.top;
 
-                                if (isInsideVideo || isInsideImage) {
-                                    e.preventDefault();
-                                    // 팝업 메뉴 표시 로직
-                                    contextMenu.style.top = `${e.clientY}px`;
-                                    contextMenu.style.left = `${e.clientX}px`;
-                                    contextMenu.style.display = 'block';
-                                } else {
-                                    contextMenu.style.display = 'none';
-                                }
-                            });
+                                    const isInsideVideo = videoElement && // videoElement가 존재하는지 확인
+                                        mouseX >= overlayX &&
+                                        mouseX <= overlayX + videoElement.videoWidth &&
+                                        mouseY >= overlayY &&
+                                        mouseY <= overlayY + videoElement.videoHeight;
 
-                        } catch (error) {
-                            console.error('Error handling dropped video file:', error);
+                                    const isInsideImage = overlayImage.src && // overlayImage가 존재하는지 확인
+                                        mouseX >= overlayX &&
+                                        mouseX <= overlayX + (overlayImage._drawWidth || overlayImage.naturalWidth) &&
+                                        mouseY >= overlayY &&
+                                        mouseY <= overlayY + (overlayImage._drawHeight || overlayImage.naturalHeight);
+
+                                    if (isInsideVideo || isInsideImage) {
+                                        e.preventDefault();
+                                        // 팝업 메뉴 표시 로직
+                                        contextMenu.style.top = `${e.clientY}px`;
+                                        contextMenu.style.left = `${e.clientX}px`;
+                                        contextMenu.style.display = 'block';
+                                    } else {
+                                        contextMenu.style.display = 'none';
+                                    }
+                                });
+
+                            } catch (error) {
+                                console.error('Error handling dropped video file:', error);
+                            }
+                        } else {
+                            console.warn('Dropped file is not a valid image or video');
                         }
-                    } else {
-                        console.warn('Dropped file is not a valid image or video');
                     }
-                }
-            });
+                });
 
 
-            // 팝업 메뉴 생성
-            const contextMenu = document.createElement('div');
-            contextMenu.style.position = 'absolute';
-            contextMenu.style.display = 'none';
-            contextMenu.style.backgroundColor = '#fff';
-            contextMenu.style.border = '1px solid #ccc';
-            contextMenu.style.padding = '8px';
-            contextMenu.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.2)';
-            contextMenu.style.cursor = 'pointer';
-            contextMenu.innerText = '삭제';
-            contextMenu.style.zIndex = '10000';
-            document.body.appendChild(contextMenu);
+                // 팝업 메뉴 생성
+                const contextMenu = document.createElement('div');
+                contextMenu.style.position = 'absolute';
+                contextMenu.style.display = 'none';
+                contextMenu.style.backgroundColor = '#fff';
+                contextMenu.style.border = '1px solid #ccc';
+                contextMenu.style.padding = '8px';
+                contextMenu.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.2)';
+                contextMenu.style.cursor = 'pointer';
+                contextMenu.innerText = '삭제';
+                contextMenu.style.zIndex = '10000';
+                document.body.appendChild(contextMenu);
 
-            // 팝업 메뉴 내용 초기화
-            contextMenu.innerHTML = `
+                // 팝업 메뉴 내용 초기화
+                contextMenu.innerHTML = `
             <div style="margin-bottom: 10px;">
                 <div style="margin-bottom: 5px;">
                     <label>
@@ -655,213 +655,213 @@ class OpenviduFinal extends Component {
             </div>
             `;
 
-            // 팝업 메뉴 이벤트 추가
-            const resizeButton = document.getElementById('resizeButton');
-            const deleteButton = document.getElementById('deleteButton');
-            const overlayWidthInput = document.getElementById('overlayWidth');
-            const overlayHeightInput = document.getElementById('overlayHeight');
+                // 팝업 메뉴 이벤트 추가
+                const resizeButton = document.getElementById('resizeButton');
+                const deleteButton = document.getElementById('deleteButton');
+                const overlayWidthInput = document.getElementById('overlayWidth');
+                const overlayHeightInput = document.getElementById('overlayHeight');
 
-            // 마우스 우클릭 이벤트 처리
-            this.eventCanvas.addEventListener('contextmenu', (e) => {
-                const rect = this.eventCanvas.getBoundingClientRect();
-                const mouseX = e.clientX - rect.left;
-                const mouseY = e.clientY - rect.top;
-
-                const isInsideVideo = videoElement && // videoElement가 존재하는지 확인
-                    mouseX >= overlayX &&
-                    mouseX <= overlayX + videoElement.videoWidth &&
-                    mouseY >= overlayY &&
-                    mouseY <= overlayY + videoElement.videoHeight;
-
-                const isInsideImage = overlayImage.src && // overlayImage가 존재하는지 확인
-                    mouseX >= overlayX &&
-                    mouseX <= overlayX + (overlayImage._drawWidth || overlayImage.naturalWidth) &&
-                    mouseY >= overlayY &&
-                    mouseY <= overlayY + (overlayImage._drawHeight || overlayImage.naturalHeight);
-
-                if (isInsideVideo || isInsideImage) {
-                    e.preventDefault(); // 기본 브라우저 우클릭 메뉴 막기
-
-                    console.log('Showing custom context menu');
-
-                    // 팝업 메뉴 위치 설정
-                    const menuX = e.clientX;
-                    const menuY = e.clientY;
-
-                    contextMenu.style.top = `${menuY}px`;
-                    contextMenu.style.left = `${menuX}px`;
-                    contextMenu.style.display = 'block';
-
-                    // 현재 오버레이 크기를 입력 필드에 표시
-                    if (isInsideImage) {
-                        overlayWidthInput.value = overlayImage._drawWidth || overlayImage.naturalWidth;
-                        overlayHeightInput.value = overlayImage._drawHeight || overlayImage.naturalHeight;
-                    } else if (isInsideVideo && videoElement) {
-                        overlayWidthInput.value = videoElement.width;
-                        overlayHeightInput.value = videoElement.height;
-                    }
-                } else {
-                    console.log('Outside overlay. Showing default context menu');
-                    contextMenu.style.display = 'none'; // 커스텀 팝업 숨기기
-                }
-            });
-
-            // 크기 조절 버튼 클릭 이벤트
-            resizeButton.addEventListener('click', () => {
-                const newWidth = parseInt(overlayWidthInput.value, 10);
-                const newHeight = parseInt(overlayHeightInput.value, 10);
-
-                console.log('Input Values:', { newWidth, newHeight });
-
-                if (!isNaN(newWidth) && newWidth > 0 && !isNaN(newHeight) && newHeight > 0) {
-                    if (activeOverlay === 'image') {
-                        overlayImage._drawWidth = newWidth;
-                        overlayImage._drawHeight = newHeight;
-                    } else if (activeOverlay === 'video' && videoElement) {
-                        videoElement.width = newWidth;
-                        videoElement.height = newHeight;
-                    }
-
-                    console.log('Overlay dimensions set to:', {
-                        width: newWidth,
-                        height: newHeight,
-                    });
-
-                    redrawCanvas();
-                } else {
-                    console.warn('Invalid size inputs');
-                }
-
-                contextMenu.style.display = 'none'; // 팝업 닫기
-            });
-
-            // 캔버스 다시 그리기 함수
-            function redrawCanvas() {
-                hiddenCtx.clearRect(0, 0, hiddenCanvas.width, hiddenCanvas.height);
-                hiddenCtx.drawImage(hiddenVideo, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
-
-                if (activeOverlay === 'image' && overlayImage.src && overlayImage.src !== '') {
-                    hiddenCtx.drawImage(
-                        overlayImage,
-                        overlayX,
-                        overlayY,
-                        overlayImage._drawWidth || overlayImage.naturalWidth,
-                        overlayImage._drawHeight || overlayImage.naturalHeight
-                    );
-                }
-
-                if (activeOverlay === 'video' && videoElement && videoElement.readyState >= videoElement.HAVE_CURRENT_DATA) {
-                    hiddenCtx.drawImage(
-                        videoElement,
-                        overlayX,
-                        overlayY,
-                        videoElement.width,
-                        videoElement.height
-                    );
-                }
-            }
-
-            // 삭제 버튼 클릭 이벤트
-            deleteButton.addEventListener('click', () => {
-                console.log('Removing overlay image');
-                overlayImage.src = ''; // 이미지 제거
-                overlayX = 0;
-                overlayY = 0;
-
-                // 비디오 오버레이 제거
-                if (videoElement) {
-                    videoElement.pause(); // 비디오 재생 중지
-                    videoElement.src = ''; // 비디오 소스 제거
-                    videoElement.remove(); // 비디오 요소 제거
-                    videoElement = null; // 비디오 요소 참조 초기화
-                    activeOverlay = null;
-                }
-
-                // 캔버스 초기화
-                hiddenCtx.clearRect(0, 0, hiddenCanvas.width, hiddenCanvas.height);
-                hiddenCtx.drawImage(hiddenVideo, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
-
-                contextMenu.style.display = 'none'; // 팝업 닫기
-            });
-
-            // 팝업 내부 클릭 시 이벤트 전파 방지
-            contextMenu.addEventListener('click', (e) => {
-                e.stopPropagation();
-            });
-
-            // 팝업 외부 클릭 시 닫기
-            document.addEventListener('click', (e) => {
-                if (!contextMenu.contains(e.target)) {
-                    contextMenu.style.display = 'none';
-                }
-            });
-
-            // 이벤트 핸들러
-            this.eventCanvas.addEventListener('mousedown', (e) => {
-                console.log("mousedown!!");
-                const rect = this.eventCanvas.getBoundingClientRect();
-                const mouseX = e.clientX - rect.left;
-                const mouseY = e.clientY - rect.top;
-
-                // 마우스 좌표를 스트리밍 해상도 좌표로 변환
-                const { streamingMouseX, streamingMouseY } = {streamingMouseX: mouseX, streamingMouseY: mouseY};
-
-                if (
-                    streamingMouseX >= overlayX && streamingMouseX <= overlayX + overlayImage.width &&
-                    streamingMouseY >= overlayY && streamingMouseY <= overlayY + overlayImage.height
-                ) {
-                    isDragging = true;
-                    dragOffsetX = streamingMouseX - overlayX;
-                    dragOffsetY = streamingMouseY - overlayY;
-                }
-            });
-
-            this.eventCanvas.addEventListener('mousemove', (e) => {
-                if (isDragging) {
+                // 마우스 우클릭 이벤트 처리
+                this.eventCanvas.addEventListener('contextmenu', (e) => {
                     const rect = this.eventCanvas.getBoundingClientRect();
                     const mouseX = e.clientX - rect.left;
                     const mouseY = e.clientY - rect.top;
 
-                    const { streamingMouseX, streamingMouseY } = {streamingMouseX: mouseX, streamingMouseY: mouseY};
-                    overlayX = streamingMouseX - dragOffsetX;
-                    overlayY = streamingMouseY - dragOffsetY;
+                    const isInsideVideo = videoElement && // videoElement가 존재하는지 확인
+                        mouseX >= overlayX &&
+                        mouseX <= overlayX + videoElement.videoWidth &&
+                        mouseY >= overlayY &&
+                        mouseY <= overlayY + videoElement.videoHeight;
+
+                    const isInsideImage = overlayImage.src && // overlayImage가 존재하는지 확인
+                        mouseX >= overlayX &&
+                        mouseX <= overlayX + (overlayImage._drawWidth || overlayImage.naturalWidth) &&
+                        mouseY >= overlayY &&
+                        mouseY <= overlayY + (overlayImage._drawHeight || overlayImage.naturalHeight);
+
+                    if (isInsideVideo || isInsideImage) {
+                        e.preventDefault(); // 기본 브라우저 우클릭 메뉴 막기
+
+                        console.log('Showing custom context menu');
+
+                        // 팝업 메뉴 위치 설정
+                        const menuX = e.clientX;
+                        const menuY = e.clientY;
+
+                        contextMenu.style.top = `${menuY}px`;
+                        contextMenu.style.left = `${menuX}px`;
+                        contextMenu.style.display = 'block';
+
+                        // 현재 오버레이 크기를 입력 필드에 표시
+                        if (isInsideImage) {
+                            overlayWidthInput.value = overlayImage._drawWidth || overlayImage.naturalWidth;
+                            overlayHeightInput.value = overlayImage._drawHeight || overlayImage.naturalHeight;
+                        } else if (isInsideVideo && videoElement) {
+                            overlayWidthInput.value = videoElement.width;
+                            overlayHeightInput.value = videoElement.height;
+                        }
+                    } else {
+                        console.log('Outside overlay. Showing default context menu');
+                        contextMenu.style.display = 'none'; // 커스텀 팝업 숨기기
+                    }
+                });
+
+                // 크기 조절 버튼 클릭 이벤트
+                resizeButton.addEventListener('click', () => {
+                    const newWidth = parseInt(overlayWidthInput.value, 10);
+                    const newHeight = parseInt(overlayHeightInput.value, 10);
+
+                    console.log('Input Values:', { newWidth, newHeight });
+
+                    if (!isNaN(newWidth) && newWidth > 0 && !isNaN(newHeight) && newHeight > 0) {
+                        if (activeOverlay === 'image') {
+                            overlayImage._drawWidth = newWidth;
+                            overlayImage._drawHeight = newHeight;
+                        } else if (activeOverlay === 'video' && videoElement) {
+                            videoElement.width = newWidth;
+                            videoElement.height = newHeight;
+                        }
+
+                        console.log('Overlay dimensions set to:', {
+                            width: newWidth,
+                            height: newHeight,
+                        });
+
+                        redrawCanvas();
+                    } else {
+                        console.warn('Invalid size inputs');
+                    }
+
+                    contextMenu.style.display = 'none'; // 팝업 닫기
+                });
+
+                // 캔버스 다시 그리기 함수
+                function redrawCanvas() {
+                    hiddenCtx.clearRect(0, 0, hiddenCanvas.width, hiddenCanvas.height);
+                    hiddenCtx.drawImage(hiddenVideo, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
+
+                    if (activeOverlay === 'image' && overlayImage.src && overlayImage.src !== '') {
+                        hiddenCtx.drawImage(
+                            overlayImage,
+                            overlayX,
+                            overlayY,
+                            overlayImage._drawWidth || overlayImage.naturalWidth,
+                            overlayImage._drawHeight || overlayImage.naturalHeight
+                        );
+                    }
+
+                    if (activeOverlay === 'video' && videoElement && videoElement.readyState >= videoElement.HAVE_CURRENT_DATA) {
+                        hiddenCtx.drawImage(
+                            videoElement,
+                            overlayX,
+                            overlayY,
+                            videoElement.width,
+                            videoElement.height
+                        );
+                    }
                 }
-            });
 
-            this.eventCanvas.addEventListener('mouseup', () => {
-                console.log("mouseup!!");
-                isDragging = false;
-            });
+                // 삭제 버튼 클릭 이벤트
+                deleteButton.addEventListener('click', () => {
+                    console.log('Removing overlay image');
+                    overlayImage.src = ''; // 이미지 제거
+                    overlayX = 0;
+                    overlayY = 0;
 
-            this.eventCanvas.addEventListener('mouseleave', () => {
-                isDragging = false;
-            });
+                    // 비디오 오버레이 제거
+                    if (videoElement) {
+                        videoElement.pause(); // 비디오 재생 중지
+                        videoElement.src = ''; // 비디오 소스 제거
+                        videoElement.remove(); // 비디오 요소 제거
+                        videoElement = null; // 비디오 요소 참조 초기화
+                        activeOverlay = null;
+                    }
 
-            // 퍼블리셔 생성 시 hiddenCanvas 스트림을 비디오 소스로 사용 (원본 해상도 유지)
-            publisher = await OV.initPublisherAsync(undefined, {
-                audioSource: cameraStream.getAudioTracks()[0],
-                videoSource: canvasStream.getVideoTracks()[0],
-                publishAudio: true,
-                publishVideo: true,
-                resolution: `${streamWidth}x${streamHeight}`, 
-                frameRate: 30,
-                mirror: false,
-                audioProcessing: {
-                    echoCancellation: true,
-                    noiseSuppression: true,
-                    autoGainControl: true,
-                }
-            });
+                    // 캔버스 초기화
+                    hiddenCtx.clearRect(0, 0, hiddenCanvas.width, hiddenCanvas.height);
+                    hiddenCtx.drawImage(hiddenVideo, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
 
-            // 초기 오디오 비활성화
-            publisher.publishAudio(false); 
-            session.publish(publisher);
-            console.log(`Published composite (camera+overlay) stream for user: ${this.state.userName}`);
+                    contextMenu.style.display = 'none'; // 팝업 닫기
+                });
 
-        } catch (error) {
-            console.error('Error initializing publisher:', error);
+                // 팝업 내부 클릭 시 이벤트 전파 방지
+                contextMenu.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+
+                // 팝업 외부 클릭 시 닫기
+                document.addEventListener('click', (e) => {
+                    if (!contextMenu.contains(e.target)) {
+                        contextMenu.style.display = 'none';
+                    }
+                });
+
+                // 이벤트 핸들러
+                this.eventCanvas.addEventListener('mousedown', (e) => {
+                    console.log("mousedown!!");
+                    const rect = this.eventCanvas.getBoundingClientRect();
+                    const mouseX = e.clientX - rect.left;
+                    const mouseY = e.clientY - rect.top;
+
+                    // 마우스 좌표를 스트리밍 해상도 좌표로 변환
+                    const { streamingMouseX, streamingMouseY } = { streamingMouseX: mouseX, streamingMouseY: mouseY };
+
+                    if (
+                        streamingMouseX >= overlayX && streamingMouseX <= overlayX + overlayImage.width &&
+                        streamingMouseY >= overlayY && streamingMouseY <= overlayY + overlayImage.height
+                    ) {
+                        isDragging = true;
+                        dragOffsetX = streamingMouseX - overlayX;
+                        dragOffsetY = streamingMouseY - overlayY;
+                    }
+                });
+
+                this.eventCanvas.addEventListener('mousemove', (e) => {
+                    if (isDragging) {
+                        const rect = this.eventCanvas.getBoundingClientRect();
+                        const mouseX = e.clientX - rect.left;
+                        const mouseY = e.clientY - rect.top;
+
+                        const { streamingMouseX, streamingMouseY } = { streamingMouseX: mouseX, streamingMouseY: mouseY };
+                        overlayX = streamingMouseX - dragOffsetX;
+                        overlayY = streamingMouseY - dragOffsetY;
+                    }
+                });
+
+                this.eventCanvas.addEventListener('mouseup', () => {
+                    console.log("mouseup!!");
+                    isDragging = false;
+                });
+
+                this.eventCanvas.addEventListener('mouseleave', () => {
+                    isDragging = false;
+                });
+
+                // 퍼블리셔 생성 시 hiddenCanvas 스트림을 비디오 소스로 사용 (원본 해상도 유지)
+                publisher = await OV.initPublisherAsync(undefined, {
+                    audioSource: cameraStream.getAudioTracks()[0],
+                    videoSource: canvasStream.getVideoTracks()[0],
+                    publishAudio: true,
+                    publishVideo: true,
+                    resolution: `${streamWidth}x${streamHeight}`,
+                    frameRate: 30,
+                    mirror: false,
+                    audioProcessing: {
+                        echoCancellation: true,
+                        noiseSuppression: true,
+                        autoGainControl: true,
+                    }
+                });
+
+                // 초기 오디오 비활성화
+                publisher.publishAudio(false);
+                session.publish(publisher);
+                console.log(`Published composite (camera+overlay) stream for user: ${this.state.userName}`);
+
+            } catch (error) {
+                console.error('Error initializing publisher:', error);
+            }
         }
-    }
 
         this.setState({
             session: session,
@@ -916,7 +916,7 @@ class OpenviduFinal extends Component {
                 if (this.state.userName != this.props.createdBy) {
                     console.log("right");
                     if (this.eventCanvas) {
-                        this.eventCanvas.style.left = `${1280*0.8851 - 640 * 0.8851 + 20}px`; // 위치 조정
+                        this.eventCanvas.style.left = `${1280 * 0.8851 - 640 * 0.8851 + 20}px`; // 위치 조정
                         rightVideoContainer.appendChild(this.eventCanvas);
                     }
                 } else {
@@ -1269,12 +1269,13 @@ class OpenviduFinal extends Component {
                                         streamManager={currentLeftUser.streamManager}
                                         localConnectionId={localConnectionId}
                                     />
+                                    {/* <p>{currentLeftUser?.userName || 'No User'}</p> */}
                                     {/* LeftUser의 주장 표시/입력 공간 */}
                                     <div className="argument-section-bottom">
                                         <div
                                             className={`speech-bubble ${this.props.isstart ? 'disabled' :
-                                                    isLeftUserEditing ? 'editing' :
-                                                        localConnectionId === currentLeftUser?.connectionId ? '' : 'disabled'
+                                                isLeftUserEditing ? 'editing' :
+                                                    localConnectionId === currentLeftUser?.connectionId ? '' : 'disabled'
                                                 }`}
                                             onClick={() => {
                                                 if (!isLeftUserEditing && localConnectionId === currentLeftUser?.connectionId) {
@@ -1309,7 +1310,12 @@ class OpenviduFinal extends Component {
 
                                 </div>
                             ) : (
-                                <img className="empty-slot" src="/unknown.png" />
+                                <div>
+                                    <img className="empty-slot" src="/unknown.png" />
+                                    <div className='waitng'>
+                                    </div>
+                                </div>
+
                             )}
                         </div>
 
@@ -1359,7 +1365,11 @@ class OpenviduFinal extends Component {
                                 </div>
 
                             ) : (
-                                <img className="empty-slot" src="/unknown.png" />
+                                <div>
+                                    <img className="empty-slot" src="/unknown.png" />
+                                    <div className='waitng'>
+                                    </div>
+                                </div>
                             )}
                         </div>
                     </div>

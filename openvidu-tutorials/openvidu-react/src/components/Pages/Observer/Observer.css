@@ -4,12 +4,40 @@
   left: -570px;
   /* width: 100px; */
   height: auto;
-  display: flex
-;
+  display: flex;
   flex-direction: column;
   grid-gap: 10px;
   gap: 10px;
   /* justify-content: center; */
   align-items: center;
   border-radius: 8px;
+}
+
+.hover-area {
+  position: absolute;
+  top: 30%;
+  left: 56.8%;
+  transform: translate(-50%, -10%);
+  width: 200px; /* 원형의 지름 */
+  height: 160px; /* 원형의 지름 */
+  background: transparent; /* 배경 없앰 */
+  cursor: pointer; /* 마우스를 올리면 클릭 가능처럼 보임 */
+  border-radius: 50%; /* 원형으로 만들기 */
+}
+
+.hover-text {
+  position: absolute;
+  font-size: 1.4rem;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  opacity: 0; /* 기본적으로 보이지 않음 */
+  transition: opacity 0.3s ease-in-out; /* 부드럽게 나타남 */
+  top: 50%; /* 부모 요소의 세로 중심 */
+  left: 50%; /* 부모 요소의 가로 중심 */
+  transform: translate(-50%, -50%); /* 정확히 중앙으로 이동 */
+}
+
+.hover-area:hover .hover-text {
+  opacity: 1; /* hover 시 글씨가 나타남 */
 }

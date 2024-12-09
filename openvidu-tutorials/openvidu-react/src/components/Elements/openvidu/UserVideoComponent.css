@@ -1,0 +1,18 @@
+.streamcomponent {
+  position: relative; /* 자식 요소의 절대 위치 기준 */
+}
+
+.user-name {
+  position: absolute;
+  bottom: 70px;
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  color: #ffffff;
+  text-shadow:
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
+}
