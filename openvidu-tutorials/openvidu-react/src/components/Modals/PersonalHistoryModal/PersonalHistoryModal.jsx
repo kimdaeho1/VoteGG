@@ -72,8 +72,8 @@ const PersonalHistory = ({ onClose }) => {
                   <p>Tags: {result.tags?.join(", ") || "없음"}</p>
                   <p>Participants: {result.participantsArray?.length || 0}명</p>
                   <p>Max Viewers: {result.maxViewers || 0}</p>
-                  <p>Red Score: {result.redScore || 0}</p>
-                  <p>Blue Score: {result.blueScore || 0}</p>
+                  {/* <p>Red Score: {result.redScore || 0}</p>
+                  <p>Blue Score: {result.blueScore || 0}</p> */}
                   <p>Created At: {new Date(result.createdAt).toLocaleString()}</p>
                 </div>
               ))}

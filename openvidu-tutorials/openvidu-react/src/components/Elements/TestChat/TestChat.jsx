@@ -88,22 +88,22 @@ const TestChat = () => {
     }
     //console.log(`increaseVoteCount called ${n} times.`);
   };
-  // useEffect(() => {
-  //   //console.log(`Current roomNumber: ${roomNumber}`);
+  useEffect(() => {
+    //console.log(`Current roomNumber: ${roomNumber}`);
 
-  //   const { maxVoteCount, usedVoteCount } = getVoteCount(roomNumber, username);
-  //   //console.log("Initial Vote Counts:", maxVoteCount, usedVoteCount);
+    const { maxVoteCount, usedVoteCount } = getVoteCount(roomNumber, username);
+    //console.log("Initial Vote Counts:", maxVoteCount, usedVoteCount);
 
-  //   const interval = setInterval(() => {
-  //     increaseVoteCount(roomNumber, username);
-  //     const { maxVoteCount, usedVoteCount } = getVoteCount(roomNumber, username);
-  //     //console.log("After Increasing Vote Count:", maxVoteCount, usedVoteCount);
-  //   }, 10000); // 10초마다 증가시키는 함수 호출
+    const interval = setInterval(() => {
+      increaseVoteCount(roomNumber, username);
+      const { maxVoteCount, usedVoteCount } = getVoteCount(roomNumber, username);
+      //console.log("After Increasing Vote Count:", maxVoteCount, usedVoteCount);
+    }, 10000); // 10초마다 증가시키는 함수 호출
 
-  //   return () => {
-  //     clearInterval(interval); // clean up on unmount
-  //   };
-  // }, [roomNumber, username]);
+    return () => {
+      clearInterval(interval); // clean up on unmount
+    };
+  }, [roomNumber, username]);
 
   useEffect(() => {
     setUserColors((prevColors) => {

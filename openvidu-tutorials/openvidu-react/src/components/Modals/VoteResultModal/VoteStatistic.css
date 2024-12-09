@@ -27,7 +27,7 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-20px);
   }
   to {
     opacity: 1;
@@ -36,12 +36,12 @@
 }
 
 .modal-title {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: bold;
   text-align: center;
   margin-bottom: 20px;
-  color: #495057; /* 중간 밝기의 회색 */
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+  color: #343a40; /* 어두운 회색 */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .winner-banner {
@@ -54,13 +54,23 @@
   border-radius: 10px;
   margin-bottom: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 .chart-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
+  margin: 25px 0;
 }
 
 .close-button1 {
@@ -68,21 +78,52 @@
   margin: 0 auto;
   padding: 12px 24px;
   font-size: 18px;
+  font-weight: bold;
   color: #fff;
-  background: #6c757d; /* 어두운 회색 배경 */
+  background: linear-gradient(145deg, #6c757d, #495057); /* 어두운 회색 그라디언트 */
   border: none;
-  border-radius: 6px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s;
 }
 
 .close-button1:hover {
   transform: scale(1.1);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(145deg, #495057, #343a40);
 }
 
 .close-button1:active {
   transform: scale(0.95);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.winning-argument {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #1a237e; /* 진한 파란색 */
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.winner-banner.tie {
+  background-color: #ffccd5; /* 연한 빨간색 */
+  color: #1a237e;
+  font-weight: bold;
+  text-align: center;
+}
+
+.tie-text .animated-text {
+  font-size: 1.3em; /* 동점일 때 약간 큰 글씨 */
+}
+
+.animated-text {
+  animation: pulse 1.8s infinite;
+}
+
+.winner-text {
+  font-size: 1.3em; /* 승자 글씨 크기 */
+  color: #212529; /* 진한 텍스트 색상 */
 }

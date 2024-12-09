@@ -209,7 +209,11 @@ router.get("/:roomId/participants", async (req, res) => {
       return res.status(404).json({ error: "방을 찾을 수 없습니다." });
     }
 
-    const participantsArray = Array.from(room.participant.entries());
+    const participantsArray = {
+      participants : Array.from(room.participant.entries()),
+      LeftArguMent : Array.from(room.leftUserArgument.entries()),
+      RightArguMent : Array.from(room.rightUserArgument.entries()),
+    }
     //console.log("참가자 목록 응답 (서버):", participantsArray);
     res.status(200).json(participantsArray);
   } catch (error) {
