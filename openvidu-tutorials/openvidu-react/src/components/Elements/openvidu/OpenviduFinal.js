@@ -360,8 +360,8 @@ class OpenviduFinal extends Component {
 
             // 오버레이 이미지 로드
             const overlayImage = new Image();
-            overlayImage.src = '/resources/images/egg.png'; 
-            await overlayImage.decode();
+            //overlayImage.src = '/resources/images/egg.png';
+            //await overlayImage.decode();
 
             const hiddenCanvas = document.createElement('canvas');
             hiddenCanvas.width = streamWidth * 0.8851;
@@ -700,33 +700,35 @@ class OpenviduFinal extends Component {
             });
 
             // 크기 조절 버튼 클릭 이벤트
-            resizeButton.addEventListener('click', () => {
-                const newWidth = parseInt(overlayWidthInput.value, 10);
-                const newHeight = parseInt(overlayHeightInput.value, 10);
+            if (resizeButton) {
+                resizeButton.addEventListener('click', () => {
+                    const newWidth = parseInt(overlayWidthInput.value, 10);
+                    const newHeight = parseInt(overlayHeightInput.value, 10);
 
-                console.log('Input Values:', { newWidth, newHeight });
+                    console.log('Input Values:', { newWidth, newHeight });
 
-                if (!isNaN(newWidth) && newWidth > 0 && !isNaN(newHeight) && newHeight > 0) {
-                    if (activeOverlay === 'image') {
-                        overlayImage._drawWidth = newWidth;
-                        overlayImage._drawHeight = newHeight;
-                    } else if (activeOverlay === 'video' && videoElement) {
-                        videoElement.width = newWidth;
-                        videoElement.height = newHeight;
+                    if (!isNaN(newWidth) && newWidth > 0 && !isNaN(newHeight) && newHeight > 0) {
+                        if (activeOverlay === 'image') {
+                            overlayImage._drawWidth = newWidth;
+                            overlayImage._drawHeight = newHeight;
+                        } else if (activeOverlay === 'video' && videoElement) {
+                            videoElement.width = newWidth;
+                            videoElement.height = newHeight;
+                        }
+
+                        console.log('Overlay dimensions set to:', {
+                            width: newWidth,
+                            height: newHeight,
+                        });
+
+                        redrawCanvas();
+                    } else {
+                        console.warn('Invalid size inputs');
                     }
 
-                    console.log('Overlay dimensions set to:', {
-                        width: newWidth,
-                        height: newHeight,
-                    });
-
-                    redrawCanvas();
-                } else {
-                    console.warn('Invalid size inputs');
-                }
-
-                contextMenu.style.display = 'none'; // 팝업 닫기
-            });
+                    contextMenu.style.display = 'none'; // 팝업 닫기
+                });
+            }
 
             // 캔버스 다시 그리기 함수
             function redrawCanvas() {
@@ -755,27 +757,29 @@ class OpenviduFinal extends Component {
             }
 
             // 삭제 버튼 클릭 이벤트
-            deleteButton.addEventListener('click', () => {
-                console.log('Removing overlay image');
-                overlayImage.src = ''; // 이미지 제거
-                overlayX = 0;
-                overlayY = 0;
+            if (deleteButton) {
+                deleteButton.addEventListener('click', () => {
+                    console.log('Removing overlay image');
+                    overlayImage.src = ''; // 이미지 제거
+                    overlayX = 0;
+                    overlayY = 0;
 
-                // 비디오 오버레이 제거
-                if (videoElement) {
-                    videoElement.pause(); // 비디오 재생 중지
-                    videoElement.src = ''; // 비디오 소스 제거
-                    videoElement.remove(); // 비디오 요소 제거
-                    videoElement = null; // 비디오 요소 참조 초기화
-                    activeOverlay = null;
-                }
+                    // 비디오 오버레이 제거
+                    if (videoElement) {
+                        videoElement.pause(); // 비디오 재생 중지
+                        videoElement.src = ''; // 비디오 소스 제거
+                        videoElement.remove(); // 비디오 요소 제거
+                        videoElement = null; // 비디오 요소 참조 초기화
+                        activeOverlay = null;
+                    }
 
-                // 캔버스 초기화
-                hiddenCtx.clearRect(0, 0, hiddenCanvas.width, hiddenCanvas.height);
-                hiddenCtx.drawImage(hiddenVideo, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
+                    // 캔버스 초기화
+                    hiddenCtx.clearRect(0, 0, hiddenCanvas.width, hiddenCanvas.height);
+                    hiddenCtx.drawImage(hiddenVideo, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
 
-                contextMenu.style.display = 'none'; // 팝업 닫기
-            });
+                    contextMenu.style.display = 'none'; // 팝업 닫기
+                });
+            }
 
             // 팝업 내부 클릭 시 이벤트 전파 방지
             contextMenu.addEventListener('click', (e) => {
