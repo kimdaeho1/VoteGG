@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './InviteModal.css';
 import axios from 'axios';
 import { useToast } from '../../Elements/Toast/ToastContext';
-
+import jwtDecode from 'jwt-decode'; // jwt-decode 라이브러리 임포트
 // 기존 코드
 const InviteModal = ({ onClose }) => {
     const [invitee, setInvitee] = useState('');
@@ -58,15 +58,14 @@ const InviteModal = ({ onClose }) => {
     );
 };
 
-// Function to extract username from JWT token
 const getUsernameFromToken = (token) => {
     try {
-      const payload = JSON.parse(atob(token.split('.')[1])); // Decode JWT payload
-      return payload.username; // Extract username from payload
+      const decoded = jwtDecode(token); // JWT 디코딩
+      return decoded.username || 'Unknown User'; // username 반환, 없을 시 기본값
     } catch (error) {
-      console.error('Failed to parse token:', error);
+      console.error('Failed to decode token:', error);
       return 'Unknown User';
     }
-};  
+  };
 
 export default InviteModal;
