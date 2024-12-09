@@ -100,7 +100,7 @@ const RoomInfo = () => {
             className="room-info__profile"
             style={
               idx !== 0
-                ? { left: `${idx * 20}px` }
+                ? { left: `${idx * 45}px` }
                 : {}
             }
           >

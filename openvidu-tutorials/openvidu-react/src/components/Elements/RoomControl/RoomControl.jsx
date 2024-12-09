@@ -88,7 +88,7 @@ const RoomControl = ({ isObserver }) => {
               <span className="room-info__tag--none">태그 없음</span>
             )}
           </div>
-          <p className="room-info__count">{roomData.memberCount}명이 시청중</p>
+          {/* <p className="room-info__count">{roomData.memberCount}명이 시청중</p> */}
         </div>
       </div>
       <Timer roomId={roomNumber} isObserver={isObserver} className='room-timer'/>

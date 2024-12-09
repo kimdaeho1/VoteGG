@@ -59,7 +59,7 @@ const Signup = () => {
       <div
         className="home-background"
         style={{
-          backgroundImage: 'url("/footer9.png")',
+          backgroundImage: 'url("/footer14.jpg")',
           backgroundSize: '100% 70%',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',

@@ -65,7 +65,7 @@ const Login = () => {
       <div
         className="home-background"
         style={{
-          backgroundImage: 'url("/footer9.png")',
+          backgroundImage: 'url("/footer14.jgp")',
           backgroundSize: '100% 70%',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',

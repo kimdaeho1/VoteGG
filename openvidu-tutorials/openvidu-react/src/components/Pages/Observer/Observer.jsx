@@ -46,7 +46,7 @@ const Observer = () => {
       <div
         className="home-background"
         style={{
-          backgroundImage: 'url("/footer9.png")',
+          backgroundImage: 'url("/footer19.jpg")',
           backgroundSize: '100% 70%',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',

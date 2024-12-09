@@ -2,11 +2,12 @@
 .openvidu-final {
     display: grid;
     grid-template-columns: 1fr;
-    width: 100%;
+    /* width: 100%; */
     height: auto;
     box-sizing: border-box;
     /* margin-top: -7.5px; */
-    margin-top: 30px;
+    margin-top: -10px;
+    margin-left: 30px;
 }
 
 /* 비디오 컨테이너 */
@@ -298,5 +299,5 @@
     /* height: 45px; */
     margin-left: 50px;
     /* margin-top: -24px; */
-    
+
 }
