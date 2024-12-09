@@ -36,8 +36,8 @@ const VoteModal = ({ toggleModal, roomNumber }) => {
       try {
         //console.log(`Fetching participants for roomNumber: ${roomNumber}`);
         const response = await axios.get(`/api/room/${roomNumber}/participants`);
-        const participantsArray = Array.isArray(response.data) ? response.data : [];
-        //console.log("Participants received from server:", participantsArray);
+        const participantsArray = Array.isArray(response.data.participants) ? response.data.participants : [];
+        // console.log("Participants received from server:", participantsArray);
 
         // 본인을 제외한 참가자 목록으로 설정
         const filteredParticipants = participantsArray.filter(
