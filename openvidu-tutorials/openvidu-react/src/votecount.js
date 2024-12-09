@@ -77,7 +77,7 @@ const handleVote = async (roomNumber, userId, selectedParticipant, currentVote, 
     return remainingVoteCount;
   }
   // 투표권 사용
-  const voteSuccess = useVoteCount(roomNumber, userId, Math.abs(currentVote));
+  const voteSuccess = useVoteCount(roomNumber, userId, 1);
 
   if (voteSuccess) {
     try {
@@ -87,7 +87,7 @@ const handleVote = async (roomNumber, userId, selectedParticipant, currentVote, 
         votes: parseInt(currentVote, 10),
       });
 
-      addToast(`${selectedParticipant}님에게 ${currentVote} 투표 완료!`, 'success');
+      addToast(`${selectedParticipant}님에게 투표 완료!`, 'success');
 
       // 투표 후 투표권을 새로 가져오기
       const updatedVoteCount = getVoteCount(roomNumber, userId);
