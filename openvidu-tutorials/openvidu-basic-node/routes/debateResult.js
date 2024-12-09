@@ -3,25 +3,6 @@ const router = express.Router();
 const DebateResult = require("../schemas/debateResult");
 const user = require("../schemas/user"); // 'User' 모델 추가
 const jwt = require("jsonwebtoken"); // 추가
-// 토론 결과 저장
-// router.post("/save-result", async (req, res) => {
-//   const { roomName, tags, redScore, blueScore, maxViewers } = req.body;
-
-//   try {
-//     const newResult = new DebateResult({
-//       roomName,
-//       tags,
-//       redScore,
-//       blueScore,
-//       maxViewers,
-//     });
-//     await newResult.save();
-//     res.status(200).json({ message: "Debate result saved successfully" });
-//   } catch (error) {
-//     console.error("Error saving debate result:", error);
-//     res.status(500).json({ message: "Failed to save debate result" });
-//   }
-// });
 
 // 인기 태그와 인기 토론 가져오기
 router.get("/popular-topics", async (req, res) => {
@@ -67,7 +48,6 @@ router.get("/:roomName", async (req, res) => {
     res.status(500).json({ message: "서버 오류가 발생했습니다." });
   }
 });
-
 
 // 유저 히스토리에서 특정 기록 삭제 및 JWT 토큰 재발급
 router.delete("/history", async (req, res) => {
@@ -121,7 +101,6 @@ router.delete("/history", async (req, res) => {
     res.status(500).json({ message: "서버 오류가 발생했습니다." });
   }
 });
-
 
 module.exports = router;
 
