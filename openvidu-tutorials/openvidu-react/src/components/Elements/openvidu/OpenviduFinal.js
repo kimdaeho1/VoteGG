@@ -599,36 +599,7 @@ class OpenviduFinal extends Component {
 
                             this.eventCanvas.addEventListener('mouseleave', () => {
                                 isDragging = false;
-                            });
-
-                            // 팝업 메뉴 이벤트 추가
-                            this.eventCanvas.addEventListener('contextmenu', (e) => {
-                                const rect = this.eventCanvas.getBoundingClientRect();
-                                const mouseX = e.clientX - rect.left;
-                                const mouseY = e.clientY - rect.top;
-
-                                const isInsideVideo = videoElement && // videoElement가 존재하는지 확인
-                                    mouseX >= overlayX &&
-                                    mouseX <= overlayX + videoElement.videoWidth &&
-                                    mouseY >= overlayY &&
-                                    mouseY <= overlayY + videoElement.videoHeight;
-
-                                const isInsideImage = overlayImage.src && // overlayImage가 존재하는지 확인
-                                    mouseX >= overlayX &&
-                                    mouseX <= overlayX + (overlayImage._drawWidth || overlayImage.naturalWidth) &&
-                                    mouseY >= overlayY &&
-                                    mouseY <= overlayY + (overlayImage._drawHeight || overlayImage.naturalHeight);
-
-                                if (isInsideVideo || isInsideImage) {
-                                    e.preventDefault();
-                                    // 팝업 메뉴 표시 로직
-                                    contextMenu.style.top = `${e.clientY}px`;
-                                    contextMenu.style.left = `${e.clientX}px`;
-                                    contextMenu.style.display = 'block';
-                                } else {
-                                    contextMenu.style.display = 'none';
-                                }
-                            });
+                            });                            
 
                         } catch (error) {
                             console.error('Error handling dropped video file:', error);
