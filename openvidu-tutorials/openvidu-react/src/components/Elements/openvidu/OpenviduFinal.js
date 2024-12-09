@@ -363,9 +363,24 @@ class OpenviduFinal extends Component {
             //overlayImage.src = '/resources/images/egg.png';
             //await overlayImage.decode();
 
+            function calculateSyncRatio(baseWidth, baseHeight, baseRatio) {
+                const currentWidth = window.innerWidth; // 현재 화면의 너비
+                const currentHeight = window.innerHeight; // 현재 화면의 높이
+                const syncRatioWidth = (currentWidth / baseWidth) * baseRatio;
+                const syncRatioHeight = (currentHeight / baseHeight) * baseRatio;
+                return {syncRatioWidth, syncRatioHeight};
+            }
+            
+            // 기준 해상도 및 비율
+            const baseWidth = 1920;
+            const baseHeight = 1080;
+            const baseRatio = 0.8851;
+            
+            // 동기화 비율 계산
+            const {syncRatioWidth, syncRatioHeight} = calculateSyncRatio(baseWidth, baseHeight, baseRatio);
             const hiddenCanvas = document.createElement('canvas');
-            hiddenCanvas.width = streamWidth * 0.8851;
-            hiddenCanvas.height = streamHeight * 0.8851;
+            hiddenCanvas.width = streamWidth * syncRatioWidth;
+            hiddenCanvas.height = streamHeight * syncRatioHeight;
             const hiddenCtx = hiddenCanvas.getContext('2d');
 
             function drawFrame() {
@@ -908,6 +923,7 @@ class OpenviduFinal extends Component {
                     return null;
                 }
 
+                /*
                 const leftVideoContainer = document.querySelector('.left-video');
                 const rightVideoContainer = document.querySelector('.right-video');
                 if (this.state.userName != this.props.createdBy) {
@@ -919,6 +935,30 @@ class OpenviduFinal extends Component {
                 } else {
                     leftVideoContainer.appendChild(this.eventCanvas);
                 }
+                */
+
+                // MutationObserver로 DOM 변화를 감지
+                const observer = new MutationObserver(() => {
+                    const leftVideoContainer = document.querySelector('.left-video .user-video .streamcomponent');
+                    const rightVideoContainer = document.querySelector('.right-video .user-video .streamcomponent');
+
+                    if (this.state.userName !== this.props.createdBy) {
+                        if (rightVideoContainer && this.eventCanvas) {
+                            rightVideoContainer.appendChild(this.eventCanvas);
+                            observer.disconnect();
+                        }
+                    } else {
+                        if (leftVideoContainer && this.eventCanvas) {
+                            leftVideoContainer.appendChild(this.eventCanvas);
+                            observer.disconnect();
+                        }
+                    }
+                });
+
+                observer.observe(document.body, {
+                    childList: true,
+                    subtree: true,
+                });
 
                 // 모든 참가자에게 업데이트된 사용자 리스트 전송
                 this.state.session.signal({
