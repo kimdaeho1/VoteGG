@@ -379,8 +379,8 @@ class OpenviduFinal extends Component {
             // 동기화 비율 계산
             const {syncRatioWidth, syncRatioHeight} = calculateSyncRatio(baseWidth, baseHeight, baseRatio);
             const hiddenCanvas = document.createElement('canvas');
-            hiddenCanvas.width = streamWidth * syncRatioWidth;
-            hiddenCanvas.height = streamHeight * syncRatioHeight;
+            hiddenCanvas.width = streamWidth;
+            hiddenCanvas.height = streamHeight;
             const hiddenCtx = hiddenCanvas.getContext('2d');
 
             function drawFrame() {
@@ -401,7 +401,7 @@ class OpenviduFinal extends Component {
                         overlayImage._drawHeight || overlayImage.naturalHeight
                     );
                 } else {
-                    console.warn("Overlay image not ready to draw.");
+                    // console.warn("Overlay image not ready to draw.");
                 }
 
                 requestAnimationFrame(drawFrame);
@@ -413,8 +413,8 @@ class OpenviduFinal extends Component {
 
             // 이벤트 전용 캔버스(eventCanvas) 생성: 마우스 이벤트만 처리 (투명)
             this.eventCanvas = document.createElement('canvas');
-            this.eventCanvas.width = hiddenCanvas.width;
-            this.eventCanvas.height = hiddenCanvas.height;
+            this.eventCanvas.width = streamWidth * syncRatioWidth;
+            this.eventCanvas.height = streamHeight * syncRatioHeight;
             this.eventCanvas.style.position = 'absolute';
             this.eventCanvas.style.top = '0';
             this.eventCanvas.style.left = '0';
