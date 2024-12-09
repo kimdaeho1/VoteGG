@@ -12,7 +12,7 @@ const VoteStatistichard = ({ onClose }) => {
 
   const chartDataParticipants = [
     { name: '키보드워리어', y: 334 },
-    { name: '고구마킬러', y: 333 },
+    { name: '고구마킬러', y: 335 },
   ];
 
   const LeftArgu = '테스트 주제 1'; // 하드코딩된 왼쪽 주장

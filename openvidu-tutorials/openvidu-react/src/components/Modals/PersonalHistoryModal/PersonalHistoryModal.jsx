@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import "./PersonalHistoryModal.css";
+import jwt_decode from "jwt-decode";
 
 const PersonalHistory = ({ onClose }) => {
   const [historyResults, setHistoryResults] = useState([]);
@@ -16,16 +17,16 @@ const PersonalHistory = ({ onClose }) => {
           setLoading(false);
           return;
         }
-
-        const payload = JSON.parse(atob(token.split(".")[1]));
+  
+        const payload = jwt_decode(token);
+  
         const myHistory = payload.myHistory || [];
-
+        console.log("------", myHistory, "------");
+  
         // roomName 목록 추출
-        const roomNames = myHistory.map(entry => entry.roomName);
-
-        // 중복 roomName 제거(옵션)
+        const roomNames = myHistory.map((entry) => entry.roomName);
         const uniqueRoomNames = [...new Set(roomNames)];
-
+  
         // 모든 roomName에 대해 결과 가져오기
         const allResults = [];
         for (const name of uniqueRoomNames) {
@@ -35,10 +36,9 @@ const PersonalHistory = ({ onClose }) => {
             continue;
           }
           const data = await res.json();
-          // data가 배열 형태라고 가정. 여러 결과가 있을 수 있으므로 allResults에 push
           allResults.push(...data);
         }
-
+  
         setHistoryResults(allResults);
       } catch (err) {
         console.error("히스토리 가져오는 중 오류:", err);
@@ -47,7 +47,7 @@ const PersonalHistory = ({ onClose }) => {
         setLoading(false);
       }
     };
-
+  
     fetchHistory();
   }, []);
 

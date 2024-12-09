@@ -65,7 +65,7 @@ router.post("/login", async (req, res) => {
       myHistory: existingUser.myHistory || [], // myHistory 추가
     },
     process.env.JWT_SECRET,
-    { expiresIn: "1h" }
+    { expiresIn: "1h"}
   );
 
   res.cookie("Authorization", `Bearer ${token}`);
@@ -124,7 +124,7 @@ router.get("/auth/kakao/callback", async (req, res) => {
         process.env.JWT_SECRET,
         { expiresIn: "1h" }
       );
-
+      
       res.cookie("token", jwtToken, { httpOnly: false, secure: true });
       res.cookie("access_token", access_token, { httpOnly: false, secure: true });
       return res.redirect(`${CLIENT_BASE_URL}/`);
