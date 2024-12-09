@@ -10,7 +10,7 @@ const ToastList = ({ toasts }) => {
         right: "40%",
         zIndex: 1000,
         maxWidth: "1000px",
-        width: "20%",
+        width: "25%",
       }}
     >
       {toasts.map(({ message, type }, index) => (

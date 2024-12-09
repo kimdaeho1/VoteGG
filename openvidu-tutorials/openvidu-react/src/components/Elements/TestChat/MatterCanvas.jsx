@@ -44,9 +44,9 @@ const MatterCanvas = ({ roomNumber, socket }) => {
     const chatRect = chatWindow.getBoundingClientRect();
     // 바닥 생성
     const ground = Bodies.rectangle(
-      chatRect.left + chatRect.width / 2,
-      chatRect.bottom - 60, // 바닥을 채팅창 하단에 위치하도록 조정
-      chatRect.width,
+      930,
+      990, // 바닥을 채팅창 하단에 위치하도록 조정
+      300,
       80,
       {
         isStatic: true,
@@ -59,10 +59,10 @@ const MatterCanvas = ({ roomNumber, socket }) => {
   
     // 양옆 벽 생성
     const leftWall = Bodies.rectangle(
-      chatRect.left, // 왼쪽 벽을 채팅창의 왼쪽에 위치하도록 조정
-      chatRect.top + chatRect.height / 2,
+      800, // 왼쪽 벽을 채팅창의 왼쪽에 위치하도록 조정
+      900,
       30,
-      chatRect.height,
+      200,
       {
         isStatic: true,
         render: {
@@ -71,10 +71,10 @@ const MatterCanvas = ({ roomNumber, socket }) => {
       }
     );
     const rightWall = Bodies.rectangle(
-      chatRect.right, // 오른쪽 벽을 채팅창의 오른쪽에 위치하도록 조정
-      chatRect.top + chatRect.height / 2,
+      1060, // 오른쪽 벽을 채팅창의 오른쪽에 위치하도록 조정
+      900,
       30,
-      chatRect.height,
+      200,
       {
         isStatic: true,
         render: {
@@ -83,10 +83,10 @@ const MatterCanvas = ({ roomNumber, socket }) => {
       }
     );
     const roopWall = Bodies.rectangle(
-      chatRect.left + chatRect.width / 2,
-      chatRect.top + 30, // 천장을 채팅창의 위쪽에 위치하도록 조정
-      chatRect.width,
-      70,
+      930,
+      750,
+      300,
+      0,
       {
         isStatic: true,
         render: {
@@ -216,8 +216,8 @@ const MatterCanvas = ({ roomNumber, socket }) => {
       
       // 드래그가 끝난 후 계란의 크기를 원래대로 되돌리기
       if (draggedEgg.current) {
-        draggedEgg.current.render.sprite.xScale = 0.3;
-        draggedEgg.current.render.sprite.yScale = 0.3;        
+        draggedEgg.current.render.sprite.xScale = 0.5;
+        draggedEgg.current.render.sprite.yScale = 0.5;        
 
         const streamComponent = event.target.closest('.streamcomponent');
         if (streamComponent){
@@ -263,7 +263,7 @@ const MatterCanvas = ({ roomNumber, socket }) => {
                 throwEgg(targetwidth, targetheight);            
                 //console.log("오른쪽 클릭 - 던지기");
                 const { maxVoteCount, usedVoteCount} = getVoteCount( roomNumber, username );
-                handleVote(roomNumber, username, user, -1, maxVoteCount - usedVoteCount, addToast);
+                handleVote(roomNumber, username, user, 0, maxVoteCount - usedVoteCount, addToast);
               }
             }
             World.remove(world, draggedEgg.current); // 드래그 중인 계란 제거
@@ -303,23 +303,23 @@ const MatterCanvas = ({ roomNumber, socket }) => {
     // 계란을 생성하는 함수
     const addEgg = () => {
       // 채팅창 위치와 크기 정보를 이용해 계란 생성 위치를 설정
-      const chatWindow = document.querySelector('.chat-window');
-      const chatRect = chatWindow.getBoundingClientRect();
+      // const chatWindow = document.querySelector('.chat-window');
+      // const chatRect = chatWindow.getBoundingClientRect();
 
-      const randomX = chatRect.left + 10 + Math.random() * (chatRect.width - 20);
-      const randomY = chatRect.top + 150;
+      const randomX = Math.floor(Math.random() * (960 - 920 + 1)) + 920;
+      const randomY = 800;
       const img = new Image();
       img.src = "/resources/images/egg.png"; // 올바른 이미지 URL
   
       img.onload = () => {
-        const egg = Bodies.circle(randomX, randomY, 10, {
+        const egg = Bodies.circle(randomX, randomY, 14, {
           restitution: 0.3,
           friction: 0.4,
           render: {
             sprite: {
               texture: img.src,
-              xScale: 0.3,
-              yScale: 0.3,
+              xScale: 0.5,
+              yScale: 0.5,
               zIndex: 1,
             },
           },
@@ -405,14 +405,14 @@ const MatterCanvas = ({ roomNumber, socket }) => {
       img.src = "/resources/images/egg.png";
     
       img.onload = () => {
-        const egg = Bodies.circle(startX, startY, 10, {
+        const egg = Bodies.circle(startX, startY, 14, {
           restitution: 0.3,
           friction: 0.4,
           render: {
             sprite: {
               texture: img.src,
-              xScale: 0.3,
-              yScale: 0.3,
+              xScale: 0.5,
+              yScale: 0.5,
             },
           },
         });
@@ -543,7 +543,7 @@ const MatterCanvas = ({ roomNumber, socket }) => {
           eggCount -= 1;
           //console.log("Destroy egg!");
           // 새로운 계란 추가
-          addEgg();
+          // addEgg();
         }
       });
     });
