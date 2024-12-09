@@ -16,11 +16,11 @@ const { KAKAO_CLIENT_ID, KAKAO_REDIRECT_URI, JWT_SECRET, CLIENT_BASE_URL } = pro
 router.post("/users", async (req, res) => {
   const { username, password, confirmPassword } = req.body;
 
-  const nicknameRegex = /^[a-zA-Z0-9]{3,}$/;
+  const nicknameRegex = /^[a-zA-Z0-9\uAC00-\uD7A3]{3,}$/;
   if (!nicknameRegex.test(username)) {
     return res
       .status(400)
-      .json({ message: "닉네임은 최소 3자 이상이어야 하며, 알파벳과 숫자만 사용 가능합니다." });
+      .json({ message: "닉네임은 최소 3자 이상이어야 하며, 한글, 알파벳과 숫자만 사용 가능합니다." });
   }
 
   if (password.length < 4 || password.includes(username)) {
@@ -65,7 +65,7 @@ router.post("/login", async (req, res) => {
       myHistory: existingUser.myHistory || [], // myHistory 추가
     },
     process.env.JWT_SECRET,
-    { expiresIn: "1h" }
+    { expiresIn: "1h"}
   );
 
   res.cookie("Authorization", `Bearer ${token}`);
@@ -124,7 +124,7 @@ router.get("/auth/kakao/callback", async (req, res) => {
         process.env.JWT_SECRET,
         { expiresIn: "1h" }
       );
-
+      
       res.cookie("token", jwtToken, { httpOnly: false, secure: true });
       res.cookie("access_token", access_token, { httpOnly: false, secure: true });
       return res.redirect(`${CLIENT_BASE_URL}/`);
@@ -148,10 +148,10 @@ router.post("/set-username", async (req, res) => {
   }
 
   // 닉네임 검증
-  const nicknameRegex = /^[a-zA-Z0-9]{3,}$/;
+  const nicknameRegex = /^[a-zA-Z0-9\uAC00-\uD7A3]{3,}$/;
   if (!nicknameRegex.test(username)) {
     return res.status(400).json({
-      message: "닉네임은 최소 3자 이상이어야 하며, 알파벳과 숫자만 사용 가능합니다.",
+      message: "닉네임은 최소 3자 이상이어야 하며, 한글과 알파벳과 숫자만 사용 가능합니다.",
     });
   }
 
@@ -287,6 +287,47 @@ router.post("/profile-image", upload.single("profileImage"), async (req, res) =>
   }
 });
 
+
+
+
+router.post("/refresh-token", async (req, res) => {
+  const token = req.headers.authorization?.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({ message: "JWT 토큰이 필요합니다." });
+  }
+
+  try {
+    // 만료된 토큰도 디코딩 가능 (옵션 `ignoreExpiration` 사용)
+    const decoded = jwt.verify(token, process.env.JWT_SECRET, { ignoreExpiration: true });
+    const userId = decoded.userId;
+
+    const currentUser = await user.findById(userId);
+    if (!currentUser) {
+      return res.status(404).json({ message: "사용자를 찾을 수 없습니다." });
+    }
+
+    // 새로운 JWT 발급
+    const newToken = jwt.sign(
+      {
+        userId: currentUser._id,
+        username: currentUser.username,
+        profileImageUrl: currentUser.profileImageUrl || "",
+        totalParticipations: currentUser.totalParticipations || 0,
+        totalWins: currentUser.totalWins || 0,
+        firstPlaceWins: currentUser.firstPlaceWins || 0,
+        myHistory: currentUser.myHistory || [],
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    res.status(200).json({ token: newToken });
+  } catch (error) {
+    console.error("토큰 재발급 중 오류:", error);
+    res.status(500).json({ message: "서버 오류가 발생했습니다." });
+  }
+});
 
 module.exports = router;
 

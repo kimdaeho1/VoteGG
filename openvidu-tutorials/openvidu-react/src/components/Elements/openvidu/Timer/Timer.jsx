@@ -190,7 +190,6 @@ const Timer = ({ isObserver }) => {
 
       {timerFinished && <VoteStatistic roomNumber={roomId} resultData={resultData} onClose={() => setTimerFinished(false)} />}
 
-
     </div>
   );
 };

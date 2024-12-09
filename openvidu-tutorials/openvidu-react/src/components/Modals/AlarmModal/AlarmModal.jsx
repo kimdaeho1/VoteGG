@@ -3,6 +3,7 @@ import './AlarmModal.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '../../Elements/Toast/ToastContext';
+import jwtDecode from 'jwt-decode'; // jwt-decode 라이브러리 임포트
 
 const AlarmModal = ({ onClose, username }) => {
   const [invitations, setInvitations] = useState([]);
@@ -83,14 +84,15 @@ const AlarmModal = ({ onClose, username }) => {
 };
 
 // Function to extract username from JWT token
+// Utility Function for Token Decoding
 const getUsernameFromToken = (token) => {
   try {
-    const payload = JSON.parse(atob(token.split('.')[1])); // Decode JWT payload
-    return payload.username; // Extract username from payload
+    const decoded = jwtDecode(token); // JWT 디코딩
+    return decoded.username || 'Unknown User'; // username 반환, 없을 시 기본값
   } catch (error) {
-    console.error('Failed to parse token:', error);
+    console.error('Failed to decode token:', error);
     return 'Unknown User';
   }
-}; 
+};
 
 export default AlarmModal;

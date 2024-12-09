@@ -3,14 +3,15 @@ import axios from "axios"; // axios 추가
 import { handleVote, getVoteCount } from "../../../votecount.js"; // handleVote 함수 가져오기
 import "./VoteModal.css";
 import { useToast } from "../../Elements/Toast/ToastContext.jsx";
+import jwtDecode from 'jwt-decode'; // jwt-decode 라이브러리 임포트
 
 const getUsernameFromToken = (token) => {
   try {
-    const payload = JSON.parse(atob(token.split(".")[1]));
-    return payload.username;
+    const decoded = jwtDecode(token); // JWT 디코딩
+    return decoded.username || 'Unknown User'; // username 반환, 없을 시 기본값
   } catch (error) {
-    console.error("Failed to parse token:", error);
-    return "Unknown User";
+    console.error('Failed to decode token:', error);
+    return 'Unknown User';
   }
 };
 
@@ -36,8 +37,8 @@ const VoteModal = ({ toggleModal, roomNumber }) => {
       try {
         //console.log(`Fetching participants for roomNumber: ${roomNumber}`);
         const response = await axios.get(`/api/room/${roomNumber}/participants`);
-        const participantsArray = Array.isArray(response.data) ? response.data : [];
-        //console.log("Participants received from server:", participantsArray);
+        const participantsArray = Array.isArray(response.data.participants) ? response.data.participants : [];
+        // console.log("Participants received from server:", participantsArray);
 
         // 본인을 제외한 참가자 목록으로 설정
         const filteredParticipants = participantsArray.filter(

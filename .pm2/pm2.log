@@ -396,3 +396,29 @@
 2024-12-04T20:31:43: PM2 log: pid=3145 msg=process killed
 2024-12-04T20:31:43: PM2 log: App [client:1] starting in -fork mode-
 2024-12-04T20:31:43: PM2 log: App [client:1] online
+2024-12-09T05:45:21: PM2 log: ===============================================================================
+2024-12-09T05:45:21: PM2 log: --- New PM2 Daemon started ----------------------------------------------------
+2024-12-09T05:45:21: PM2 log: Time                 : Mon Dec 09 2024 05:45:21 GMT+0000 (Coordinated Universal Time)
+2024-12-09T05:45:21: PM2 log: PM2 version          : 5.4.3
+2024-12-09T05:45:21: PM2 log: Node.js version      : 18.20.4
+2024-12-09T05:45:21: PM2 log: Current arch         : x64
+2024-12-09T05:45:21: PM2 log: PM2 home             : /home/ubuntu/.pm2
+2024-12-09T05:45:21: PM2 log: PM2 PID file         : /home/ubuntu/.pm2/pm2.pid
+2024-12-09T05:45:21: PM2 log: RPC socket file      : /home/ubuntu/.pm2/rpc.sock
+2024-12-09T05:45:21: PM2 log: BUS socket file      : /home/ubuntu/.pm2/pub.sock
+2024-12-09T05:45:21: PM2 log: Application log path : /home/ubuntu/.pm2/logs
+2024-12-09T05:45:21: PM2 log: Worker Interval      : 30000
+2024-12-09T05:45:21: PM2 log: Process dump file    : /home/ubuntu/.pm2/dump.pm2
+2024-12-09T05:45:21: PM2 log: Concurrent actions   : 2
+2024-12-09T05:45:21: PM2 log: SIGTERM timeout      : 1600
+2024-12-09T05:45:21: PM2 log: ===============================================================================
+2024-12-09T05:45:21: PM2 log: App [server:0] starting in -fork mode-
+2024-12-09T05:45:21: PM2 log: App [server:0] online
+2024-12-09T05:45:25: PM2 log: App [client:1] starting in -fork mode-
+2024-12-09T05:45:25: PM2 log: App [client:1] online
+2024-12-09T07:16:38: PM2 log: Stopping app:server id:0
+2024-12-09T07:16:38: PM2 log: App [server:0] exited with code [0] via signal [SIGINT]
+2024-12-09T07:16:38: PM2 log: pid=275099 msg=process killed
+2024-12-09T07:16:38: PM2 log: Stopping app:client id:1
+2024-12-09T07:16:38: PM2 log: App [client:1] exited with code [0] via signal [SIGINT]
+2024-12-09T07:16:38: PM2 log: pid=275145 msg=process killed
