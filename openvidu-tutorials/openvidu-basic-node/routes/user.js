@@ -16,11 +16,11 @@ const { KAKAO_CLIENT_ID, KAKAO_REDIRECT_URI, JWT_SECRET, CLIENT_BASE_URL } = pro
 router.post("/users", async (req, res) => {
   const { username, password, confirmPassword } = req.body;
 
-  const nicknameRegex = /^[a-zA-Z0-9]{3,}$/;
+  const nicknameRegex = /^[a-zA-Z0-9\uAC00-\uD7A3]{3,}$/;
   if (!nicknameRegex.test(username)) {
     return res
       .status(400)
-      .json({ message: "닉네임은 최소 3자 이상이어야 하며, 알파벳과 숫자만 사용 가능합니다." });
+      .json({ message: "닉네임은 최소 3자 이상이어야 하며, 한글, 알파벳과 숫자만 사용 가능합니다." });
   }
 
   if (password.length < 4 || password.includes(username)) {
@@ -148,10 +148,10 @@ router.post("/set-username", async (req, res) => {
   }
 
   // 닉네임 검증
-  const nicknameRegex = /^[a-zA-Z0-9]{3,}$/;
+  const nicknameRegex = /^[a-zA-Z0-9\uAC00-\uD7A3]{3,}$/;
   if (!nicknameRegex.test(username)) {
     return res.status(400).json({
-      message: "닉네임은 최소 3자 이상이어야 하며, 알파벳과 숫자만 사용 가능합니다.",
+      message: "닉네임은 최소 3자 이상이어야 하며, 한글과 알파벳과 숫자만 사용 가능합니다.",
     });
   }
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Categories.css";
 import { useToast } from '../../../Elements/Toast/ToastContext'; // useToast import
 import PersonalHistory from "../../../Modals/PersonalHistoryModal/PersonalHistoryModal.jsx"; // PersonalHistory 컴포넌트 import
+import jwt_decode from "jwt-decode"; // jwt_decode import
 
 const Categories = () => {
   const { addToast } = useToast(); // ToastContext에서 addToast 가져오기
@@ -13,7 +14,8 @@ const Categories = () => {
     const token = localStorage.getItem("token");
     if (token) {
       try {
-        const payload = JSON.parse(atob(token.split(".")[1]));
+        // Use jwt_decode to decode the token and extract user data
+        const payload = jwt_decode(token);
         setUserData({
           username: payload.username || "정보 없음",
           profileImageUrl: payload.profileImageUrl || "/defaultportrait.jpg",
@@ -27,7 +29,7 @@ const Categories = () => {
         });
         setIsLoggedIn(true);
       } catch (error) {
-        console.error("토큰 파싱 오류:", error);
+        console.error("토큰 디코딩 오류:", error);
         setIsLoggedIn(false);
       }
     } else {
@@ -127,4 +129,3 @@ const Categories = () => {
 };
 
 export default Categories;
-
