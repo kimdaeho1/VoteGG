@@ -5,11 +5,13 @@ import './RoomControl.css';
 import Timer from '../openvidu/Timer/Timer';
 import { useParams, useLocation } from 'react-router-dom';
 import RoomInfo from '../Buttons/EndButton/RoomInfo';
+import useTranscriptionStore from '../../../stores/transcriptionStore';
 
 const RoomControl = ({ isObserver }) => {
   const location = useLocation();
   const { roomNumber } = useParams(); // URL의 :id 부분 추출
   const [roomname, setRoomname] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [roomData, setRoomData] = useState({
     roomname: "",
     memberCount: 0,
@@ -18,6 +20,11 @@ const RoomControl = ({ isObserver }) => {
     tags: [],
   });
 
+  const transcriptionHistory = useTranscriptionStore((state) => state.transcriptionHistory);
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
   useEffect(() => {
     const fetchRoomData = async () => {
       try {
@@ -92,7 +99,36 @@ const RoomControl = ({ isObserver }) => {
         </div>
       </div>
       <Timer roomId={roomNumber} isObserver={isObserver} className='room-timer'/>
-    </div >
+      <button onClick={toggleModal} className="transcript-button">
+          대화 기록 보기
+        </button>
+{/* 모달 컴포넌트 */}
+{isModalOpen && (
+        <>
+          <div 
+            className={`transcript-modal-overlay ${isModalOpen ? 'open' : ''}`} 
+            onClick={toggleModal}
+          />
+          <div className={`transcript-modal ${isModalOpen ? 'open' : ''}`}>
+            <div className="transcript-modal-content">
+              <button onClick={toggleModal} className="transcript-close-button">×</button>
+              <h2>대화 기록</h2>
+              <div className="transcript-container">
+                {transcriptionHistory.map((item, index) => (
+                  <div key={index} className="transcription-item">
+                    <span className="speaker">{item.speaker}:</span>
+                    <span className="text">{item.text}</span>
+                    <span className="timestamp">
+                      {new Date(item.timestamp).toLocaleTimeString()}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
   );
 };
 
