@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import jwt_decode from 'jwt-decode'; // jwt_decode 라이브러리 추가
 import LoginoutModal from '../../../Modals/LoginoutModal/LoginoutModal';
-import CreateRoomButton from '../CreateRoomButton/CreateRoomButton'
+import CreateRoomButton from '../CreateRoomButton/CreateRoomButton';
 import AlarmButton from '../AlarmButton/AlarmButton';
 import InviteButton from '../InviteButton/InviteButton';
 import './LoginoutButton.css';
@@ -42,14 +43,11 @@ const LoginoutButton = () => {
           });
 
           if (response.ok) {
-            //console.log("카카오 REST API 로그아웃 성공");
             window.Kakao.Auth.setAccessToken(null); // Reset Kakao SDK session
           } else {
             console.error("카카오 REST API 로그아웃 실패:", await response.json());
             throw new Error("카카오 REST API 로그아웃 실패");
           }
-        } else {
-          //console.warn("유효한 액세스 토큰이 없습니다. 이미 로그아웃되었을 수 있습니다.");
         }
       }
 
@@ -118,10 +116,10 @@ export default LoginoutButton;
 // Function to extract username from JWT token
 const getUsernameFromToken = (token) => {
   try {
-    const payload = JSON.parse(atob(token.split('.')[1])); // Decode JWT payload
+    const payload = jwt_decode(token); // jwt_decode로 디코딩
     return payload.username; // Extract username from payload
   } catch (error) {
-    console.error('Failed to parse token:', error);
+    console.error('Failed to decode token:', error);
     return 'Unknown User';
   }
 };
