@@ -101,7 +101,7 @@ const TestChat = () => {
       increaseVoteCount(roomNumber, username);
       const { maxVoteCount, usedVoteCount } = getVoteCount(roomNumber, username);
       //console.log("After Increasing Vote Count:", maxVoteCount, usedVoteCount);
-    }, 1000); // 10초마다 증가시키는 함수 호출
+    }, 10000); // 10초마다 증가시키는 함수 호출
 
     return () => {
       clearInterval(interval); // clean up on unmount
