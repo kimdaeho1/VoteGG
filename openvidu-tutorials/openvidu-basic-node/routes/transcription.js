@@ -103,6 +103,28 @@ router.post('/convert', upload.single('audio'), async (req, res) => {
 
         const result = await response.json();
 
+        // 필터링할 단어 목록
+        const filterWords = [
+            'youtube.com',
+            '구독',
+            '좋아요',
+            '시청',
+            '뉴스',
+            '채널',
+            '감사합니다',
+            '영상편집',
+        ];
+
+        // 필터링 조건 검사
+        if (result.text.trim().length === 0 || 
+            filterWords.some(word => result.text.includes(word)) ||  // 필터 단어 검사
+            result.text.length > 200 || // 너무 긴 텍스트 필터링
+            /^[.,!?]+$/.test(result.text.trim())) { // 의미 없는 문장부호만 있는 경우
+            return res.json({ text: '' });
+        }
+
+        res.json({ text: result.text });
+
         // 임시 파일 정리
         try {
             fs.unlinkSync(inputPath);
@@ -111,7 +133,6 @@ router.post('/convert', upload.single('audio'), async (req, res) => {
             console.error('Error cleaning up files:', err);
         }
 
-        res.json({ text: result.text });
     } catch (error) {
         console.error('Error in transcription:', error);
         // 에러 발생 시에도 임시 파일 정리
