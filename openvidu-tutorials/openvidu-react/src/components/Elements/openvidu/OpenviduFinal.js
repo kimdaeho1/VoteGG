@@ -288,6 +288,12 @@ class OpenviduFinal extends Component {
 
         window.session = session;
 
+        session.on('signal:startAutoRecording', (event) => {
+            if (!this.props.isObserver) {  // 관전자가 아닌 경우에만
+                this.startAutoRecording();
+            }
+        });
+
         // 기존 주장 데이터를 새로운 사용자가 받도록 처리 추가
         session.on('connectionCreated', (event) => {
             if (event.connection.connectionId !== session.connection.connectionId) {
@@ -1400,6 +1406,7 @@ class OpenviduFinal extends Component {
 
         // 즉시 첫 녹음 시작
         this.startRecording();
+        this.setState({ isAutoRecording: true });
 
         const interval = setInterval(() => {
             if (this.state.isRecording) {
@@ -1539,7 +1546,7 @@ class OpenviduFinal extends Component {
 
         return (
             <div>
-                <div className="transcription-controls">
+                {/* <div className="transcription-controls">
                     <button
                         className={`auto-record-button ${this.state.isAutoRecording ? 'recording' : ''}`}
                         onClick={() => this.state.isAutoRecording ?
@@ -1548,7 +1555,7 @@ class OpenviduFinal extends Component {
                     >
                         {this.state.isAutoRecording ? '녹음 종료' : '녹음 시작'}
                     </button>
-                </div>
+                </div> */}
                 <div className="openvidu-final">
                     <div className="video-container">
                         {/* Left User Video */}
