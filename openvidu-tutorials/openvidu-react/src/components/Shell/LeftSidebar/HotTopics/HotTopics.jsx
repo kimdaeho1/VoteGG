@@ -57,7 +57,7 @@ const HotTopics = () => {
         onClick={() => handleRoomClick(item._id)}
       >
         <div className="topic-header">
-          <span className="topic-rank">{index + 1}.</span>
+        <span className="topic-rank">{index + 1}.&nbsp;</span>
           <span className="topic-title">{item.roomName}</span>
         </div>
       </div>

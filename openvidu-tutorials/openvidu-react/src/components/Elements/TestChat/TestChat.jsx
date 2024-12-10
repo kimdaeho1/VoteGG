@@ -274,7 +274,7 @@ const TestChat = () => {
               />
             </div>
           </div>
-          {isObserver && (
+          {/* {isObserver && (
             <button className="modal-button" onClick={toggleModal}>
               <img
                 src="/resources/images/egg.png"
@@ -283,7 +283,7 @@ const TestChat = () => {
                 style={{ width: "20px", height: "auto" }}
               />
             </button>
-          )}
+          )} */}
         </div>
       </div>
 
