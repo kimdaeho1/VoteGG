@@ -131,37 +131,144 @@ router.post("/roomCreate", upload.single("thumbnail"), async (req, res) => {
   }
 });
 
-// 방 목록 조회 API
+// // 방 목록 조회 API
+// router.get("/roomList", async (req, res) => {
+//   try {
+//     // 데이터베이스에서 방 정보 가져오기
+//     const rooms = await Room.find().select(
+//       "roomNumber roomname createdby thumbnail tags participant" // memberCount 제외
+//     );
+
+//     // usersNumber 기반으로 memberCount 업데이트
+//     const updatedRooms = rooms.map(room => {
+//       const roomId = room.roomNumber.toString(); // roomNumber를 문자열로 변환
+//       const currentUserCount = usersNumber[roomId] || 0; // usersNumber에서 현재 사용자 수 가져오기
+//       const participantCount = room.participant ? room.participant.size : 0; // 참가자 수 계산 (participant의 키 개수)
+
+//       //console.log("----------------------Participant Data:", room.participant); // 디버깅용 로그 추가
+
+//       return {
+//         ...room.toObject(), // 기존 Room 객체의 데이터를 그대로 복사
+//         memberCount: currentUserCount, // memberCount를 usersNumber의 값으로 대체
+//         participantCount, // 참가자 수
+//         participant: room.participant,
+//       };
+//     });
+
+//     //console.log("방 목록 응답:", updatedRooms);
+//     res.status(200).json(updatedRooms); // 태그 포함된 방 목록 응답
+//   } catch (error) {
+//     console.error("방 목록 가져오기 실패:", error.message);
+//     res.status(500).json({ error: "방 목록을 가져오는 중 오류가 발생했습니다." });
+//   }
+// });
+
 router.get("/roomList", async (req, res) => {
   try {
-    // 데이터베이스에서 방 정보 가져오기
-    const rooms = await Room.find().select(
-      "roomNumber roomname createdby thumbnail tags participant" // memberCount 제외
+    const dbRooms = await Room.find().select(
+      "roomNumber roomname createdby thumbnail tags participant"
     );
 
-    // usersNumber 기반으로 memberCount 업데이트
-    const updatedRooms = rooms.map(room => {
-      const roomId = room.roomNumber.toString(); // roomNumber를 문자열로 변환
-      const currentUserCount = usersNumber[roomId] || 0; // usersNumber에서 현재 사용자 수 가져오기
-      const participantCount = room.participant ? room.participant.size : 0; // 참가자 수 계산 (participant의 키 개수)
+    const testRooms = [
+      {
+        roomNumber: 9999,
+        roomname: "짬뽕 vs 짜장",
+        createdby: "중식마스터",
+        thumbnail: "https://projectagorabucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733847464429_Wkwk.jpg",
+        tags: ["중식", "음식"],
+        participant: { "중식마스터": 0, "양식마스터": 0},
+      },
+      {
+        roomNumber: 10000,
+        roomname: "부먹 vs 찍먹",
+        createdby: "뭐든찍먹",
+        thumbnail: "https://projectagorabucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733847784187_%C3%AB%C2%B6%C2%80%C3%AB%C2%A8%C2%B9%C3%AC%C2%B0%C2%8D%C3%AB%C2%A8%C2%B9.jpg",
+        tags: ["탕수육", "음식"],
+        participant: { "뭐든찍먹": 0, "어림반푼": 0}
+      },
+      {
+        roomNumber: 10001,
+        roomname: "제 5공화국 vs 서울의 봄",
+        createdby: "고정간첩",
+        thumbnail: "https://projectagorabucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733847882722_drama.jpg",
+        tags: ["영화", "드라마"],
+        participant: { "고정간첩": 0, "석령": 0}
+      },
+      {
+        roomNumber: 10002,
+        roomname: "지팡이 vs 광선검",
+        createdby: "헤뤼퍼터",
+        thumbnail: "https://projectagorabucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733848571048_%C3%AA%C2%B1%C2%B0%C3%A3%C2%85%C2%98%C3%A3%C2%85%C2%87%C3%AC%C2%84%C2%A0%C3%AA%C2%B2%C2%80.jpg",
+        tags: ["영화", "무기"],
+        participant: { "헤뤼퍼터": 0, "요다스몰": 0}
+      },
+      {
+        roomNumber: 10003,
+        roomname: "탈주범 친구가 찾아오면?",
+        createdby: "도망챠",
+        thumbnail: "https://projectagorabucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733849495005_%C3%AD%C2%83%C2%88%C3%AC%C2%A3%C2%BC.jpg",
+        tags: ["기타", "우정"],
+        participant: { "도망챠": 0, "넌잡는다": 0},
+      },
+      {
+        roomNumber: 10004,
+        roomname: "눌러야만 한다.",
+        createdby: "버튼클릭",
+        thumbnail: "https://projectagorabucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733850104633_%C3%AB%C2%B2%C2%84%C3%AD%C2%8A%C2%BC.jpg",
+        tags: ["선택", "해야만한다구"],
+        participant: { "뭐1든1찍먹": 0, "어림반1푼": 0}
+      },
+      {
+        roomNumber: 10005,
+        roomname: "아침식사 필수인가?",
+        createdby: "굶으면후회존",
+        thumbnail: "https://projectagorabucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733854588611_%C3%AC%C2%95%C2%84%C3%AC%C2%B9%C2%A8%C3%AB%C2%B0%C2%A5.jpg",
+        tags: ["영화", "드라마"],
+        participant: { "고1정간첩": 0, "석1": 0}
+      },
+      {
+        roomNumber: 10006,
+        roomname: "민트초코 음식인가?",
+        createdby: "민트추방위원장",
+        thumbnail: "https://projectagorabucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733854159606_%C3%AB%C2%AF%C2%BC%C3%AC%C2%B4%C2%88.jpg",
+        tags: ["민트초코", "음식"],
+        participant: { "헤뤼1퍼터": 0, "요다스1몰": 0}
+      }
+    ];
 
-      //console.log("----------------------Participant Data:", room.participant); // 디버깅용 로그 추가
+    // DB에서 가져온 데이터와 하드코딩된 테스트 데이터 합치기
+    const allRooms = [...dbRooms, ...testRooms];
+
+    // 기존에 존재하는 usersNumber 객체에 테스트 방 데이터 추가
+    usersNumber["9999"] = 4;   // 테스트 방 9999의 인원수 예:2
+    usersNumber["10000"] = 3;  // 테스트 방 10000의 인원수 예:1
+    usersNumber["10001"] = 2;
+    usersNumber["10002"] = 3;
+    usersNumber["10003"] = 2;   // 테스트 방 9999의 인원수 예:2
+    usersNumber["10004"] = 2;  // 테스트 방 10000의 인원수 예:1
+    usersNumber["10005"] = 2;
+    usersNumber["10006"] = 3;
+
+    const updatedRooms = allRooms.map((room) => {
+      const roomId = room.roomNumber.toString();
+      const currentUserCount = usersNumber[roomId] || 0;
+      const participantCount = room.participant ? Object.keys(room.participant).length : 0;
 
       return {
-        ...room.toObject(), // 기존 Room 객체의 데이터를 그대로 복사
-        memberCount: currentUserCount, // memberCount를 usersNumber의 값으로 대체
-        participantCount, // 참가자 수
-        participant: room.participant,
+        ...(room.toObject?.() || room),
+        memberCount: currentUserCount,
+        participantCount,
       };
     });
 
-    //console.log("방 목록 응답:", updatedRooms);
-    res.status(200).json(updatedRooms); // 태그 포함된 방 목록 응답
+    res.status(200).json(updatedRooms);
   } catch (error) {
     console.error("방 목록 가져오기 실패:", error.message);
     res.status(500).json({ error: "방 목록을 가져오는 중 오류가 발생했습니다." });
   }
 });
+
+
 
 
 // 방 참가자 추가 API
