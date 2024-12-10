@@ -14,7 +14,7 @@ const VoteStatistic = ({ onClose, resultData }) => {
   const [rightArgument, setRightArgument] = useState('');
   const [leftUserId, setLeftUserId] = useState('');
   const [rightUserId, setRightUserId] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true); // 로딩 상태
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ const VoteStatistic = ({ onClose, resultData }) => {
         console.error('Error fetching participants:', error);
         setError('참가자 목록을 가져오는 중 오류가 발생했습니다.');
       } finally {
-        setIsLoading(false);
+        setIsLoading(false); // 로딩 완료
       }
     };
 
@@ -52,7 +52,6 @@ const VoteStatistic = ({ onClose, resultData }) => {
   }, [roomNumber]);
 
   useEffect(() => {
-    console.log('Participants:', chartDataParticipants);
     if (chartDataParticipants.length > 0 && leftUserId && rightUserId) {
       const totalVotesLeftCalc = chartDataParticipants
         .filter((participant) => participant.name === leftUserId)
@@ -75,7 +74,6 @@ const VoteStatistic = ({ onClose, resultData }) => {
     }
   }, [chartDataParticipants, leftUserId, rightUserId, leftArgument, rightArgument]);
 
-
   const maxParticipant = chartDataParticipants.reduce((max, participant) => {
     return participant && participant.y > (max?.y || 0) ? participant : max;
   }, {});
@@ -86,25 +84,25 @@ const VoteStatistic = ({ onClose, resultData }) => {
       backgroundColor: 'transparent',
     },
     title: {
-      text: null, // 중앙 타이틀 제거
+      text: null,
     },
     colors: ['#FFD700', '#4D96FF', '#FFC75F', '#F9F871', '#FF8C42', '#845EC2'],
     credits: {
       enabled: false,
     },
     tooltip: {
-      pointFormat: '<span style="font-size: 16px; font-weight: bold; color: #000000;">{series.name}</span>: <b>{point.y}</b>', // 글자색을 검은색으로 변경
+      pointFormat: '<span style="font-size: 16px; font-weight: bold; color: #000000;">{series.name}</span>: <b>{point.y}</b>',
     },
     plotOptions: {
       pie: {
-        allowPointSelect: false, // 클릭 반응 제거
+        allowPointSelect: false,
         innerSize: '50%',
         dataLabels: {
           enabled: true,
           format: '<b>{point.name}</b>: {point.y}',
           style: { 
             fontSize: '16px', 
-            color: '#1a237e', // 진한 파란색으로 변경
+            color: '#1a237e',
             textOutline: 'none', 
             textShadow: '1px 1px 3px rgba(0, 0, 0, 0.3)' 
           },
@@ -114,12 +112,12 @@ const VoteStatistic = ({ onClose, resultData }) => {
     },
     legend: {
       itemStyle: {
-        fontSize: '20px', // 글씨 크기를 키우기
-        color: '#1a237e', // 진한 파란색
+        fontSize: '20px',
+        color: '#1a237e',
         fontWeight: 'bold',
       },
-      symbolHeight: 14, // 아이콘 크기 조정
-      symbolRadius: 6, // 아이콘 둥글게
+      symbolHeight: 14,
+      symbolRadius: 6,
     },
     series: [
       {
@@ -143,36 +141,43 @@ const VoteStatistic = ({ onClose, resultData }) => {
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
       <div className="modal-content1 animated-modal" onClick={(e) => e.stopPropagation()}>
-      {resultData?.summary && (
-          <div className="votestatic-summary-section">
-            <h3>토론 요약</h3>
-            <p className="votestatic-summary-text">{resultData.summary}</p>
+        {isLoading ? (
+          // 로딩 상태일 때 표시할 UI
+          <div className="loading-container">
+            <h2>집계중...</h2>
           </div>
-        )}
-        <div className="votestatic-results-section">
-        <h2 className="modal-title">
-          {totalVotesLeft === totalVotesRight ? '동점!!' : '승자!!'}
-        </h2>
-        {maxParticipant.name && winningArgument && (
-          <div className="winner-banner">
-            {totalVotesLeft === totalVotesRight ? (
-              <strong className="tie-text">
-                <span className="animated-text">{leftArgument}</span> vs <span className="animated-text">{rightArgument}</span>
-              </strong>
-            ) : (
-              <strong>
-                <span className="animated-text winner-text">
-                  {maxParticipant.name}의 주장 {winningArgument}!!
-                </span>
-              </strong>
+        ) : (
+          // 로딩 완료 후 기존 UI 표시
+          <>
+            {resultData?.summary && (
+              <div className="votestatic-summary-section">
+                <h3>토론 요약</h3>
+                <p className="votestatic-summary-text">{resultData.summary}</p>
+              </div>
             )}
-          </div>
+            <div className="votestatic-results-section">
+              {maxParticipant.name && winningArgument && (
+                <div className="winner-banner">
+                  {totalVotesLeft === totalVotesRight ? (
+                    <strong className="tie-text">
+                      <span className="animated-text">{leftArgument}</span> vs <span className="animated-text">{rightArgument}</span>
+                    </strong>
+                  ) : (
+                    <strong>
+                      <span className="animated-text winner-text">
+                        {winningArgument}의 {maxParticipant.name} 승리!!
+                      </span>
+                    </strong>
+                  )}
+                </div>
+              )}
+              <div className="chart-container">
+                <HighchartsReact highcharts={Highcharts} options={participantChartOptions} />
+              </div>
+              <button onClick={handleClose} className="close-button1">닫기</button>
+            </div>
+          </>
         )}
-        <div className="chart-container">
-          <HighchartsReact highcharts={Highcharts} options={participantChartOptions} />
-        </div>
-        <button onClick={handleClose} className="close-button1">닫기</button>
-        </div>
       </div>
     </div>
   );

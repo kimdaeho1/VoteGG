@@ -6,7 +6,7 @@ import jwtDecode from 'jwt-decode'; // jwt-decode 라이브러리 임포트
 // 기존 코드
 const InviteModal = ({ onClose }) => {
     const [invitee, setInvitee] = useState('');
-    const roomId = window.location.href.split('/room/')[1];
+    const roomId = window.location.href.split('/observer/')[1];
     const token = localStorage.getItem('token');
     const { addToast } = useToast();
 

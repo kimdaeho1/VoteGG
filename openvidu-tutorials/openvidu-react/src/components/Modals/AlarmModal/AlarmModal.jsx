@@ -34,7 +34,7 @@ const AlarmModal = ({ onClose, username }) => {
       const roomId = res.data.invitation.roomId;
       //console.log(roomId);
       if (response === 'accepted') {
-        navigate(`/room/${roomId}`); // roomId로 페이지 이동
+        navigate(`/observer/${roomId}`); // roomId로 페이지 이동
         addToast("토론방에 입장했습니다.", "success");
       } else {
         setInvitations((prev) => prev.filter((invite) => invite._id !== id)); // 초대 목록에서 제거
