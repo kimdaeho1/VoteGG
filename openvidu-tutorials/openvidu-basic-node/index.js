@@ -42,6 +42,9 @@ app.use(express.json());
 const transcriptionRouter = require('./routes/transcription');
 app.use('/api/transcription', transcriptionRouter);
 
+
+const summarizeRouter = require('./routes/summarize');
+app.use('/', summarizeRouter);
 // HTTP 라우터 추가
 // app.use('/chat', chatRouter);
 app.use('/api/user', userRouter);

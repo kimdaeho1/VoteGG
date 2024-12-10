@@ -477,6 +477,13 @@ class OpenviduFinal extends Component {
             });
         });
 
+        // 토론 종료 시그널 핸들러 추가
+        session.on('signal:stopAutoRecording', (event) => {
+            if (!this.props.isObserver) {  // 관전자가 아닌 경우에만
+                this.stopAutoRecording();
+            }
+        });
+
         // Handle exceptions
         session.on("exception", (exception) => {
             //console.warn(exception);
