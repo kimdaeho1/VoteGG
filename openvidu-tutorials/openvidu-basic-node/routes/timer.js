@@ -5,7 +5,6 @@ const router = express.Router();
 const rooms = {}; // 방별 타이머 정보를 저장할 객체
 const User = require("../schemas/user");
 const Room = require("../schemas/room");
-
 const DebateResult = require("../schemas/debateResult");
 
 function timerSocketHandler(io) {
@@ -13,16 +12,12 @@ function timerSocketHandler(io) {
   const timerNamespace = io.of('/timer');
 
   timerNamespace.on('connection', (socket) => {
-    //console.log(`타이머 네임스페이스에 새로운 클라이언트 연결: ${socket.id}`);
-
     // 방에 조인하는 이벤트 처리
     socket.on('join_room', (roomId) => {
       socket.join(roomId);
-      //console.log(`타이머방 ${socket.id}가 방 ${roomId}에 참여했습니다.`);
 
       // 해당 방의 타이머가 없으면 생성
       if (!rooms[roomId]) {
-        // 타이머 초기 설정
         rooms[roomId] = {
           durations: [300], // 타이머 단계들의 지속 시간 (초)
           cycleCount: 1, // 총 사이클 수
@@ -34,16 +29,25 @@ function timerSocketHandler(io) {
           currentPhase: 1, // 초기 phase
           currentTurn: 'left', // 초기 turn
           readyCount: 0, // 준비된 사용자 수
-          stopRequests: 0, // 종료 요청 상태 추가
+          stopRequests: 0, // 종료 요청 상태
+          currentMemberCount: 0, // 현재 멤버 수
+          maxMemberCount: 0, // 최대 멤버 수
         };
       }
 
-      // 현재 타이머 상태를 클라이언트에게 전송
       const room = rooms[roomId];
+
+      // 멤버 수 증가
+      room.currentMemberCount++;
+      if (room.currentMemberCount > room.maxMemberCount) {
+        room.maxMemberCount = room.currentMemberCount;
+      }
+
+      // 현재 타이머 상태를 클라이언트에게 전송
       socket.emit('timerUpdate', {
         timeLeft: room.timeLeft,
         isRunning: room.isRunning,
-        currentIndex: room.currentIndex, 
+        currentIndex: room.currentIndex,
         currentCycle: room.currentCycle,
         totalCycles: room.cycleCount,
         currentPhase: room.currentPhase,
@@ -57,14 +61,11 @@ function timerSocketHandler(io) {
     
       // 준비 상태 업데이트
       room.readyCount += isReady ? 1 : -1;
-      room.readyCount = Math.max(0, room.readyCount); // 음수로 가지 않도록 보장
+      room.readyCount = Math.max(0, room.readyCount); // 음수 방지
     
       // 모든 클라이언트에게 준비 상태 업데이트 전송
       timerNamespace.to(roomId).emit('update_ready_count', room.readyCount);
-    
-      //console.log(`방 ${roomId}의 준비된 사용자 수: ${room.readyCount}`);
     });
-    
 
     socket.on('toggle_stop_request', ({ roomId, requested }) => {
       const room = rooms[roomId];
@@ -74,9 +75,7 @@ function timerSocketHandler(io) {
       room.stopRequests += requested ? 1 : -1;
       room.stopRequests = Math.max(0, room.stopRequests);
 
-      //console.log(`방 ${roomId}의 종료 요청 상태: ${room.stopRequests}`);
-
-      // 모든 클라이언트에게 종료 요청 수 업데이트 브로드캐스트
+      // 모든 클라이언트에게 종료 요청 수 업데이트
       timerNamespace.to(roomId).emit('stopRequestUpdate', {
         stopRequests: room.stopRequests,
       });
@@ -93,7 +92,6 @@ function timerSocketHandler(io) {
           currentPhase: room.currentPhase,
           currentTurn: room.currentTurn,
         });
-        //console.log(`방 ${roomId}의 타이머가 종료되었습니다.`);
       }
     });
 
@@ -119,7 +117,7 @@ function timerSocketHandler(io) {
     socket.on('stop_timer', (roomId) => {
       const room = rooms[roomId];
       if (room) {
-        room.timeLeft = 0; // 타이머 시간을 강제로 0초로 설정
+        room.timeLeft = 0; // 강제로 시간을 0초로
         stopTimer(roomId);
         timerNamespace.to(roomId).emit('timerFinished', {
           timeLeft: 0,
@@ -131,12 +129,12 @@ function timerSocketHandler(io) {
           currentTurn: room.currentTurn,
         });
     
-        // 강제로 모든 사이클을 완료로 설정하여 종료 조건을 만족시킴
+        // 모든 사이클 완료 처리
         room.currentCycle = room.cycleCount;
     
-        // 이미 처리되었는지 확인
+        // 투표 결과 처리 여부 체크
         if (!room.isVotingHandled) {
-          room.isVotingHandled = true; // 플래그 설정
+          room.isVotingHandled = true;
           handleVotingAndResults(roomId);
         }
       }
@@ -146,10 +144,9 @@ function timerSocketHandler(io) {
     socket.on('set_timer_duration', ({ roomId, duration }) => {
       const room = rooms[roomId];
       if (room) {
-        room.durations[0] = duration; // 첫 번째 단계의 지속 시간을 설정
-        room.timeLeft = duration; // 남은 시간도 업데이트
-        //console.log(`방 ${roomId}의 타이머가 ${duration}초로 설정되었습니다.`);
-
+        room.durations[0] = duration; 
+        room.timeLeft = duration;
+    
         // 모든 클라이언트에게 업데이트된 타이머 정보 전송
         timerNamespace.to(roomId).emit('timerUpdate', {
           timeLeft: room.timeLeft,
@@ -161,30 +158,23 @@ function timerSocketHandler(io) {
       }
     });
 
-
     // 클라이언트 연결 해제 시 처리
     socket.on('disconnect', () => {
-      //console.log('타이머방 연결 해제:', socket.id);
-
-      // 사용자가 속한 방들에 대해 처리
       const roomsJoined = socket.rooms;
       roomsJoined.forEach((roomId) => {
-        // 기본 방(ID)이 소켓 ID인 경우 스킵
-        if (roomId === socket.id) return;
+        if (roomId === socket.id) return; // 기본 방(ID)이 소켓 ID인 경우 스킵
 
-        // 방에서 나가기
-        socket.leave(roomId);
+        const room = rooms[roomId];
+        if (room) {
+          // 멤버 수 감소
+          room.currentMemberCount = Math.max(0, room.currentMemberCount - 1);
 
-        // 방의 사용자 수 확인
-        const room = timerNamespace.adapter.rooms.get(roomId);
-        const numUsers = room ? room.size : 0;
-
-        if (numUsers === 0) {
-          // 방에 사용자가 없으므로 타이머 정리
-          if (rooms[roomId]) {
+          // 방의 사용자 수 확인
+          const numUsers = timerNamespace.adapter.rooms.get(roomId) ? timerNamespace.adapter.rooms.get(roomId).size : 0;
+          if (numUsers === 0) {
+            // 방에 사용자가 없으므로 타이머 정리
             stopTimer(roomId);
             delete rooms[roomId];
-            //console.log(`타이머방 ${roomId}의 타이머가 정리되었습니다.`);
           }
         }
       });
@@ -205,7 +195,7 @@ function timerSocketHandler(io) {
       const remainingTime = Math.round((endTime - Date.now()) / 1000);
       room.timeLeft = Math.max(remainingTime, 0);
 
-      // 방에 있는 모든 클라이언트에게 타이머 업데이트 전송
+      // 타이머 업데이트 전송
       timerNamespace.to(roomId).emit('timerUpdate', {
         timeLeft: room.timeLeft,
         isRunning: room.isRunning,
@@ -220,8 +210,6 @@ function timerSocketHandler(io) {
         clearInterval(room.timer);
         room.timer = null;
         room.isRunning = false;
-
-        // 다음 단계로 이동
         moveToNextStage(roomId);
       }
     }, 1000);
@@ -246,24 +234,23 @@ function timerSocketHandler(io) {
       if (room.currentTurn === 'left') {
         newTurn = 'right';
       } else {
-        // 양측 참가자들의 발언이 끝나면 다음 phase로 이동
+        // 양측 발언 끝나면 다음 phase 이동 로직 (여기선 phase 변동 없이 예시)
         newTurn = 'left';
-        newPhase = room.currentPhase === 1 ? 1 : 1; // Phase를 1과 2 사이에서 변경
+        newPhase = room.currentPhase === 1 ? 1 : 1; 
       }
 
-      // 방의 currentPhase와 currentTurn 업데이트
       room.currentPhase = newPhase;
       room.currentTurn = newTurn;
 
-      // 클라이언트에 phaseChange 이벤트 emit
+      // phaseChange 이벤트 전송
       timerNamespace.to(roomId).emit('phaseChange', {
         newPhase,
         newTurn,
       });
 
-      // 모든 사이클이 끝났는지 확인
+      // 사이클 완료 확인
       if (room.currentCycle >= room.cycleCount) {
-        // 타이머 종료 및 투표 결과 처리
+        // 투표 결과 처리
         handleVotingAndResults(roomId);
         return;
       }
@@ -273,54 +260,40 @@ function timerSocketHandler(io) {
     startTimer(roomId);
   }
 
-  // 타이머 종료 후 투표 및 결과 처리 함수
+  // 투표 및 결과 처리 함수
   async function handleVotingAndResults(roomId) {
     const room = rooms[roomId];
     if (!room) return;
 
     try {
-        // roomId에 해당하는 Room 문서 가져오기
-        const roomDocument = await Room.findOne({ roomNumber: roomId });
+      const roomDocument = await Room.findOne({ roomNumber: roomId });
 
-        if (!roomDocument) {
-            console.error(`roomId ${roomId}에 해당하는 방을 찾을 수 없습니다.`);
-            return;
-        }
+      if (!roomDocument) {
+        console.error(`roomId ${roomId}에 해당하는 방을 찾을 수 없습니다.`);
+        return;
+      }
 
-        const participantsArray = Array.from(roomDocument.participant.entries());
+      const participantsArray = Array.from(roomDocument.participant.entries());
 
-        if (participantsArray.length < 1) {
-            timerNamespace.to(roomId).emit('timerFinished', { error: "참가자가 부족합니다. 최소 4명이 필요합니다." });
-            return;
-        }
+      if (participantsArray.length < 1) {
+        timerNamespace.to(roomId).emit('timerFinished', { error: "참가자가 부족합니다. 최소 4명이 필요합니다." });
+        return;
+      }
 
-        // Red팀과 Blue팀 나누기
-        const redTeam = participantsArray.slice(0, 2); // 0, 1번 참가자
-        const blueTeam = participantsArray.slice(2, 4); // 2, 3번 참가자
+      // 득표 처리 등 기존 로직
+      const participantIds = participantsArray.map(([id]) => id);
+      const users = await User.find({ username: { $in: participantIds } });
 
-        // 점수 계산
-        const redScore = redTeam.reduce((sum, [, votes]) => sum + votes, 0);
-        const blueScore = blueTeam.reduce((sum, [, votes]) => sum + votes, 0);
+      const historyEntry = {
+        roomName: roomDocument.roomname,
+        date: new Date(),
+      };
 
-        // 전체 참가자 정보 가져오기
-        const participantIds = participantsArray.map(([id]) => id);
-        const users = await User.find({ username: { $in: participantIds } });
+      for (const user of users) {
+        user.totalParticipations += 1;
+        user.myHistory.push(historyEntry);
+      }
 
-        // 결과 업데이트 및 myHistory에 기록 추가
-        const historyEntry = {
-            roomName: roomDocument.roomname,
-            date: new Date(),
-        };
-
-        for (const user of users) {
-            user.totalParticipations += 1; // 모든 참가자의 참가 횟수 증가
-
-            // myHistory에 기록 추가
-            user.myHistory.push(historyEntry);
-        }
-
-
-      // 최대 득표자 계산
       const maxVotes = Math.max(...participantsArray.map(([, votes]) => votes));
       const topScorers = users.filter((user) =>
         participantsArray.some(
@@ -328,27 +301,23 @@ function timerSocketHandler(io) {
         )
       );
 
-      // 최대 득표자 업데이트
       for (const topScorer of topScorers) {
         topScorer.firstPlaceWins += 1;
       }
-      
-      // DB 업데이트
+
       await Promise.all(users.map((user) => user.save()));
 
-      
       // 토론 결과 저장
       const debateResult = new DebateResult({
         roomName: roomDocument.roomname,
         tags: roomDocument.tags,
-        maxViewers : roomDocument.maxViewers,
-        participantsArray: Array.from(roomDocument.participant.entries()), // Map을 배열로 저장]
-        leftArgument : Array.from(roomDocument.leftUserArgument.entries()), // Map을 배열로 저장
-        rightArgument : Array.from(roomDocument.rightUserArgument.entries()), // Map을 배열로 저장
+        maxViewers: room.maxMemberCount, // 여기서 roomDocument.maxViewers 대신 room.maxMemberCount 사용
+        participantsArray: Array.from(roomDocument.participant.entries()),
+        leftArgument: Array.from(roomDocument.leftUserArgument.entries()),
+        rightArgument: Array.from(roomDocument.rightUserArgument.entries()),
       });
-      
+
       await debateResult.save();
-      //console.log("토론 결과가 성공적으로 저장되었습니다.");
 
       // 클라이언트에게 결과 전송
       timerNamespace.to(roomId).emit('timerFinished', {
@@ -357,11 +326,10 @@ function timerSocketHandler(io) {
       });
 
     } catch (error) {
-        console.error("투표 결과 처리 중 오류:", error);
-        timerNamespace.to(roomId).emit('timerFinished', { error: "투표 결과를 처리하는 중 오류가 발생했습니다." });
+      console.error("투표 결과 처리 중 오류:", error);
+      timerNamespace.to(roomId).emit('timerFinished', { error: "투표 결과 처리 중 오류가 발생했습니다." });
     }
-}
-
+  }
 
   // 타이머 정지 함수
   function stopTimer(roomId) {
@@ -373,28 +341,23 @@ function timerSocketHandler(io) {
     }
   }
 
-  // 사이클 넘어가는 함수
+  // 사이클 넘기기 함수
   function skipToNextCycle(roomId) {
     const room = rooms[roomId];
     if (!room) return;
 
     stopTimer(roomId);
 
-    // 현재 사이클을 증가시키고 단계 인덱스 초기화
     room.currentCycle++;
     room.currentIndex = 0;
 
-    // 모든 사이클이 끝났는지 확인
     if (room.currentCycle >= room.cycleCount) {
-      // 타이머 종료
       timerNamespace.to(roomId).emit('timerFinished');
       return;
     }
 
-    // 다음 사이클의 첫 번째 단계로 타이머 재시작
     startTimer(roomId);
   }
 }
 
 module.exports = { router, timerSocketHandler };
-
