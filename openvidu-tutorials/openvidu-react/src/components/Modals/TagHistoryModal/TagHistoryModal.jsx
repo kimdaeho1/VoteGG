@@ -135,7 +135,7 @@ const TagHistoryModal = ({ isOpen, onClose, roomData }) => {
             <strong>관련 태그:</strong> {debateResult.tags.join(", ")}
           </p>
           <button className="tag-history-modal-close-btn" onClick={onClose}>
-            모달 닫기
+            닫기
           </button>
         </div>
       </div>
