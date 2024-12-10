@@ -9,6 +9,8 @@ import { useRecoilState } from 'recoil';
 import { resetTimerState } from '../../../../stores/TimerAtom';
 import { registerSetResetTimerFunc } from '../../../../stores/setTimerState';
 
+import useTranscriptionStore from '../../../../stores/transcriptionStore';
+
 const Timer = ({ isObserver }) => {
   const { roomNumber } = useParams();
   const roomId = roomNumber;
@@ -49,11 +51,46 @@ const Timer = ({ isObserver }) => {
       setCurrentIndex(currentIndex);
     };
 
-    const handleTimerFinished = (data) => {
+    const handleTimerFinished = async (data) => {
       setIsRunning(false);
       setTimerFinished(true);
-      setResultData(data || {});
-
+  
+      // transcriptionHistory 가져오기
+     
+  
+      try {
+        // GPT 요약 요청
+        const transcriptionHistory = useTranscriptionStore.getState().transcriptionHistory;
+        
+        const response = await fetch('/api/summarize', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ transcripts: transcriptionHistory }),
+        });
+  
+        if (response.ok) {
+          const { summary } = await response.json();
+          const finalResultData = {
+            ...data,
+            summary: summary
+          };
+          setResultData(finalResultData);
+        }
+      } catch (error) {
+        console.error('Error getting summary:', error);
+        setResultData(data); // 에러 발생 시 기본 데이터만 설정
+      }
+  
+      // 토론 종료 시그널 발생
+      if (window.session) {
+        window.session.signal({
+          data: JSON.stringify({ action: 'stopRecording' }),
+          type: 'stopAutoRecording'
+        });
+      }
+  
       const maxViewers = localStorage.getItem("maxViewers");
       if (maxViewers) {
         socket.emit("updateMaxViewers", {
@@ -63,7 +100,6 @@ const Timer = ({ isObserver }) => {
         localStorage.removeItem("maxViewers");
       }
     };
-
     socket.on('openviduActive', (isActive) => {
       setIsOpenviduActive(isActive);
     });

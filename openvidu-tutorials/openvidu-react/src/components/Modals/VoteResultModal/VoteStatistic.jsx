@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './VoteStatistic.css';
 
-const VoteStatistic = ({ onClose }) => {
+const VoteStatistic = ({ onClose, resultData }) => {
   const [chartDataParticipants, setChartDataParticipants] = useState([]);
   const [winningArgument, setWinningArgument] = useState('');
   const [totalVotesLeft, setTotalVotesLeft] = useState(0);
@@ -24,11 +24,11 @@ const VoteStatistic = ({ onClose }) => {
     const fetchParticipants = async () => {
       try {
         const response = await axios.get(`/api/room/${roomNumber}/participants`);
-        const participants = response.data.participants;
-        const LeftArgu = response.data.LeftArguMent[0][1];
-        const RightArgu = response.data.RightArguMent[0][1];
-        const LeftUserId = response.data.LeftArguMent[0][0];
-        const RightUserId = response.data.RightArguMent[0][0];
+        const participants = response.data.participants || [];
+        const LeftArgu = response.data.LeftArguMent?.[0]?.[1] || '';
+        const RightArgu = response.data.RightArguMent?.[0]?.[1] || '';
+        const LeftUserId = response.data.LeftArguMent?.[0]?.[0] || '';
+        const RightUserId = response.data.RightArguMent?.[0]?.[0] || '';
 
         setLeftArgument(LeftArgu);
         setRightArgument(RightArgu);
@@ -143,6 +143,13 @@ const VoteStatistic = ({ onClose }) => {
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
       <div className="modal-content1 animated-modal" onClick={(e) => e.stopPropagation()}>
+      {resultData?.summary && (
+          <div className="votestatic-summary-section">
+            <h3>토론 요약</h3>
+            <p className="votestatic-summary-text">{resultData.summary}</p>
+          </div>
+        )}
+        <div className="votestatic-results-section">
         <h2 className="modal-title">
           {totalVotesLeft === totalVotesRight ? '동점!!' : '승자!!'}
         </h2>
@@ -165,6 +172,7 @@ const VoteStatistic = ({ onClose }) => {
           <HighchartsReact highcharts={Highcharts} options={participantChartOptions} />
         </div>
         <button onClick={handleClose} className="close-button1">닫기</button>
+        </div>
       </div>
     </div>
   );

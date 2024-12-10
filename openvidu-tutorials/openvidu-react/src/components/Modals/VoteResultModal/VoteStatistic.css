@@ -14,14 +14,34 @@
 }
 
 .modal-content1 {
-  background: #f8f9fa; /* 밝은 회색 배경 */
-  border: 2px solid #adb5bd; /* 중간 밝기의 회색 테두리 */
+  background: #f8f9fa;
+  border: 2px solid #adb5bd;
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 80%;
-  max-width: 600px;
+  width: 100%;
+  max-width: 1200px;  /* 최대 너비 증가 */
   padding: 20px;
   animation: fadeIn 0.5s ease-in-out;
+  display: flex;  /* Flexbox 사용 */
+  flex-wrap: wrap;  /* 필요시 줄바꿈 */
+}
+
+.votestatic-summary-section {
+  flex: 1;  /* 왼쪽 영역 */
+  min-width: 400px;  /* 최소 너비 설정 */
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.votestatic-summary-text {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  white-space: pre-wrap;
 }
 
 @keyframes fadeIn {
@@ -35,13 +55,25 @@
   }
 }
 
+.votestatic-results-section {
+  flex: 1;
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  position: relative;
+}
+
 .modal-title {
-  font-size: 26px;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 20px;
-  color: #343a40; /* 어두운 회색 */
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  margin-bottom: 0;
+  padding: 10px 20px;
+  border-radius: 10px;
 }
 
 .winner-banner {
@@ -127,3 +159,6 @@
   font-size: 1.3em; /* 승자 글씨 크기 */
   color: #212529; /* 진한 텍스트 색상 */
 }
+
+
+
