@@ -160,5 +160,11 @@
   color: #212529; /* 진한 텍스트 색상 */
 }
 
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* 부모 컨테이너 크기에 맞춰 조정 */
+}
 
 
