@@ -100,7 +100,7 @@ const RoomControl = ({ isObserver }) => {
       </div>
       <Timer roomId={roomNumber} isObserver={isObserver} className='room-timer'/>
       <button onClick={toggleModal} className="transcript-button">
-          대화 기록 보기
+          대화 기록
         </button>
 {/* 모달 컴포넌트 */}
 {isModalOpen && (

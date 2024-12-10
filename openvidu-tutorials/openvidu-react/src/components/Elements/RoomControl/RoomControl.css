@@ -46,20 +46,23 @@
 /* 트랜스크립트 버튼 스타일 */
 .transcript-button {
   position: absolute;
-  right: 20px;
-  top: 20px;
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
+  right: 5px;
+  top: 54px;
+  padding: 10px 10px;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* 기본 그림자 */
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: all 0.3s ease; /* 모든 속성에 부드러운 전환 효과 */
 }
 
 .transcript-button:hover {
-  background-color: #45a049;
+  transform: scale(1.1); /* 크기를 10% 확대 */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* 약간의 그림자 추가 */
 }
 
 /* 모달 오버레이 스타일 */

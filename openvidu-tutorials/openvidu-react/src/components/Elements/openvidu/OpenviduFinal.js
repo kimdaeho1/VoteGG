@@ -329,7 +329,7 @@ class OpenviduFinal extends Component {
             this.setState((prevState) => {
                 const mergedLeftUserList = mergeUserLists(prevState.leftUserList, data.leftUserList || []);
                 const mergedRightUserList = mergeUserLists(prevState.rightUserList, data.rightUserList || []);
-        
+
                 // transcriptionHistory가 있는 경우에만 추가
                 if (data.transcriptionHistory && data.transcriptionHistory.length > 0) {
                     const addTranscription = useTranscriptionStore.getState().addTranscription;
@@ -337,16 +337,16 @@ class OpenviduFinal extends Component {
                         // 중복 체크
                         const existingTranscriptions = useTranscriptionStore.getState().transcriptionHistory;
                         const isDuplicate = existingTranscriptions.some(
-                            t => t.timestamp === transcription.timestamp && 
-                                 t.speaker === transcription.speaker
+                            t => t.timestamp === transcription.timestamp &&
+                                t.speaker === transcription.speaker
                         );
-                        
+
                         if (!isDuplicate) {
                             addTranscription(transcription);
                         }
                     });
                 }
-        
+
                 return {
                     leftUserList: mergedLeftUserList,
                     rightUserList: mergedRightUserList,
@@ -404,14 +404,14 @@ class OpenviduFinal extends Component {
         session.on('signal:transcription', (event) => {
             const transcriptionData = JSON.parse(event.data);
             const addTranscription = useTranscriptionStore.getState().addTranscription;
-            
+
             // 중복 체크를 위한 로직 추가
             const existingTranscriptions = useTranscriptionStore.getState().transcriptionHistory;
             const isDuplicate = existingTranscriptions.some(
-                t => t.timestamp === transcriptionData.timestamp && 
-                     t.speaker === transcriptionData.speaker
+                t => t.timestamp === transcriptionData.timestamp &&
+                    t.speaker === transcriptionData.speaker
             );
-            
+
             if (!isDuplicate) {
                 addTranscription(transcriptionData);
                 this.setState(prevState => ({
@@ -1395,10 +1395,10 @@ class OpenviduFinal extends Component {
     // 자동 녹음 시작
     startAutoRecording() {
         if (this.state.isAutoRecording) return;
-        
+
         // 즉시 첫 녹음 시작
         this.startRecording();
-        
+
         const interval = setInterval(() => {
             if (this.state.isRecording) {
                 this.stopRecording();
@@ -1410,7 +1410,7 @@ class OpenviduFinal extends Component {
                 this.startRecording();
             }
         }, 2000); // 5초마다 녹음 교체
-    
+
         this.setState({
             isAutoRecording: true,
             recordingInterval: interval
@@ -1544,7 +1544,7 @@ class OpenviduFinal extends Component {
                             this.stopAutoRecording() :
                             this.startAutoRecording()}
                     >
-                        {this.state.isAutoRecording ? '자동 녹음 중지' : '자동 녹음 시작'}
+                        {this.state.isAutoRecording ? '녹음 종료' : '녹음 시작'}
                     </button>
                 </div>
                 <div className="openvidu-final">
