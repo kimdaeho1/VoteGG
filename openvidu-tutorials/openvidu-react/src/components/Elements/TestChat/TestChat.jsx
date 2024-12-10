@@ -101,7 +101,7 @@ const TestChat = () => {
       increaseVoteCount(roomNumber, username);
       const { maxVoteCount, usedVoteCount } = getVoteCount(roomNumber, username);
       //console.log("After Increasing Vote Count:", maxVoteCount, usedVoteCount);
-    }, 1000); // 10초마다 증가시키는 함수 호출
+    }, 10000); // 10초마다 증가시키는 함수 호출
 
     return () => {
       clearInterval(interval); // clean up on unmount
@@ -149,8 +149,8 @@ const TestChat = () => {
       let profileImageUrl = "";
       if (token) {
         try {
-          const payload = JSON.parse(atob(token.split(".")[1]));
-          profileImageUrl = payload.profileImageUrl || "";
+          const decoded = jwtDecode(token); // JWT 디코딩
+          profileImageUrl = decoded.profileImageUrl || ""; // username 반환, 없을 시 기본값
         } catch (error) {
           console.error("토큰 파싱 오류:", error);
         }

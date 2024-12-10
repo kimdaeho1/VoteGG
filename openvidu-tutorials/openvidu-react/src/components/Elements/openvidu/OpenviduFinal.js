@@ -573,7 +573,7 @@ class OpenviduFinal extends Component {
 
                 // 기준 해상도 및 비율
                 const baseWidth = 1920;
-                const baseHeight = 1080;
+                const baseHeight = 920;
                 const baseRatio = 0.8851;
 
                 // 동기화 비율 계산
