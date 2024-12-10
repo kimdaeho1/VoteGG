@@ -182,7 +182,7 @@ router.get("/roomList", async (req, res) => {
         roomNumber: 10000,
         roomname: "부먹 vs 찍먹",
         createdby: "뭐든찍먹",
-        thumbnail: "https://projectagorabucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733847784187_%C3%AB%C2%B6%C2%80%C3%AB%C2%A8%C2%B9%C3%AC%C2%B0%C2%8D%C3%AB%C2%A8%C2%B9.jpg",
+        thumbnail: "https://projectagorabucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733856115373_%C3%AB%C2%B6%C2%80%C3%AB%C2%A8%C2%B9.jpg",
         tags: ["탕수육", "음식"],
         participant: { "뭐든찍먹": 0, "어림반푼": 0}
       },
@@ -190,7 +190,7 @@ router.get("/roomList", async (req, res) => {
         roomNumber: 10001,
         roomname: "제 5공화국 vs 서울의 봄",
         createdby: "고정간첩",
-        thumbnail: "https://projectagorabucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733847882722_drama.jpg",
+        thumbnail: "https://projectagorabucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733856103199_%C3%AB%C2%93%C2%9C%C3%AB%C2%9D%C2%BC%C3%AB%C2%A7%C2%88.jpg",
         tags: ["영화", "드라마"],
         participant: { "고정간첩": 0, "석령": 0}
       },
