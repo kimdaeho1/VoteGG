@@ -86,3 +86,311 @@ Please migrate your code to use AWS SDK for JavaScript (v3).
 For more information, check the blog post at https://a.co/cUPnyil
 (Use `node --trace-warnings ...` to show where the warning was created)
 방 생성 실패: E11000 duplicate key error collection: test.rooms index: roomname_1 dup key: { roomname: "테스트" }
+(node:409978) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+MongoServerSelectionError: connect ECONNREFUSED 3.39.38.3:27017
+    at Topology.selectServer (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/sdam/topology.js:303:38)
+    at async tryOperation (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/operations/execute_operation.js:138:18)
+    at async executeOperation (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/operations/execute_operation.js:69:16)
+    at async FindCursor._initialize (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/find_cursor.js:51:26)
+    at async FindCursor.cursorInit (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:495:27)
+    at async FindCursor.fetchBatch (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:527:13)
+    at async FindCursor.next (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:239:13)
+    at async [Symbol.asyncIterator] (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:170:34)
+    at async FindCursor.toArray (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:300:26)
+    at async model.Query._find (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongoose/lib/query.js:2366:14) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'ac-piy9lkk-shard-00-01.owrma9h.mongodb.net:27017' => [ServerDescription],
+      'ac-piy9lkk-shard-00-02.owrma9h.mongodb.net:27017' => [ServerDescription],
+      'ac-piy9lkk-shard-00-00.owrma9h.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 10000,
+    localThresholdMS: 15,
+    setName: 'atlas-6b0t8t-shard-0',
+    maxElectionId: new ObjectId('7fffffff00000000000000c8'),
+    maxSetVersion: 6,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: 30
+  },
+  code: undefined,
+  [Symbol(errorLabels)]: Set(0) {},
+  [cause]: MongoNetworkError: connect ECONNREFUSED 3.39.38.3:27017
+      at connectionFailureError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cmap/connect.js:356:20)
+      at TLSSocket.<anonymous> (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cmap/connect.js:272:44)
+      at Object.onceWrapper (node:events:632:26)
+      at TLSSocket.emit (node:events:517:28)
+      at TLSSocket.emit (node:domain:489:12)
+      at emitErrorNT (node:internal/streams/destroy:151:8)
+      at emitErrorCloseNT (node:internal/streams/destroy:116:3)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+    [Symbol(errorLabels)]: Set(1) { 'ResetPool' },
+    [cause]: AggregateError
+        at internalConnectMultiple (node:net:1114:18)
+        at afterConnectMultiple (node:net:1601:5) {
+      code: 'ECONNREFUSED',
+      [errors]: [Array]
+    }
+  }
+}
+MongoServerSelectionError: connect ECONNREFUSED 3.39.38.3:27017
+    at Topology.selectServer (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/sdam/topology.js:303:38)
+    at async tryOperation (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/operations/execute_operation.js:138:18)
+    at async executeOperation (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/operations/execute_operation.js:69:16)
+    at async FindCursor._initialize (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/find_cursor.js:51:26)
+    at async FindCursor.cursorInit (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:495:27)
+    at async FindCursor.fetchBatch (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:527:13)
+    at async FindCursor.next (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:239:13)
+    at async [Symbol.asyncIterator] (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:170:34)
+    at async FindCursor.toArray (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:300:26)
+    at async model.Query._find (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongoose/lib/query.js:2366:14) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'ac-piy9lkk-shard-00-01.owrma9h.mongodb.net:27017' => [ServerDescription],
+      'ac-piy9lkk-shard-00-02.owrma9h.mongodb.net:27017' => [ServerDescription],
+      'ac-piy9lkk-shard-00-00.owrma9h.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 10000,
+    localThresholdMS: 15,
+    setName: 'atlas-6b0t8t-shard-0',
+    maxElectionId: new ObjectId('7fffffff00000000000000c8'),
+    maxSetVersion: 6,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: 30
+  },
+  code: undefined,
+  [Symbol(errorLabels)]: Set(0) {},
+  [cause]: MongoNetworkError: connect ECONNREFUSED 3.39.38.3:27017
+      at connectionFailureError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cmap/connect.js:356:20)
+      at TLSSocket.<anonymous> (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cmap/connect.js:272:44)
+      at Object.onceWrapper (node:events:632:26)
+      at TLSSocket.emit (node:events:517:28)
+      at TLSSocket.emit (node:domain:489:12)
+      at emitErrorNT (node:internal/streams/destroy:151:8)
+      at emitErrorCloseNT (node:internal/streams/destroy:116:3)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+    [Symbol(errorLabels)]: Set(1) { 'ResetPool' },
+    [cause]: AggregateError
+        at internalConnectMultiple (node:net:1114:18)
+        at afterConnectMultiple (node:net:1601:5) {
+      code: 'ECONNREFUSED',
+      [errors]: [Array]
+    }
+  }
+}
+MongoServerSelectionError: connect ECONNREFUSED 3.39.38.3:27017
+    at Topology.selectServer (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/sdam/topology.js:303:38)
+    at async tryOperation (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/operations/execute_operation.js:138:18)
+    at async executeOperation (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/operations/execute_operation.js:69:16)
+    at async FindCursor._initialize (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/find_cursor.js:51:26)
+    at async FindCursor.cursorInit (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:495:27)
+    at async FindCursor.fetchBatch (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:527:13)
+    at async FindCursor.next (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:239:13)
+    at async [Symbol.asyncIterator] (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:170:34)
+    at async FindCursor.toArray (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:300:26)
+    at async model.Query._find (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongoose/lib/query.js:2366:14) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'ac-piy9lkk-shard-00-01.owrma9h.mongodb.net:27017' => [ServerDescription],
+      'ac-piy9lkk-shard-00-02.owrma9h.mongodb.net:27017' => [ServerDescription],
+      'ac-piy9lkk-shard-00-00.owrma9h.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 10000,
+    localThresholdMS: 15,
+    setName: 'atlas-6b0t8t-shard-0',
+    maxElectionId: new ObjectId('7fffffff00000000000000c8'),
+    maxSetVersion: 6,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: 30
+  },
+  code: undefined,
+  [Symbol(errorLabels)]: Set(0) {},
+  [cause]: MongoNetworkError: connect ECONNREFUSED 3.39.38.3:27017
+      at connectionFailureError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cmap/connect.js:356:20)
+      at TLSSocket.<anonymous> (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cmap/connect.js:272:44)
+      at Object.onceWrapper (node:events:632:26)
+      at TLSSocket.emit (node:events:517:28)
+      at TLSSocket.emit (node:domain:489:12)
+      at emitErrorNT (node:internal/streams/destroy:151:8)
+      at emitErrorCloseNT (node:internal/streams/destroy:116:3)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+    [Symbol(errorLabels)]: Set(1) { 'ResetPool' },
+    [cause]: AggregateError
+        at internalConnectMultiple (node:net:1114:18)
+        at afterConnectMultiple (node:net:1601:5) {
+      code: 'ECONNREFUSED',
+      [errors]: [Array]
+    }
+  }
+}
+MongoServerSelectionError: connect ECONNREFUSED 3.39.38.3:27017
+    at Topology.selectServer (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/sdam/topology.js:303:38)
+    at async tryOperation (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/operations/execute_operation.js:138:18)
+    at async executeOperation (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/operations/execute_operation.js:69:16)
+    at async FindCursor._initialize (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/find_cursor.js:51:26)
+    at async FindCursor.cursorInit (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:495:27)
+    at async FindCursor.fetchBatch (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:527:13)
+    at async FindCursor.next (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:239:13)
+    at async [Symbol.asyncIterator] (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:170:34)
+    at async FindCursor.toArray (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:300:26)
+    at async model.Query._find (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongoose/lib/query.js:2366:14) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'ac-piy9lkk-shard-00-01.owrma9h.mongodb.net:27017' => [ServerDescription],
+      'ac-piy9lkk-shard-00-02.owrma9h.mongodb.net:27017' => [ServerDescription],
+      'ac-piy9lkk-shard-00-00.owrma9h.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 10000,
+    localThresholdMS: 15,
+    setName: 'atlas-6b0t8t-shard-0',
+    maxElectionId: new ObjectId('7fffffff00000000000000c8'),
+    maxSetVersion: 6,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: 30
+  },
+  code: undefined,
+  [Symbol(errorLabels)]: Set(0) {},
+  [cause]: MongoNetworkError: connect ECONNREFUSED 3.39.38.3:27017
+      at connectionFailureError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cmap/connect.js:356:20)
+      at TLSSocket.<anonymous> (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cmap/connect.js:272:44)
+      at Object.onceWrapper (node:events:632:26)
+      at TLSSocket.emit (node:events:517:28)
+      at TLSSocket.emit (node:domain:489:12)
+      at emitErrorNT (node:internal/streams/destroy:151:8)
+      at emitErrorCloseNT (node:internal/streams/destroy:116:3)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+    [Symbol(errorLabels)]: Set(1) { 'ResetPool' },
+    [cause]: AggregateError
+        at internalConnectMultiple (node:net:1114:18)
+        at afterConnectMultiple (node:net:1601:5) {
+      code: 'ECONNREFUSED',
+      [errors]: [Array]
+    }
+  }
+}
+MongoServerSelectionError: connect ECONNREFUSED 3.39.38.3:27017
+    at Topology.selectServer (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/sdam/topology.js:303:38)
+    at async tryOperation (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/operations/execute_operation.js:138:18)
+    at async executeOperation (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/operations/execute_operation.js:69:16)
+    at async FindCursor._initialize (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/find_cursor.js:51:26)
+    at async FindCursor.cursorInit (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:495:27)
+    at async FindCursor.fetchBatch (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:527:13)
+    at async FindCursor.next (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:239:13)
+    at async [Symbol.asyncIterator] (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:170:34)
+    at async FindCursor.toArray (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:300:26)
+    at async model.Query._find (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongoose/lib/query.js:2366:14) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'ac-piy9lkk-shard-00-01.owrma9h.mongodb.net:27017' => [ServerDescription],
+      'ac-piy9lkk-shard-00-02.owrma9h.mongodb.net:27017' => [ServerDescription],
+      'ac-piy9lkk-shard-00-00.owrma9h.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 10000,
+    localThresholdMS: 15,
+    setName: 'atlas-6b0t8t-shard-0',
+    maxElectionId: new ObjectId('7fffffff00000000000000c8'),
+    maxSetVersion: 6,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: 30
+  },
+  code: undefined,
+  [Symbol(errorLabels)]: Set(0) {},
+  [cause]: MongoNetworkError: connect ECONNREFUSED 3.39.38.3:27017
+      at connectionFailureError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cmap/connect.js:356:20)
+      at TLSSocket.<anonymous> (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cmap/connect.js:272:44)
+      at Object.onceWrapper (node:events:632:26)
+      at TLSSocket.emit (node:events:517:28)
+      at TLSSocket.emit (node:domain:489:12)
+      at emitErrorNT (node:internal/streams/destroy:151:8)
+      at emitErrorCloseNT (node:internal/streams/destroy:116:3)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+    [Symbol(errorLabels)]: Set(1) { 'ResetPool' },
+    [cause]: AggregateError
+        at internalConnectMultiple (node:net:1114:18)
+        at afterConnectMultiple (node:net:1601:5) {
+      code: 'ECONNREFUSED',
+      [errors]: [Array]
+    }
+  }
+}
+MongoServerSelectionError: connect ECONNREFUSED 3.39.38.3:27017
+    at Topology.selectServer (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/sdam/topology.js:303:38)
+    at async tryOperation (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/operations/execute_operation.js:138:18)
+    at async executeOperation (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/operations/execute_operation.js:69:16)
+    at async FindCursor._initialize (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/find_cursor.js:51:26)
+    at async FindCursor.cursorInit (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:495:27)
+    at async FindCursor.fetchBatch (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:527:13)
+    at async FindCursor.next (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:239:13)
+    at async [Symbol.asyncIterator] (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:170:34)
+    at async FindCursor.toArray (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cursor/abstract_cursor.js:300:26)
+    at async model.Query._find (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongoose/lib/query.js:2366:14) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'ac-piy9lkk-shard-00-01.owrma9h.mongodb.net:27017' => [ServerDescription],
+      'ac-piy9lkk-shard-00-02.owrma9h.mongodb.net:27017' => [ServerDescription],
+      'ac-piy9lkk-shard-00-00.owrma9h.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 10000,
+    localThresholdMS: 15,
+    setName: 'atlas-6b0t8t-shard-0',
+    maxElectionId: new ObjectId('7fffffff00000000000000c8'),
+    maxSetVersion: 6,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: 30
+  },
+  code: undefined,
+  [Symbol(errorLabels)]: Set(0) {},
+  [cause]: MongoNetworkError: connect ECONNREFUSED 3.39.38.3:27017
+      at connectionFailureError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cmap/connect.js:356:20)
+      at TLSSocket.<anonymous> (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/mongodb/lib/cmap/connect.js:272:44)
+      at Object.onceWrapper (node:events:632:26)
+      at TLSSocket.emit (node:events:517:28)
+      at TLSSocket.emit (node:domain:489:12)
+      at emitErrorNT (node:internal/streams/destroy:151:8)
+      at emitErrorCloseNT (node:internal/streams/destroy:116:3)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+    [Symbol(errorLabels)]: Set(1) { 'ResetPool' },
+    [cause]: AggregateError
+        at internalConnectMultiple (node:net:1114:18)
+        at afterConnectMultiple (node:net:1601:5) {
+      code: 'ECONNREFUSED',
+      [errors]: [Array]
+    }
+  }
+}
+(node:413816) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:446885) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+roomId 4deea50d14ced43ba4b6ab6433118485에 해당하는 방을 찾을 수 없습니다.
+roomId 4c6a6e9207adb48fb8cd9a6ac46f4e04에 해당하는 방을 찾을 수 없습니다.

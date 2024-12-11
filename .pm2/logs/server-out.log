@@ -28159,3 +28159,54 @@ req.file: {
 방 4c272c8adc324690ae6f44772fe27dfb가 1초 딜레이 후 삭제되었습니다.
 AWS_BUCKET_NAME: projectagorabucket
 AWS_BUCKET_NAME: projectagorabucket
+roomName: ㅁㄴㄹㅇㄴㅁㅇㄻㅇㄹ
+api탓따
+roomName: ㅁㄴㄹㅇㄴㅁㅇㄻㅇㄹ
+api탓따
+roomName: 붕어빵머리 vs 꼬리
+api탓따
+roomName: ㅁㄴㄹㅇㄴㅁㅇㄻㅇㄹ
+api탓따
+AWS_BUCKET_NAME: projectagorabucket
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920381983.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920381983.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920395905.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920395905.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920399903.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920399903.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920401864.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920401864.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920407872.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920407872.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920412035.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920412035.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920415864.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920415864.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920417870.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920417870.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920421868.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920421868.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920433895.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920433895.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920437870.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920437870.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920443869.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920443869.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920445862.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920445862.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920447865.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920447865.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920449861.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920449861.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920455865.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920455865.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920457891.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920457891.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920459865.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920459865.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920461874.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920461874.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920463872.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920463872.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920467865.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920467865.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920471862.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920471862.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920475855.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920475855.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920483863.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920483863.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920487892.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920487892.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920489866.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920489866.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920490425.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920490425.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920540661.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920540661.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920554664.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920554664.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920556662.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920556662.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920560654.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920560654.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920582681.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920582681.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920586656.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920586656.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920588653.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920588653.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920590653.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920590653.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920592655.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920592655.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920594653.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920594653.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920596654.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920596654.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920608682.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920608682.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920616655.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920616655.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920618654.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920618654.wav
+FFmpeg 명령어: ffmpeg -f webm -acodec libopus -i /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920622659.webm -y -ac 1 -ar 16000 -acodec pcm_s16le -f wav /home/ubuntu/openvidu-tutorials/openvidu-basic-node/temp/audio/1733920622659.wav

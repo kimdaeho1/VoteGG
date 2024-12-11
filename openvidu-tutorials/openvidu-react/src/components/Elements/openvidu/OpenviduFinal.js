@@ -1350,7 +1350,7 @@ class OpenviduFinal extends Component {
         if (!session) return;
 
         const localConnectionId = session.connection.connectionId;
-        let shouldEnableAudio = false;
+        let shouldEnableAudio = true;
 
         // 현재 발언자인지 확인
         if (currentTurn === 'left') {
