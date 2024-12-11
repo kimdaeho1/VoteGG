@@ -113,6 +113,8 @@ router.post('/convert', upload.single('audio'), async (req, res) => {
             '채널',
             '감사합니다',
             '영상편집',
+            '수고',
+            '먹방',
         ];
 
         // 필터링 조건 검사
