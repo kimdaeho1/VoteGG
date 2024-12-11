@@ -160,7 +160,7 @@ const VoteStatistic = ({ onClose, resultData }) => {
                 <div className="winner-banner">
                   {totalVotesLeft === totalVotesRight ? (
                     <strong className="tie-text">
-                      <span className="animated-text">{leftArgument}</span> vs <span className="animated-text">{rightArgument}</span>
+                      <span className="animated-text">박빙!!</span>
                     </strong>
                   ) : (
                     <strong>

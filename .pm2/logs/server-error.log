@@ -394,3 +394,742 @@ For more information, check the blog post at https://a.co/cUPnyil
 (Use `node --trace-warnings ...` to show where the warning was created)
 roomId 4deea50d14ced43ba4b6ab6433118485에 해당하는 방을 찾을 수 없습니다.
 roomId 4c6a6e9207adb48fb8cd9a6ac46f4e04에 해당하는 방을 찾을 수 없습니다.
+방 생성 실패: E11000 duplicate key error collection: test.rooms index: roomname_1 dup key: { roomname: "ㅂㅈㄷㄱ" }
+OpenAI API error: RateLimitError: 429 Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 28456, Requested 1806. Please try again in 524ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+    at APIError.generate (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/error.js:63:20)
+    at OpenAI.makeStatusError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:293:33)
+    at OpenAI.makeRequest (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:337:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/ubuntu/openvidu-tutorials/openvidu-basic-node/routes/summarize.js:18:24 {
+  status: 429,
+  headers: {
+    'alt-svc': 'h3=":443"; ma=86400',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': '8f06645f7a35ea1b-ICN',
+    connection: 'keep-alive',
+    'content-length': '371',
+    'content-type': 'application/json; charset=utf-8',
+    date: 'Wed, 11 Dec 2024 15:08:48 GMT',
+    'retry-after': '1',
+    'retry-after-ms': '524',
+    server: 'cloudflare',
+    'set-cookie': '__cf_bm=zY0CC5.OJqldcmpgUGeXhw85nt08llTdKYGZaBjIFCw-1733929728-1.0.1.1-IeDr4_c0cat9.3JbTjHU45LvQjjtQcxja40XG4flKV9hxYEaguW2v1_h3c.GrB68YOjf_Dekl.q4siZS0HMnXA; path=/; expires=Wed, 11-Dec-24 15:38:48 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=36xtLWKsaeNl7CGEoQyo.lGeBI3EUe0krNnuClusfsg-1733929728068-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    vary: 'Origin',
+    'x-content-type-options': 'nosniff',
+    'x-ratelimit-limit-requests': '500',
+    'x-ratelimit-limit-tokens': '30000',
+    'x-ratelimit-remaining-requests': '497',
+    'x-ratelimit-remaining-tokens': '1544',
+    'x-ratelimit-reset-requests': '359ms',
+    'x-ratelimit-reset-tokens': '56.911s',
+    'x-request-id': 'req_6f7edd5da24ced37c8a7e755bdc78773'
+  },
+  request_id: 'req_6f7edd5da24ced37c8a7e755bdc78773',
+  error: {
+    message: 'Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 28456, Requested 1806. Please try again in 524ms. Visit https://platform.openai.com/account/rate-limits to learn more.',
+    type: 'tokens',
+    param: null,
+    code: 'rate_limit_exceeded'
+  },
+  code: 'rate_limit_exceeded',
+  param: null,
+  type: 'tokens'
+}
+OpenAI API error: RateLimitError: 429 Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 28456, Requested 1806. Please try again in 524ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+    at APIError.generate (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/error.js:63:20)
+    at OpenAI.makeStatusError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:293:33)
+    at OpenAI.makeRequest (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:337:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/ubuntu/openvidu-tutorials/openvidu-basic-node/routes/summarize.js:18:24 {
+  status: 429,
+  headers: {
+    'alt-svc': 'h3=":443"; ma=86400',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': '8f06645f7fa2aa48-ICN',
+    connection: 'keep-alive',
+    'content-length': '371',
+    'content-type': 'application/json; charset=utf-8',
+    date: 'Wed, 11 Dec 2024 15:08:48 GMT',
+    'retry-after': '1',
+    'retry-after-ms': '524',
+    server: 'cloudflare',
+    'set-cookie': '__cf_bm=2E9WutLYCkER53o_YX3Aw4f3fOq4xwV_cjkOi5dU6Mg-1733929728-1.0.1.1-j7NNWx_6rGSTskDmJHew6iHiKPZ5IQwUugZmxw7yGfc1Ss68uPDyT2.bhZJQGh0CUTGGEdoSFCmFGIhgqjqyfA; path=/; expires=Wed, 11-Dec-24 15:38:48 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=rMqteAfqnvvg6WTWlOWqUmbcGnSmrWgtyAXbSWIfLpk-1733929728070-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    vary: 'Origin',
+    'x-content-type-options': 'nosniff',
+    'x-ratelimit-limit-requests': '500',
+    'x-ratelimit-limit-tokens': '30000',
+    'x-ratelimit-remaining-requests': '499',
+    'x-ratelimit-remaining-tokens': '1544',
+    'x-ratelimit-reset-requests': '120ms',
+    'x-ratelimit-reset-tokens': '56.911s',
+    'x-request-id': 'req_ffbb54a8861e61b8a191e905029cc7d8'
+  },
+  request_id: 'req_ffbb54a8861e61b8a191e905029cc7d8',
+  error: {
+    message: 'Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 28456, Requested 1806. Please try again in 524ms. Visit https://platform.openai.com/account/rate-limits to learn more.',
+    type: 'tokens',
+    param: null,
+    code: 'rate_limit_exceeded'
+  },
+  code: 'rate_limit_exceeded',
+  param: null,
+  type: 'tokens'
+}
+OpenAI API error: RateLimitError: 429 Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 28455, Requested 1806. Please try again in 522ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+    at APIError.generate (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/error.js:63:20)
+    at OpenAI.makeStatusError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:293:33)
+    at OpenAI.makeRequest (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:337:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/ubuntu/openvidu-tutorials/openvidu-basic-node/routes/summarize.js:18:24 {
+  status: 429,
+  headers: {
+    'alt-svc': 'h3=":443"; ma=86400',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': '8f06645f788a3097-ICN',
+    connection: 'keep-alive',
+    'content-length': '371',
+    'content-type': 'application/json; charset=utf-8',
+    date: 'Wed, 11 Dec 2024 15:08:48 GMT',
+    'retry-after': '1',
+    'retry-after-ms': '522',
+    server: 'cloudflare',
+    'set-cookie': '__cf_bm=Uvhu0mgZRvwyITx0WFH9MVl8pJKZX7sr93Av30nvCLg-1733929728-1.0.1.1-XRZsiqa_5rbX9w88vtkazzXYaBBEpw.vra6XMAsbk9Un5eZCaE7NM6fP8Yka.mY_EgedrourUbbKb7eekLlnFQ; path=/; expires=Wed, 11-Dec-24 15:38:48 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=RVhkiLmY0p5x5GNWp5XS1GMVLJqOF_ccq4NdSKir.MQ-1733929728072-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    vary: 'Origin',
+    'x-content-type-options': 'nosniff',
+    'x-ratelimit-limit-requests': '500',
+    'x-ratelimit-limit-tokens': '30000',
+    'x-ratelimit-remaining-requests': '496',
+    'x-ratelimit-remaining-tokens': '1545',
+    'x-ratelimit-reset-requests': '476ms',
+    'x-ratelimit-reset-tokens': '56.908s',
+    'x-request-id': 'req_420a66073a6178af6dce224a83c1e5a8'
+  },
+  request_id: 'req_420a66073a6178af6dce224a83c1e5a8',
+  error: {
+    message: 'Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 28455, Requested 1806. Please try again in 522ms. Visit https://platform.openai.com/account/rate-limits to learn more.',
+    type: 'tokens',
+    param: null,
+    code: 'rate_limit_exceeded'
+  },
+  code: 'rate_limit_exceeded',
+  param: null,
+  type: 'tokens'
+}
+OpenAI API error: RateLimitError: 429 Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 28503, Requested 1806. Please try again in 618ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+    at APIError.generate (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/error.js:63:20)
+    at OpenAI.makeStatusError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:293:33)
+    at OpenAI.makeRequest (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:337:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/ubuntu/openvidu-tutorials/openvidu-basic-node/routes/summarize.js:18:24 {
+  status: 429,
+  headers: {
+    'alt-svc': 'h3=":443"; ma=86400',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': '8f066463ca75ea1f-ICN',
+    connection: 'keep-alive',
+    'content-length': '371',
+    'content-type': 'application/json; charset=utf-8',
+    date: 'Wed, 11 Dec 2024 15:08:48 GMT',
+    'retry-after': '1',
+    'retry-after-ms': '618',
+    server: 'cloudflare',
+    'set-cookie': '__cf_bm=oz6FvRWU_stdmk76mo0jtGpHlDtf2kjAD.qjCtaajiM-1733929728-1.0.1.1-ZeCnvoyJPjREjZuBwHEU8DvVyoKBUZwXPo6EKwqITealiJsgg_nuj4rWvvUsEy4LPU2h23htiSweEqhUAYvRhQ; path=/; expires=Wed, 11-Dec-24 15:38:48 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=55nWxaGFC2xDBjznDC34G7wcbNMMRu9ndiD2Lati98g-1733929728757-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    vary: 'Origin',
+    'x-content-type-options': 'nosniff',
+    'x-ratelimit-limit-requests': '500',
+    'x-ratelimit-limit-tokens': '30000',
+    'x-ratelimit-remaining-requests': '497',
+    'x-ratelimit-remaining-tokens': '1497',
+    'x-ratelimit-reset-requests': '270ms',
+    'x-ratelimit-reset-tokens': '57.004s',
+    'x-request-id': 'req_97e9ff020c34f2303a2fb2a7f2bc9842'
+  },
+  request_id: 'req_97e9ff020c34f2303a2fb2a7f2bc9842',
+  error: {
+    message: 'Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 28503, Requested 1806. Please try again in 618ms. Visit https://platform.openai.com/account/rate-limits to learn more.',
+    type: 'tokens',
+    param: null,
+    code: 'rate_limit_exceeded'
+  },
+  code: 'rate_limit_exceeded',
+  param: null,
+  type: 'tokens'
+}
+OpenAI API error: RateLimitError: 429 Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 28454, Requested 1806. Please try again in 520ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+    at APIError.generate (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/error.js:63:20)
+    at OpenAI.makeStatusError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:293:33)
+    at OpenAI.makeRequest (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:337:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/ubuntu/openvidu-tutorials/openvidu-basic-node/routes/summarize.js:18:24 {
+  status: 429,
+  headers: {
+    'alt-svc': 'h3=":443"; ma=86400',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': '8f066465cc79a7c3-ICN',
+    connection: 'keep-alive',
+    'content-length': '371',
+    'content-type': 'application/json; charset=utf-8',
+    date: 'Wed, 11 Dec 2024 15:08:49 GMT',
+    'retry-after': '1',
+    'retry-after-ms': '520',
+    server: 'cloudflare',
+    'set-cookie': '__cf_bm=oBKXUpRbyk_xVR1Lbgrk8zs5K2.dnmpHrH0lzFX.zqY-1733929729-1.0.1.1-45tfdkIb8G_MwF65KUlbmbXnJNso68M9COxup_bv3TFoOvbLzMdx6qbqh0dGT1Bs5LCku6Fg6zCoOYCrT7WuCw; path=/; expires=Wed, 11-Dec-24 15:38:49 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=wgGuk.moQ6grz.rJuxadbnICr7JgiMyEn0DYvMkDTr0-1733929729084-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    vary: 'Origin',
+    'x-content-type-options': 'nosniff',
+    'x-ratelimit-limit-requests': '500',
+    'x-ratelimit-limit-tokens': '30000',
+    'x-ratelimit-remaining-requests': '499',
+    'x-ratelimit-remaining-tokens': '1546',
+    'x-ratelimit-reset-requests': '120ms',
+    'x-ratelimit-reset-tokens': '56.907s',
+    'x-request-id': 'req_c0cc64f2bcc208644ef307bac701c60a'
+  },
+  request_id: 'req_c0cc64f2bcc208644ef307bac701c60a',
+  error: {
+    message: 'Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 28454, Requested 1806. Please try again in 520ms. Visit https://platform.openai.com/account/rate-limits to learn more.',
+    type: 'tokens',
+    param: null,
+    code: 'rate_limit_exceeded'
+  },
+  code: 'rate_limit_exceeded',
+  param: null,
+  type: 'tokens'
+}
+OpenAI API error: RateLimitError: 429 Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 28276, Requested 1806. Please try again in 164ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+    at APIError.generate (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/error.js:63:20)
+    at OpenAI.makeStatusError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:293:33)
+    at OpenAI.makeRequest (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:337:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/ubuntu/openvidu-tutorials/openvidu-basic-node/routes/summarize.js:18:24 {
+  status: 429,
+  headers: {
+    'alt-svc': 'h3=":443"; ma=86400',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': '8f06646c3942d1ea-ICN',
+    connection: 'keep-alive',
+    'content-length': '371',
+    'content-type': 'application/json; charset=utf-8',
+    date: 'Wed, 11 Dec 2024 15:08:50 GMT',
+    'retry-after': '1',
+    'retry-after-ms': '164',
+    server: 'cloudflare',
+    'set-cookie': '__cf_bm=iR74YmGcpwPmQrqWDw5CeR0mdzp6SkSBeRrcKtQWXeQ-1733929730-1.0.1.1-S977zgQzSL3Q18Veto.ONaNToSPPJ5bJtK6Hso.Ns5JJD97zL9elXLjnZZJuIevkSy1PHUdcj58EBWh_c5arQQ; path=/; expires=Wed, 11-Dec-24 15:38:50 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=Lcu98s25OfQCPRDHpxIY22ojJUc76k1twmse74.8SbI-1733929730105-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    vary: 'Origin',
+    'x-content-type-options': 'nosniff',
+    'x-ratelimit-limit-requests': '500',
+    'x-ratelimit-limit-tokens': '30000',
+    'x-ratelimit-remaining-requests': '499',
+    'x-ratelimit-remaining-tokens': '1724',
+    'x-ratelimit-reset-requests': '120ms',
+    'x-ratelimit-reset-tokens': '56.55s',
+    'x-request-id': 'req_0ff6e0675fd74b8e387ece87f6231b95'
+  },
+  request_id: 'req_0ff6e0675fd74b8e387ece87f6231b95',
+  error: {
+    message: 'Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 28276, Requested 1806. Please try again in 164ms. Visit https://platform.openai.com/account/rate-limits to learn more.',
+    type: 'tokens',
+    param: null,
+    code: 'rate_limit_exceeded'
+  },
+  code: 'rate_limit_exceeded',
+  param: null,
+  type: 'tokens'
+}
+OpenAI API error: RateLimitError: 429 Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 28273, Requested 1806. Please try again in 158ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+    at APIError.generate (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/error.js:63:20)
+    at OpenAI.makeStatusError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:293:33)
+    at OpenAI.makeRequest (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:337:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/ubuntu/openvidu-tutorials/openvidu-basic-node/routes/summarize.js:18:24 {
+  status: 429,
+  headers: {
+    'alt-svc': 'h3=":443"; ma=86400',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': '8f06646c3928a7c3-ICN',
+    connection: 'keep-alive',
+    'content-length': '371',
+    'content-type': 'application/json; charset=utf-8',
+    date: 'Wed, 11 Dec 2024 15:08:50 GMT',
+    'retry-after': '1',
+    'retry-after-ms': '158',
+    server: 'cloudflare',
+    'set-cookie': '__cf_bm=sRPwT6BHxph8k45HV7WM9JG.1O7qYkPecpCTOWlxyVs-1733929730-1.0.1.1-42.gHc7BGY8UeykHWQTob_BzDtgVtrnawuO1IlmckMnux.qdq0uVg0_99IpCVOeKT3RK6U_VssAp83la7OGI6Q; path=/; expires=Wed, 11-Dec-24 15:38:50 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=5DlWwNQZFtG9FH57RGFQKUsBt8TEbrXaT5nOCxaZRAA-1733929730119-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    vary: 'Origin',
+    'x-content-type-options': 'nosniff',
+    'x-ratelimit-limit-requests': '500',
+    'x-ratelimit-limit-tokens': '30000',
+    'x-ratelimit-remaining-requests': '498',
+    'x-ratelimit-remaining-tokens': '1727',
+    'x-ratelimit-reset-requests': '234ms',
+    'x-ratelimit-reset-tokens': '56.545s',
+    'x-request-id': 'req_7404e0491e6cdd0071cfcde8e691ef31'
+  },
+  request_id: 'req_7404e0491e6cdd0071cfcde8e691ef31',
+  error: {
+    message: 'Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 28273, Requested 1806. Please try again in 158ms. Visit https://platform.openai.com/account/rate-limits to learn more.',
+    type: 'tokens',
+    param: null,
+    code: 'rate_limit_exceeded'
+  },
+  code: 'rate_limit_exceeded',
+  param: null,
+  type: 'tokens'
+}
+OpenAI API error: RateLimitError: 429 Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29379, Requested 2582. Please try again in 3.922s. Visit https://platform.openai.com/account/rate-limits to learn more.
+    at APIError.generate (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/error.js:63:20)
+    at OpenAI.makeStatusError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:293:33)
+    at OpenAI.makeRequest (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:337:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/ubuntu/openvidu-tutorials/openvidu-basic-node/routes/summarize.js:18:24 {
+  status: 429,
+  headers: {
+    'alt-svc': 'h3=":443"; ma=86400',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': '8f06829abb77ea9b-ICN',
+    connection: 'keep-alive',
+    'content-length': '372',
+    'content-type': 'application/json; charset=utf-8',
+    date: 'Wed, 11 Dec 2024 15:29:26 GMT',
+    'retry-after': '4',
+    'retry-after-ms': '3922',
+    server: 'cloudflare',
+    'set-cookie': '__cf_bm=ciAt7V53awBDwKRrw7PSfmOam8cYMiEahhDukTqFm.A-1733930966-1.0.1.1-SuljN5F9PQdHt2XqLLDBo4uAis7pxElEbkDXzdgdGk48ZGe_VrxZlTlrJIgALQbPa1YCWHI8eRyX8OVjrCsYMg; path=/; expires=Wed, 11-Dec-24 15:59:26 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=6n8NmA40K.nmqXCT9P_XDhV.7MTMDD3AkDfXpU9KXkc-1733930966347-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    vary: 'Origin',
+    'x-content-type-options': 'nosniff',
+    'x-ratelimit-limit-requests': '500',
+    'x-ratelimit-limit-tokens': '30000',
+    'x-ratelimit-remaining-requests': '499',
+    'x-ratelimit-remaining-tokens': '621',
+    'x-ratelimit-reset-requests': '120ms',
+    'x-ratelimit-reset-tokens': '58.757s',
+    'x-request-id': 'req_47b11ce585ff1bc55e37c672c6c738c0'
+  },
+  request_id: 'req_47b11ce585ff1bc55e37c672c6c738c0',
+  error: {
+    message: 'Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29379, Requested 2582. Please try again in 3.922s. Visit https://platform.openai.com/account/rate-limits to learn more.',
+    type: 'tokens',
+    param: null,
+    code: 'rate_limit_exceeded'
+  },
+  code: 'rate_limit_exceeded',
+  param: null,
+  type: 'tokens'
+}
+OpenAI API error: RateLimitError: 429 Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29376, Requested 2582. Please try again in 3.916s. Visit https://platform.openai.com/account/rate-limits to learn more.
+    at APIError.generate (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/error.js:63:20)
+    at OpenAI.makeStatusError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:293:33)
+    at OpenAI.makeRequest (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:337:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/ubuntu/openvidu-tutorials/openvidu-basic-node/routes/summarize.js:18:24 {
+  status: 429,
+  headers: {
+    'alt-svc': 'h3=":443"; ma=86400',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': '8f06829acf39ea1d-ICN',
+    connection: 'keep-alive',
+    'content-length': '372',
+    'content-type': 'application/json; charset=utf-8',
+    date: 'Wed, 11 Dec 2024 15:29:26 GMT',
+    'retry-after': '4',
+    'retry-after-ms': '3916',
+    server: 'cloudflare',
+    'set-cookie': '__cf_bm=9gYq1ja71ZEFd4.JMZ10sShduaPuW5aoS74LwmUVp1U-1733930966-1.0.1.1-qKXPZKRVdtQsIzjEhk_ogiBgdDwWQxdmypyjKg80O.TiRInqxn5Z5N5naw4Zs4ntuEF0m9tLWanEgKF2tl7Fdw; path=/; expires=Wed, 11-Dec-24 15:59:26 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=ibg7KettWD1ZE0FcT3e0CQ4YBsQWxYWyN76LhwKEkjA-1733930966355-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    vary: 'Origin',
+    'x-content-type-options': 'nosniff',
+    'x-ratelimit-limit-requests': '500',
+    'x-ratelimit-limit-tokens': '30000',
+    'x-ratelimit-remaining-requests': '497',
+    'x-ratelimit-remaining-tokens': '624',
+    'x-ratelimit-reset-requests': '354ms',
+    'x-ratelimit-reset-tokens': '58.751s',
+    'x-request-id': 'req_26f564762989be171c46ac470cf9e349'
+  },
+  request_id: 'req_26f564762989be171c46ac470cf9e349',
+  error: {
+    message: 'Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29376, Requested 2582. Please try again in 3.916s. Visit https://platform.openai.com/account/rate-limits to learn more.',
+    type: 'tokens',
+    param: null,
+    code: 'rate_limit_exceeded'
+  },
+  code: 'rate_limit_exceeded',
+  param: null,
+  type: 'tokens'
+}
+OpenAI API error: RateLimitError: 429 Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29375, Requested 2582. Please try again in 3.914s. Visit https://platform.openai.com/account/rate-limits to learn more.
+    at APIError.generate (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/error.js:63:20)
+    at OpenAI.makeStatusError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:293:33)
+    at OpenAI.makeRequest (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:337:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/ubuntu/openvidu-tutorials/openvidu-basic-node/routes/summarize.js:18:24 {
+  status: 429,
+  headers: {
+    'alt-svc': 'h3=":443"; ma=86400',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': '8f06829ace3cd1d3-ICN',
+    connection: 'keep-alive',
+    'content-length': '372',
+    'content-type': 'application/json; charset=utf-8',
+    date: 'Wed, 11 Dec 2024 15:29:26 GMT',
+    'retry-after': '4',
+    'retry-after-ms': '3914',
+    server: 'cloudflare',
+    'set-cookie': '__cf_bm=ltdzMGRdaEyadi8cv7UUC8t1en3BHehDXXbEtCnV3OM-1733930966-1.0.1.1-MDFw1sEbo15PUs.NO4Q8PddbPrjI8DUV4sqoYwmjfgXHcRipvcnKuHUh14dLtZLRi3HQa7DO48OhXJqqHwXpBw; path=/; expires=Wed, 11-Dec-24 15:59:26 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=Svs0zRFculwjjrYfuW6QAmZK3dEDXHMbydEBHuWObnY-1733930966356-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    vary: 'Origin',
+    'x-content-type-options': 'nosniff',
+    'x-ratelimit-limit-requests': '500',
+    'x-ratelimit-limit-tokens': '30000',
+    'x-ratelimit-remaining-requests': '495',
+    'x-ratelimit-remaining-tokens': '625',
+    'x-ratelimit-reset-requests': '592ms',
+    'x-ratelimit-reset-tokens': '58.749s',
+    'x-request-id': 'req_b158349f2f742d0e550eeb142a278ad9'
+  },
+  request_id: 'req_b158349f2f742d0e550eeb142a278ad9',
+  error: {
+    message: 'Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29375, Requested 2582. Please try again in 3.914s. Visit https://platform.openai.com/account/rate-limits to learn more.',
+    type: 'tokens',
+    param: null,
+    code: 'rate_limit_exceeded'
+  },
+  code: 'rate_limit_exceeded',
+  param: null,
+  type: 'tokens'
+}
+OpenAI API error: RateLimitError: 429 Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29384, Requested 2582. Please try again in 3.932s. Visit https://platform.openai.com/account/rate-limits to learn more.
+    at APIError.generate (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/error.js:63:20)
+    at OpenAI.makeStatusError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:293:33)
+    at OpenAI.makeRequest (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:337:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/ubuntu/openvidu-tutorials/openvidu-basic-node/routes/summarize.js:18:24 {
+  status: 429,
+  headers: {
+    'alt-svc': 'h3=":443"; ma=86400',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': '8f06829abea230de-ICN',
+    connection: 'keep-alive',
+    'content-length': '372',
+    'content-type': 'application/json; charset=utf-8',
+    date: 'Wed, 11 Dec 2024 15:29:26 GMT',
+    'retry-after': '4',
+    'retry-after-ms': '3932',
+    server: 'cloudflare',
+    'set-cookie': '__cf_bm=4xLY89ZBqKRezLw4HjvTtM8dnQZn4VRBYP3LAt2r0Bs-1733930966-1.0.1.1-Va0VgLF3ObBoU00UEuLG9IMZxwRymcRQd.13QjL8rKlbo5EiY8t37ohCIf_WZ3SkYayZtEQN0xUgu8ksYgnIbA; path=/; expires=Wed, 11-Dec-24 15:59:26 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=OiU.RtLQBuLTk1AfggOSIZkweGQBEaE9nddh5_n.n1k-1733930966357-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    vary: 'Origin',
+    'x-content-type-options': 'nosniff',
+    'x-ratelimit-limit-requests': '500',
+    'x-ratelimit-limit-tokens': '30000',
+    'x-ratelimit-remaining-requests': '493',
+    'x-ratelimit-remaining-tokens': '616',
+    'x-ratelimit-reset-requests': '728ms',
+    'x-ratelimit-reset-tokens': '58.766s',
+    'x-request-id': 'req_9ad782da18801f9c54e01313ac87e647'
+  },
+  request_id: 'req_9ad782da18801f9c54e01313ac87e647',
+  error: {
+    message: 'Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29384, Requested 2582. Please try again in 3.932s. Visit https://platform.openai.com/account/rate-limits to learn more.',
+    type: 'tokens',
+    param: null,
+    code: 'rate_limit_exceeded'
+  },
+  code: 'rate_limit_exceeded',
+  param: null,
+  type: 'tokens'
+}
+OpenAI API error: RateLimitError: 429 Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29373, Requested 2582. Please try again in 3.91s. Visit https://platform.openai.com/account/rate-limits to learn more.
+    at APIError.generate (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/error.js:63:20)
+    at OpenAI.makeStatusError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:293:33)
+    at OpenAI.makeRequest (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:337:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/ubuntu/openvidu-tutorials/openvidu-basic-node/routes/summarize.js:18:24 {
+  status: 429,
+  headers: {
+    'alt-svc': 'h3=":443"; ma=86400',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': '8f06829ab857ea97-ICN',
+    connection: 'keep-alive',
+    'content-length': '371',
+    'content-type': 'application/json; charset=utf-8',
+    date: 'Wed, 11 Dec 2024 15:29:26 GMT',
+    'retry-after': '4',
+    'retry-after-ms': '3910',
+    server: 'cloudflare',
+    'set-cookie': '__cf_bm=3WUKFBuMOLlz9vp9vG2E6K0P.clX5ipJ6Lth_mffQl0-1733930966-1.0.1.1-dNBYafpDEBL9zqz9qtvEXVcvHE19wxEVWv1Mw1bolLlIQjxmFPI.14LU1S7JepXWigaQM4bme09uB6eJtazomw; path=/; expires=Wed, 11-Dec-24 15:59:26 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=7liwK5G1aLfAYKQpb5yGcMwNesf1nktamgPwJec9djo-1733930966361-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    vary: 'Origin',
+    'x-content-type-options': 'nosniff',
+    'x-ratelimit-limit-requests': '500',
+    'x-ratelimit-limit-tokens': '30000',
+    'x-ratelimit-remaining-requests': '491',
+    'x-ratelimit-remaining-tokens': '627',
+    'x-ratelimit-reset-requests': '1.067s',
+    'x-ratelimit-reset-tokens': '58.744s',
+    'x-request-id': 'req_c7324d2a35dda620417b51dc5073ba79'
+  },
+  request_id: 'req_c7324d2a35dda620417b51dc5073ba79',
+  error: {
+    message: 'Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29373, Requested 2582. Please try again in 3.91s. Visit https://platform.openai.com/account/rate-limits to learn more.',
+    type: 'tokens',
+    param: null,
+    code: 'rate_limit_exceeded'
+  },
+  code: 'rate_limit_exceeded',
+  param: null,
+  type: 'tokens'
+}
+OpenAI API error: RateLimitError: 429 Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29379, Requested 2582. Please try again in 3.922s. Visit https://platform.openai.com/account/rate-limits to learn more.
+    at APIError.generate (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/error.js:63:20)
+    at OpenAI.makeStatusError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:293:33)
+    at OpenAI.makeRequest (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:337:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/ubuntu/openvidu-tutorials/openvidu-basic-node/routes/summarize.js:18:24 {
+  status: 429,
+  headers: {
+    'alt-svc': 'h3=":443"; ma=86400',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': '8f06829ab887ea04-ICN',
+    connection: 'keep-alive',
+    'content-length': '372',
+    'content-type': 'application/json; charset=utf-8',
+    date: 'Wed, 11 Dec 2024 15:29:26 GMT',
+    'retry-after': '4',
+    'retry-after-ms': '3922',
+    server: 'cloudflare',
+    'set-cookie': '__cf_bm=KlqDkXcB5y5rTHqq_ItGD4VY8ric.RFx6v8X8iq2Oqg-1733930966-1.0.1.1-tUlFoGQTRoFTgryiXkjr.9PMrSkeFhneks5kKgua7CIan7BICWTsxocLdedYfOGR3EsluS.UQ1fpFgs9EM7phg; path=/; expires=Wed, 11-Dec-24 15:59:26 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=ekJzQ_AYfPL.8IOXnwwUqESXPbeoTuJ2Mfklm4SVKrQ-1733930966362-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    vary: 'Origin',
+    'x-content-type-options': 'nosniff',
+    'x-ratelimit-limit-requests': '500',
+    'x-ratelimit-limit-tokens': '30000',
+    'x-ratelimit-remaining-requests': '498',
+    'x-ratelimit-remaining-tokens': '621',
+    'x-ratelimit-reset-requests': '239ms',
+    'x-ratelimit-reset-tokens': '58.756s',
+    'x-request-id': 'req_8d8f373573af040df6c9b706176d8166'
+  },
+  request_id: 'req_8d8f373573af040df6c9b706176d8166',
+  error: {
+    message: 'Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29379, Requested 2582. Please try again in 3.922s. Visit https://platform.openai.com/account/rate-limits to learn more.',
+    type: 'tokens',
+    param: null,
+    code: 'rate_limit_exceeded'
+  },
+  code: 'rate_limit_exceeded',
+  param: null,
+  type: 'tokens'
+}
+OpenAI API error: RateLimitError: 429 Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29376, Requested 2582. Please try again in 3.916s. Visit https://platform.openai.com/account/rate-limits to learn more.
+    at APIError.generate (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/error.js:63:20)
+    at OpenAI.makeStatusError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:293:33)
+    at OpenAI.makeRequest (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:337:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/ubuntu/openvidu-tutorials/openvidu-basic-node/routes/summarize.js:18:24 {
+  status: 429,
+  headers: {
+    'alt-svc': 'h3=":443"; ma=86400',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': '8f06829abf11ea31-ICN',
+    connection: 'keep-alive',
+    'content-length': '372',
+    'content-type': 'application/json; charset=utf-8',
+    date: 'Wed, 11 Dec 2024 15:29:26 GMT',
+    'retry-after': '4',
+    'retry-after-ms': '3916',
+    server: 'cloudflare',
+    'set-cookie': '__cf_bm=kXkOSmXWtfk0Nv8.WV7nvjJd08JFNl5rlQzj4YYB8C8-1733930966-1.0.1.1-Obo8do.8__UrlPH.gbRyYQLQv_qwDBVXvT7hDV7FndO87BkPhZjaHfubwemuktwkVT8t5reXZuetKNGzLC9Esg; path=/; expires=Wed, 11-Dec-24 15:59:26 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=0nPoGDMYnt98RNlZX4aQruY2DeR1mJ6hNZuog5OAEWk-1733930966363-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    vary: 'Origin',
+    'x-content-type-options': 'nosniff',
+    'x-ratelimit-limit-requests': '500',
+    'x-ratelimit-limit-tokens': '30000',
+    'x-ratelimit-remaining-requests': '496',
+    'x-ratelimit-remaining-tokens': '624',
+    'x-ratelimit-reset-requests': '473ms',
+    'x-ratelimit-reset-tokens': '58.75s',
+    'x-request-id': 'req_0104a4f3374127f16794c8ee2e7434bd'
+  },
+  request_id: 'req_0104a4f3374127f16794c8ee2e7434bd',
+  error: {
+    message: 'Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29376, Requested 2582. Please try again in 3.916s. Visit https://platform.openai.com/account/rate-limits to learn more.',
+    type: 'tokens',
+    param: null,
+    code: 'rate_limit_exceeded'
+  },
+  code: 'rate_limit_exceeded',
+  param: null,
+  type: 'tokens'
+}
+OpenAI API error: RateLimitError: 429 Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29375, Requested 2582. Please try again in 3.914s. Visit https://platform.openai.com/account/rate-limits to learn more.
+    at APIError.generate (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/error.js:63:20)
+    at OpenAI.makeStatusError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:293:33)
+    at OpenAI.makeRequest (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:337:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/ubuntu/openvidu-tutorials/openvidu-basic-node/routes/summarize.js:18:24 {
+  status: 429,
+  headers: {
+    'alt-svc': 'h3=":443"; ma=86400',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': '8f06829abcc2ea2d-ICN',
+    connection: 'keep-alive',
+    'content-length': '372',
+    'content-type': 'application/json; charset=utf-8',
+    date: 'Wed, 11 Dec 2024 15:29:26 GMT',
+    'retry-after': '4',
+    'retry-after-ms': '3914',
+    server: 'cloudflare',
+    'set-cookie': '__cf_bm=uRyUnBzNK0DUnUTR9axRPW3U662_6w4wl4u1PiGStUM-1733930966-1.0.1.1-yNAfsgz_5.XdLRQeZ1epibu85skGgdyHw0PqvOkiD0RvWzQyw6btr8YUagXtz_EvXmjr7Rr6BGhKnyUr4qyDGA; path=/; expires=Wed, 11-Dec-24 15:59:26 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=phQzRj9r1.md4GTNDAhysq.ftO7JeTTOdPLrk16lxPI-1733930966365-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    vary: 'Origin',
+    'x-content-type-options': 'nosniff',
+    'x-ratelimit-limit-requests': '500',
+    'x-ratelimit-limit-tokens': '30000',
+    'x-ratelimit-remaining-requests': '493',
+    'x-ratelimit-remaining-tokens': '625',
+    'x-ratelimit-reset-requests': '831ms',
+    'x-ratelimit-reset-tokens': '58.748s',
+    'x-request-id': 'req_5389f2540c9730d453fc0023cb4acfb3'
+  },
+  request_id: 'req_5389f2540c9730d453fc0023cb4acfb3',
+  error: {
+    message: 'Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29375, Requested 2582. Please try again in 3.914s. Visit https://platform.openai.com/account/rate-limits to learn more.',
+    type: 'tokens',
+    param: null,
+    code: 'rate_limit_exceeded'
+  },
+  code: 'rate_limit_exceeded',
+  param: null,
+  type: 'tokens'
+}
+OpenAI API error: RateLimitError: 429 Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29375, Requested 2582. Please try again in 3.914s. Visit https://platform.openai.com/account/rate-limits to learn more.
+    at APIError.generate (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/error.js:63:20)
+    at OpenAI.makeStatusError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:293:33)
+    at OpenAI.makeRequest (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:337:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/ubuntu/openvidu-tutorials/openvidu-basic-node/routes/summarize.js:18:24 {
+  status: 429,
+  headers: {
+    'alt-svc': 'h3=":443"; ma=86400',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': '8f06829abd26d1de-ICN',
+    connection: 'keep-alive',
+    'content-length': '372',
+    'content-type': 'application/json; charset=utf-8',
+    date: 'Wed, 11 Dec 2024 15:29:26 GMT',
+    'retry-after': '4',
+    'retry-after-ms': '3914',
+    server: 'cloudflare',
+    'set-cookie': '__cf_bm=oGIBUP4sBE0ZS4k3gLoi2XD7GAGbMEB4u2B8Uk_ZHy8-1733930966-1.0.1.1-1zYY_5A2UgZYElQ8VS5DXXvAJ43HrkfvaccU9v0q4HeCXLDx_JhsBUy28Wmh8zhjQ2x7qn5yJ_uUd84SqMw7AQ; path=/; expires=Wed, 11-Dec-24 15:59:26 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=8xZdPrLGSQpVx9aPu1_9B0goZiCTwzwECjQgZr8KBlo-1733930966368-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    vary: 'Origin',
+    'x-content-type-options': 'nosniff',
+    'x-ratelimit-limit-requests': '500',
+    'x-ratelimit-limit-tokens': '30000',
+    'x-ratelimit-remaining-requests': '490',
+    'x-ratelimit-remaining-tokens': '625',
+    'x-ratelimit-reset-requests': '1.191s',
+    'x-ratelimit-reset-tokens': '58.748s',
+    'x-request-id': 'req_23f81a3f267ffadc7ba28a5972372366'
+  },
+  request_id: 'req_23f81a3f267ffadc7ba28a5972372366',
+  error: {
+    message: 'Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29375, Requested 2582. Please try again in 3.914s. Visit https://platform.openai.com/account/rate-limits to learn more.',
+    type: 'tokens',
+    param: null,
+    code: 'rate_limit_exceeded'
+  },
+  code: 'rate_limit_exceeded',
+  param: null,
+  type: 'tokens'
+}
+OpenAI API error: RateLimitError: 429 Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29372, Requested 2582. Please try again in 3.908s. Visit https://platform.openai.com/account/rate-limits to learn more.
+    at APIError.generate (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/error.js:63:20)
+    at OpenAI.makeStatusError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:293:33)
+    at OpenAI.makeRequest (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:337:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/ubuntu/openvidu-tutorials/openvidu-basic-node/routes/summarize.js:18:24 {
+  status: 429,
+  headers: {
+    'alt-svc': 'h3=":443"; ma=86400',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': '8f06829abcfaea00-ICN',
+    connection: 'keep-alive',
+    'content-length': '372',
+    'content-type': 'application/json; charset=utf-8',
+    date: 'Wed, 11 Dec 2024 15:29:26 GMT',
+    'retry-after': '4',
+    'retry-after-ms': '3908',
+    server: 'cloudflare',
+    'set-cookie': '__cf_bm=hzT6maxpDJOcryCzdwxHGbWMBf0x5kqqmAX5VukK6mk-1733930966-1.0.1.1-CrqpkgqkRgoMf.P9LjaRLAQYHfYf9QJri9I_R2rtM2._vMhKFX1QS3YzjDwHMOEQMs4r6ddbz0JcAVrQWUaGvA; path=/; expires=Wed, 11-Dec-24 15:59:26 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=6cdGxLEgv3of7W9DY3FBSW8Im88SWQgEJovfU5N6k3g-1733930966369-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    vary: 'Origin',
+    'x-content-type-options': 'nosniff',
+    'x-ratelimit-limit-requests': '500',
+    'x-ratelimit-limit-tokens': '30000',
+    'x-ratelimit-remaining-requests': '492',
+    'x-ratelimit-remaining-tokens': '628',
+    'x-ratelimit-reset-requests': '945ms',
+    'x-ratelimit-reset-tokens': '58.742s',
+    'x-request-id': 'req_1ee45de95dc9fcdf53ba425ff4f79bfd'
+  },
+  request_id: 'req_1ee45de95dc9fcdf53ba425ff4f79bfd',
+  error: {
+    message: 'Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29372, Requested 2582. Please try again in 3.908s. Visit https://platform.openai.com/account/rate-limits to learn more.',
+    type: 'tokens',
+    param: null,
+    code: 'rate_limit_exceeded'
+  },
+  code: 'rate_limit_exceeded',
+  param: null,
+  type: 'tokens'
+}
+OpenAI API error: RateLimitError: 429 Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29911, Requested 2582. Please try again in 4.986s. Visit https://platform.openai.com/account/rate-limits to learn more.
+    at APIError.generate (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/error.js:63:20)
+    at OpenAI.makeStatusError (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:293:33)
+    at OpenAI.makeRequest (/home/ubuntu/openvidu-tutorials/openvidu-basic-node/node_modules/openai/core.js:337:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/ubuntu/openvidu-tutorials/openvidu-basic-node/routes/summarize.js:18:24 {
+  status: 429,
+  headers: {
+    'alt-svc': 'h3=":443"; ma=86400',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': '8f0682b71bcaeab5-ICN',
+    connection: 'keep-alive',
+    'content-length': '372',
+    'content-type': 'application/json; charset=utf-8',
+    date: 'Wed, 11 Dec 2024 15:29:30 GMT',
+    'retry-after': '5',
+    'retry-after-ms': '4986',
+    server: 'cloudflare',
+    'set-cookie': '__cf_bm=r_3Dn8mTZywz1d8q4x8aeyAg6TWb26mdI.3jV__3zQU-1733930970-1.0.1.1-lOaeToIMzA6tmJBfPoIzBwO509Ivz9RyRu72idd9Y1o4.DG9_GDdOFkeH91A9uBVUW_yMRjAKdNzyzfA9bmvvA; path=/; expires=Wed, 11-Dec-24 15:59:30 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=TtZqjLPvp7reIjh4fmIuR8V0BxjkuHhq20Ni_qMyR4s-1733930970886-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    vary: 'Origin',
+    'x-content-type-options': 'nosniff',
+    'x-ratelimit-limit-requests': '500',
+    'x-ratelimit-limit-tokens': '30000',
+    'x-ratelimit-remaining-requests': '498',
+    'x-ratelimit-remaining-tokens': '89',
+    'x-ratelimit-reset-requests': '222ms',
+    'x-ratelimit-reset-tokens': '59.821s',
+    'x-request-id': 'req_bbabb4b63661ddd7a1f4f7f00b271967'
+  },
+  request_id: 'req_bbabb4b63661ddd7a1f4f7f00b271967',
+  error: {
+    message: 'Rate limit reached for gpt-4o in organization org-UOZrbbI0b81OqSiUsp9qTK2F on tokens per min (TPM): Limit 30000, Used 29911, Requested 2582. Please try again in 4.986s. Visit https://platform.openai.com/account/rate-limits to learn more.',
+    type: 'tokens',
+    param: null,
+    code: 'rate_limit_exceeded'
+  },
+  code: 'rate_limit_exceeded',
+  param: null,
+  type: 'tokens'
+}
