@@ -98,15 +98,15 @@ const RoomControl = ({ isObserver }) => {
           {/* <p className="room-info__count">{roomData.memberCount}명이 시청중</p> */}
         </div>
       </div>
-      <Timer roomId={roomNumber} isObserver={isObserver} className='room-timer'/>
+      <Timer roomId={roomNumber} isObserver={isObserver} className='room-timer' />
       <button onClick={toggleModal} className="transcript-button">
-          대화 기록
-        </button>
-{/* 모달 컴포넌트 */}
-{isModalOpen && (
+        대화 기록
+      </button>
+      {/* 모달 컴포넌트 */}
+      {isModalOpen && (
         <>
-          <div 
-            className={`transcript-modal-overlay ${isModalOpen ? 'open' : ''}`} 
+          <div
+            className={`transcript-modal-overlay ${isModalOpen ? 'open' : ''}`}
             onClick={toggleModal}
           />
           <div className={`transcript-modal ${isModalOpen ? 'open' : ''}`}>
@@ -116,7 +116,12 @@ const RoomControl = ({ isObserver }) => {
               <div className="transcript-container">
                 {transcriptionHistory.map((item, index) => (
                   <div key={index} className="transcription-item">
-                    <span className="speaker">{item.speaker}:</span>
+                    <span className={`roomcontrol-speaker ${item.position === 'left' ? 'left' :
+                        item.position === 'right' ? 'right' :
+                          'observer'
+                      }`}>
+                      {item.speaker}:
+                    </span>
                     <span className="text">{item.text}</span>
                     <span className="timestamp">
                       {new Date(item.timestamp).toLocaleTimeString()}
