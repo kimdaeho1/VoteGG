@@ -174,7 +174,7 @@ router.get("/roomList", async (req, res) => {
         roomNumber: 9999,
         roomname: "짬뽕 vs 짜장",
         createdby: "중식마스터",
-        thumbnail: "https://projectagorabucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1733847464429_Wkwk.jpg",
+        thumbnail: "https://projectagorabucket.s3.ap-northeast-2.amazonaws.com/room-thumbnails/1734002038130_%C3%AC%C2%A7%C2%AC%C3%AC%C2%A7%C2%9C.jpg",
         tags: ["중식", "음식"],
         participant: { "중식마스터": 0, "양식마스터": 0},
       },
