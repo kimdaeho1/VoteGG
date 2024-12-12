@@ -20,22 +20,23 @@ const PersonalHistory = ({ onClose }) => {
 
   const applyFilter = (filter, results) => {
     const now = new Date();
+  
     switch (filter) {
-      case FILTERS.ONE_DAY:
-        return results.filter(
-          (item) =>
-            new Date(item.createdAt) >= new Date(now.setDate(now.getDate() - 1))
-        );
-      case FILTERS.THREE_DAYS:
-        return results.filter(
-          (item) =>
-            new Date(item.createdAt) >= new Date(now.setDate(now.getDate() - 3))
-        );
-      case FILTERS.ONE_WEEK:
-        return results.filter(
-          (item) =>
-            new Date(item.createdAt) >= new Date(now.setDate(now.getDate() - 7))
-        );
+      case FILTERS.ONE_DAY: {
+        const cutoff = new Date();
+        cutoff.setDate(cutoff.getDate() - 1);
+        return results.filter((item) => new Date(item.createdAt) >= cutoff);
+      }
+      case FILTERS.THREE_DAYS: {
+        const cutoff = new Date();
+        cutoff.setDate(cutoff.getDate() - 3);
+        return results.filter((item) => new Date(item.createdAt) >= cutoff);
+      }
+      case FILTERS.ONE_WEEK: {
+        const cutoff = new Date();
+        cutoff.setDate(cutoff.getDate() - 7);
+        return results.filter((item) => new Date(item.createdAt) >= cutoff);
+      }
       case FILTERS.ALL:
       default:
         return results;
