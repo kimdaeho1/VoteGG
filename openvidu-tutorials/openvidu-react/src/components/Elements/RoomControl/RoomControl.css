@@ -182,3 +182,24 @@
 .transcript-container::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+
+/* 기존 .speaker 클래스 제거하고 아래 클래스들로 대체 */
+.roomcontrol-speaker.left {
+  font-weight: bold;
+  min-width: 100px;
+  color: #FF0000; /* 왼쪽 토론자 - 빨간색 */
+}
+
+.roomcontrol-speaker.right {
+  font-weight: bold;
+  min-width: 100px;
+  color: #2196F3; /* 오른쪽 토론자 - 파란색 */
+}
+
+.speaker.observer {
+  font-weight: bold;
+  min-width: 100px;
+  color: #9E9E9E; /* 관찰자 - 회색 */
+}
+

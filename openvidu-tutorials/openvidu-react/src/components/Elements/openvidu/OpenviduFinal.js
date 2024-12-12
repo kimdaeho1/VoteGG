@@ -149,19 +149,19 @@ class OpenviduFinal extends Component {
         try {
             const formData = new FormData();
             formData.append('audio', audioBlob);
-
+    
             const response = await fetch('/api/transcription/convert', {
                 method: 'POST',
                 body: formData,
             });
-
+    
             if (!response.ok) {
                 throw new Error('Transcription failed');
             }
-
+    
             const result = await response.json();
             const text = result.text?.trim();
-
+    
             // 필터링할 텍스트 패턴
             const meaninglessTexts = [
                 '시청해주셔서 감사합니다',
@@ -175,7 +175,7 @@ class OpenviduFinal extends Component {
                 '시청해 주셔서 감사합니다',
                 'MBC 뉴스 이덕영입니다',
             ];
-
+    
             // 텍스트 유효성 검사
             const isValidText = text &&
                 text.length > 2 &&
@@ -184,18 +184,27 @@ class OpenviduFinal extends Component {
                     text.toLowerCase().includes(meaninglessText.toLowerCase())
                 ) &&
                 !text.match(/^[어음아으음]+$/);
-
+    
             if (isValidText) {
+                // 발화자의 위치(left/right) 확인
+                const connectionId = this.state.session.connection.connectionId;
+                const position = this.state.leftUserList.some(user => user.connectionId === connectionId)
+                    ? 'left'
+                    : this.state.rightUserList.some(user => user.connectionId === connectionId)
+                        ? 'right'
+                        : 'observer';
+    
                 const transcriptionData = {
                     text: text,
                     timestamp: new Date().toISOString(),
                     speaker: this.state.userName,
-                    connectionId: this.state.session.connection.connectionId
+                    connectionId: connectionId,
+                    position: position  // position 정보 추가
                 };
-
+    
                 const addTranscription = useTranscriptionStore.getState().addTranscription;
                 addTranscription(transcriptionData);
-
+    
                 if (this.state.session) {
                     this.state.session.signal({
                         data: JSON.stringify(transcriptionData),
